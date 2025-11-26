@@ -19,7 +19,72 @@ enum Role {
   CUSTOMER
 }
 
-model Users {
+enum FerryType {
+  STANDARD
+  FAST
+  PREMIUM
+}
+
+enum FerryStatus {
+  ACTIVE
+  MAINTENANCE
+  RETIRED
+}
+
+enum RouteStatus {
+  ACTIVE
+  INACTIVE
+  SEASONAL
+}
+
+enum ScheduleStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum TripStatus {
+  SCHEDULED
+  BOARDING
+  DEPARTED
+  ARRIVED
+  CANCELLED
+  DELAYED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  EXPIRED
+}
+
+enum PassengerType {
+  ADULT
+  CHILD
+  SENIOR
+  INFANT
+}
+
+enum TicketStatus {
+  VALID
+  USED
+  CANCELLED
+  REFUNDED
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  FAILED
+}
+
+enum NotificationType {
+  EMAIL
+  SMS
+  PUSH
+}
+
+model users {
   id        String @id @default(uuid())
   email     String @unique
   firstName String @db.VarChar(100)
@@ -32,4 +97,209 @@ model Users {
   updatedAt DateTime @updatedAt
 
   @@index([email, role])
+}
+
+model ferries {
+  id                       String   @id @default(uuid())
+  name                     String   @db.VarChar(100)
+  code                     String   @unique @db.VarChar(20)
+  total_passenger_capacity Int
+  total_vehicle_capacity   Int
+  amenities                String[]
+
+  type   FerryType   @default(STANDARD)
+  status FerryStatus @default(ACTIVE)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([code, status])
+}
+
+model ports {
+  id   String @id @default(uuid())
+  name String @db.VarChar(100)
+  code String @unique @db.VarChar(20)
+  city String @db.VarChar(100)
+
+  role Role @default(CUSTOMER)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([code, city])
+}
+
+model routes {
+  id                         String @id @default(uuid())
+  estimated_duration_minutes Int
+
+  status RouteStatus @default(ACTIVE)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //TODO: make relations
+  // origin_port_id int [not null, ref: > ports.id] //index
+  // destination_port_id int [not null, ref: > ports.id] //index
+
+  @@index([status])
+}
+
+model schedules {
+  id             String    @id @default(uuid())
+  departure_time DateTime
+  arrival_time   DateTime
+  days_of_week   String[]
+  valid_from     DateTime
+  valid_until    DateTime?
+
+  status ScheduleStatus @default(ACTIVE)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //TODO: make relations
+  // route_id int [not null, ref: > routes.id] //index
+  // ferry_id int [not null, ref: > ferries.id] //index
+
+  @@index([status])
+}
+
+model trips {
+  id                        String   @id @default(uuid())
+  departure_date            DateTime
+  departure_time            DateTime
+  arrival_date              DateTime
+  arrival_time              DateTime
+  available_passenger_seats Int
+
+  status TripStatus @default(SCHEDULED)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //TODO: Relations
+  // schedule_id int [not null, ref: > schedules.id] //index
+  // ferry_id int [not null, ref: > ferries.id] //index
+  // route_id int [not null, ref: > routes.id] //index
+
+  @@index([departure_date, status])
+}
+
+model seat_configurations {
+  id          String @id @default(uuid())
+  total_seats Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //TODO: relations
+  // ferry_id int [not null, ref: > ferries.id] //index
+}
+
+model seats {
+  id      String  @id @default(uuid())
+  is_free Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //TODO: Relations
+  // seat_configuration_id int [not null, ref: > seat_configurations.id] // index
+}
+
+model bookings {
+  id               String  @id @default(uuid())
+  total_passengers Int
+  total_vehicles   Int     @default(0)
+  subtotal         Decimal @db.Decimal(10, 2)
+  taxes            Decimal @default(0) @db.Decimal(10, 2)
+  discount_amount  Decimal @default(0) @db.Decimal(10, 2)
+  total_amount     Decimal @db.Decimal(10, 2)
+
+  status BookingStatus @default(PENDING)
+
+  expires_at DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  //TODO: relations
+  // user_id int [not null, ref: > users.id] //index
+  // trip_id int [not null, ref: > trips.id] //index
+
+  @@index([status, expires_at])
+}
+
+model booking_passengers {
+  id         String  @id @default(uuid())
+  first_name String  @db.VarChar(100)
+  last_name  String  @db.VarChar(100)
+  id_number  String? @db.VarChar(50)
+  price      Decimal @db.Decimal(10, 2)
+
+  passenger_type PassengerType @default(ADULT)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // booking_id int [not null, ref: > bookings.id]
+  // seat_id int [null, ref: > seats.id]
+}
+
+model booking_vehicles {
+  id            String  @id @default(uuid())
+  license_plate String  @db.VarChar(20)
+  brand         String? @db.VarChar(50)
+  driver_name   String? @db.VarChar(200)
+  price         Decimal @db.Decimal(10, 2)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // booking_id int [not null, ref: > bookings.id]
+}
+
+model tickets {
+  id             String @id @default(uuid())
+  ticket_number  String @unique @db.VarChar(50)
+  qr_code        String
+  passenger_name String @db.VarChar(200)
+
+  status TicketStatus
+
+  used_at   DateTime
+  issued_at DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // booking_id int [not null, ref: > bookings.id]
+
+  @@index([ticket_number, qr_code, status])
+}
+
+// model payments {
+//   id        String @id @default(uuid())
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+// }
+
+model notifications {
+  id      String  @id @default(uuid())
+  subject String? @db.VarChar(200)
+  content String
+
+  type   NotificationType   @default(EMAIL)
+  status NotificationStatus @default(PENDING)
+
+  sent_at   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // user_id int [not null, ref: > users.id]
+  // booking_id int [null, ref: > bookings.id]
+
+  @@index([status, createdAt])
 }
