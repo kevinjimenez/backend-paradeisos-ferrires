@@ -1,17 +1,15 @@
-import { envs } from './../config/envs';
 import {
-  Global,
   Injectable,
   Logger,
   OnModuleDestroy,
   OnModuleInit,
 } from '@nestjs/common';
 import { PrismaPg } from '@prisma/adapter-pg';
+import { envs } from '../common/config/envs';
 import { PrismaClient } from './generated/prisma/client';
 
 const logger = new Logger('DatabaseService');
 
-@Global()
 @Injectable()
 export class DatabasesService
   extends PrismaClient

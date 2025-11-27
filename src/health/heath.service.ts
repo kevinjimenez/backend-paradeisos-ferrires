@@ -1,4 +1,4 @@
-import { envs } from './../config/envs';
+import { envs } from '../common/config/envs';
 import { Injectable } from '@nestjs/common';
 import type { Health } from './types/health.type';
 
