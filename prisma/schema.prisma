@@ -6,7 +6,8 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
+  moduleFormat = "cjs"
 }
 
 datasource db {
@@ -96,6 +97,9 @@ model users {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  notifications notifications[]
+  bookings      bookings[]
+
   @@index([email, role])
 }
 
@@ -113,6 +117,10 @@ model ferries {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  schedules           schedules[]
+  trips               trips[]
+  seat_configurations seat_configurations[]
+
   @@index([code, status])
 }
 
@@ -127,6 +135,9 @@ model ports {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  origin_routes      routes[] @relation("origin_routes")
+  destination_routes routes[] @relation("destination_routes")
+
   @@index([code, city])
 }
 
@@ -139,11 +150,15 @@ model routes {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  //TODO: make relations
-  // origin_port_id int [not null, ref: > ports.id] //index
-  // destination_port_id int [not null, ref: > ports.id] //index
+  schedules schedules[]
+  trips     trips[]
 
-  @@index([status])
+  origin_ports        ports  @relation("origin_routes", fields: [origin_port_id], references: [id])
+  origin_port_id      String
+  destination_ports   ports  @relation("destination_routes", fields: [destination_port_id], references: [id])
+  destination_port_id String
+
+  @@index([status, origin_port_id, destination_port_id])
 }
 
 model schedules {
@@ -159,11 +174,14 @@ model schedules {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  //TODO: make relations
-  // route_id int [not null, ref: > routes.id] //index
-  // ferry_id int [not null, ref: > ferries.id] //index
+  trips trips[]
 
-  @@index([status])
+  routes     routes?  @relation(fields: [routes_id], references: [id])
+  routes_id  String?
+  ferries    ferries? @relation(fields: [ferries_id], references: [id])
+  ferries_id String?
+
+  @@index([status, routes_id, ferries_id])
 }
 
 model trips {
@@ -179,12 +197,17 @@ model trips {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  //TODO: Relations
-  // schedule_id int [not null, ref: > schedules.id] //index
-  // ferry_id int [not null, ref: > ferries.id] //index
-  // route_id int [not null, ref: > routes.id] //index
+  bookings bookings[]
 
-  @@index([departure_date, status])
+  ferries      ferries?   @relation(fields: [ferries_id], references: [id])
+  ferries_id   String?
+  routes       routes?    @relation(fields: [routes_id], references: [id])
+  routes_id    String?
+  schedules    schedules? @relation(fields: [schedules_id], references: [id])
+  schedules_id String?
+
+  @@index([departure_date, status, routes_id])
+  @@index([ferries_id, schedules_id])
 }
 
 model seat_configurations {
@@ -194,8 +217,12 @@ model seat_configurations {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  //TODO: relations
-  // ferry_id int [not null, ref: > ferries.id] //index
+  seats seats[]
+
+  ferries    ferries? @relation(fields: [ferries_id], references: [id])
+  ferries_id String?
+
+  @@index([ferries_id])
 }
 
 model seats {
@@ -205,8 +232,12 @@ model seats {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  //TODO: Relations
-  // seat_configuration_id int [not null, ref: > seat_configurations.id] // index
+  booking_passengers booking_passengers[]
+
+  seat_configurations    seat_configurations? @relation(fields: [seat_configurations_id], references: [id])
+  seat_configurations_id String?
+
+  @@index([seat_configurations_id])
 }
 
 model bookings {
@@ -224,11 +255,18 @@ model bookings {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  //TODO: relations
-  // user_id int [not null, ref: > users.id] //index
-  // trip_id int [not null, ref: > trips.id] //index
+  tickets            tickets[]
+  notifications      notifications[]
+  booking_passengers booking_passengers[]
+  booking_vehicles   booking_vehicles[]
 
-  @@index([status, expires_at])
+  users    users?  @relation(fields: [users_id], references: [id])
+  users_id String?
+  trips    trips?  @relation(fields: [trips_id], references: [id])
+  trips_id String?
+
+  @@index([status, users_id])
+  @@index([trips_id, expires_at])
 }
 
 model booking_passengers {
@@ -243,8 +281,12 @@ model booking_passengers {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // booking_id int [not null, ref: > bookings.id]
-  // seat_id int [null, ref: > seats.id]
+  seats       seats?    @relation(fields: [seats_id], references: [id])
+  seats_id    String?
+  bookings    bookings? @relation(fields: [bookings_id], references: [id])
+  bookings_id String?
+
+  @@index([bookings_id, seats_id])
 }
 
 model booking_vehicles {
@@ -257,7 +299,10 @@ model booking_vehicles {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // booking_id int [not null, ref: > bookings.id]
+  bookings    bookings? @relation(fields: [bookings_id], references: [id])
+  bookings_id String?
+
+  @@index([bookings_id])
 }
 
 model tickets {
@@ -273,18 +318,12 @@ model tickets {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // booking_id int [not null, ref: > bookings.id]
+  bookings    bookings? @relation(fields: [bookings_id], references: [id])
+  bookings_id String?
 
-  @@index([ticket_number, qr_code, status])
+  @@index([ticket_number, qr_code])
+  @@index([bookings_id, status])
 }
-
-// model payments {
-//   id        String @id @default(uuid())
-
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-// }
 
 model notifications {
   id      String  @id @default(uuid())
@@ -298,8 +337,11 @@ model notifications {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // user_id int [not null, ref: > users.id]
-  // booking_id int [null, ref: > bookings.id]
+  users       users?    @relation(fields: [users_id], references: [id])
+  users_id    String?
+  bookings    bookings? @relation(fields: [bookings_id], references: [id])
+  bookings_id String?
 
   @@index([status, createdAt])
+  @@index([users_id])
 }
