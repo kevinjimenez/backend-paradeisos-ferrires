@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import { DatabasesService } from 'src/databases/databases.service';
 import { CreateFerryDto } from './dto/create-ferry.dto';
 import { UpdateFerryDto } from './dto/update-ferry.dto';
 
 @Injectable()
 export class FerriesService {
+  constructor(private databasesService: DatabasesService) {}
+
   create(createFerryDto: CreateFerryDto) {
     return 'This action adds a new ferry';
   }
 
   findAll() {
-    return `This action returns all ferries`;
+    return this.databasesService.ferries.findMany();
   }
 
   findOne(id: number) {

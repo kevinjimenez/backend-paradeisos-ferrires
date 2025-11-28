@@ -6,12 +6,24 @@ import { DatabasesService } from 'src/databases/databases.service';
 @Injectable()
 export class TripsService {
   constructor(private databasesService: DatabasesService) {}
+
   create(createTripDto: CreateTripDto) {
     return 'This action adds a new trip';
   }
 
   findAll() {
-    return this.databasesService.trips.findMany();
+    return this.databasesService.trips.findMany({
+      include: {
+        schedules: true,
+        routes: {
+          include: {
+            origin_ports: true,
+            destination_ports: true,
+          },
+        },
+        ferries: true,
+      },
+    });
   }
 
   findOne(id: number) {

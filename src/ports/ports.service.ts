@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePortDto } from './dto/create-port.dto';
 import { UpdatePortDto } from './dto/update-port.dto';
+import { DatabasesService } from 'src/databases/databases.service';
 
 @Injectable()
 export class PortsService {
+  constructor(private databasesService: DatabasesService) {}
+
   create(createPortDto: CreatePortDto) {
     return 'This action adds a new port';
   }
 
   findAll() {
-    return `This action returns all ports`;
+    return this.databasesService.ports.findMany();
   }
 
   findOne(id: number) {

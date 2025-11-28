@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from './generated/prisma/client';
 import { envs } from 'src/common/config/envs';
@@ -28,7 +29,7 @@ async function main() {
 
   // Create Users
   console.log('👥 Creating users...');
-  const admin = await prisma.users.create({
+  await prisma.users.create({
     data: {
       email: 'admin@paradeisos.com',
       firstName: 'Admin',
@@ -38,7 +39,7 @@ async function main() {
     },
   });
 
-  const seller = await prisma.users.create({
+  await prisma.users.create({
     data: {
       email: 'seller@paradeisos.com',
       firstName: 'Carlos',
@@ -178,7 +179,7 @@ async function main() {
     },
   });
 
-  const ferry4 = await prisma.ferries.create({
+  await prisma.ferries.create({
     data: {
       name: 'Costa Azul',
       code: 'CST-004',
@@ -201,7 +202,7 @@ async function main() {
     },
   });
 
-  const route2 = await prisma.routes.create({
+  await prisma.routes.create({
     data: {
       origin_port_id: portPalma.id,
       destination_port_id: portBarcelona.id,
@@ -219,7 +220,7 @@ async function main() {
     },
   });
 
-  const route4 = await prisma.routes.create({
+  await prisma.routes.create({
     data: {
       origin_port_id: portIbiza.id,
       destination_port_id: portValencia.id,
@@ -228,7 +229,7 @@ async function main() {
     },
   });
 
-  const route5 = await prisma.routes.create({
+  await prisma.routes.create({
     data: {
       origin_port_id: portPalma.id,
       destination_port_id: portMahon.id,
