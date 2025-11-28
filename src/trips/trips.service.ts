@@ -14,7 +14,6 @@ export class TripsService {
   findAll() {
     return this.databasesService.trips.findMany({
       include: {
-        schedules: true,
         routes: {
           include: {
             origin_ports: true,
