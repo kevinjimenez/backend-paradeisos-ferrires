@@ -12,7 +12,20 @@ export class FerriesService {
   }
 
   findAll() {
-    return this.databasesService.ferries.findMany();
+    return this.databasesService.ferries.findMany({
+      // include: {
+      //   schedules: {
+      //     include: {
+      //       routes: {
+      //         include: {
+      //           destination_ports: true,
+      //           origin_ports: true,
+      //         },
+      //       },
+      //     },
+      //   },
+      // },
+    });
   }
 
   findOne(id: number) {

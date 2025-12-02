@@ -29,16 +29,18 @@ model islands {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-
-  ports ports[]
+  // Relations one-to-many
+  ports      ports[]
 }
 
 // TABLE ports
 model ports {
-  id        String   @id @default(uuid())
-  islands   islands? @relation(fields: [island_id], references: [id])
-  island_id String?
+  id      String   @id @default(uuid())
+  // Relations many-to-one
+  islands islands? @relation(fields: [island_id], references: [id])
 
+  island_id     String?
+  //
   name          String   @db.VarChar(100)
   code          String   @unique @db.VarChar(10)
   address       String?  @db.VarChar(255)
@@ -47,24 +49,25 @@ model ports {
   longitude     Decimal? @db.Decimal(11, 8)
   is_active     Boolean  @default(true)
 
-  opening_time DateTime @default(now())
-  closing_time DateTime @default(now())
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
+  opening_time       DateTime @default(now())
+  closing_time       DateTime @default(now())
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  // Relations one-to-many
   origin_routes      routes[] @relation("origin_routes")
   destination_routes routes[] @relation("destination_routes")
 }
 
 // TABLE routes
 model routes {
-  id                  String @id @default(uuid())
-  origin_port_id      String
-  origin_ports        ports  @relation("origin_routes", fields: [origin_port_id], references: [id])
-  destination_port_id String
-  destination_ports   ports  @relation("destination_routes", fields: [destination_port_id], references: [id])
+  id                String @id @default(uuid())
+  // Relations many-to-one
+  origin_ports      ports  @relation("origin_routes", fields: [origin_port_id], references: [id])
+  destination_ports ports  @relation("destination_routes", fields: [destination_port_id], references: [id])
 
+  origin_port_id      String
+  destination_port_id String
+  //
   distance_km         Decimal? @db.Decimal(6, 2)
   duration_minutes    Int
   base_price_resident Decimal  @db.Decimal(10, 2)
@@ -72,10 +75,10 @@ model routes {
   base_price_foreign  Decimal  @db.Decimal(10, 2)
   is_active           Boolean  @default(true)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  schedules schedules[]
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
+  // Relations one-to-many
+  schedules  schedules[]
 }
 
 // TABLE ferries
@@ -98,10 +101,10 @@ model ferries {
 
   status FerryStatus @default(active)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  schedules schedules[]
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
+  // Relations one-to-many
+  schedules  schedules[]
 }
 
 // TABLE schedules
@@ -114,26 +117,27 @@ enum ScheduleStatus {
 }
 
 model schedules {
-  id       String   @id @default(uuid())
-  routes   routes?  @relation(fields: [route_id], references: [id])
-  route_id String?
-  ferries  ferries? @relation(fields: [ferry_id], references: [id])
-  ferry_id String?
+  id      String   @id @default(uuid())
+  // Relations many-to-one
+  routes  routes?  @relation(fields: [route_id], references: [id])
+  ferries ferries? @relation(fields: [ferry_id], references: [id])
 
-  departure_date      DateTime
-  departure_time      DateTime
-  arrival_time        DateTime
+  route_id            String?
+  ferry_id            String?
+  //
   total_capacity      Int
   available_seats     Int
-  cancellation_reason String?  @db.Text
-  notes               String?  @db.Text
+  cancellation_reason String? @db.Text
+  notes               String? @db.Text
 
   status ScheduleStatus @default(scheduled)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  // tickets    tickets[]
+  departure_date   DateTime
+  departure_time   DateTime
+  arrival_time     DateTime
+  created_at       DateTime     @default(now())
+  updated_at       DateTime     @updatedAt
+  // Relations one-to-many
   seat_holds       seat_holds[]
   return_tickets   tickets[]    @relation("return_tickets")
   outbound_tickets tickets[]    @relation("outbound_tickets")
@@ -150,34 +154,36 @@ model users {
 
   document_type DocumentType
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
+  created_at DateTime     @default(now())
+  updated_at DateTime     @updatedAt
+  // Relations one-to-many
   tickets    tickets[]
   seat_holds seat_holds[]
 }
 
 // TABLE passengers
 model passengers {
-  id        String   @id @default(uuid())
-  tickets   tickets? @relation(fields: [ticket_id], references: [id])
-  ticket_id String?
+  id      String   @id @default(uuid())
+  // Relations many-to-one
+  tickets tickets? @relation(fields: [ticket_id], references: [id])
 
-  first_name             String    @db.VarChar(100)
-  last_name              String    @db.VarChar(100)
-  email                  String?   @db.VarChar(255)
-  phone                  String?   @db.VarChar(20)
-  document_number        String    @db.VarChar(50)
-  unit_price             Decimal   @db.Decimal(10, 2)
-  is_primary             Boolean   @default(false)
-  checked_in_outbound    Boolean   @default(false)
-  checked_in_return      Boolean   @default(false)
-  checked_in_outbound_at DateTime?
-  checked_in_return_at   DateTime?
+  ticket_id           String?
+  //
+  first_name          String  @db.VarChar(100)
+  last_name           String  @db.VarChar(100)
+  email               String? @db.VarChar(255)
+  phone               String? @db.VarChar(20)
+  document_number     String  @db.VarChar(50)
+  unit_price          Decimal @db.Decimal(10, 2)
+  is_primary          Boolean @default(false)
+  checked_in_outbound Boolean @default(false)
+  checked_in_return   Boolean @default(false)
 
   document_type DocumentType
 
-  created_at DateTime @default(now())
+  checked_in_outbound_at DateTime?
+  checked_in_return_at   DateTime?
+  created_at             DateTime  @default(now())
 }
 
 // TABLE payments
@@ -199,31 +205,33 @@ enum PaymentStatus {
 }
 
 model payments {
-  id        String   @id @default(uuid())
-  tickets   tickets? @relation(fields: [ticket_id], references: [id])
-  ticket_id String?
+  id      String   @id @default(uuid())
+  // Relations many-to-one
+  tickets tickets? @relation(fields: [ticket_id], references: [id])
 
-  payment_provider        String    @db.VarChar(50)
-  provider_transaction_id String?   @db.VarChar(255)
-  provider_payment_intent String?   @db.VarChar(255)
-  amount                  Decimal   @db.Decimal(10, 2)
-  currency                String    @default("USD") @db.VarChar(3)
-  error_code              String?   @db.VarChar(50)
-  error_message           String?   @db.Text
-  attempts                Int       @default(1)
-  paid_at                 DateTime? @default(now())
-  refunded_at             DateTime? @default(now())
-  refund_amount           Decimal?  @db.Decimal(10, 2)
-  refund_text             String?   @db.Text
-  metadata                Json?     @default("{}") @db.JsonB
-  ip_address              String?   @db.VarChar(45)
-  user_agent              String?   @db.Text
+  ticket_id               String?
+  //
+  payment_provider        String   @db.VarChar(50)
+  provider_transaction_id String?  @db.VarChar(255)
+  provider_payment_intent String?  @db.VarChar(255)
+  amount                  Decimal  @db.Decimal(10, 2)
+  currency                String   @default("USD") @db.VarChar(3)
+  error_code              String?  @db.VarChar(50)
+  error_message           String?  @db.Text
+  attempts                Int      @default(1)
+  refund_amount           Decimal? @db.Decimal(10, 2)
+  refund_text             String?  @db.Text
+  metadata                Json?    @default("{}") @db.JsonB
+  ip_address              String?  @db.VarChar(45)
+  user_agent              String?  @db.Text
 
   payment_method PaymentMethod
   status         PaymentStatus @default(pending)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  paid_at     DateTime? @default(now())
+  refunded_at DateTime? @default(now())
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
 }
 
 // TABLE seat_holds
@@ -235,23 +243,26 @@ enum SeatHoldsStatus {
 }
 
 model seat_holds {
-  id              String     @id @default(uuid())
-  users           users?     @relation(fields: [user_id], references: [id])
-  user_id         String?
-  schedules       schedules? @relation(fields: [schedule_id], references: [id])
-  schedule_id     String?
-  outbound_ticket tickets?   @relation("outbound_hold")
-  return_ticket   tickets?   @relation("return_hold")
+  id        String     @id @default(uuid())
+  // Relations many-to-one
+  users     users?     @relation(fields: [user_id], references: [id])
+  schedules schedules? @relation(fields: [schedule_id], references: [id])
 
-  quantity Int
+  user_id     String?
+  schedule_id String?
+  //
+  quantity    Int
 
   status SeatHoldsStatus @default(held)
 
-  held_at      DateTime  @default(now())
-  expires_at   DateTime  @default(now()) // held_at + 15min
-  confirmed_at DateTime?
-  released_at  DateTime?
-  created_at   DateTime  @default(now())
+  held_at         DateTime  @default(now())
+  expires_at      DateTime  @default(now()) // held_at + 15min
+  confirmed_at    DateTime?
+  released_at     DateTime?
+  created_at      DateTime  @default(now())
+  // Relations one-to-one
+  outbound_ticket tickets?  @relation("outbound_hold")
+  return_ticket   tickets?  @relation("return_hold")
 }
 
 // TABLE tickets
@@ -271,39 +282,42 @@ enum TicketsStatus {
 }
 
 model tickets {
-  id                   String     @id @default(uuid())
-  users                users?     @relation(fields: [user_id], references: [id])
-  user_id              String?
-  return_schedules     schedules? @relation("return_tickets", fields: [return_schedule_id], references: [id])
+  id                 String     @id @default(uuid())
+  // Relations many-to-one
+  users              users?     @relation(fields: [user_id], references: [id])
+  return_schedules   schedules? @relation("return_tickets", fields: [return_schedule_id], references: [id])
+  outbound_schedules schedules? @relation("outbound_tickets", fields: [outbound_schedule_id], references: [id])
+
   return_schedule_id   String?
-  outbound_schedules   schedules? @relation("outbound_tickets", fields: [outbound_schedule_id], references: [id])
+  user_id              String?
   outbound_schedule_id String?
+  // Relations one-to-one
+  outbound_hold        seat_holds? @relation("outbound_hold", fields: [outbound_hold_id], references: [id])
+  return_hold          seat_holds? @relation("return_hold", fields: [return_hold_id], references: [id])
 
-  ticket_code         String          @unique @db.VarChar(20)
-  trip_type           TicketsTripType
+  return_hold_id      String? @unique
+  outbound_hold_id    String? @unique
+  //
+  ticket_code         String  @unique @db.VarChar(20)
   total_passengers    Int
-  subtotal            Decimal         @db.Decimal(10, 2)
-  taxes               Decimal         @default(0) @db.Decimal(10, 2)
-  service_fee         Decimal         @default(0) @db.Decimal(10, 2)
-  discount            Decimal         @default(0) @db.Decimal(10, 2)
-  total               Decimal         @db.Decimal(10, 2)
-  currency            String          @default("USD") @db.VarChar(3)
-  qr_code             String?         @db.Text
-  cancellation_reason String?         @db.Text
+  subtotal            Decimal @db.Decimal(10, 2)
+  taxes               Decimal @default(0) @db.Decimal(10, 2)
+  service_fee         Decimal @default(0) @db.Decimal(10, 2)
+  discount            Decimal @default(0) @db.Decimal(10, 2)
+  total               Decimal @db.Decimal(10, 2)
+  currency            String  @default("USD") @db.VarChar(3)
+  qr_code             String? @db.Text
+  cancellation_reason String? @db.Text
 
-  status TicketsStatus @default(pending)
+  trip_type TicketsTripType
+  status    TicketsStatus   @default(pending)
 
   booking_expires_at DateTime?
-  confirmed_at       DateTime? @default(now())
-  cancelled_at       DateTime? @default(now())
-  created_at         DateTime  @default(now())
-  updated_at         DateTime  @updatedAt
-
-  outbound_hold    seat_holds? @relation("outbound_hold", fields: [outbound_hold_id], references: [id])
-  outbound_hold_id String?     @unique
-  return_hold      seat_holds? @relation("return_hold", fields: [return_hold_id], references: [id])
-  return_hold_id   String?     @unique
-
-  passengers passengers[]
-  payments   payments[]
+  confirmed_at       DateTime?    @default(now())
+  cancelled_at       DateTime?    @default(now())
+  created_at         DateTime     @default(now())
+  updated_at         DateTime     @updatedAt
+  // Relations one-to-many
+  passengers         passengers[]
+  payments           payments[]
 }
