@@ -1207,7 +1207,7 @@ export type IslandsScalarFieldEnum = (typeof IslandsScalarFieldEnum)[keyof typeo
 
 export const PortsScalarFieldEnum = {
   id: 'id',
-  islands_id: 'islands_id',
+  island_id: 'island_id',
   name: 'name',
   code: 'code',
   address: 'address',
@@ -1261,8 +1261,8 @@ export type FerriesScalarFieldEnum = (typeof FerriesScalarFieldEnum)[keyof typeo
 
 export const SchedulesScalarFieldEnum = {
   id: 'id',
-  routes_id: 'routes_id',
-  ferries_id: 'ferries_id',
+  route_id: 'route_id',
+  ferry_id: 'ferry_id',
   departure_date: 'departure_date',
   departure_time: 'departure_time',
   arrival_time: 'arrival_time',
@@ -1295,7 +1295,7 @@ export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof Us
 
 export const PassengersScalarFieldEnum = {
   id: 'id',
-  tickets_id: 'tickets_id',
+  ticket_id: 'ticket_id',
   first_name: 'first_name',
   last_name: 'last_name',
   email: 'email',
@@ -1316,7 +1316,7 @@ export type PassengersScalarFieldEnum = (typeof PassengersScalarFieldEnum)[keyof
 
 export const PaymentsScalarFieldEnum = {
   id: 'id',
-  tickets_id: 'tickets_id',
+  ticket_id: 'ticket_id',
   payment_provider: 'payment_provider',
   provider_transaction_id: 'provider_transaction_id',
   provider_payment_intent: 'provider_payment_intent',
@@ -1343,8 +1343,8 @@ export type PaymentsScalarFieldEnum = (typeof PaymentsScalarFieldEnum)[keyof typ
 
 export const Seat_holdsScalarFieldEnum = {
   id: 'id',
-  users_id: 'users_id',
-  schedules_id: 'schedules_id',
+  user_id: 'user_id',
+  schedule_id: 'schedule_id',
   quantity: 'quantity',
   status: 'status',
   held_at: 'held_at',
@@ -1359,9 +1359,9 @@ export type Seat_holdsScalarFieldEnum = (typeof Seat_holdsScalarFieldEnum)[keyof
 
 export const TicketsScalarFieldEnum = {
   id: 'id',
-  users_Id: 'users_Id',
-  return_schedules_id: 'return_schedules_id',
-  outbound_schedules_id: 'outbound_schedules_id',
+  user_id: 'user_id',
+  return_schedule_id: 'return_schedule_id',
+  outbound_schedule_id: 'outbound_schedule_id',
   ticket_code: 'ticket_code',
   trip_type: 'trip_type',
   total_passengers: 'total_passengers',

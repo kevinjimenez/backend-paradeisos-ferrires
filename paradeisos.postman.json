@@ -1,0 +1,625 @@
+{
+    "info": {
+        "name": "personal",
+        "description": "",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "paradeisos",
+            "description": "",
+            "item": [
+                {
+                    "name": "users",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "get all users",
+                            "description": "",
+                            "event": [],
+                            "auth": {},
+                            "request": {
+                                "auth": {},
+                                "method": "GET",
+                                "body": {},
+                                "header": [],
+                                "url": {
+                                    "raw": "http://localhost:3000/api/users",
+                                    "path": [
+                                        "api",
+                                        "users"
+                                    ],
+                                    "host": [
+                                        "localhost"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "3000",
+                                    "query": [],
+                                    "variable": []
+                                }
+                            },
+                            "response": [],
+                            "protocolProfileBehavior": {
+                                "strictSSL": false,
+                                "followRedirects": true
+                            }
+                        }
+                    ],
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        }
+                    ],
+                    "auth": {}
+                },
+                {
+                    "name": "islands",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "get all islands",
+                            "description": "",
+                            "event": [],
+                            "auth": {},
+                            "request": {
+                                "auth": {},
+                                "method": "GET",
+                                "body": {},
+                                "header": [],
+                                "url": {
+                                    "raw": "http://localhost:3000/api/islands",
+                                    "path": [
+                                        "api",
+                                        "islands"
+                                    ],
+                                    "host": [
+                                        "localhost"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "3000",
+                                    "query": [],
+                                    "variable": []
+                                }
+                            },
+                            "response": [],
+                            "protocolProfileBehavior": {
+                                "strictSSL": false,
+                                "followRedirects": true
+                            }
+                        }
+                    ],
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        }
+                    ],
+                    "auth": {}
+                },
+                {
+                    "name": "ferries",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "get all ferries",
+                            "description": "",
+                            "event": [],
+                            "auth": {},
+                            "request": {
+                                "auth": {},
+                                "method": "GET",
+                                "body": {},
+                                "header": [],
+                                "url": {
+                                    "raw": "http://localhost:3000/api/ferries",
+                                    "path": [
+                                        "api",
+                                        "ferries"
+                                    ],
+                                    "host": [
+                                        "localhost"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "3000",
+                                    "query": [],
+                                    "variable": []
+                                }
+                            },
+                            "response": [],
+                            "protocolProfileBehavior": {
+                                "strictSSL": false,
+                                "followRedirects": true
+                            }
+                        }
+                    ],
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        }
+                    ],
+                    "auth": {}
+                },
+                {
+                    "name": "ports",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "get all ports",
+                            "description": "",
+                            "event": [],
+                            "auth": {},
+                            "request": {
+                                "auth": {},
+                                "method": "GET",
+                                "body": {},
+                                "header": [],
+                                "url": {
+                                    "raw": "http://localhost:3000/api/ports",
+                                    "path": [
+                                        "api",
+                                        "ports"
+                                    ],
+                                    "host": [
+                                        "localhost"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "3000",
+                                    "query": [],
+                                    "variable": []
+                                }
+                            },
+                            "response": [],
+                            "protocolProfileBehavior": {
+                                "strictSSL": false,
+                                "followRedirects": true
+                            }
+                        }
+                    ],
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        }
+                    ],
+                    "auth": {}
+                },
+                {
+                    "name": "routes",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "get all routes",
+                            "description": "",
+                            "event": [],
+                            "auth": {},
+                            "request": {
+                                "auth": {},
+                                "method": "GET",
+                                "body": {},
+                                "header": [],
+                                "url": {
+                                    "raw": "http://localhost:3000/api/routes",
+                                    "path": [
+                                        "api",
+                                        "routes"
+                                    ],
+                                    "host": [
+                                        "localhost"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "3000",
+                                    "query": [],
+                                    "variable": []
+                                }
+                            },
+                            "response": [],
+                            "protocolProfileBehavior": {
+                                "strictSSL": false,
+                                "followRedirects": true
+                            }
+                        }
+                    ],
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        }
+                    ],
+                    "auth": {}
+                },
+                {
+                    "name": "seat holds",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "get all seat holds",
+                            "description": "",
+                            "event": [],
+                            "auth": {},
+                            "request": {
+                                "auth": {},
+                                "method": "GET",
+                                "body": {},
+                                "header": [],
+                                "url": {
+                                    "raw": "http://localhost:3000/api/seat-holds",
+                                    "path": [
+                                        "api",
+                                        "seat-holds"
+                                    ],
+                                    "host": [
+                                        "localhost"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "3000",
+                                    "query": [],
+                                    "variable": []
+                                }
+                            },
+                            "response": [],
+                            "protocolProfileBehavior": {
+                                "strictSSL": false,
+                                "followRedirects": true
+                            }
+                        }
+                    ],
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        }
+                    ],
+                    "auth": {}
+                },
+                {
+                    "name": "tickets",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "get all tickets",
+                            "description": "",
+                            "event": [],
+                            "auth": {},
+                            "request": {
+                                "auth": {},
+                                "method": "GET",
+                                "body": {},
+                                "header": [],
+                                "url": {
+                                    "raw": "http://localhost:3000/api/tickets",
+                                    "path": [
+                                        "api",
+                                        "tickets"
+                                    ],
+                                    "host": [
+                                        "localhost"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "3000",
+                                    "query": [],
+                                    "variable": []
+                                }
+                            },
+                            "response": [],
+                            "protocolProfileBehavior": {
+                                "strictSSL": false,
+                                "followRedirects": true
+                            }
+                        }
+                    ],
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        }
+                    ],
+                    "auth": {}
+                },
+                {
+                    "name": "payments",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "get all payments",
+                            "description": "",
+                            "event": [],
+                            "auth": {},
+                            "request": {
+                                "auth": {},
+                                "method": "GET",
+                                "body": {},
+                                "header": [],
+                                "url": {
+                                    "raw": "http://localhost:3000/api/payments",
+                                    "path": [
+                                        "api",
+                                        "payments"
+                                    ],
+                                    "host": [
+                                        "localhost"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "3000",
+                                    "query": [],
+                                    "variable": []
+                                }
+                            },
+                            "response": [],
+                            "protocolProfileBehavior": {
+                                "strictSSL": false,
+                                "followRedirects": true
+                            }
+                        }
+                    ],
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        }
+                    ],
+                    "auth": {}
+                },
+                {
+                    "name": "passengers",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "get all passengers",
+                            "description": "",
+                            "event": [],
+                            "auth": {},
+                            "request": {
+                                "auth": {},
+                                "method": "GET",
+                                "body": {},
+                                "header": [],
+                                "url": {
+                                    "raw": "http://localhost:3000/api/passengers",
+                                    "path": [
+                                        "api",
+                                        "passengers"
+                                    ],
+                                    "host": [
+                                        "localhost"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "3000",
+                                    "query": [],
+                                    "variable": []
+                                }
+                            },
+                            "response": [],
+                            "protocolProfileBehavior": {
+                                "strictSSL": false,
+                                "followRedirects": true
+                            }
+                        }
+                    ],
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        }
+                    ],
+                    "auth": {}
+                },
+                {
+                    "name": "schedules",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "get all schedules",
+                            "description": "",
+                            "event": [],
+                            "auth": {},
+                            "request": {
+                                "auth": {},
+                                "method": "GET",
+                                "body": {},
+                                "header": [],
+                                "url": {
+                                    "raw": "http://localhost:3000/api/schedules",
+                                    "path": [
+                                        "api",
+                                        "schedules"
+                                    ],
+                                    "host": [
+                                        "localhost"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "3000",
+                                    "query": [],
+                                    "variable": []
+                                }
+                            },
+                            "response": [],
+                            "protocolProfileBehavior": {
+                                "strictSSL": false,
+                                "followRedirects": true
+                            }
+                        }
+                    ],
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [],
+                                "type": "text/javascript",
+                                "packages": {}
+                            }
+                        }
+                    ],
+                    "auth": {}
+                },
+                {
+                    "name": "Health check",
+                    "description": "",
+                    "event": [],
+                    "auth": {},
+                    "request": {
+                        "auth": {},
+                        "method": "GET",
+                        "body": {},
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3000",
+                            "path": [],
+                            "host": [
+                                "localhost"
+                            ],
+                            "protocol": "http",
+                            "port": "3000",
+                            "query": [],
+                            "variable": []
+                        }
+                    },
+                    "response": [],
+                    "protocolProfileBehavior": {
+                        "strictSSL": false,
+                        "followRedirects": true
+                    }
+                }
+            ],
+            "event": [
+                {
+                    "listen": "prerequest",
+                    "script": {
+                        "exec": [],
+                        "type": "text/javascript",
+                        "packages": {}
+                    }
+                },
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [],
+                        "type": "text/javascript",
+                        "packages": {}
+                    }
+                }
+            ],
+            "auth": {}
+        }
+    ],
+    "variable": [],
+    "event": [],
+    "auth": {}
+}

@@ -40,7 +40,7 @@ export type PaymentsSumAggregateOutputType = {
 
 export type PaymentsMinAggregateOutputType = {
   id: string | null
-  tickets_id: string | null
+  ticket_id: string | null
   payment_provider: string | null
   provider_transaction_id: string | null
   provider_payment_intent: string | null
@@ -63,7 +63,7 @@ export type PaymentsMinAggregateOutputType = {
 
 export type PaymentsMaxAggregateOutputType = {
   id: string | null
-  tickets_id: string | null
+  ticket_id: string | null
   payment_provider: string | null
   provider_transaction_id: string | null
   provider_payment_intent: string | null
@@ -86,7 +86,7 @@ export type PaymentsMaxAggregateOutputType = {
 
 export type PaymentsCountAggregateOutputType = {
   id: number
-  tickets_id: number
+  ticket_id: number
   payment_provider: number
   provider_transaction_id: number
   provider_payment_intent: number
@@ -124,7 +124,7 @@ export type PaymentsSumAggregateInputType = {
 
 export type PaymentsMinAggregateInputType = {
   id?: true
-  tickets_id?: true
+  ticket_id?: true
   payment_provider?: true
   provider_transaction_id?: true
   provider_payment_intent?: true
@@ -147,7 +147,7 @@ export type PaymentsMinAggregateInputType = {
 
 export type PaymentsMaxAggregateInputType = {
   id?: true
-  tickets_id?: true
+  ticket_id?: true
   payment_provider?: true
   provider_transaction_id?: true
   provider_payment_intent?: true
@@ -170,7 +170,7 @@ export type PaymentsMaxAggregateInputType = {
 
 export type PaymentsCountAggregateInputType = {
   id?: true
-  tickets_id?: true
+  ticket_id?: true
   payment_provider?: true
   provider_transaction_id?: true
   provider_payment_intent?: true
@@ -281,7 +281,7 @@ export type paymentsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type PaymentsGroupByOutputType = {
   id: string
-  tickets_id: string | null
+  ticket_id: string | null
   payment_provider: string
   provider_transaction_id: string | null
   provider_payment_intent: string | null
@@ -328,7 +328,7 @@ export type paymentsWhereInput = {
   OR?: Prisma.paymentsWhereInput[]
   NOT?: Prisma.paymentsWhereInput | Prisma.paymentsWhereInput[]
   id?: Prisma.StringFilter<"payments"> | string
-  tickets_id?: Prisma.StringNullableFilter<"payments"> | string | null
+  ticket_id?: Prisma.StringNullableFilter<"payments"> | string | null
   payment_provider?: Prisma.StringFilter<"payments"> | string
   provider_transaction_id?: Prisma.StringNullableFilter<"payments"> | string | null
   provider_payment_intent?: Prisma.StringNullableFilter<"payments"> | string | null
@@ -353,7 +353,7 @@ export type paymentsWhereInput = {
 
 export type paymentsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  tickets_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  ticket_id?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_provider?: Prisma.SortOrder
   provider_transaction_id?: Prisma.SortOrderInput | Prisma.SortOrder
   provider_payment_intent?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -381,7 +381,7 @@ export type paymentsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.paymentsWhereInput | Prisma.paymentsWhereInput[]
   OR?: Prisma.paymentsWhereInput[]
   NOT?: Prisma.paymentsWhereInput | Prisma.paymentsWhereInput[]
-  tickets_id?: Prisma.StringNullableFilter<"payments"> | string | null
+  ticket_id?: Prisma.StringNullableFilter<"payments"> | string | null
   payment_provider?: Prisma.StringFilter<"payments"> | string
   provider_transaction_id?: Prisma.StringNullableFilter<"payments"> | string | null
   provider_payment_intent?: Prisma.StringNullableFilter<"payments"> | string | null
@@ -406,7 +406,7 @@ export type paymentsWhereUniqueInput = Prisma.AtLeast<{
 
 export type paymentsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  tickets_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  ticket_id?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_provider?: Prisma.SortOrder
   provider_transaction_id?: Prisma.SortOrderInput | Prisma.SortOrder
   provider_payment_intent?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -438,7 +438,7 @@ export type paymentsScalarWhereWithAggregatesInput = {
   OR?: Prisma.paymentsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.paymentsScalarWhereWithAggregatesInput | Prisma.paymentsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"payments"> | string
-  tickets_id?: Prisma.StringNullableWithAggregatesFilter<"payments"> | string | null
+  ticket_id?: Prisma.StringNullableWithAggregatesFilter<"payments"> | string | null
   payment_provider?: Prisma.StringWithAggregatesFilter<"payments"> | string
   provider_transaction_id?: Prisma.StringNullableWithAggregatesFilter<"payments"> | string | null
   provider_payment_intent?: Prisma.StringNullableWithAggregatesFilter<"payments"> | string | null
@@ -486,7 +486,7 @@ export type paymentsCreateInput = {
 
 export type paymentsUncheckedCreateInput = {
   id?: string
-  tickets_id?: string | null
+  ticket_id?: string | null
   payment_provider: string
   provider_transaction_id?: string | null
   provider_payment_intent?: string | null
@@ -534,7 +534,7 @@ export type paymentsUpdateInput = {
 
 export type paymentsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  tickets_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ticket_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_provider?: Prisma.StringFieldUpdateOperationsInput | string
   provider_transaction_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider_payment_intent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -558,7 +558,7 @@ export type paymentsUncheckedUpdateInput = {
 
 export type paymentsCreateManyInput = {
   id?: string
-  tickets_id?: string | null
+  ticket_id?: string | null
   payment_provider: string
   provider_transaction_id?: string | null
   provider_payment_intent?: string | null
@@ -605,7 +605,7 @@ export type paymentsUpdateManyMutationInput = {
 
 export type paymentsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  tickets_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ticket_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_provider?: Prisma.StringFieldUpdateOperationsInput | string
   provider_transaction_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider_payment_intent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -629,7 +629,7 @@ export type paymentsUncheckedUpdateManyInput = {
 
 export type paymentsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  tickets_id?: Prisma.SortOrder
+  ticket_id?: Prisma.SortOrder
   payment_provider?: Prisma.SortOrder
   provider_transaction_id?: Prisma.SortOrder
   provider_payment_intent?: Prisma.SortOrder
@@ -659,7 +659,7 @@ export type paymentsAvgOrderByAggregateInput = {
 
 export type paymentsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  tickets_id?: Prisma.SortOrder
+  ticket_id?: Prisma.SortOrder
   payment_provider?: Prisma.SortOrder
   provider_transaction_id?: Prisma.SortOrder
   provider_payment_intent?: Prisma.SortOrder
@@ -682,7 +682,7 @@ export type paymentsMaxOrderByAggregateInput = {
 
 export type paymentsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  tickets_id?: Prisma.SortOrder
+  ticket_id?: Prisma.SortOrder
   payment_provider?: Prisma.SortOrder
   provider_transaction_id?: Prisma.SortOrder
   provider_payment_intent?: Prisma.SortOrder
@@ -846,7 +846,7 @@ export type paymentsScalarWhereInput = {
   OR?: Prisma.paymentsScalarWhereInput[]
   NOT?: Prisma.paymentsScalarWhereInput | Prisma.paymentsScalarWhereInput[]
   id?: Prisma.StringFilter<"payments"> | string
-  tickets_id?: Prisma.StringNullableFilter<"payments"> | string | null
+  ticket_id?: Prisma.StringNullableFilter<"payments"> | string | null
   payment_provider?: Prisma.StringFilter<"payments"> | string
   provider_transaction_id?: Prisma.StringNullableFilter<"payments"> | string | null
   provider_payment_intent?: Prisma.StringNullableFilter<"payments"> | string | null
@@ -964,7 +964,7 @@ export type paymentsUncheckedUpdateManyWithoutTicketsInput = {
 
 export type paymentsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  tickets_id?: boolean
+  ticket_id?: boolean
   payment_provider?: boolean
   provider_transaction_id?: boolean
   provider_payment_intent?: boolean
@@ -989,7 +989,7 @@ export type paymentsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 
 export type paymentsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  tickets_id?: boolean
+  ticket_id?: boolean
   payment_provider?: boolean
   provider_transaction_id?: boolean
   provider_payment_intent?: boolean
@@ -1014,7 +1014,7 @@ export type paymentsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 
 export type paymentsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  tickets_id?: boolean
+  ticket_id?: boolean
   payment_provider?: boolean
   provider_transaction_id?: boolean
   provider_payment_intent?: boolean
@@ -1039,7 +1039,7 @@ export type paymentsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 
 export type paymentsSelectScalar = {
   id?: boolean
-  tickets_id?: boolean
+  ticket_id?: boolean
   payment_provider?: boolean
   provider_transaction_id?: boolean
   provider_payment_intent?: boolean
@@ -1061,7 +1061,7 @@ export type paymentsSelectScalar = {
   updated_at?: boolean
 }
 
-export type paymentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tickets_id" | "payment_provider" | "provider_transaction_id" | "provider_payment_intent" | "amount" | "currency" | "error_code" | "error_message" | "attempts" | "paid_at" | "refunded_at" | "refund_amount" | "refund_text" | "metadata" | "ip_address" | "user_agent" | "payment_method" | "status" | "created_at" | "updated_at", ExtArgs["result"]["payments"]>
+export type paymentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ticket_id" | "payment_provider" | "provider_transaction_id" | "provider_payment_intent" | "amount" | "currency" | "error_code" | "error_message" | "attempts" | "paid_at" | "refunded_at" | "refund_amount" | "refund_text" | "metadata" | "ip_address" | "user_agent" | "payment_method" | "status" | "created_at" | "updated_at", ExtArgs["result"]["payments"]>
 export type paymentsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tickets?: boolean | Prisma.payments$ticketsArgs<ExtArgs>
 }
@@ -1079,7 +1079,7 @@ export type $paymentsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    tickets_id: string | null
+    ticket_id: string | null
     payment_provider: string
     provider_transaction_id: string | null
     provider_payment_intent: string | null
@@ -1524,7 +1524,7 @@ export interface Prisma__paymentsClient<T, Null = never, ExtArgs extends runtime
  */
 export interface paymentsFieldRefs {
   readonly id: Prisma.FieldRef<"payments", 'String'>
-  readonly tickets_id: Prisma.FieldRef<"payments", 'String'>
+  readonly ticket_id: Prisma.FieldRef<"payments", 'String'>
   readonly payment_provider: Prisma.FieldRef<"payments", 'String'>
   readonly provider_transaction_id: Prisma.FieldRef<"payments", 'String'>
   readonly provider_payment_intent: Prisma.FieldRef<"payments", 'String'>

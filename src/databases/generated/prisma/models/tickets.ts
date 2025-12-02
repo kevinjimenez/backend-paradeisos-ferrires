@@ -46,9 +46,9 @@ export type TicketsSumAggregateOutputType = {
 
 export type TicketsMinAggregateOutputType = {
   id: string | null
-  users_Id: string | null
-  return_schedules_id: string | null
-  outbound_schedules_id: string | null
+  user_id: string | null
+  return_schedule_id: string | null
+  outbound_schedule_id: string | null
   ticket_code: string | null
   trip_type: $Enums.TicketsTripType | null
   total_passengers: number | null
@@ -72,9 +72,9 @@ export type TicketsMinAggregateOutputType = {
 
 export type TicketsMaxAggregateOutputType = {
   id: string | null
-  users_Id: string | null
-  return_schedules_id: string | null
-  outbound_schedules_id: string | null
+  user_id: string | null
+  return_schedule_id: string | null
+  outbound_schedule_id: string | null
   ticket_code: string | null
   trip_type: $Enums.TicketsTripType | null
   total_passengers: number | null
@@ -98,9 +98,9 @@ export type TicketsMaxAggregateOutputType = {
 
 export type TicketsCountAggregateOutputType = {
   id: number
-  users_Id: number
-  return_schedules_id: number
-  outbound_schedules_id: number
+  user_id: number
+  return_schedule_id: number
+  outbound_schedule_id: number
   ticket_code: number
   trip_type: number
   total_passengers: number
@@ -144,9 +144,9 @@ export type TicketsSumAggregateInputType = {
 
 export type TicketsMinAggregateInputType = {
   id?: true
-  users_Id?: true
-  return_schedules_id?: true
-  outbound_schedules_id?: true
+  user_id?: true
+  return_schedule_id?: true
+  outbound_schedule_id?: true
   ticket_code?: true
   trip_type?: true
   total_passengers?: true
@@ -170,9 +170,9 @@ export type TicketsMinAggregateInputType = {
 
 export type TicketsMaxAggregateInputType = {
   id?: true
-  users_Id?: true
-  return_schedules_id?: true
-  outbound_schedules_id?: true
+  user_id?: true
+  return_schedule_id?: true
+  outbound_schedule_id?: true
   ticket_code?: true
   trip_type?: true
   total_passengers?: true
@@ -196,9 +196,9 @@ export type TicketsMaxAggregateInputType = {
 
 export type TicketsCountAggregateInputType = {
   id?: true
-  users_Id?: true
-  return_schedules_id?: true
-  outbound_schedules_id?: true
+  user_id?: true
+  return_schedule_id?: true
+  outbound_schedule_id?: true
   ticket_code?: true
   trip_type?: true
   total_passengers?: true
@@ -309,9 +309,9 @@ export type ticketsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type TicketsGroupByOutputType = {
   id: string
-  users_Id: string | null
-  return_schedules_id: string | null
-  outbound_schedules_id: string | null
+  user_id: string | null
+  return_schedule_id: string | null
+  outbound_schedule_id: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -358,9 +358,9 @@ export type ticketsWhereInput = {
   OR?: Prisma.ticketsWhereInput[]
   NOT?: Prisma.ticketsWhereInput | Prisma.ticketsWhereInput[]
   id?: Prisma.StringFilter<"tickets"> | string
-  users_Id?: Prisma.StringNullableFilter<"tickets"> | string | null
-  return_schedules_id?: Prisma.StringNullableFilter<"tickets"> | string | null
-  outbound_schedules_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  user_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  return_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  outbound_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   ticket_code?: Prisma.StringFilter<"tickets"> | string
   trip_type?: Prisma.EnumTicketsTripTypeFilter<"tickets"> | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFilter<"tickets"> | number
@@ -391,9 +391,9 @@ export type ticketsWhereInput = {
 
 export type ticketsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  users_Id?: Prisma.SortOrderInput | Prisma.SortOrder
-  return_schedules_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  outbound_schedules_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  user_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  return_schedule_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  outbound_schedule_id?: Prisma.SortOrderInput | Prisma.SortOrder
   ticket_code?: Prisma.SortOrder
   trip_type?: Prisma.SortOrder
   total_passengers?: Prisma.SortOrder
@@ -430,9 +430,9 @@ export type ticketsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ticketsWhereInput | Prisma.ticketsWhereInput[]
   OR?: Prisma.ticketsWhereInput[]
   NOT?: Prisma.ticketsWhereInput | Prisma.ticketsWhereInput[]
-  users_Id?: Prisma.StringNullableFilter<"tickets"> | string | null
-  return_schedules_id?: Prisma.StringNullableFilter<"tickets"> | string | null
-  outbound_schedules_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  user_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  return_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  outbound_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   trip_type?: Prisma.EnumTicketsTripTypeFilter<"tickets"> | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFilter<"tickets"> | number
   subtotal?: Prisma.DecimalFilter<"tickets"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -460,9 +460,9 @@ export type ticketsWhereUniqueInput = Prisma.AtLeast<{
 
 export type ticketsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  users_Id?: Prisma.SortOrderInput | Prisma.SortOrder
-  return_schedules_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  outbound_schedules_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  user_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  return_schedule_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  outbound_schedule_id?: Prisma.SortOrderInput | Prisma.SortOrder
   ticket_code?: Prisma.SortOrder
   trip_type?: Prisma.SortOrder
   total_passengers?: Prisma.SortOrder
@@ -494,9 +494,9 @@ export type ticketsScalarWhereWithAggregatesInput = {
   OR?: Prisma.ticketsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ticketsScalarWhereWithAggregatesInput | Prisma.ticketsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"tickets"> | string
-  users_Id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
-  return_schedules_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
-  outbound_schedules_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
+  user_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
+  return_schedule_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
+  outbound_schedule_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
   ticket_code?: Prisma.StringWithAggregatesFilter<"tickets"> | string
   trip_type?: Prisma.EnumTicketsTripTypeWithAggregatesFilter<"tickets"> | $Enums.TicketsTripType
   total_passengers?: Prisma.IntWithAggregatesFilter<"tickets"> | number
@@ -548,9 +548,9 @@ export type ticketsCreateInput = {
 
 export type ticketsUncheckedCreateInput = {
   id?: string
-  users_Id?: string | null
-  return_schedules_id?: string | null
-  outbound_schedules_id?: string | null
+  user_id?: string | null
+  return_schedule_id?: string | null
+  outbound_schedule_id?: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -604,9 +604,9 @@ export type ticketsUpdateInput = {
 
 export type ticketsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  users_Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outbound_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -632,9 +632,9 @@ export type ticketsUncheckedUpdateInput = {
 
 export type ticketsCreateManyInput = {
   id?: string
-  users_Id?: string | null
-  return_schedules_id?: string | null
-  outbound_schedules_id?: string | null
+  user_id?: string | null
+  return_schedule_id?: string | null
+  outbound_schedule_id?: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -679,9 +679,9 @@ export type ticketsUpdateManyMutationInput = {
 
 export type ticketsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  users_Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outbound_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -720,9 +720,9 @@ export type TicketsNullableScalarRelationFilter = {
 
 export type ticketsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  users_Id?: Prisma.SortOrder
-  return_schedules_id?: Prisma.SortOrder
-  outbound_schedules_id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+  return_schedule_id?: Prisma.SortOrder
+  outbound_schedule_id?: Prisma.SortOrder
   ticket_code?: Prisma.SortOrder
   trip_type?: Prisma.SortOrder
   total_passengers?: Prisma.SortOrder
@@ -755,9 +755,9 @@ export type ticketsAvgOrderByAggregateInput = {
 
 export type ticketsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  users_Id?: Prisma.SortOrder
-  return_schedules_id?: Prisma.SortOrder
-  outbound_schedules_id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+  return_schedule_id?: Prisma.SortOrder
+  outbound_schedule_id?: Prisma.SortOrder
   ticket_code?: Prisma.SortOrder
   trip_type?: Prisma.SortOrder
   total_passengers?: Prisma.SortOrder
@@ -781,9 +781,9 @@ export type ticketsMaxOrderByAggregateInput = {
 
 export type ticketsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  users_Id?: Prisma.SortOrder
-  return_schedules_id?: Prisma.SortOrder
-  outbound_schedules_id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+  return_schedule_id?: Prisma.SortOrder
+  outbound_schedule_id?: Prisma.SortOrder
   ticket_code?: Prisma.SortOrder
   trip_type?: Prisma.SortOrder
   total_passengers?: Prisma.SortOrder
@@ -1073,8 +1073,8 @@ export type ticketsCreateWithoutReturn_schedulesInput = {
 
 export type ticketsUncheckedCreateWithoutReturn_schedulesInput = {
   id?: string
-  users_Id?: string | null
-  outbound_schedules_id?: string | null
+  user_id?: string | null
+  outbound_schedule_id?: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -1137,8 +1137,8 @@ export type ticketsCreateWithoutOutbound_schedulesInput = {
 
 export type ticketsUncheckedCreateWithoutOutbound_schedulesInput = {
   id?: string
-  users_Id?: string | null
-  return_schedules_id?: string | null
+  user_id?: string | null
+  return_schedule_id?: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -1193,9 +1193,9 @@ export type ticketsScalarWhereInput = {
   OR?: Prisma.ticketsScalarWhereInput[]
   NOT?: Prisma.ticketsScalarWhereInput | Prisma.ticketsScalarWhereInput[]
   id?: Prisma.StringFilter<"tickets"> | string
-  users_Id?: Prisma.StringNullableFilter<"tickets"> | string | null
-  return_schedules_id?: Prisma.StringNullableFilter<"tickets"> | string | null
-  outbound_schedules_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  user_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  return_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  outbound_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   ticket_code?: Prisma.StringFilter<"tickets"> | string
   trip_type?: Prisma.EnumTicketsTripTypeFilter<"tickets"> | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFilter<"tickets"> | number
@@ -1262,8 +1262,8 @@ export type ticketsCreateWithoutUsersInput = {
 
 export type ticketsUncheckedCreateWithoutUsersInput = {
   id?: string
-  return_schedules_id?: string | null
-  outbound_schedules_id?: string | null
+  return_schedule_id?: string | null
+  outbound_schedule_id?: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -1342,9 +1342,9 @@ export type ticketsCreateWithoutPassengersInput = {
 
 export type ticketsUncheckedCreateWithoutPassengersInput = {
   id?: string
-  users_Id?: string | null
-  return_schedules_id?: string | null
-  outbound_schedules_id?: string | null
+  user_id?: string | null
+  return_schedule_id?: string | null
+  outbound_schedule_id?: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -1412,9 +1412,9 @@ export type ticketsUpdateWithoutPassengersInput = {
 
 export type ticketsUncheckedUpdateWithoutPassengersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  users_Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outbound_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1466,9 +1466,9 @@ export type ticketsCreateWithoutPaymentsInput = {
 
 export type ticketsUncheckedCreateWithoutPaymentsInput = {
   id?: string
-  users_Id?: string | null
-  return_schedules_id?: string | null
-  outbound_schedules_id?: string | null
+  user_id?: string | null
+  return_schedule_id?: string | null
+  outbound_schedule_id?: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -1536,9 +1536,9 @@ export type ticketsUpdateWithoutPaymentsInput = {
 
 export type ticketsUncheckedUpdateWithoutPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  users_Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outbound_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1590,9 +1590,9 @@ export type ticketsCreateWithoutOutbound_holdInput = {
 
 export type ticketsUncheckedCreateWithoutOutbound_holdInput = {
   id?: string
-  users_Id?: string | null
-  return_schedules_id?: string | null
-  outbound_schedules_id?: string | null
+  user_id?: string | null
+  return_schedule_id?: string | null
+  outbound_schedule_id?: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -1649,9 +1649,9 @@ export type ticketsCreateWithoutReturn_holdInput = {
 
 export type ticketsUncheckedCreateWithoutReturn_holdInput = {
   id?: string
-  users_Id?: string | null
-  return_schedules_id?: string | null
-  outbound_schedules_id?: string | null
+  user_id?: string | null
+  return_schedule_id?: string | null
+  outbound_schedule_id?: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -1719,9 +1719,9 @@ export type ticketsUpdateWithoutOutbound_holdInput = {
 
 export type ticketsUncheckedUpdateWithoutOutbound_holdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  users_Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outbound_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1784,9 +1784,9 @@ export type ticketsUpdateWithoutReturn_holdInput = {
 
 export type ticketsUncheckedUpdateWithoutReturn_holdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  users_Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outbound_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1811,8 +1811,8 @@ export type ticketsUncheckedUpdateWithoutReturn_holdInput = {
 
 export type ticketsCreateManyReturn_schedulesInput = {
   id?: string
-  users_Id?: string | null
-  outbound_schedules_id?: string | null
+  user_id?: string | null
+  outbound_schedule_id?: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -1836,8 +1836,8 @@ export type ticketsCreateManyReturn_schedulesInput = {
 
 export type ticketsCreateManyOutbound_schedulesInput = {
   id?: string
-  users_Id?: string | null
-  return_schedules_id?: string | null
+  user_id?: string | null
+  return_schedule_id?: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -1888,8 +1888,8 @@ export type ticketsUpdateWithoutReturn_schedulesInput = {
 
 export type ticketsUncheckedUpdateWithoutReturn_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  users_Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outbound_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1915,8 +1915,8 @@ export type ticketsUncheckedUpdateWithoutReturn_schedulesInput = {
 
 export type ticketsUncheckedUpdateManyWithoutReturn_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  users_Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outbound_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1967,8 +1967,8 @@ export type ticketsUpdateWithoutOutbound_schedulesInput = {
 
 export type ticketsUncheckedUpdateWithoutOutbound_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  users_Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1994,8 +1994,8 @@ export type ticketsUncheckedUpdateWithoutOutbound_schedulesInput = {
 
 export type ticketsUncheckedUpdateManyWithoutOutbound_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  users_Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2019,8 +2019,8 @@ export type ticketsUncheckedUpdateManyWithoutOutbound_schedulesInput = {
 
 export type ticketsCreateManyUsersInput = {
   id?: string
-  return_schedules_id?: string | null
-  outbound_schedules_id?: string | null
+  return_schedule_id?: string | null
+  outbound_schedule_id?: string | null
   ticket_code: string
   trip_type: $Enums.TicketsTripType
   total_passengers: number
@@ -2071,8 +2071,8 @@ export type ticketsUpdateWithoutUsersInput = {
 
 export type ticketsUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  return_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outbound_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2098,8 +2098,8 @@ export type ticketsUncheckedUpdateWithoutUsersInput = {
 
 export type ticketsUncheckedUpdateManyWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  return_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outbound_schedules_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2163,9 +2163,9 @@ export type TicketsCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Type
 
 export type ticketsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  users_Id?: boolean
-  return_schedules_id?: boolean
-  outbound_schedules_id?: boolean
+  user_id?: boolean
+  return_schedule_id?: boolean
+  outbound_schedule_id?: boolean
   ticket_code?: boolean
   trip_type?: boolean
   total_passengers?: boolean
@@ -2197,9 +2197,9 @@ export type ticketsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 
 export type ticketsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  users_Id?: boolean
-  return_schedules_id?: boolean
-  outbound_schedules_id?: boolean
+  user_id?: boolean
+  return_schedule_id?: boolean
+  outbound_schedule_id?: boolean
   ticket_code?: boolean
   trip_type?: boolean
   total_passengers?: boolean
@@ -2228,9 +2228,9 @@ export type ticketsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type ticketsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  users_Id?: boolean
-  return_schedules_id?: boolean
-  outbound_schedules_id?: boolean
+  user_id?: boolean
+  return_schedule_id?: boolean
+  outbound_schedule_id?: boolean
   ticket_code?: boolean
   trip_type?: boolean
   total_passengers?: boolean
@@ -2259,9 +2259,9 @@ export type ticketsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type ticketsSelectScalar = {
   id?: boolean
-  users_Id?: boolean
-  return_schedules_id?: boolean
-  outbound_schedules_id?: boolean
+  user_id?: boolean
+  return_schedule_id?: boolean
+  outbound_schedule_id?: boolean
   ticket_code?: boolean
   trip_type?: boolean
   total_passengers?: boolean
@@ -2283,7 +2283,7 @@ export type ticketsSelectScalar = {
   return_hold_id?: boolean
 }
 
-export type ticketsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "users_Id" | "return_schedules_id" | "outbound_schedules_id" | "ticket_code" | "trip_type" | "total_passengers" | "subtotal" | "taxes" | "service_fee" | "discount" | "total" | "currency" | "qr_code" | "cancellation_reason" | "status" | "booking_expires_at" | "confirmed_at" | "cancelled_at" | "created_at" | "updated_at" | "outbound_hold_id" | "return_hold_id", ExtArgs["result"]["tickets"]>
+export type ticketsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "return_schedule_id" | "outbound_schedule_id" | "ticket_code" | "trip_type" | "total_passengers" | "subtotal" | "taxes" | "service_fee" | "discount" | "total" | "currency" | "qr_code" | "cancellation_reason" | "status" | "booking_expires_at" | "confirmed_at" | "cancelled_at" | "created_at" | "updated_at" | "outbound_hold_id" | "return_hold_id", ExtArgs["result"]["tickets"]>
 export type ticketsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.tickets$usersArgs<ExtArgs>
   return_schedules?: boolean | Prisma.tickets$return_schedulesArgs<ExtArgs>
@@ -2322,9 +2322,9 @@ export type $ticketsPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    users_Id: string | null
-    return_schedules_id: string | null
-    outbound_schedules_id: string | null
+    user_id: string | null
+    return_schedule_id: string | null
+    outbound_schedule_id: string | null
     ticket_code: string
     trip_type: $Enums.TicketsTripType
     total_passengers: number
@@ -2775,9 +2775,9 @@ export interface Prisma__ticketsClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface ticketsFieldRefs {
   readonly id: Prisma.FieldRef<"tickets", 'String'>
-  readonly users_Id: Prisma.FieldRef<"tickets", 'String'>
-  readonly return_schedules_id: Prisma.FieldRef<"tickets", 'String'>
-  readonly outbound_schedules_id: Prisma.FieldRef<"tickets", 'String'>
+  readonly user_id: Prisma.FieldRef<"tickets", 'String'>
+  readonly return_schedule_id: Prisma.FieldRef<"tickets", 'String'>
+  readonly outbound_schedule_id: Prisma.FieldRef<"tickets", 'String'>
   readonly ticket_code: Prisma.FieldRef<"tickets", 'String'>
   readonly trip_type: Prisma.FieldRef<"tickets", 'TicketsTripType'>
   readonly total_passengers: Prisma.FieldRef<"tickets", 'Int'>

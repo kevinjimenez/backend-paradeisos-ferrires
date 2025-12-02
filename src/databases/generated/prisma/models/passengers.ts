@@ -36,7 +36,7 @@ export type PassengersSumAggregateOutputType = {
 
 export type PassengersMinAggregateOutputType = {
   id: string | null
-  tickets_id: string | null
+  ticket_id: string | null
   first_name: string | null
   last_name: string | null
   email: string | null
@@ -54,7 +54,7 @@ export type PassengersMinAggregateOutputType = {
 
 export type PassengersMaxAggregateOutputType = {
   id: string | null
-  tickets_id: string | null
+  ticket_id: string | null
   first_name: string | null
   last_name: string | null
   email: string | null
@@ -72,7 +72,7 @@ export type PassengersMaxAggregateOutputType = {
 
 export type PassengersCountAggregateOutputType = {
   id: number
-  tickets_id: number
+  ticket_id: number
   first_name: number
   last_name: number
   email: number
@@ -100,7 +100,7 @@ export type PassengersSumAggregateInputType = {
 
 export type PassengersMinAggregateInputType = {
   id?: true
-  tickets_id?: true
+  ticket_id?: true
   first_name?: true
   last_name?: true
   email?: true
@@ -118,7 +118,7 @@ export type PassengersMinAggregateInputType = {
 
 export type PassengersMaxAggregateInputType = {
   id?: true
-  tickets_id?: true
+  ticket_id?: true
   first_name?: true
   last_name?: true
   email?: true
@@ -136,7 +136,7 @@ export type PassengersMaxAggregateInputType = {
 
 export type PassengersCountAggregateInputType = {
   id?: true
-  tickets_id?: true
+  ticket_id?: true
   first_name?: true
   last_name?: true
   email?: true
@@ -241,7 +241,7 @@ export type passengersGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 
 export type PassengersGroupByOutputType = {
   id: string
-  tickets_id: string | null
+  ticket_id: string | null
   first_name: string
   last_name: string
   email: string | null
@@ -282,7 +282,7 @@ export type passengersWhereInput = {
   OR?: Prisma.passengersWhereInput[]
   NOT?: Prisma.passengersWhereInput | Prisma.passengersWhereInput[]
   id?: Prisma.StringFilter<"passengers"> | string
-  tickets_id?: Prisma.StringNullableFilter<"passengers"> | string | null
+  ticket_id?: Prisma.StringNullableFilter<"passengers"> | string | null
   first_name?: Prisma.StringFilter<"passengers"> | string
   last_name?: Prisma.StringFilter<"passengers"> | string
   email?: Prisma.StringNullableFilter<"passengers"> | string | null
@@ -301,7 +301,7 @@ export type passengersWhereInput = {
 
 export type passengersOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  tickets_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  ticket_id?: Prisma.SortOrderInput | Prisma.SortOrder
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -323,7 +323,7 @@ export type passengersWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.passengersWhereInput | Prisma.passengersWhereInput[]
   OR?: Prisma.passengersWhereInput[]
   NOT?: Prisma.passengersWhereInput | Prisma.passengersWhereInput[]
-  tickets_id?: Prisma.StringNullableFilter<"passengers"> | string | null
+  ticket_id?: Prisma.StringNullableFilter<"passengers"> | string | null
   first_name?: Prisma.StringFilter<"passengers"> | string
   last_name?: Prisma.StringFilter<"passengers"> | string
   email?: Prisma.StringNullableFilter<"passengers"> | string | null
@@ -342,7 +342,7 @@ export type passengersWhereUniqueInput = Prisma.AtLeast<{
 
 export type passengersOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  tickets_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  ticket_id?: Prisma.SortOrderInput | Prisma.SortOrder
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -368,7 +368,7 @@ export type passengersScalarWhereWithAggregatesInput = {
   OR?: Prisma.passengersScalarWhereWithAggregatesInput[]
   NOT?: Prisma.passengersScalarWhereWithAggregatesInput | Prisma.passengersScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"passengers"> | string
-  tickets_id?: Prisma.StringNullableWithAggregatesFilter<"passengers"> | string | null
+  ticket_id?: Prisma.StringNullableWithAggregatesFilter<"passengers"> | string | null
   first_name?: Prisma.StringWithAggregatesFilter<"passengers"> | string
   last_name?: Prisma.StringWithAggregatesFilter<"passengers"> | string
   email?: Prisma.StringNullableWithAggregatesFilter<"passengers"> | string | null
@@ -404,7 +404,7 @@ export type passengersCreateInput = {
 
 export type passengersUncheckedCreateInput = {
   id?: string
-  tickets_id?: string | null
+  ticket_id?: string | null
   first_name: string
   last_name: string
   email?: string | null
@@ -440,7 +440,7 @@ export type passengersUpdateInput = {
 
 export type passengersUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  tickets_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ticket_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -458,7 +458,7 @@ export type passengersUncheckedUpdateInput = {
 
 export type passengersCreateManyInput = {
   id?: string
-  tickets_id?: string | null
+  ticket_id?: string | null
   first_name: string
   last_name: string
   email?: string | null
@@ -493,7 +493,7 @@ export type passengersUpdateManyMutationInput = {
 
 export type passengersUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  tickets_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ticket_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -511,7 +511,7 @@ export type passengersUncheckedUpdateManyInput = {
 
 export type passengersCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  tickets_id?: Prisma.SortOrder
+  ticket_id?: Prisma.SortOrder
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -533,7 +533,7 @@ export type passengersAvgOrderByAggregateInput = {
 
 export type passengersMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  tickets_id?: Prisma.SortOrder
+  ticket_id?: Prisma.SortOrder
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -551,7 +551,7 @@ export type passengersMaxOrderByAggregateInput = {
 
 export type passengersMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  tickets_id?: Prisma.SortOrder
+  ticket_id?: Prisma.SortOrder
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -692,7 +692,7 @@ export type passengersScalarWhereInput = {
   OR?: Prisma.passengersScalarWhereInput[]
   NOT?: Prisma.passengersScalarWhereInput | Prisma.passengersScalarWhereInput[]
   id?: Prisma.StringFilter<"passengers"> | string
-  tickets_id?: Prisma.StringNullableFilter<"passengers"> | string | null
+  ticket_id?: Prisma.StringNullableFilter<"passengers"> | string | null
   first_name?: Prisma.StringFilter<"passengers"> | string
   last_name?: Prisma.StringFilter<"passengers"> | string
   email?: Prisma.StringNullableFilter<"passengers"> | string | null
@@ -780,7 +780,7 @@ export type passengersUncheckedUpdateManyWithoutTicketsInput = {
 
 export type passengersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  tickets_id?: boolean
+  ticket_id?: boolean
   first_name?: boolean
   last_name?: boolean
   email?: boolean
@@ -799,7 +799,7 @@ export type passengersSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type passengersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  tickets_id?: boolean
+  ticket_id?: boolean
   first_name?: boolean
   last_name?: boolean
   email?: boolean
@@ -818,7 +818,7 @@ export type passengersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
 
 export type passengersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  tickets_id?: boolean
+  ticket_id?: boolean
   first_name?: boolean
   last_name?: boolean
   email?: boolean
@@ -837,7 +837,7 @@ export type passengersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 
 export type passengersSelectScalar = {
   id?: boolean
-  tickets_id?: boolean
+  ticket_id?: boolean
   first_name?: boolean
   last_name?: boolean
   email?: boolean
@@ -853,7 +853,7 @@ export type passengersSelectScalar = {
   created_at?: boolean
 }
 
-export type passengersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tickets_id" | "first_name" | "last_name" | "email" | "phone" | "document_number" | "unit_price" | "is_primary" | "checked_in_outbound" | "checked_in_return" | "checked_in_outbound_at" | "checked_in_return_at" | "document_type" | "created_at", ExtArgs["result"]["passengers"]>
+export type passengersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ticket_id" | "first_name" | "last_name" | "email" | "phone" | "document_number" | "unit_price" | "is_primary" | "checked_in_outbound" | "checked_in_return" | "checked_in_outbound_at" | "checked_in_return_at" | "document_type" | "created_at", ExtArgs["result"]["passengers"]>
 export type passengersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tickets?: boolean | Prisma.passengers$ticketsArgs<ExtArgs>
 }
@@ -871,7 +871,7 @@ export type $passengersPayload<ExtArgs extends runtime.Types.Extensions.Internal
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    tickets_id: string | null
+    ticket_id: string | null
     first_name: string
     last_name: string
     email: string | null
@@ -1310,7 +1310,7 @@ export interface Prisma__passengersClient<T, Null = never, ExtArgs extends runti
  */
 export interface passengersFieldRefs {
   readonly id: Prisma.FieldRef<"passengers", 'String'>
-  readonly tickets_id: Prisma.FieldRef<"passengers", 'String'>
+  readonly ticket_id: Prisma.FieldRef<"passengers", 'String'>
   readonly first_name: Prisma.FieldRef<"passengers", 'String'>
   readonly last_name: Prisma.FieldRef<"passengers", 'String'>
   readonly email: Prisma.FieldRef<"passengers", 'String'>

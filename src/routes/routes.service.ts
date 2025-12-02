@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { DatabasesService } from './../databases/databases.service';
 import { CreateRouteDto } from './dto/create-route.dto';
 import { UpdateRouteDto } from './dto/update-route.dto';
-import { DatabasesService } from 'src/databases/databases.service';
 
 @Injectable()
 export class RoutesService {

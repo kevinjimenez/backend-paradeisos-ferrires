@@ -1,7 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { FerriesService } from './ferries.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CreateFerryDto } from './dto/create-ferry.dto';
 import { UpdateFerryDto } from './dto/update-ferry.dto';
+import { FerriesService } from './ferries.service';
 
 @Controller('ferries')
 export class FerriesController {

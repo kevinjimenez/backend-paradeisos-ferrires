@@ -1,7 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { PortsService } from './ports.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CreatePortDto } from './dto/create-port.dto';
 import { UpdatePortDto } from './dto/update-port.dto';
+import { PortsService } from './ports.service';
 
 @Controller('ports')
 export class PortsController {

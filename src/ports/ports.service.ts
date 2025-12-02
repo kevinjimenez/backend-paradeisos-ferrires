@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { DatabasesService } from './../databases/databases.service';
 import { CreatePortDto } from './dto/create-port.dto';
 import { UpdatePortDto } from './dto/update-port.dto';
-import { DatabasesService } from 'src/databases/databases.service';
 
 @Injectable()
 export class PortsService {

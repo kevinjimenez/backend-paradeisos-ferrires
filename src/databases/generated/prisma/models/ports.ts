@@ -38,7 +38,7 @@ export type PortsSumAggregateOutputType = {
 
 export type PortsMinAggregateOutputType = {
   id: string | null
-  islands_id: string | null
+  island_id: string | null
   name: string | null
   code: string | null
   address: string | null
@@ -54,7 +54,7 @@ export type PortsMinAggregateOutputType = {
 
 export type PortsMaxAggregateOutputType = {
   id: string | null
-  islands_id: string | null
+  island_id: string | null
   name: string | null
   code: string | null
   address: string | null
@@ -70,7 +70,7 @@ export type PortsMaxAggregateOutputType = {
 
 export type PortsCountAggregateOutputType = {
   id: number
-  islands_id: number
+  island_id: number
   name: number
   code: number
   address: number
@@ -98,7 +98,7 @@ export type PortsSumAggregateInputType = {
 
 export type PortsMinAggregateInputType = {
   id?: true
-  islands_id?: true
+  island_id?: true
   name?: true
   code?: true
   address?: true
@@ -114,7 +114,7 @@ export type PortsMinAggregateInputType = {
 
 export type PortsMaxAggregateInputType = {
   id?: true
-  islands_id?: true
+  island_id?: true
   name?: true
   code?: true
   address?: true
@@ -130,7 +130,7 @@ export type PortsMaxAggregateInputType = {
 
 export type PortsCountAggregateInputType = {
   id?: true
-  islands_id?: true
+  island_id?: true
   name?: true
   code?: true
   address?: true
@@ -233,7 +233,7 @@ export type portsGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type PortsGroupByOutputType = {
   id: string
-  islands_id: string | null
+  island_id: string | null
   name: string
   code: string
   address: string | null
@@ -272,7 +272,7 @@ export type portsWhereInput = {
   OR?: Prisma.portsWhereInput[]
   NOT?: Prisma.portsWhereInput | Prisma.portsWhereInput[]
   id?: Prisma.StringFilter<"ports"> | string
-  islands_id?: Prisma.StringNullableFilter<"ports"> | string | null
+  island_id?: Prisma.StringNullableFilter<"ports"> | string | null
   name?: Prisma.StringFilter<"ports"> | string
   code?: Prisma.StringFilter<"ports"> | string
   address?: Prisma.StringNullableFilter<"ports"> | string | null
@@ -291,7 +291,7 @@ export type portsWhereInput = {
 
 export type portsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  islands_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  island_id?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -314,7 +314,7 @@ export type portsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.portsWhereInput | Prisma.portsWhereInput[]
   OR?: Prisma.portsWhereInput[]
   NOT?: Prisma.portsWhereInput | Prisma.portsWhereInput[]
-  islands_id?: Prisma.StringNullableFilter<"ports"> | string | null
+  island_id?: Prisma.StringNullableFilter<"ports"> | string | null
   name?: Prisma.StringFilter<"ports"> | string
   address?: Prisma.StringNullableFilter<"ports"> | string | null
   contact_phone?: Prisma.StringNullableFilter<"ports"> | string | null
@@ -332,7 +332,7 @@ export type portsWhereUniqueInput = Prisma.AtLeast<{
 
 export type portsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  islands_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  island_id?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -356,7 +356,7 @@ export type portsScalarWhereWithAggregatesInput = {
   OR?: Prisma.portsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.portsScalarWhereWithAggregatesInput | Prisma.portsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"ports"> | string
-  islands_id?: Prisma.StringNullableWithAggregatesFilter<"ports"> | string | null
+  island_id?: Prisma.StringNullableWithAggregatesFilter<"ports"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"ports"> | string
   code?: Prisma.StringWithAggregatesFilter<"ports"> | string
   address?: Prisma.StringNullableWithAggregatesFilter<"ports"> | string | null
@@ -390,7 +390,7 @@ export type portsCreateInput = {
 
 export type portsUncheckedCreateInput = {
   id?: string
-  islands_id?: string | null
+  island_id?: string | null
   name: string
   code: string
   address?: string | null
@@ -426,7 +426,7 @@ export type portsUpdateInput = {
 
 export type portsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  islands_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  island_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -444,7 +444,7 @@ export type portsUncheckedUpdateInput = {
 
 export type portsCreateManyInput = {
   id?: string
-  islands_id?: string | null
+  island_id?: string | null
   name: string
   code: string
   address?: string | null
@@ -475,7 +475,7 @@ export type portsUpdateManyMutationInput = {
 
 export type portsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  islands_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  island_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -501,7 +501,7 @@ export type portsOrderByRelationAggregateInput = {
 
 export type portsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  islands_id?: Prisma.SortOrder
+  island_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   address?: Prisma.SortOrder
@@ -522,7 +522,7 @@ export type portsAvgOrderByAggregateInput = {
 
 export type portsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  islands_id?: Prisma.SortOrder
+  island_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   address?: Prisma.SortOrder
@@ -538,7 +538,7 @@ export type portsMaxOrderByAggregateInput = {
 
 export type portsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  islands_id?: Prisma.SortOrder
+  island_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   address?: Prisma.SortOrder
@@ -709,7 +709,7 @@ export type portsScalarWhereInput = {
   OR?: Prisma.portsScalarWhereInput[]
   NOT?: Prisma.portsScalarWhereInput | Prisma.portsScalarWhereInput[]
   id?: Prisma.StringFilter<"ports"> | string
-  islands_id?: Prisma.StringNullableFilter<"ports"> | string | null
+  island_id?: Prisma.StringNullableFilter<"ports"> | string | null
   name?: Prisma.StringFilter<"ports"> | string
   code?: Prisma.StringFilter<"ports"> | string
   address?: Prisma.StringNullableFilter<"ports"> | string | null
@@ -742,7 +742,7 @@ export type portsCreateWithoutOrigin_routesInput = {
 
 export type portsUncheckedCreateWithoutOrigin_routesInput = {
   id?: string
-  islands_id?: string | null
+  island_id?: string | null
   name: string
   code: string
   address?: string | null
@@ -781,7 +781,7 @@ export type portsCreateWithoutDestination_routesInput = {
 
 export type portsUncheckedCreateWithoutDestination_routesInput = {
   id?: string
-  islands_id?: string | null
+  island_id?: string | null
   name: string
   code: string
   address?: string | null
@@ -831,7 +831,7 @@ export type portsUpdateWithoutOrigin_routesInput = {
 
 export type portsUncheckedUpdateWithoutOrigin_routesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  islands_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  island_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -876,7 +876,7 @@ export type portsUpdateWithoutDestination_routesInput = {
 
 export type portsUncheckedUpdateWithoutDestination_routesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  islands_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  island_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -997,7 +997,7 @@ export type PortsCountOutputTypeCountDestination_routesArgs<ExtArgs extends runt
 
 export type portsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  islands_id?: boolean
+  island_id?: boolean
   name?: boolean
   code?: boolean
   address?: boolean
@@ -1017,7 +1017,7 @@ export type portsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 
 export type portsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  islands_id?: boolean
+  island_id?: boolean
   name?: boolean
   code?: boolean
   address?: boolean
@@ -1034,7 +1034,7 @@ export type portsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 
 export type portsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  islands_id?: boolean
+  island_id?: boolean
   name?: boolean
   code?: boolean
   address?: boolean
@@ -1051,7 +1051,7 @@ export type portsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 
 export type portsSelectScalar = {
   id?: boolean
-  islands_id?: boolean
+  island_id?: boolean
   name?: boolean
   code?: boolean
   address?: boolean
@@ -1065,7 +1065,7 @@ export type portsSelectScalar = {
   updated_at?: boolean
 }
 
-export type portsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "islands_id" | "name" | "code" | "address" | "contact_phone" | "latitude" | "longitude" | "is_active" | "opening_time" | "closing_time" | "created_at" | "updated_at", ExtArgs["result"]["ports"]>
+export type portsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "island_id" | "name" | "code" | "address" | "contact_phone" | "latitude" | "longitude" | "is_active" | "opening_time" | "closing_time" | "created_at" | "updated_at", ExtArgs["result"]["ports"]>
 export type portsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   islands?: boolean | Prisma.ports$islandsArgs<ExtArgs>
   origin_routes?: boolean | Prisma.ports$origin_routesArgs<ExtArgs>
@@ -1088,7 +1088,7 @@ export type $portsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    islands_id: string | null
+    island_id: string | null
     name: string
     code: string
     address: string | null
@@ -1527,7 +1527,7 @@ export interface Prisma__portsClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface portsFieldRefs {
   readonly id: Prisma.FieldRef<"ports", 'String'>
-  readonly islands_id: Prisma.FieldRef<"ports", 'String'>
+  readonly island_id: Prisma.FieldRef<"ports", 'String'>
   readonly name: Prisma.FieldRef<"ports", 'String'>
   readonly code: Prisma.FieldRef<"ports", 'String'>
   readonly address: Prisma.FieldRef<"ports", 'String'>

@@ -38,8 +38,8 @@ export type SchedulesSumAggregateOutputType = {
 
 export type SchedulesMinAggregateOutputType = {
   id: string | null
-  routes_id: string | null
-  ferries_id: string | null
+  route_id: string | null
+  ferry_id: string | null
   departure_date: Date | null
   departure_time: Date | null
   arrival_time: Date | null
@@ -54,8 +54,8 @@ export type SchedulesMinAggregateOutputType = {
 
 export type SchedulesMaxAggregateOutputType = {
   id: string | null
-  routes_id: string | null
-  ferries_id: string | null
+  route_id: string | null
+  ferry_id: string | null
   departure_date: Date | null
   departure_time: Date | null
   arrival_time: Date | null
@@ -70,8 +70,8 @@ export type SchedulesMaxAggregateOutputType = {
 
 export type SchedulesCountAggregateOutputType = {
   id: number
-  routes_id: number
-  ferries_id: number
+  route_id: number
+  ferry_id: number
   departure_date: number
   departure_time: number
   arrival_time: number
@@ -98,8 +98,8 @@ export type SchedulesSumAggregateInputType = {
 
 export type SchedulesMinAggregateInputType = {
   id?: true
-  routes_id?: true
-  ferries_id?: true
+  route_id?: true
+  ferry_id?: true
   departure_date?: true
   departure_time?: true
   arrival_time?: true
@@ -114,8 +114,8 @@ export type SchedulesMinAggregateInputType = {
 
 export type SchedulesMaxAggregateInputType = {
   id?: true
-  routes_id?: true
-  ferries_id?: true
+  route_id?: true
+  ferry_id?: true
   departure_date?: true
   departure_time?: true
   arrival_time?: true
@@ -130,8 +130,8 @@ export type SchedulesMaxAggregateInputType = {
 
 export type SchedulesCountAggregateInputType = {
   id?: true
-  routes_id?: true
-  ferries_id?: true
+  route_id?: true
+  ferry_id?: true
   departure_date?: true
   departure_time?: true
   arrival_time?: true
@@ -233,8 +233,8 @@ export type schedulesGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 
 export type SchedulesGroupByOutputType = {
   id: string
-  routes_id: string | null
-  ferries_id: string | null
+  route_id: string | null
+  ferry_id: string | null
   departure_date: Date
   departure_time: Date
   arrival_time: Date
@@ -272,8 +272,8 @@ export type schedulesWhereInput = {
   OR?: Prisma.schedulesWhereInput[]
   NOT?: Prisma.schedulesWhereInput | Prisma.schedulesWhereInput[]
   id?: Prisma.StringFilter<"schedules"> | string
-  routes_id?: Prisma.StringNullableFilter<"schedules"> | string | null
-  ferries_id?: Prisma.StringNullableFilter<"schedules"> | string | null
+  route_id?: Prisma.StringNullableFilter<"schedules"> | string | null
+  ferry_id?: Prisma.StringNullableFilter<"schedules"> | string | null
   departure_date?: Prisma.DateTimeFilter<"schedules"> | Date | string
   departure_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
   arrival_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
@@ -293,8 +293,8 @@ export type schedulesWhereInput = {
 
 export type schedulesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  routes_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  ferries_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  route_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  ferry_id?: Prisma.SortOrderInput | Prisma.SortOrder
   departure_date?: Prisma.SortOrder
   departure_time?: Prisma.SortOrder
   arrival_time?: Prisma.SortOrder
@@ -317,8 +317,8 @@ export type schedulesWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.schedulesWhereInput | Prisma.schedulesWhereInput[]
   OR?: Prisma.schedulesWhereInput[]
   NOT?: Prisma.schedulesWhereInput | Prisma.schedulesWhereInput[]
-  routes_id?: Prisma.StringNullableFilter<"schedules"> | string | null
-  ferries_id?: Prisma.StringNullableFilter<"schedules"> | string | null
+  route_id?: Prisma.StringNullableFilter<"schedules"> | string | null
+  ferry_id?: Prisma.StringNullableFilter<"schedules"> | string | null
   departure_date?: Prisma.DateTimeFilter<"schedules"> | Date | string
   departure_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
   arrival_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
@@ -338,8 +338,8 @@ export type schedulesWhereUniqueInput = Prisma.AtLeast<{
 
 export type schedulesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  routes_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  ferries_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  route_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  ferry_id?: Prisma.SortOrderInput | Prisma.SortOrder
   departure_date?: Prisma.SortOrder
   departure_time?: Prisma.SortOrder
   arrival_time?: Prisma.SortOrder
@@ -362,8 +362,8 @@ export type schedulesScalarWhereWithAggregatesInput = {
   OR?: Prisma.schedulesScalarWhereWithAggregatesInput[]
   NOT?: Prisma.schedulesScalarWhereWithAggregatesInput | Prisma.schedulesScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"schedules"> | string
-  routes_id?: Prisma.StringNullableWithAggregatesFilter<"schedules"> | string | null
-  ferries_id?: Prisma.StringNullableWithAggregatesFilter<"schedules"> | string | null
+  route_id?: Prisma.StringNullableWithAggregatesFilter<"schedules"> | string | null
+  ferry_id?: Prisma.StringNullableWithAggregatesFilter<"schedules"> | string | null
   departure_date?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
   departure_time?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
   arrival_time?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
@@ -397,8 +397,8 @@ export type schedulesCreateInput = {
 
 export type schedulesUncheckedCreateInput = {
   id?: string
-  routes_id?: string | null
-  ferries_id?: string | null
+  route_id?: string | null
+  ferry_id?: string | null
   departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
@@ -435,8 +435,8 @@ export type schedulesUpdateInput = {
 
 export type schedulesUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -454,8 +454,8 @@ export type schedulesUncheckedUpdateInput = {
 
 export type schedulesCreateManyInput = {
   id?: string
-  routes_id?: string | null
-  ferries_id?: string | null
+  route_id?: string | null
+  ferry_id?: string | null
   departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
@@ -484,8 +484,8 @@ export type schedulesUpdateManyMutationInput = {
 
 export type schedulesUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -510,8 +510,8 @@ export type schedulesOrderByRelationAggregateInput = {
 
 export type schedulesCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  routes_id?: Prisma.SortOrder
-  ferries_id?: Prisma.SortOrder
+  route_id?: Prisma.SortOrder
+  ferry_id?: Prisma.SortOrder
   departure_date?: Prisma.SortOrder
   departure_time?: Prisma.SortOrder
   arrival_time?: Prisma.SortOrder
@@ -531,8 +531,8 @@ export type schedulesAvgOrderByAggregateInput = {
 
 export type schedulesMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  routes_id?: Prisma.SortOrder
-  ferries_id?: Prisma.SortOrder
+  route_id?: Prisma.SortOrder
+  ferry_id?: Prisma.SortOrder
   departure_date?: Prisma.SortOrder
   departure_time?: Prisma.SortOrder
   arrival_time?: Prisma.SortOrder
@@ -547,8 +547,8 @@ export type schedulesMaxOrderByAggregateInput = {
 
 export type schedulesMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  routes_id?: Prisma.SortOrder
-  ferries_id?: Prisma.SortOrder
+  route_id?: Prisma.SortOrder
+  ferry_id?: Prisma.SortOrder
   departure_date?: Prisma.SortOrder
   departure_time?: Prisma.SortOrder
   arrival_time?: Prisma.SortOrder
@@ -727,7 +727,7 @@ export type schedulesCreateWithoutRoutesInput = {
 
 export type schedulesUncheckedCreateWithoutRoutesInput = {
   id?: string
-  ferries_id?: string | null
+  ferry_id?: string | null
   departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
@@ -774,8 +774,8 @@ export type schedulesScalarWhereInput = {
   OR?: Prisma.schedulesScalarWhereInput[]
   NOT?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
   id?: Prisma.StringFilter<"schedules"> | string
-  routes_id?: Prisma.StringNullableFilter<"schedules"> | string | null
-  ferries_id?: Prisma.StringNullableFilter<"schedules"> | string | null
+  route_id?: Prisma.StringNullableFilter<"schedules"> | string | null
+  ferry_id?: Prisma.StringNullableFilter<"schedules"> | string | null
   departure_date?: Prisma.DateTimeFilter<"schedules"> | Date | string
   departure_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
   arrival_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
@@ -808,7 +808,7 @@ export type schedulesCreateWithoutFerriesInput = {
 
 export type schedulesUncheckedCreateWithoutFerriesInput = {
   id?: string
-  routes_id?: string | null
+  route_id?: string | null
   departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
@@ -870,8 +870,8 @@ export type schedulesCreateWithoutSeat_holdsInput = {
 
 export type schedulesUncheckedCreateWithoutSeat_holdsInput = {
   id?: string
-  routes_id?: string | null
-  ferries_id?: string | null
+  route_id?: string | null
+  ferry_id?: string | null
   departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
@@ -922,8 +922,8 @@ export type schedulesUpdateWithoutSeat_holdsInput = {
 
 export type schedulesUncheckedUpdateWithoutSeat_holdsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -958,8 +958,8 @@ export type schedulesCreateWithoutReturn_ticketsInput = {
 
 export type schedulesUncheckedCreateWithoutReturn_ticketsInput = {
   id?: string
-  routes_id?: string | null
-  ferries_id?: string | null
+  route_id?: string | null
+  ferry_id?: string | null
   departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
@@ -999,8 +999,8 @@ export type schedulesCreateWithoutOutbound_ticketsInput = {
 
 export type schedulesUncheckedCreateWithoutOutbound_ticketsInput = {
   id?: string
-  routes_id?: string | null
-  ferries_id?: string | null
+  route_id?: string | null
+  ferry_id?: string | null
   departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
@@ -1051,8 +1051,8 @@ export type schedulesUpdateWithoutReturn_ticketsInput = {
 
 export type schedulesUncheckedUpdateWithoutReturn_ticketsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1098,8 +1098,8 @@ export type schedulesUpdateWithoutOutbound_ticketsInput = {
 
 export type schedulesUncheckedUpdateWithoutOutbound_ticketsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1116,7 +1116,7 @@ export type schedulesUncheckedUpdateWithoutOutbound_ticketsInput = {
 
 export type schedulesCreateManyRoutesInput = {
   id?: string
-  ferries_id?: string | null
+  ferry_id?: string | null
   departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
@@ -1149,7 +1149,7 @@ export type schedulesUpdateWithoutRoutesInput = {
 
 export type schedulesUncheckedUpdateWithoutRoutesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1167,7 +1167,7 @@ export type schedulesUncheckedUpdateWithoutRoutesInput = {
 
 export type schedulesUncheckedUpdateManyWithoutRoutesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1182,7 +1182,7 @@ export type schedulesUncheckedUpdateManyWithoutRoutesInput = {
 
 export type schedulesCreateManyFerriesInput = {
   id?: string
-  routes_id?: string | null
+  route_id?: string | null
   departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
@@ -1215,7 +1215,7 @@ export type schedulesUpdateWithoutFerriesInput = {
 
 export type schedulesUncheckedUpdateWithoutFerriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1233,7 +1233,7 @@ export type schedulesUncheckedUpdateWithoutFerriesInput = {
 
 export type schedulesUncheckedUpdateManyWithoutFerriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1297,8 +1297,8 @@ export type SchedulesCountOutputTypeCountOutbound_ticketsArgs<ExtArgs extends ru
 
 export type schedulesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  routes_id?: boolean
-  ferries_id?: boolean
+  route_id?: boolean
+  ferry_id?: boolean
   departure_date?: boolean
   departure_time?: boolean
   arrival_time?: boolean
@@ -1319,8 +1319,8 @@ export type schedulesSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type schedulesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  routes_id?: boolean
-  ferries_id?: boolean
+  route_id?: boolean
+  ferry_id?: boolean
   departure_date?: boolean
   departure_time?: boolean
   arrival_time?: boolean
@@ -1337,8 +1337,8 @@ export type schedulesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
 
 export type schedulesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  routes_id?: boolean
-  ferries_id?: boolean
+  route_id?: boolean
+  ferry_id?: boolean
   departure_date?: boolean
   departure_time?: boolean
   arrival_time?: boolean
@@ -1355,8 +1355,8 @@ export type schedulesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 
 export type schedulesSelectScalar = {
   id?: boolean
-  routes_id?: boolean
-  ferries_id?: boolean
+  route_id?: boolean
+  ferry_id?: boolean
   departure_date?: boolean
   departure_time?: boolean
   arrival_time?: boolean
@@ -1369,7 +1369,7 @@ export type schedulesSelectScalar = {
   updated_at?: boolean
 }
 
-export type schedulesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "routes_id" | "ferries_id" | "departure_date" | "departure_time" | "arrival_time" | "total_capacity" | "available_seats" | "cancellation_reason" | "notes" | "status" | "created_at" | "updated_at", ExtArgs["result"]["schedules"]>
+export type schedulesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "route_id" | "ferry_id" | "departure_date" | "departure_time" | "arrival_time" | "total_capacity" | "available_seats" | "cancellation_reason" | "notes" | "status" | "created_at" | "updated_at", ExtArgs["result"]["schedules"]>
 export type schedulesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   routes?: boolean | Prisma.schedules$routesArgs<ExtArgs>
   ferries?: boolean | Prisma.schedules$ferriesArgs<ExtArgs>
@@ -1398,8 +1398,8 @@ export type $schedulesPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    routes_id: string | null
-    ferries_id: string | null
+    route_id: string | null
+    ferry_id: string | null
     departure_date: Date
     departure_time: Date
     arrival_time: Date
@@ -1839,8 +1839,8 @@ export interface Prisma__schedulesClient<T, Null = never, ExtArgs extends runtim
  */
 export interface schedulesFieldRefs {
   readonly id: Prisma.FieldRef<"schedules", 'String'>
-  readonly routes_id: Prisma.FieldRef<"schedules", 'String'>
-  readonly ferries_id: Prisma.FieldRef<"schedules", 'String'>
+  readonly route_id: Prisma.FieldRef<"schedules", 'String'>
+  readonly ferry_id: Prisma.FieldRef<"schedules", 'String'>
   readonly departure_date: Prisma.FieldRef<"schedules", 'DateTime'>
   readonly departure_time: Prisma.FieldRef<"schedules", 'DateTime'>
   readonly arrival_time: Prisma.FieldRef<"schedules", 'DateTime'>

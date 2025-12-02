@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import { DatabasesService } from './../databases/databases.service';
 import { CreateScheduleDto } from './dto/create-schedule.dto';
 import { UpdateScheduleDto } from './dto/update-schedule.dto';
 
 @Injectable()
 export class SchedulesService {
+  constructor(private databasesService: DatabasesService) {}
+
   create(createScheduleDto: CreateScheduleDto) {
     return 'This action adds a new schedule';
   }
 
   findAll() {
-    return `This action returns all schedules`;
+    return this.databasesService.schedules.findMany();
   }
 
   findOne(id: number) {

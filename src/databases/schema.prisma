@@ -35,9 +35,9 @@ model islands {
 
 // TABLE ports
 model ports {
-  id         String   @id @default(uuid())
-  islands    islands? @relation(fields: [islands_id], references: [id])
-  islands_id String?
+  id        String   @id @default(uuid())
+  islands   islands? @relation(fields: [island_id], references: [id])
+  island_id String?
 
   name          String   @db.VarChar(100)
   code          String   @unique @db.VarChar(10)
@@ -114,11 +114,11 @@ enum ScheduleStatus {
 }
 
 model schedules {
-  id         String   @id @default(uuid())
-  routes     routes?  @relation(fields: [routes_id], references: [id])
-  routes_id  String?
-  ferries    ferries? @relation(fields: [ferries_id], references: [id])
-  ferries_id String?
+  id       String   @id @default(uuid())
+  routes   routes?  @relation(fields: [route_id], references: [id])
+  route_id String?
+  ferries  ferries? @relation(fields: [ferry_id], references: [id])
+  ferry_id String?
 
   departure_date      DateTime
   departure_time      DateTime
@@ -159,9 +159,9 @@ model users {
 
 // TABLE passengers
 model passengers {
-  id         String   @id @default(uuid())
-  tickets    tickets? @relation(fields: [tickets_id], references: [id])
-  tickets_id String?
+  id        String   @id @default(uuid())
+  tickets   tickets? @relation(fields: [ticket_id], references: [id])
+  ticket_id String?
 
   first_name             String    @db.VarChar(100)
   last_name              String    @db.VarChar(100)
@@ -199,9 +199,9 @@ enum PaymentStatus {
 }
 
 model payments {
-  id         String   @id @default(uuid())
-  tickets    tickets? @relation(fields: [tickets_id], references: [id])
-  tickets_id String?
+  id        String   @id @default(uuid())
+  tickets   tickets? @relation(fields: [ticket_id], references: [id])
+  ticket_id String?
 
   payment_provider        String    @db.VarChar(50)
   provider_transaction_id String?   @db.VarChar(255)
@@ -236,10 +236,10 @@ enum SeatHoldsStatus {
 
 model seat_holds {
   id              String     @id @default(uuid())
-  users           users?     @relation(fields: [users_id], references: [id])
-  users_id        String?
-  schedules       schedules? @relation(fields: [schedules_id], references: [id])
-  schedules_id    String?
+  users           users?     @relation(fields: [user_id], references: [id])
+  user_id         String?
+  schedules       schedules? @relation(fields: [schedule_id], references: [id])
+  schedule_id     String?
   outbound_ticket tickets?   @relation("outbound_hold")
   return_ticket   tickets?   @relation("return_hold")
 
@@ -271,13 +271,13 @@ enum TicketsStatus {
 }
 
 model tickets {
-  id                    String     @id @default(uuid())
-  users                 users?     @relation(fields: [users_Id], references: [id])
-  users_Id              String?
-  return_schedules      schedules? @relation("return_tickets", fields: [return_schedules_id], references: [id])
-  return_schedules_id   String?
-  outbound_schedules    schedules? @relation("outbound_tickets", fields: [outbound_schedules_id], references: [id])
-  outbound_schedules_id String?
+  id                   String     @id @default(uuid())
+  users                users?     @relation(fields: [user_id], references: [id])
+  user_id              String?
+  return_schedules     schedules? @relation("return_tickets", fields: [return_schedule_id], references: [id])
+  return_schedule_id   String?
+  outbound_schedules   schedules? @relation("outbound_tickets", fields: [outbound_schedule_id], references: [id])
+  outbound_schedule_id String?
 
   ticket_code         String          @unique @db.VarChar(20)
   trip_type           TicketsTripType
@@ -301,8 +301,8 @@ model tickets {
 
   outbound_hold    seat_holds? @relation("outbound_hold", fields: [outbound_hold_id], references: [id])
   outbound_hold_id String?     @unique
-  return_hold    seat_holds? @relation("return_hold", fields: [return_hold_id], references: [id])
-  return_hold_id String?     @unique
+  return_hold      seat_holds? @relation("return_hold", fields: [return_hold_id], references: [id])
+  return_hold_id   String?     @unique
 
   passengers passengers[]
   payments   payments[]

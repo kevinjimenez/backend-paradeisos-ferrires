@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from './generated/prisma/client';
 import { envs } from 'src/common/config/envs';
@@ -39,7 +37,7 @@ async function main() {
     },
   });
 
-  const user2 = await prisma.users.create({
+  await prisma.users.create({
     data: {
       firstName: 'María',
       lastName: 'García',
@@ -70,7 +68,7 @@ async function main() {
 
   const portBarcelona = await prisma.ports.create({
     data: {
-      islands_id: mainland.id,
+      island_id: mainland.id,
       name: 'Port de Barcelona',
       code: 'BCN',
       address: 'Barcelona, España',
@@ -80,7 +78,7 @@ async function main() {
 
   const portPalma = await prisma.ports.create({
     data: {
-      islands_id: balearic.id,
+      island_id: balearic.id,
       name: 'Port de Palma',
       code: 'PMI',
       address: 'Palma de Mallorca, España',
@@ -127,8 +125,8 @@ async function main() {
 
   const schedule1 = await prisma.schedules.create({
     data: {
-      routes_id: route1.id,
-      ferries_id: ferry1.id,
+      route_id: route1.id,
+      ferry_id: ferry1.id,
       departure_date: departure,
       departure_time: departure,
       arrival_time: arrival,
@@ -143,8 +141,8 @@ async function main() {
   console.log('⏳ Creating seat holds...');
   const hold1 = await prisma.seat_holds.create({
     data: {
-      users_id: user1.id,
-      schedules_id: schedule1.id,
+      user_id: user1.id,
+      schedule_id: schedule1.id,
       quantity: 2,
       status: 'held',
     },
@@ -154,8 +152,8 @@ async function main() {
   console.log('🎫 Creating tickets...');
   const ticket1 = await prisma.tickets.create({
     data: {
-      users_Id: user1.id,
-      outbound_schedules_id: schedule1.id,
+      user_id: user1.id,
+      outbound_schedule_id: schedule1.id,
       ticket_code: 'TKT-2025-001',
       trip_type: 'one_way',
       total_passengers: 2,
@@ -177,7 +175,7 @@ async function main() {
   await prisma.passengers.createMany({
     data: [
       {
-        tickets_id: ticket1.id,
+        ticket_id: ticket1.id,
         first_name: 'Juan',
         last_name: 'Pérez',
         email: 'juan@example.com',
@@ -190,7 +188,7 @@ async function main() {
         document_type: 'dni',
       },
       {
-        tickets_id: ticket1.id,
+        ticket_id: ticket1.id,
         first_name: 'Ana',
         last_name: 'Pérez',
         email: 'ana@example.com',
@@ -209,7 +207,7 @@ async function main() {
   console.log('💳 Creating payments...');
   await prisma.payments.create({
     data: {
-      tickets_id: ticket1.id,
+      ticket_id: ticket1.id,
       payment_provider: 'demo',
       provider_transaction_id: 'TX-001',
       amount: 110,
@@ -238,8 +236,12 @@ async function main() {
 }
 
 main()
-  .catch((e) => {
-    console.error('❌ Error during seed:', e);
+  .catch((error: unknown) => {
+    if (error instanceof Error) {
+      console.error('❌ Error during seed:', error.message);
+    } else {
+      console.error('❌ Error during seed: Unknown error');
+    }
     process.exit(1);
   })
   .finally(async () => {

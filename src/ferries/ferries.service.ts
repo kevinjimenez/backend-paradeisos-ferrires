@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DatabasesService } from 'src/databases/databases.service';
+import { DatabasesService } from './../databases/databases.service';
 import { CreateFerryDto } from './dto/create-ferry.dto';
 import { UpdateFerryDto } from './dto/update-ferry.dto';
 
