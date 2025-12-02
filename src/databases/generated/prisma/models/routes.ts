@@ -27,81 +27,121 @@ export type AggregateRoutes = {
 }
 
 export type RoutesAvgAggregateOutputType = {
-  estimated_duration_minutes: number | null
+  distance_km: runtime.Decimal | null
+  duration_minutes: number | null
+  base_price_resident: runtime.Decimal | null
+  base_price_national: runtime.Decimal | null
+  base_price_foreign: runtime.Decimal | null
 }
 
 export type RoutesSumAggregateOutputType = {
-  estimated_duration_minutes: number | null
+  distance_km: runtime.Decimal | null
+  duration_minutes: number | null
+  base_price_resident: runtime.Decimal | null
+  base_price_national: runtime.Decimal | null
+  base_price_foreign: runtime.Decimal | null
 }
 
 export type RoutesMinAggregateOutputType = {
   id: string | null
-  estimated_duration_minutes: number | null
-  status: $Enums.RouteStatus | null
-  createdAt: Date | null
-  updatedAt: Date | null
   origin_port_id: string | null
   destination_port_id: string | null
+  distance_km: runtime.Decimal | null
+  duration_minutes: number | null
+  base_price_resident: runtime.Decimal | null
+  base_price_national: runtime.Decimal | null
+  base_price_foreign: runtime.Decimal | null
+  is_active: boolean | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type RoutesMaxAggregateOutputType = {
   id: string | null
-  estimated_duration_minutes: number | null
-  status: $Enums.RouteStatus | null
-  createdAt: Date | null
-  updatedAt: Date | null
   origin_port_id: string | null
   destination_port_id: string | null
+  distance_km: runtime.Decimal | null
+  duration_minutes: number | null
+  base_price_resident: runtime.Decimal | null
+  base_price_national: runtime.Decimal | null
+  base_price_foreign: runtime.Decimal | null
+  is_active: boolean | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type RoutesCountAggregateOutputType = {
   id: number
-  estimated_duration_minutes: number
-  status: number
-  createdAt: number
-  updatedAt: number
   origin_port_id: number
   destination_port_id: number
+  distance_km: number
+  duration_minutes: number
+  base_price_resident: number
+  base_price_national: number
+  base_price_foreign: number
+  is_active: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
 
 export type RoutesAvgAggregateInputType = {
-  estimated_duration_minutes?: true
+  distance_km?: true
+  duration_minutes?: true
+  base_price_resident?: true
+  base_price_national?: true
+  base_price_foreign?: true
 }
 
 export type RoutesSumAggregateInputType = {
-  estimated_duration_minutes?: true
+  distance_km?: true
+  duration_minutes?: true
+  base_price_resident?: true
+  base_price_national?: true
+  base_price_foreign?: true
 }
 
 export type RoutesMinAggregateInputType = {
   id?: true
-  estimated_duration_minutes?: true
-  status?: true
-  createdAt?: true
-  updatedAt?: true
   origin_port_id?: true
   destination_port_id?: true
+  distance_km?: true
+  duration_minutes?: true
+  base_price_resident?: true
+  base_price_national?: true
+  base_price_foreign?: true
+  is_active?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type RoutesMaxAggregateInputType = {
   id?: true
-  estimated_duration_minutes?: true
-  status?: true
-  createdAt?: true
-  updatedAt?: true
   origin_port_id?: true
   destination_port_id?: true
+  distance_km?: true
+  duration_minutes?: true
+  base_price_resident?: true
+  base_price_national?: true
+  base_price_foreign?: true
+  is_active?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type RoutesCountAggregateInputType = {
   id?: true
-  estimated_duration_minutes?: true
-  status?: true
-  createdAt?: true
-  updatedAt?: true
   origin_port_id?: true
   destination_port_id?: true
+  distance_km?: true
+  duration_minutes?: true
+  base_price_resident?: true
+  base_price_national?: true
+  base_price_foreign?: true
+  is_active?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -193,12 +233,16 @@ export type routesGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type RoutesGroupByOutputType = {
   id: string
-  estimated_duration_minutes: number
-  status: $Enums.RouteStatus
-  createdAt: Date
-  updatedAt: Date
   origin_port_id: string
   destination_port_id: string
+  distance_km: runtime.Decimal | null
+  duration_minutes: number
+  base_price_resident: runtime.Decimal
+  base_price_national: runtime.Decimal
+  base_price_foreign: runtime.Decimal
+  is_active: boolean
+  created_at: Date
+  updated_at: Date
   _count: RoutesCountAggregateOutputType | null
   _avg: RoutesAvgAggregateOutputType | null
   _sum: RoutesSumAggregateOutputType | null
@@ -226,30 +270,36 @@ export type routesWhereInput = {
   OR?: Prisma.routesWhereInput[]
   NOT?: Prisma.routesWhereInput | Prisma.routesWhereInput[]
   id?: Prisma.StringFilter<"routes"> | string
-  estimated_duration_minutes?: Prisma.IntFilter<"routes"> | number
-  status?: Prisma.EnumRouteStatusFilter<"routes"> | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFilter<"routes"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"routes"> | Date | string
   origin_port_id?: Prisma.StringFilter<"routes"> | string
   destination_port_id?: Prisma.StringFilter<"routes"> | string
-  schedules?: Prisma.SchedulesListRelationFilter
-  trips?: Prisma.TripsListRelationFilter
+  distance_km?: Prisma.DecimalNullableFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFilter<"routes"> | number
+  base_price_resident?: Prisma.DecimalFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFilter<"routes"> | boolean
+  created_at?: Prisma.DateTimeFilter<"routes"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"routes"> | Date | string
   origin_ports?: Prisma.XOR<Prisma.PortsScalarRelationFilter, Prisma.portsWhereInput>
   destination_ports?: Prisma.XOR<Prisma.PortsScalarRelationFilter, Prisma.portsWhereInput>
+  schedules?: Prisma.SchedulesListRelationFilter
 }
 
 export type routesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  estimated_duration_minutes?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   origin_port_id?: Prisma.SortOrder
   destination_port_id?: Prisma.SortOrder
-  schedules?: Prisma.schedulesOrderByRelationAggregateInput
-  trips?: Prisma.tripsOrderByRelationAggregateInput
+  distance_km?: Prisma.SortOrderInput | Prisma.SortOrder
+  duration_minutes?: Prisma.SortOrder
+  base_price_resident?: Prisma.SortOrder
+  base_price_national?: Prisma.SortOrder
+  base_price_foreign?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   origin_ports?: Prisma.portsOrderByWithRelationInput
   destination_ports?: Prisma.portsOrderByWithRelationInput
+  schedules?: Prisma.schedulesOrderByRelationAggregateInput
 }
 
 export type routesWhereUniqueInput = Prisma.AtLeast<{
@@ -257,26 +307,33 @@ export type routesWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.routesWhereInput | Prisma.routesWhereInput[]
   OR?: Prisma.routesWhereInput[]
   NOT?: Prisma.routesWhereInput | Prisma.routesWhereInput[]
-  estimated_duration_minutes?: Prisma.IntFilter<"routes"> | number
-  status?: Prisma.EnumRouteStatusFilter<"routes"> | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFilter<"routes"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"routes"> | Date | string
   origin_port_id?: Prisma.StringFilter<"routes"> | string
   destination_port_id?: Prisma.StringFilter<"routes"> | string
-  schedules?: Prisma.SchedulesListRelationFilter
-  trips?: Prisma.TripsListRelationFilter
+  distance_km?: Prisma.DecimalNullableFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFilter<"routes"> | number
+  base_price_resident?: Prisma.DecimalFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFilter<"routes"> | boolean
+  created_at?: Prisma.DateTimeFilter<"routes"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"routes"> | Date | string
   origin_ports?: Prisma.XOR<Prisma.PortsScalarRelationFilter, Prisma.portsWhereInput>
   destination_ports?: Prisma.XOR<Prisma.PortsScalarRelationFilter, Prisma.portsWhereInput>
+  schedules?: Prisma.SchedulesListRelationFilter
 }, "id">
 
 export type routesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  estimated_duration_minutes?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   origin_port_id?: Prisma.SortOrder
   destination_port_id?: Prisma.SortOrder
+  distance_km?: Prisma.SortOrderInput | Prisma.SortOrder
+  duration_minutes?: Prisma.SortOrder
+  base_price_resident?: Prisma.SortOrder
+  base_price_national?: Prisma.SortOrder
+  base_price_foreign?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.routesCountOrderByAggregateInput
   _avg?: Prisma.routesAvgOrderByAggregateInput
   _max?: Prisma.routesMaxOrderByAggregateInput
@@ -289,88 +346,116 @@ export type routesScalarWhereWithAggregatesInput = {
   OR?: Prisma.routesScalarWhereWithAggregatesInput[]
   NOT?: Prisma.routesScalarWhereWithAggregatesInput | Prisma.routesScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"routes"> | string
-  estimated_duration_minutes?: Prisma.IntWithAggregatesFilter<"routes"> | number
-  status?: Prisma.EnumRouteStatusWithAggregatesFilter<"routes"> | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"routes"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"routes"> | Date | string
   origin_port_id?: Prisma.StringWithAggregatesFilter<"routes"> | string
   destination_port_id?: Prisma.StringWithAggregatesFilter<"routes"> | string
+  distance_km?: Prisma.DecimalNullableWithAggregatesFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntWithAggregatesFilter<"routes"> | number
+  base_price_resident?: Prisma.DecimalWithAggregatesFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalWithAggregatesFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalWithAggregatesFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolWithAggregatesFilter<"routes"> | boolean
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"routes"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"routes"> | Date | string
 }
 
 export type routesCreateInput = {
   id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  schedules?: Prisma.schedulesCreateNestedManyWithoutRoutesInput
-  trips?: Prisma.tripsCreateNestedManyWithoutRoutesInput
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price_resident: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   origin_ports: Prisma.portsCreateNestedOneWithoutOrigin_routesInput
   destination_ports: Prisma.portsCreateNestedOneWithoutDestination_routesInput
+  schedules?: Prisma.schedulesCreateNestedManyWithoutRoutesInput
 }
 
 export type routesUncheckedCreateInput = {
   id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
   origin_port_id: string
   destination_port_id: string
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price_resident: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutRoutesInput
-  trips?: Prisma.tripsUncheckedCreateNestedManyWithoutRoutesInput
 }
 
 export type routesUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  schedules?: Prisma.schedulesUpdateManyWithoutRoutesNestedInput
-  trips?: Prisma.tripsUpdateManyWithoutRoutesNestedInput
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price_resident?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   origin_ports?: Prisma.portsUpdateOneRequiredWithoutOrigin_routesNestedInput
   destination_ports?: Prisma.portsUpdateOneRequiredWithoutDestination_routesNestedInput
+  schedules?: Prisma.schedulesUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   origin_port_id?: Prisma.StringFieldUpdateOperationsInput | string
   destination_port_id?: Prisma.StringFieldUpdateOperationsInput | string
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price_resident?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schedules?: Prisma.schedulesUncheckedUpdateManyWithoutRoutesNestedInput
-  trips?: Prisma.tripsUncheckedUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesCreateManyInput = {
   id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
   origin_port_id: string
   destination_port_id: string
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price_resident: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type routesUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price_resident?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type routesUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   origin_port_id?: Prisma.StringFieldUpdateOperationsInput | string
   destination_port_id?: Prisma.StringFieldUpdateOperationsInput | string
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price_resident?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RoutesListRelationFilter = {
@@ -385,40 +470,60 @@ export type routesOrderByRelationAggregateInput = {
 
 export type routesCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  estimated_duration_minutes?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   origin_port_id?: Prisma.SortOrder
   destination_port_id?: Prisma.SortOrder
+  distance_km?: Prisma.SortOrder
+  duration_minutes?: Prisma.SortOrder
+  base_price_resident?: Prisma.SortOrder
+  base_price_national?: Prisma.SortOrder
+  base_price_foreign?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type routesAvgOrderByAggregateInput = {
-  estimated_duration_minutes?: Prisma.SortOrder
+  distance_km?: Prisma.SortOrder
+  duration_minutes?: Prisma.SortOrder
+  base_price_resident?: Prisma.SortOrder
+  base_price_national?: Prisma.SortOrder
+  base_price_foreign?: Prisma.SortOrder
 }
 
 export type routesMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  estimated_duration_minutes?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   origin_port_id?: Prisma.SortOrder
   destination_port_id?: Prisma.SortOrder
+  distance_km?: Prisma.SortOrder
+  duration_minutes?: Prisma.SortOrder
+  base_price_resident?: Prisma.SortOrder
+  base_price_national?: Prisma.SortOrder
+  base_price_foreign?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type routesMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  estimated_duration_minutes?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   origin_port_id?: Prisma.SortOrder
   destination_port_id?: Prisma.SortOrder
+  distance_km?: Prisma.SortOrder
+  duration_minutes?: Prisma.SortOrder
+  base_price_resident?: Prisma.SortOrder
+  base_price_national?: Prisma.SortOrder
+  base_price_foreign?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type routesSumOrderByAggregateInput = {
-  estimated_duration_minutes?: Prisma.SortOrder
+  distance_km?: Prisma.SortOrder
+  duration_minutes?: Prisma.SortOrder
+  base_price_resident?: Prisma.SortOrder
+  base_price_national?: Prisma.SortOrder
+  base_price_foreign?: Prisma.SortOrder
 }
 
 export type RoutesNullableScalarRelationFilter = {
@@ -510,8 +615,20 @@ export type routesUncheckedUpdateManyWithoutDestination_portsNestedInput = {
   deleteMany?: Prisma.routesScalarWhereInput | Prisma.routesScalarWhereInput[]
 }
 
-export type EnumRouteStatusFieldUpdateOperationsInput = {
-  set?: $Enums.RouteStatus
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type DecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type routesCreateNestedOneWithoutSchedulesInput = {
@@ -530,42 +647,32 @@ export type routesUpdateOneWithoutSchedulesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.routesUpdateToOneWithWhereWithoutSchedulesInput, Prisma.routesUpdateWithoutSchedulesInput>, Prisma.routesUncheckedUpdateWithoutSchedulesInput>
 }
 
-export type routesCreateNestedOneWithoutTripsInput = {
-  create?: Prisma.XOR<Prisma.routesCreateWithoutTripsInput, Prisma.routesUncheckedCreateWithoutTripsInput>
-  connectOrCreate?: Prisma.routesCreateOrConnectWithoutTripsInput
-  connect?: Prisma.routesWhereUniqueInput
-}
-
-export type routesUpdateOneWithoutTripsNestedInput = {
-  create?: Prisma.XOR<Prisma.routesCreateWithoutTripsInput, Prisma.routesUncheckedCreateWithoutTripsInput>
-  connectOrCreate?: Prisma.routesCreateOrConnectWithoutTripsInput
-  upsert?: Prisma.routesUpsertWithoutTripsInput
-  disconnect?: Prisma.routesWhereInput | boolean
-  delete?: Prisma.routesWhereInput | boolean
-  connect?: Prisma.routesWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.routesUpdateToOneWithWhereWithoutTripsInput, Prisma.routesUpdateWithoutTripsInput>, Prisma.routesUncheckedUpdateWithoutTripsInput>
-}
-
 export type routesCreateWithoutOrigin_portsInput = {
   id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  schedules?: Prisma.schedulesCreateNestedManyWithoutRoutesInput
-  trips?: Prisma.tripsCreateNestedManyWithoutRoutesInput
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price_resident: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   destination_ports: Prisma.portsCreateNestedOneWithoutDestination_routesInput
+  schedules?: Prisma.schedulesCreateNestedManyWithoutRoutesInput
 }
 
 export type routesUncheckedCreateWithoutOrigin_portsInput = {
   id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
   destination_port_id: string
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price_resident: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutRoutesInput
-  trips?: Prisma.tripsUncheckedCreateNestedManyWithoutRoutesInput
 }
 
 export type routesCreateOrConnectWithoutOrigin_portsInput = {
@@ -580,24 +687,30 @@ export type routesCreateManyOrigin_portsInputEnvelope = {
 
 export type routesCreateWithoutDestination_portsInput = {
   id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  schedules?: Prisma.schedulesCreateNestedManyWithoutRoutesInput
-  trips?: Prisma.tripsCreateNestedManyWithoutRoutesInput
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price_resident: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   origin_ports: Prisma.portsCreateNestedOneWithoutOrigin_routesInput
+  schedules?: Prisma.schedulesCreateNestedManyWithoutRoutesInput
 }
 
 export type routesUncheckedCreateWithoutDestination_portsInput = {
   id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
   origin_port_id: string
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price_resident: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutRoutesInput
-  trips?: Prisma.tripsUncheckedCreateNestedManyWithoutRoutesInput
 }
 
 export type routesCreateOrConnectWithoutDestination_portsInput = {
@@ -631,12 +744,16 @@ export type routesScalarWhereInput = {
   OR?: Prisma.routesScalarWhereInput[]
   NOT?: Prisma.routesScalarWhereInput | Prisma.routesScalarWhereInput[]
   id?: Prisma.StringFilter<"routes"> | string
-  estimated_duration_minutes?: Prisma.IntFilter<"routes"> | number
-  status?: Prisma.EnumRouteStatusFilter<"routes"> | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFilter<"routes"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"routes"> | Date | string
   origin_port_id?: Prisma.StringFilter<"routes"> | string
   destination_port_id?: Prisma.StringFilter<"routes"> | string
+  distance_km?: Prisma.DecimalNullableFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFilter<"routes"> | number
+  base_price_resident?: Prisma.DecimalFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFilter<"routes"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFilter<"routes"> | boolean
+  created_at?: Prisma.DateTimeFilter<"routes"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"routes"> | Date | string
 }
 
 export type routesUpsertWithWhereUniqueWithoutDestination_portsInput = {
@@ -657,24 +774,30 @@ export type routesUpdateManyWithWhereWithoutDestination_portsInput = {
 
 export type routesCreateWithoutSchedulesInput = {
   id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trips?: Prisma.tripsCreateNestedManyWithoutRoutesInput
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price_resident: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
   origin_ports: Prisma.portsCreateNestedOneWithoutOrigin_routesInput
   destination_ports: Prisma.portsCreateNestedOneWithoutDestination_routesInput
 }
 
 export type routesUncheckedCreateWithoutSchedulesInput = {
   id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
   origin_port_id: string
   destination_port_id: string
-  trips?: Prisma.tripsUncheckedCreateNestedManyWithoutRoutesInput
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price_resident: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type routesCreateOrConnectWithoutSchedulesInput = {
@@ -695,164 +818,138 @@ export type routesUpdateToOneWithWhereWithoutSchedulesInput = {
 
 export type routesUpdateWithoutSchedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trips?: Prisma.tripsUpdateManyWithoutRoutesNestedInput
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price_resident?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   origin_ports?: Prisma.portsUpdateOneRequiredWithoutOrigin_routesNestedInput
   destination_ports?: Prisma.portsUpdateOneRequiredWithoutDestination_routesNestedInput
 }
 
 export type routesUncheckedUpdateWithoutSchedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   origin_port_id?: Prisma.StringFieldUpdateOperationsInput | string
   destination_port_id?: Prisma.StringFieldUpdateOperationsInput | string
-  trips?: Prisma.tripsUncheckedUpdateManyWithoutRoutesNestedInput
-}
-
-export type routesCreateWithoutTripsInput = {
-  id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  schedules?: Prisma.schedulesCreateNestedManyWithoutRoutesInput
-  origin_ports: Prisma.portsCreateNestedOneWithoutOrigin_routesInput
-  destination_ports: Prisma.portsCreateNestedOneWithoutDestination_routesInput
-}
-
-export type routesUncheckedCreateWithoutTripsInput = {
-  id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  origin_port_id: string
-  destination_port_id: string
-  schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutRoutesInput
-}
-
-export type routesCreateOrConnectWithoutTripsInput = {
-  where: Prisma.routesWhereUniqueInput
-  create: Prisma.XOR<Prisma.routesCreateWithoutTripsInput, Prisma.routesUncheckedCreateWithoutTripsInput>
-}
-
-export type routesUpsertWithoutTripsInput = {
-  update: Prisma.XOR<Prisma.routesUpdateWithoutTripsInput, Prisma.routesUncheckedUpdateWithoutTripsInput>
-  create: Prisma.XOR<Prisma.routesCreateWithoutTripsInput, Prisma.routesUncheckedCreateWithoutTripsInput>
-  where?: Prisma.routesWhereInput
-}
-
-export type routesUpdateToOneWithWhereWithoutTripsInput = {
-  where?: Prisma.routesWhereInput
-  data: Prisma.XOR<Prisma.routesUpdateWithoutTripsInput, Prisma.routesUncheckedUpdateWithoutTripsInput>
-}
-
-export type routesUpdateWithoutTripsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  schedules?: Prisma.schedulesUpdateManyWithoutRoutesNestedInput
-  origin_ports?: Prisma.portsUpdateOneRequiredWithoutOrigin_routesNestedInput
-  destination_ports?: Prisma.portsUpdateOneRequiredWithoutDestination_routesNestedInput
-}
-
-export type routesUncheckedUpdateWithoutTripsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  origin_port_id?: Prisma.StringFieldUpdateOperationsInput | string
-  destination_port_id?: Prisma.StringFieldUpdateOperationsInput | string
-  schedules?: Prisma.schedulesUncheckedUpdateManyWithoutRoutesNestedInput
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price_resident?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type routesCreateManyOrigin_portsInput = {
   id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
   destination_port_id: string
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price_resident: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type routesCreateManyDestination_portsInput = {
   id?: string
-  estimated_duration_minutes: number
-  status?: $Enums.RouteStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
   origin_port_id: string
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price_resident: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type routesUpdateWithoutOrigin_portsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  schedules?: Prisma.schedulesUpdateManyWithoutRoutesNestedInput
-  trips?: Prisma.tripsUpdateManyWithoutRoutesNestedInput
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price_resident?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   destination_ports?: Prisma.portsUpdateOneRequiredWithoutDestination_routesNestedInput
+  schedules?: Prisma.schedulesUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesUncheckedUpdateWithoutOrigin_portsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   destination_port_id?: Prisma.StringFieldUpdateOperationsInput | string
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price_resident?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schedules?: Prisma.schedulesUncheckedUpdateManyWithoutRoutesNestedInput
-  trips?: Prisma.tripsUncheckedUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesUncheckedUpdateManyWithoutOrigin_portsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   destination_port_id?: Prisma.StringFieldUpdateOperationsInput | string
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price_resident?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type routesUpdateWithoutDestination_portsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  schedules?: Prisma.schedulesUpdateManyWithoutRoutesNestedInput
-  trips?: Prisma.tripsUpdateManyWithoutRoutesNestedInput
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price_resident?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   origin_ports?: Prisma.portsUpdateOneRequiredWithoutOrigin_routesNestedInput
+  schedules?: Prisma.schedulesUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesUncheckedUpdateWithoutDestination_portsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   origin_port_id?: Prisma.StringFieldUpdateOperationsInput | string
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price_resident?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schedules?: Prisma.schedulesUncheckedUpdateManyWithoutRoutesNestedInput
-  trips?: Prisma.tripsUncheckedUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesUncheckedUpdateManyWithoutDestination_portsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  estimated_duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumRouteStatusFieldUpdateOperationsInput | $Enums.RouteStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   origin_port_id?: Prisma.StringFieldUpdateOperationsInput | string
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price_resident?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_national?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_foreign?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -862,12 +959,10 @@ export type routesUncheckedUpdateManyWithoutDestination_portsInput = {
 
 export type RoutesCountOutputType = {
   schedules: number
-  trips: number
 }
 
 export type RoutesCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   schedules?: boolean | RoutesCountOutputTypeCountSchedulesArgs
-  trips?: boolean | RoutesCountOutputTypeCountTripsArgs
 }
 
 /**
@@ -887,69 +982,76 @@ export type RoutesCountOutputTypeCountSchedulesArgs<ExtArgs extends runtime.Type
   where?: Prisma.schedulesWhereInput
 }
 
-/**
- * RoutesCountOutputType without action
- */
-export type RoutesCountOutputTypeCountTripsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.tripsWhereInput
-}
-
 
 export type routesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  estimated_duration_minutes?: boolean
-  status?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
   origin_port_id?: boolean
   destination_port_id?: boolean
-  schedules?: boolean | Prisma.routes$schedulesArgs<ExtArgs>
-  trips?: boolean | Prisma.routes$tripsArgs<ExtArgs>
+  distance_km?: boolean
+  duration_minutes?: boolean
+  base_price_resident?: boolean
+  base_price_national?: boolean
+  base_price_foreign?: boolean
+  is_active?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   origin_ports?: boolean | Prisma.portsDefaultArgs<ExtArgs>
   destination_ports?: boolean | Prisma.portsDefaultArgs<ExtArgs>
+  schedules?: boolean | Prisma.routes$schedulesArgs<ExtArgs>
   _count?: boolean | Prisma.RoutesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["routes"]>
 
 export type routesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  estimated_duration_minutes?: boolean
-  status?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
   origin_port_id?: boolean
   destination_port_id?: boolean
+  distance_km?: boolean
+  duration_minutes?: boolean
+  base_price_resident?: boolean
+  base_price_national?: boolean
+  base_price_foreign?: boolean
+  is_active?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   origin_ports?: boolean | Prisma.portsDefaultArgs<ExtArgs>
   destination_ports?: boolean | Prisma.portsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["routes"]>
 
 export type routesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  estimated_duration_minutes?: boolean
-  status?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
   origin_port_id?: boolean
   destination_port_id?: boolean
+  distance_km?: boolean
+  duration_minutes?: boolean
+  base_price_resident?: boolean
+  base_price_national?: boolean
+  base_price_foreign?: boolean
+  is_active?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   origin_ports?: boolean | Prisma.portsDefaultArgs<ExtArgs>
   destination_ports?: boolean | Prisma.portsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["routes"]>
 
 export type routesSelectScalar = {
   id?: boolean
-  estimated_duration_minutes?: boolean
-  status?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
   origin_port_id?: boolean
   destination_port_id?: boolean
+  distance_km?: boolean
+  duration_minutes?: boolean
+  base_price_resident?: boolean
+  base_price_national?: boolean
+  base_price_foreign?: boolean
+  is_active?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type routesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "estimated_duration_minutes" | "status" | "createdAt" | "updatedAt" | "origin_port_id" | "destination_port_id", ExtArgs["result"]["routes"]>
+export type routesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "origin_port_id" | "destination_port_id" | "distance_km" | "duration_minutes" | "base_price_resident" | "base_price_national" | "base_price_foreign" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["routes"]>
 export type routesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  schedules?: boolean | Prisma.routes$schedulesArgs<ExtArgs>
-  trips?: boolean | Prisma.routes$tripsArgs<ExtArgs>
   origin_ports?: boolean | Prisma.portsDefaultArgs<ExtArgs>
   destination_ports?: boolean | Prisma.portsDefaultArgs<ExtArgs>
+  schedules?: boolean | Prisma.routes$schedulesArgs<ExtArgs>
   _count?: boolean | Prisma.RoutesCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type routesIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -964,19 +1066,22 @@ export type routesIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type $routesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "routes"
   objects: {
-    schedules: Prisma.$schedulesPayload<ExtArgs>[]
-    trips: Prisma.$tripsPayload<ExtArgs>[]
     origin_ports: Prisma.$portsPayload<ExtArgs>
     destination_ports: Prisma.$portsPayload<ExtArgs>
+    schedules: Prisma.$schedulesPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    estimated_duration_minutes: number
-    status: $Enums.RouteStatus
-    createdAt: Date
-    updatedAt: Date
     origin_port_id: string
     destination_port_id: string
+    distance_km: runtime.Decimal | null
+    duration_minutes: number
+    base_price_resident: runtime.Decimal
+    base_price_national: runtime.Decimal
+    base_price_foreign: runtime.Decimal
+    is_active: boolean
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["routes"]>
   composites: {}
 }
@@ -1371,10 +1476,9 @@ readonly fields: routesFieldRefs;
  */
 export interface Prisma__routesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  schedules<T extends Prisma.routes$schedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.routes$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$schedulesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  trips<T extends Prisma.routes$tripsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.routes$tripsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tripsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   origin_ports<T extends Prisma.portsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.portsDefaultArgs<ExtArgs>>): Prisma.Prisma__portsClient<runtime.Types.Result.GetResult<Prisma.$portsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   destination_ports<T extends Prisma.portsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.portsDefaultArgs<ExtArgs>>): Prisma.Prisma__portsClient<runtime.Types.Result.GetResult<Prisma.$portsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  schedules<T extends Prisma.routes$schedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.routes$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$schedulesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1405,12 +1509,16 @@ export interface Prisma__routesClient<T, Null = never, ExtArgs extends runtime.T
  */
 export interface routesFieldRefs {
   readonly id: Prisma.FieldRef<"routes", 'String'>
-  readonly estimated_duration_minutes: Prisma.FieldRef<"routes", 'Int'>
-  readonly status: Prisma.FieldRef<"routes", 'RouteStatus'>
-  readonly createdAt: Prisma.FieldRef<"routes", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"routes", 'DateTime'>
   readonly origin_port_id: Prisma.FieldRef<"routes", 'String'>
   readonly destination_port_id: Prisma.FieldRef<"routes", 'String'>
+  readonly distance_km: Prisma.FieldRef<"routes", 'Decimal'>
+  readonly duration_minutes: Prisma.FieldRef<"routes", 'Int'>
+  readonly base_price_resident: Prisma.FieldRef<"routes", 'Decimal'>
+  readonly base_price_national: Prisma.FieldRef<"routes", 'Decimal'>
+  readonly base_price_foreign: Prisma.FieldRef<"routes", 'Decimal'>
+  readonly is_active: Prisma.FieldRef<"routes", 'Boolean'>
+  readonly created_at: Prisma.FieldRef<"routes", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"routes", 'DateTime'>
 }
     
 
@@ -1828,30 +1936,6 @@ export type routes$schedulesArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.SchedulesScalarFieldEnum | Prisma.SchedulesScalarFieldEnum[]
-}
-
-/**
- * routes.trips
- */
-export type routes$tripsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the trips
-   */
-  select?: Prisma.tripsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the trips
-   */
-  omit?: Prisma.tripsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.tripsInclude<ExtArgs> | null
-  where?: Prisma.tripsWhereInput
-  orderBy?: Prisma.tripsOrderByWithRelationInput | Prisma.tripsOrderByWithRelationInput[]
-  cursor?: Prisma.tripsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TripsScalarFieldEnum | Prisma.TripsScalarFieldEnum[]
 }
 
 /**

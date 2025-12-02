@@ -18,15 +18,10 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
- * Model users
+ * Model islands
  * 
  */
-export type users = Prisma.usersModel
-/**
- * Model ferries
- * 
- */
-export type ferries = Prisma.ferriesModel
+export type islands = Prisma.islandsModel
 /**
  * Model ports
  * 
@@ -38,47 +33,37 @@ export type ports = Prisma.portsModel
  */
 export type routes = Prisma.routesModel
 /**
+ * Model ferries
+ * 
+ */
+export type ferries = Prisma.ferriesModel
+/**
  * Model schedules
  * 
  */
 export type schedules = Prisma.schedulesModel
 /**
- * Model trips
+ * Model users
  * 
  */
-export type trips = Prisma.tripsModel
+export type users = Prisma.usersModel
 /**
- * Model seat_configurations
+ * Model passengers
  * 
  */
-export type seat_configurations = Prisma.seat_configurationsModel
+export type passengers = Prisma.passengersModel
 /**
- * Model seats
+ * Model payments
  * 
  */
-export type seats = Prisma.seatsModel
+export type payments = Prisma.paymentsModel
 /**
- * Model bookings
+ * Model seat_holds
  * 
  */
-export type bookings = Prisma.bookingsModel
-/**
- * Model booking_passengers
- * 
- */
-export type booking_passengers = Prisma.booking_passengersModel
-/**
- * Model booking_vehicles
- * 
- */
-export type booking_vehicles = Prisma.booking_vehiclesModel
+export type seat_holds = Prisma.seat_holdsModel
 /**
  * Model tickets
  * 
  */
 export type tickets = Prisma.ticketsModel
-/**
- * Model notifications
- * 
- */
-export type notifications = Prisma.notificationsModel

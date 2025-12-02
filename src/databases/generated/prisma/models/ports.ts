@@ -20,70 +20,128 @@ export type portsModel = runtime.Types.Result.DefaultSelection<Prisma.$portsPayl
 
 export type AggregatePorts = {
   _count: PortsCountAggregateOutputType | null
+  _avg: PortsAvgAggregateOutputType | null
+  _sum: PortsSumAggregateOutputType | null
   _min: PortsMinAggregateOutputType | null
   _max: PortsMaxAggregateOutputType | null
 }
 
+export type PortsAvgAggregateOutputType = {
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
+}
+
+export type PortsSumAggregateOutputType = {
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
+}
+
 export type PortsMinAggregateOutputType = {
   id: string | null
+  islands_id: string | null
   name: string | null
   code: string | null
-  city: string | null
-  role: $Enums.Role | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  address: string | null
+  contact_phone: string | null
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
+  is_active: boolean | null
+  opening_time: Date | null
+  closing_time: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type PortsMaxAggregateOutputType = {
   id: string | null
+  islands_id: string | null
   name: string | null
   code: string | null
-  city: string | null
-  role: $Enums.Role | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  address: string | null
+  contact_phone: string | null
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
+  is_active: boolean | null
+  opening_time: Date | null
+  closing_time: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type PortsCountAggregateOutputType = {
   id: number
+  islands_id: number
   name: number
   code: number
-  city: number
-  role: number
-  createdAt: number
-  updatedAt: number
+  address: number
+  contact_phone: number
+  latitude: number
+  longitude: number
+  is_active: number
+  opening_time: number
+  closing_time: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
 
+export type PortsAvgAggregateInputType = {
+  latitude?: true
+  longitude?: true
+}
+
+export type PortsSumAggregateInputType = {
+  latitude?: true
+  longitude?: true
+}
+
 export type PortsMinAggregateInputType = {
   id?: true
+  islands_id?: true
   name?: true
   code?: true
-  city?: true
-  role?: true
-  createdAt?: true
-  updatedAt?: true
+  address?: true
+  contact_phone?: true
+  latitude?: true
+  longitude?: true
+  is_active?: true
+  opening_time?: true
+  closing_time?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type PortsMaxAggregateInputType = {
   id?: true
+  islands_id?: true
   name?: true
   code?: true
-  city?: true
-  role?: true
-  createdAt?: true
-  updatedAt?: true
+  address?: true
+  contact_phone?: true
+  latitude?: true
+  longitude?: true
+  is_active?: true
+  opening_time?: true
+  closing_time?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type PortsCountAggregateInputType = {
   id?: true
+  islands_id?: true
   name?: true
   code?: true
-  city?: true
-  role?: true
-  createdAt?: true
-  updatedAt?: true
+  address?: true
+  contact_phone?: true
+  latitude?: true
+  longitude?: true
+  is_active?: true
+  opening_time?: true
+  closing_time?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -125,6 +183,18 @@ export type PortsAggregateArgs<ExtArgs extends runtime.Types.Extensions.Internal
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: PortsAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: PortsSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: PortsMinAggregateInputType
@@ -155,19 +225,29 @@ export type portsGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   _count?: PortsCountAggregateInputType | true
+  _avg?: PortsAvgAggregateInputType
+  _sum?: PortsSumAggregateInputType
   _min?: PortsMinAggregateInputType
   _max?: PortsMaxAggregateInputType
 }
 
 export type PortsGroupByOutputType = {
   id: string
+  islands_id: string | null
   name: string
   code: string
-  city: string
-  role: $Enums.Role
-  createdAt: Date
-  updatedAt: Date
+  address: string | null
+  contact_phone: string | null
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
+  is_active: boolean
+  opening_time: Date
+  closing_time: Date
+  created_at: Date
+  updated_at: Date
   _count: PortsCountAggregateOutputType | null
+  _avg: PortsAvgAggregateOutputType | null
+  _sum: PortsSumAggregateOutputType | null
   _min: PortsMinAggregateOutputType | null
   _max: PortsMaxAggregateOutputType | null
 }
@@ -192,24 +272,38 @@ export type portsWhereInput = {
   OR?: Prisma.portsWhereInput[]
   NOT?: Prisma.portsWhereInput | Prisma.portsWhereInput[]
   id?: Prisma.StringFilter<"ports"> | string
+  islands_id?: Prisma.StringNullableFilter<"ports"> | string | null
   name?: Prisma.StringFilter<"ports"> | string
   code?: Prisma.StringFilter<"ports"> | string
-  city?: Prisma.StringFilter<"ports"> | string
-  role?: Prisma.EnumRoleFilter<"ports"> | $Enums.Role
-  createdAt?: Prisma.DateTimeFilter<"ports"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ports"> | Date | string
+  address?: Prisma.StringNullableFilter<"ports"> | string | null
+  contact_phone?: Prisma.StringNullableFilter<"ports"> | string | null
+  latitude?: Prisma.DecimalNullableFilter<"ports"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableFilter<"ports"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFilter<"ports"> | boolean
+  opening_time?: Prisma.DateTimeFilter<"ports"> | Date | string
+  closing_time?: Prisma.DateTimeFilter<"ports"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"ports"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"ports"> | Date | string
+  islands?: Prisma.XOR<Prisma.IslandsNullableScalarRelationFilter, Prisma.islandsWhereInput> | null
   origin_routes?: Prisma.RoutesListRelationFilter
   destination_routes?: Prisma.RoutesListRelationFilter
 }
 
 export type portsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  islands_id?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
-  city?: Prisma.SortOrder
-  role?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  contact_phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  opening_time?: Prisma.SortOrder
+  closing_time?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+  islands?: Prisma.islandsOrderByWithRelationInput
   origin_routes?: Prisma.routesOrderByRelationAggregateInput
   destination_routes?: Prisma.routesOrderByRelationAggregateInput
 }
@@ -220,26 +314,41 @@ export type portsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.portsWhereInput | Prisma.portsWhereInput[]
   OR?: Prisma.portsWhereInput[]
   NOT?: Prisma.portsWhereInput | Prisma.portsWhereInput[]
+  islands_id?: Prisma.StringNullableFilter<"ports"> | string | null
   name?: Prisma.StringFilter<"ports"> | string
-  city?: Prisma.StringFilter<"ports"> | string
-  role?: Prisma.EnumRoleFilter<"ports"> | $Enums.Role
-  createdAt?: Prisma.DateTimeFilter<"ports"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ports"> | Date | string
+  address?: Prisma.StringNullableFilter<"ports"> | string | null
+  contact_phone?: Prisma.StringNullableFilter<"ports"> | string | null
+  latitude?: Prisma.DecimalNullableFilter<"ports"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableFilter<"ports"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFilter<"ports"> | boolean
+  opening_time?: Prisma.DateTimeFilter<"ports"> | Date | string
+  closing_time?: Prisma.DateTimeFilter<"ports"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"ports"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"ports"> | Date | string
+  islands?: Prisma.XOR<Prisma.IslandsNullableScalarRelationFilter, Prisma.islandsWhereInput> | null
   origin_routes?: Prisma.RoutesListRelationFilter
   destination_routes?: Prisma.RoutesListRelationFilter
 }, "id" | "code">
 
 export type portsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  islands_id?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
-  city?: Prisma.SortOrder
-  role?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  contact_phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  opening_time?: Prisma.SortOrder
+  closing_time?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.portsCountOrderByAggregateInput
+  _avg?: Prisma.portsAvgOrderByAggregateInput
   _max?: Prisma.portsMaxOrderByAggregateInput
   _min?: Prisma.portsMinOrderByAggregateInput
+  _sum?: Prisma.portsSumOrderByAggregateInput
 }
 
 export type portsScalarWhereWithAggregatesInput = {
@@ -247,34 +356,52 @@ export type portsScalarWhereWithAggregatesInput = {
   OR?: Prisma.portsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.portsScalarWhereWithAggregatesInput | Prisma.portsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"ports"> | string
+  islands_id?: Prisma.StringNullableWithAggregatesFilter<"ports"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"ports"> | string
   code?: Prisma.StringWithAggregatesFilter<"ports"> | string
-  city?: Prisma.StringWithAggregatesFilter<"ports"> | string
-  role?: Prisma.EnumRoleWithAggregatesFilter<"ports"> | $Enums.Role
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"ports"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ports"> | Date | string
+  address?: Prisma.StringNullableWithAggregatesFilter<"ports"> | string | null
+  contact_phone?: Prisma.StringNullableWithAggregatesFilter<"ports"> | string | null
+  latitude?: Prisma.DecimalNullableWithAggregatesFilter<"ports"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableWithAggregatesFilter<"ports"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolWithAggregatesFilter<"ports"> | boolean
+  opening_time?: Prisma.DateTimeWithAggregatesFilter<"ports"> | Date | string
+  closing_time?: Prisma.DateTimeWithAggregatesFilter<"ports"> | Date | string
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"ports"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"ports"> | Date | string
 }
 
 export type portsCreateInput = {
   id?: string
   name: string
   code: string
-  city: string
-  role?: $Enums.Role
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  address?: string | null
+  contact_phone?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: boolean
+  opening_time?: Date | string
+  closing_time?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
+  islands?: Prisma.islandsCreateNestedOneWithoutPortsInput
   origin_routes?: Prisma.routesCreateNestedManyWithoutOrigin_portsInput
   destination_routes?: Prisma.routesCreateNestedManyWithoutDestination_portsInput
 }
 
 export type portsUncheckedCreateInput = {
   id?: string
+  islands_id?: string | null
   name: string
   code: string
-  city: string
-  role?: $Enums.Role
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  address?: string | null
+  contact_phone?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: boolean
+  opening_time?: Date | string
+  closing_time?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
   origin_routes?: Prisma.routesUncheckedCreateNestedManyWithoutOrigin_portsInput
   destination_routes?: Prisma.routesUncheckedCreateNestedManyWithoutDestination_portsInput
 }
@@ -283,89 +410,210 @@ export type portsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  opening_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closing_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  islands?: Prisma.islandsUpdateOneWithoutPortsNestedInput
   origin_routes?: Prisma.routesUpdateManyWithoutOrigin_portsNestedInput
   destination_routes?: Prisma.routesUpdateManyWithoutDestination_portsNestedInput
 }
 
 export type portsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  islands_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  opening_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closing_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   origin_routes?: Prisma.routesUncheckedUpdateManyWithoutOrigin_portsNestedInput
   destination_routes?: Prisma.routesUncheckedUpdateManyWithoutDestination_portsNestedInput
 }
 
 export type portsCreateManyInput = {
   id?: string
+  islands_id?: string | null
   name: string
   code: string
-  city: string
-  role?: $Enums.Role
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  address?: string | null
+  contact_phone?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: boolean
+  opening_time?: Date | string
+  closing_time?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type portsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  opening_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closing_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type portsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  islands_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  opening_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closing_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PortsListRelationFilter = {
+  every?: Prisma.portsWhereInput
+  some?: Prisma.portsWhereInput
+  none?: Prisma.portsWhereInput
+}
+
+export type portsOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type portsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  islands_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
-  city?: Prisma.SortOrder
-  role?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  contact_phone?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  opening_time?: Prisma.SortOrder
+  closing_time?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+}
+
+export type portsAvgOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
 }
 
 export type portsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  islands_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
-  city?: Prisma.SortOrder
-  role?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  contact_phone?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  opening_time?: Prisma.SortOrder
+  closing_time?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type portsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  islands_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
-  city?: Prisma.SortOrder
-  role?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  contact_phone?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  opening_time?: Prisma.SortOrder
+  closing_time?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+}
+
+export type portsSumOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
 }
 
 export type PortsScalarRelationFilter = {
   is?: Prisma.portsWhereInput
   isNot?: Prisma.portsWhereInput
+}
+
+export type portsCreateNestedManyWithoutIslandsInput = {
+  create?: Prisma.XOR<Prisma.portsCreateWithoutIslandsInput, Prisma.portsUncheckedCreateWithoutIslandsInput> | Prisma.portsCreateWithoutIslandsInput[] | Prisma.portsUncheckedCreateWithoutIslandsInput[]
+  connectOrCreate?: Prisma.portsCreateOrConnectWithoutIslandsInput | Prisma.portsCreateOrConnectWithoutIslandsInput[]
+  createMany?: Prisma.portsCreateManyIslandsInputEnvelope
+  connect?: Prisma.portsWhereUniqueInput | Prisma.portsWhereUniqueInput[]
+}
+
+export type portsUncheckedCreateNestedManyWithoutIslandsInput = {
+  create?: Prisma.XOR<Prisma.portsCreateWithoutIslandsInput, Prisma.portsUncheckedCreateWithoutIslandsInput> | Prisma.portsCreateWithoutIslandsInput[] | Prisma.portsUncheckedCreateWithoutIslandsInput[]
+  connectOrCreate?: Prisma.portsCreateOrConnectWithoutIslandsInput | Prisma.portsCreateOrConnectWithoutIslandsInput[]
+  createMany?: Prisma.portsCreateManyIslandsInputEnvelope
+  connect?: Prisma.portsWhereUniqueInput | Prisma.portsWhereUniqueInput[]
+}
+
+export type portsUpdateManyWithoutIslandsNestedInput = {
+  create?: Prisma.XOR<Prisma.portsCreateWithoutIslandsInput, Prisma.portsUncheckedCreateWithoutIslandsInput> | Prisma.portsCreateWithoutIslandsInput[] | Prisma.portsUncheckedCreateWithoutIslandsInput[]
+  connectOrCreate?: Prisma.portsCreateOrConnectWithoutIslandsInput | Prisma.portsCreateOrConnectWithoutIslandsInput[]
+  upsert?: Prisma.portsUpsertWithWhereUniqueWithoutIslandsInput | Prisma.portsUpsertWithWhereUniqueWithoutIslandsInput[]
+  createMany?: Prisma.portsCreateManyIslandsInputEnvelope
+  set?: Prisma.portsWhereUniqueInput | Prisma.portsWhereUniqueInput[]
+  disconnect?: Prisma.portsWhereUniqueInput | Prisma.portsWhereUniqueInput[]
+  delete?: Prisma.portsWhereUniqueInput | Prisma.portsWhereUniqueInput[]
+  connect?: Prisma.portsWhereUniqueInput | Prisma.portsWhereUniqueInput[]
+  update?: Prisma.portsUpdateWithWhereUniqueWithoutIslandsInput | Prisma.portsUpdateWithWhereUniqueWithoutIslandsInput[]
+  updateMany?: Prisma.portsUpdateManyWithWhereWithoutIslandsInput | Prisma.portsUpdateManyWithWhereWithoutIslandsInput[]
+  deleteMany?: Prisma.portsScalarWhereInput | Prisma.portsScalarWhereInput[]
+}
+
+export type portsUncheckedUpdateManyWithoutIslandsNestedInput = {
+  create?: Prisma.XOR<Prisma.portsCreateWithoutIslandsInput, Prisma.portsUncheckedCreateWithoutIslandsInput> | Prisma.portsCreateWithoutIslandsInput[] | Prisma.portsUncheckedCreateWithoutIslandsInput[]
+  connectOrCreate?: Prisma.portsCreateOrConnectWithoutIslandsInput | Prisma.portsCreateOrConnectWithoutIslandsInput[]
+  upsert?: Prisma.portsUpsertWithWhereUniqueWithoutIslandsInput | Prisma.portsUpsertWithWhereUniqueWithoutIslandsInput[]
+  createMany?: Prisma.portsCreateManyIslandsInputEnvelope
+  set?: Prisma.portsWhereUniqueInput | Prisma.portsWhereUniqueInput[]
+  disconnect?: Prisma.portsWhereUniqueInput | Prisma.portsWhereUniqueInput[]
+  delete?: Prisma.portsWhereUniqueInput | Prisma.portsWhereUniqueInput[]
+  connect?: Prisma.portsWhereUniqueInput | Prisma.portsWhereUniqueInput[]
+  update?: Prisma.portsUpdateWithWhereUniqueWithoutIslandsInput | Prisma.portsUpdateWithWhereUniqueWithoutIslandsInput[]
+  updateMany?: Prisma.portsUpdateManyWithWhereWithoutIslandsInput | Prisma.portsUpdateManyWithWhereWithoutIslandsInput[]
+  deleteMany?: Prisma.portsScalarWhereInput | Prisma.portsScalarWhereInput[]
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type portsCreateNestedOneWithoutOrigin_routesInput = {
@@ -396,25 +644,116 @@ export type portsUpdateOneRequiredWithoutDestination_routesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.portsUpdateToOneWithWhereWithoutDestination_routesInput, Prisma.portsUpdateWithoutDestination_routesInput>, Prisma.portsUncheckedUpdateWithoutDestination_routesInput>
 }
 
+export type portsCreateWithoutIslandsInput = {
+  id?: string
+  name: string
+  code: string
+  address?: string | null
+  contact_phone?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: boolean
+  opening_time?: Date | string
+  closing_time?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
+  origin_routes?: Prisma.routesCreateNestedManyWithoutOrigin_portsInput
+  destination_routes?: Prisma.routesCreateNestedManyWithoutDestination_portsInput
+}
+
+export type portsUncheckedCreateWithoutIslandsInput = {
+  id?: string
+  name: string
+  code: string
+  address?: string | null
+  contact_phone?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: boolean
+  opening_time?: Date | string
+  closing_time?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
+  origin_routes?: Prisma.routesUncheckedCreateNestedManyWithoutOrigin_portsInput
+  destination_routes?: Prisma.routesUncheckedCreateNestedManyWithoutDestination_portsInput
+}
+
+export type portsCreateOrConnectWithoutIslandsInput = {
+  where: Prisma.portsWhereUniqueInput
+  create: Prisma.XOR<Prisma.portsCreateWithoutIslandsInput, Prisma.portsUncheckedCreateWithoutIslandsInput>
+}
+
+export type portsCreateManyIslandsInputEnvelope = {
+  data: Prisma.portsCreateManyIslandsInput | Prisma.portsCreateManyIslandsInput[]
+  skipDuplicates?: boolean
+}
+
+export type portsUpsertWithWhereUniqueWithoutIslandsInput = {
+  where: Prisma.portsWhereUniqueInput
+  update: Prisma.XOR<Prisma.portsUpdateWithoutIslandsInput, Prisma.portsUncheckedUpdateWithoutIslandsInput>
+  create: Prisma.XOR<Prisma.portsCreateWithoutIslandsInput, Prisma.portsUncheckedCreateWithoutIslandsInput>
+}
+
+export type portsUpdateWithWhereUniqueWithoutIslandsInput = {
+  where: Prisma.portsWhereUniqueInput
+  data: Prisma.XOR<Prisma.portsUpdateWithoutIslandsInput, Prisma.portsUncheckedUpdateWithoutIslandsInput>
+}
+
+export type portsUpdateManyWithWhereWithoutIslandsInput = {
+  where: Prisma.portsScalarWhereInput
+  data: Prisma.XOR<Prisma.portsUpdateManyMutationInput, Prisma.portsUncheckedUpdateManyWithoutIslandsInput>
+}
+
+export type portsScalarWhereInput = {
+  AND?: Prisma.portsScalarWhereInput | Prisma.portsScalarWhereInput[]
+  OR?: Prisma.portsScalarWhereInput[]
+  NOT?: Prisma.portsScalarWhereInput | Prisma.portsScalarWhereInput[]
+  id?: Prisma.StringFilter<"ports"> | string
+  islands_id?: Prisma.StringNullableFilter<"ports"> | string | null
+  name?: Prisma.StringFilter<"ports"> | string
+  code?: Prisma.StringFilter<"ports"> | string
+  address?: Prisma.StringNullableFilter<"ports"> | string | null
+  contact_phone?: Prisma.StringNullableFilter<"ports"> | string | null
+  latitude?: Prisma.DecimalNullableFilter<"ports"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableFilter<"ports"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFilter<"ports"> | boolean
+  opening_time?: Prisma.DateTimeFilter<"ports"> | Date | string
+  closing_time?: Prisma.DateTimeFilter<"ports"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"ports"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"ports"> | Date | string
+}
+
 export type portsCreateWithoutOrigin_routesInput = {
   id?: string
   name: string
   code: string
-  city: string
-  role?: $Enums.Role
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  address?: string | null
+  contact_phone?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: boolean
+  opening_time?: Date | string
+  closing_time?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
+  islands?: Prisma.islandsCreateNestedOneWithoutPortsInput
   destination_routes?: Prisma.routesCreateNestedManyWithoutDestination_portsInput
 }
 
 export type portsUncheckedCreateWithoutOrigin_routesInput = {
   id?: string
+  islands_id?: string | null
   name: string
   code: string
-  city: string
-  role?: $Enums.Role
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  address?: string | null
+  contact_phone?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: boolean
+  opening_time?: Date | string
+  closing_time?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
   destination_routes?: Prisma.routesUncheckedCreateNestedManyWithoutDestination_portsInput
 }
 
@@ -427,21 +766,33 @@ export type portsCreateWithoutDestination_routesInput = {
   id?: string
   name: string
   code: string
-  city: string
-  role?: $Enums.Role
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  address?: string | null
+  contact_phone?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: boolean
+  opening_time?: Date | string
+  closing_time?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
+  islands?: Prisma.islandsCreateNestedOneWithoutPortsInput
   origin_routes?: Prisma.routesCreateNestedManyWithoutOrigin_portsInput
 }
 
 export type portsUncheckedCreateWithoutDestination_routesInput = {
   id?: string
+  islands_id?: string | null
   name: string
   code: string
-  city: string
-  role?: $Enums.Role
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  address?: string | null
+  contact_phone?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: boolean
+  opening_time?: Date | string
+  closing_time?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
   origin_routes?: Prisma.routesUncheckedCreateNestedManyWithoutOrigin_portsInput
 }
 
@@ -465,21 +816,33 @@ export type portsUpdateWithoutOrigin_routesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  opening_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closing_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  islands?: Prisma.islandsUpdateOneWithoutPortsNestedInput
   destination_routes?: Prisma.routesUpdateManyWithoutDestination_portsNestedInput
 }
 
 export type portsUncheckedUpdateWithoutOrigin_routesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  islands_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  opening_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closing_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   destination_routes?: Prisma.routesUncheckedUpdateManyWithoutDestination_portsNestedInput
 }
 
@@ -498,22 +861,98 @@ export type portsUpdateWithoutDestination_routesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  opening_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closing_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  islands?: Prisma.islandsUpdateOneWithoutPortsNestedInput
   origin_routes?: Prisma.routesUpdateManyWithoutOrigin_portsNestedInput
 }
 
 export type portsUncheckedUpdateWithoutDestination_routesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  islands_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  opening_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closing_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   origin_routes?: Prisma.routesUncheckedUpdateManyWithoutOrigin_portsNestedInput
+}
+
+export type portsCreateManyIslandsInput = {
+  id?: string
+  name: string
+  code: string
+  address?: string | null
+  contact_phone?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: boolean
+  opening_time?: Date | string
+  closing_time?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type portsUpdateWithoutIslandsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  opening_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closing_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin_routes?: Prisma.routesUpdateManyWithoutOrigin_portsNestedInput
+  destination_routes?: Prisma.routesUpdateManyWithoutDestination_portsNestedInput
+}
+
+export type portsUncheckedUpdateWithoutIslandsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  opening_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closing_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin_routes?: Prisma.routesUncheckedUpdateManyWithoutOrigin_portsNestedInput
+  destination_routes?: Prisma.routesUncheckedUpdateManyWithoutDestination_portsNestedInput
+}
+
+export type portsUncheckedUpdateManyWithoutIslandsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  opening_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closing_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -558,12 +997,19 @@ export type PortsCountOutputTypeCountDestination_routesArgs<ExtArgs extends runt
 
 export type portsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  islands_id?: boolean
   name?: boolean
   code?: boolean
-  city?: boolean
-  role?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  address?: boolean
+  contact_phone?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  is_active?: boolean
+  opening_time?: boolean
+  closing_time?: boolean
+  created_at?: boolean
+  updated_at?: boolean
+  islands?: boolean | Prisma.ports$islandsArgs<ExtArgs>
   origin_routes?: boolean | Prisma.ports$origin_routesArgs<ExtArgs>
   destination_routes?: boolean | Prisma.ports$destination_routesArgs<ExtArgs>
   _count?: boolean | Prisma.PortsCountOutputTypeDefaultArgs<ExtArgs>
@@ -571,57 +1017,89 @@ export type portsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 
 export type portsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  islands_id?: boolean
   name?: boolean
   code?: boolean
-  city?: boolean
-  role?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  address?: boolean
+  contact_phone?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  is_active?: boolean
+  opening_time?: boolean
+  closing_time?: boolean
+  created_at?: boolean
+  updated_at?: boolean
+  islands?: boolean | Prisma.ports$islandsArgs<ExtArgs>
 }, ExtArgs["result"]["ports"]>
 
 export type portsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  islands_id?: boolean
   name?: boolean
   code?: boolean
-  city?: boolean
-  role?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  address?: boolean
+  contact_phone?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  is_active?: boolean
+  opening_time?: boolean
+  closing_time?: boolean
+  created_at?: boolean
+  updated_at?: boolean
+  islands?: boolean | Prisma.ports$islandsArgs<ExtArgs>
 }, ExtArgs["result"]["ports"]>
 
 export type portsSelectScalar = {
   id?: boolean
+  islands_id?: boolean
   name?: boolean
   code?: boolean
-  city?: boolean
-  role?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  address?: boolean
+  contact_phone?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  is_active?: boolean
+  opening_time?: boolean
+  closing_time?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type portsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "city" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["ports"]>
+export type portsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "islands_id" | "name" | "code" | "address" | "contact_phone" | "latitude" | "longitude" | "is_active" | "opening_time" | "closing_time" | "created_at" | "updated_at", ExtArgs["result"]["ports"]>
 export type portsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  islands?: boolean | Prisma.ports$islandsArgs<ExtArgs>
   origin_routes?: boolean | Prisma.ports$origin_routesArgs<ExtArgs>
   destination_routes?: boolean | Prisma.ports$destination_routesArgs<ExtArgs>
   _count?: boolean | Prisma.PortsCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type portsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type portsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type portsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  islands?: boolean | Prisma.ports$islandsArgs<ExtArgs>
+}
+export type portsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  islands?: boolean | Prisma.ports$islandsArgs<ExtArgs>
+}
 
 export type $portsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ports"
   objects: {
+    islands: Prisma.$islandsPayload<ExtArgs> | null
     origin_routes: Prisma.$routesPayload<ExtArgs>[]
     destination_routes: Prisma.$routesPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    islands_id: string | null
     name: string
     code: string
-    city: string
-    role: $Enums.Role
-    createdAt: Date
-    updatedAt: Date
+    address: string | null
+    contact_phone: string | null
+    latitude: runtime.Decimal | null
+    longitude: runtime.Decimal | null
+    is_active: boolean
+    opening_time: Date
+    closing_time: Date
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["ports"]>
   composites: {}
 }
@@ -1016,6 +1494,7 @@ readonly fields: portsFieldRefs;
  */
 export interface Prisma__portsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  islands<T extends Prisma.ports$islandsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ports$islandsArgs<ExtArgs>>): Prisma.Prisma__islandsClient<runtime.Types.Result.GetResult<Prisma.$islandsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   origin_routes<T extends Prisma.ports$origin_routesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ports$origin_routesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$routesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   destination_routes<T extends Prisma.ports$destination_routesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ports$destination_routesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$routesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1048,12 +1527,18 @@ export interface Prisma__portsClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface portsFieldRefs {
   readonly id: Prisma.FieldRef<"ports", 'String'>
+  readonly islands_id: Prisma.FieldRef<"ports", 'String'>
   readonly name: Prisma.FieldRef<"ports", 'String'>
   readonly code: Prisma.FieldRef<"ports", 'String'>
-  readonly city: Prisma.FieldRef<"ports", 'String'>
-  readonly role: Prisma.FieldRef<"ports", 'Role'>
-  readonly createdAt: Prisma.FieldRef<"ports", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"ports", 'DateTime'>
+  readonly address: Prisma.FieldRef<"ports", 'String'>
+  readonly contact_phone: Prisma.FieldRef<"ports", 'String'>
+  readonly latitude: Prisma.FieldRef<"ports", 'Decimal'>
+  readonly longitude: Prisma.FieldRef<"ports", 'Decimal'>
+  readonly is_active: Prisma.FieldRef<"ports", 'Boolean'>
+  readonly opening_time: Prisma.FieldRef<"ports", 'DateTime'>
+  readonly closing_time: Prisma.FieldRef<"ports", 'DateTime'>
+  readonly created_at: Prisma.FieldRef<"ports", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"ports", 'DateTime'>
 }
     
 
@@ -1303,6 +1788,10 @@ export type portsCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    */
   data: Prisma.portsCreateManyInput | Prisma.portsCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.portsIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1373,6 +1862,10 @@ export type portsUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many ports to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.portsIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1439,6 +1932,25 @@ export type portsDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many ports to delete.
    */
   limit?: number
+}
+
+/**
+ * ports.islands
+ */
+export type ports$islandsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the islands
+   */
+  select?: Prisma.islandsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the islands
+   */
+  omit?: Prisma.islandsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.islandsInclude<ExtArgs> | null
+  where?: Prisma.islandsWhereInput
 }
 
 /**

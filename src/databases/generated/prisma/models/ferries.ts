@@ -27,99 +27,111 @@ export type AggregateFerries = {
 }
 
 export type FerriesAvgAggregateOutputType = {
-  total_passenger_capacity: number | null
-  total_vehicle_capacity: number | null
+  capacity: number | null
+  year_built: number | null
 }
 
 export type FerriesSumAggregateOutputType = {
-  total_passenger_capacity: number | null
-  total_vehicle_capacity: number | null
+  capacity: number | null
+  year_built: number | null
 }
 
 export type FerriesMinAggregateOutputType = {
   id: string | null
   name: string | null
-  code: string | null
-  total_passenger_capacity: number | null
-  total_vehicle_capacity: number | null
-  type: $Enums.FerryType | null
+  register_code: string | null
+  capacity: number | null
+  operator_name: string | null
+  operator_phone: string | null
+  operator_email: string | null
+  year_built: number | null
   status: $Enums.FerryStatus | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type FerriesMaxAggregateOutputType = {
   id: string | null
   name: string | null
-  code: string | null
-  total_passenger_capacity: number | null
-  total_vehicle_capacity: number | null
-  type: $Enums.FerryType | null
+  register_code: string | null
+  capacity: number | null
+  operator_name: string | null
+  operator_phone: string | null
+  operator_email: string | null
+  year_built: number | null
   status: $Enums.FerryStatus | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type FerriesCountAggregateOutputType = {
   id: number
   name: number
-  code: number
-  total_passenger_capacity: number
-  total_vehicle_capacity: number
+  register_code: number
+  capacity: number
+  operator_name: number
+  operator_phone: number
+  operator_email: number
+  year_built: number
   amenities: number
-  type: number
   status: number
-  createdAt: number
-  updatedAt: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
 
 export type FerriesAvgAggregateInputType = {
-  total_passenger_capacity?: true
-  total_vehicle_capacity?: true
+  capacity?: true
+  year_built?: true
 }
 
 export type FerriesSumAggregateInputType = {
-  total_passenger_capacity?: true
-  total_vehicle_capacity?: true
+  capacity?: true
+  year_built?: true
 }
 
 export type FerriesMinAggregateInputType = {
   id?: true
   name?: true
-  code?: true
-  total_passenger_capacity?: true
-  total_vehicle_capacity?: true
-  type?: true
+  register_code?: true
+  capacity?: true
+  operator_name?: true
+  operator_phone?: true
+  operator_email?: true
+  year_built?: true
   status?: true
-  createdAt?: true
-  updatedAt?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type FerriesMaxAggregateInputType = {
   id?: true
   name?: true
-  code?: true
-  total_passenger_capacity?: true
-  total_vehicle_capacity?: true
-  type?: true
+  register_code?: true
+  capacity?: true
+  operator_name?: true
+  operator_phone?: true
+  operator_email?: true
+  year_built?: true
   status?: true
-  createdAt?: true
-  updatedAt?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type FerriesCountAggregateInputType = {
   id?: true
   name?: true
-  code?: true
-  total_passenger_capacity?: true
-  total_vehicle_capacity?: true
+  register_code?: true
+  capacity?: true
+  operator_name?: true
+  operator_phone?: true
+  operator_email?: true
+  year_built?: true
   amenities?: true
-  type?: true
   status?: true
-  createdAt?: true
-  updatedAt?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -212,14 +224,16 @@ export type ferriesGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type FerriesGroupByOutputType = {
   id: string
   name: string
-  code: string
-  total_passenger_capacity: number
-  total_vehicle_capacity: number
-  amenities: string[]
-  type: $Enums.FerryType
+  register_code: string
+  capacity: number
+  operator_name: string
+  operator_phone: string | null
+  operator_email: string | null
+  year_built: number | null
+  amenities: runtime.JsonValue
   status: $Enums.FerryStatus
-  createdAt: Date
-  updatedAt: Date
+  created_at: Date
+  updated_at: Date
   _count: FerriesCountAggregateOutputType | null
   _avg: FerriesAvgAggregateOutputType | null
   _sum: FerriesSumAggregateOutputType | null
@@ -248,65 +262,67 @@ export type ferriesWhereInput = {
   NOT?: Prisma.ferriesWhereInput | Prisma.ferriesWhereInput[]
   id?: Prisma.StringFilter<"ferries"> | string
   name?: Prisma.StringFilter<"ferries"> | string
-  code?: Prisma.StringFilter<"ferries"> | string
-  total_passenger_capacity?: Prisma.IntFilter<"ferries"> | number
-  total_vehicle_capacity?: Prisma.IntFilter<"ferries"> | number
-  amenities?: Prisma.StringNullableListFilter<"ferries">
-  type?: Prisma.EnumFerryTypeFilter<"ferries"> | $Enums.FerryType
+  register_code?: Prisma.StringFilter<"ferries"> | string
+  capacity?: Prisma.IntFilter<"ferries"> | number
+  operator_name?: Prisma.StringFilter<"ferries"> | string
+  operator_phone?: Prisma.StringNullableFilter<"ferries"> | string | null
+  operator_email?: Prisma.StringNullableFilter<"ferries"> | string | null
+  year_built?: Prisma.IntNullableFilter<"ferries"> | number | null
+  amenities?: Prisma.JsonFilter<"ferries">
   status?: Prisma.EnumFerryStatusFilter<"ferries"> | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeFilter<"ferries"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ferries"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"ferries"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"ferries"> | Date | string
   schedules?: Prisma.SchedulesListRelationFilter
-  trips?: Prisma.TripsListRelationFilter
-  seat_configurations?: Prisma.Seat_configurationsListRelationFilter
 }
 
 export type ferriesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  code?: Prisma.SortOrder
-  total_passenger_capacity?: Prisma.SortOrder
-  total_vehicle_capacity?: Prisma.SortOrder
+  register_code?: Prisma.SortOrder
+  capacity?: Prisma.SortOrder
+  operator_name?: Prisma.SortOrder
+  operator_phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  operator_email?: Prisma.SortOrderInput | Prisma.SortOrder
+  year_built?: Prisma.SortOrderInput | Prisma.SortOrder
   amenities?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   schedules?: Prisma.schedulesOrderByRelationAggregateInput
-  trips?: Prisma.tripsOrderByRelationAggregateInput
-  seat_configurations?: Prisma.seat_configurationsOrderByRelationAggregateInput
 }
 
 export type ferriesWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  code?: string
+  register_code?: string
   AND?: Prisma.ferriesWhereInput | Prisma.ferriesWhereInput[]
   OR?: Prisma.ferriesWhereInput[]
   NOT?: Prisma.ferriesWhereInput | Prisma.ferriesWhereInput[]
   name?: Prisma.StringFilter<"ferries"> | string
-  total_passenger_capacity?: Prisma.IntFilter<"ferries"> | number
-  total_vehicle_capacity?: Prisma.IntFilter<"ferries"> | number
-  amenities?: Prisma.StringNullableListFilter<"ferries">
-  type?: Prisma.EnumFerryTypeFilter<"ferries"> | $Enums.FerryType
+  capacity?: Prisma.IntFilter<"ferries"> | number
+  operator_name?: Prisma.StringFilter<"ferries"> | string
+  operator_phone?: Prisma.StringNullableFilter<"ferries"> | string | null
+  operator_email?: Prisma.StringNullableFilter<"ferries"> | string | null
+  year_built?: Prisma.IntNullableFilter<"ferries"> | number | null
+  amenities?: Prisma.JsonFilter<"ferries">
   status?: Prisma.EnumFerryStatusFilter<"ferries"> | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeFilter<"ferries"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ferries"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"ferries"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"ferries"> | Date | string
   schedules?: Prisma.SchedulesListRelationFilter
-  trips?: Prisma.TripsListRelationFilter
-  seat_configurations?: Prisma.Seat_configurationsListRelationFilter
-}, "id" | "code">
+}, "id" | "register_code">
 
 export type ferriesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  code?: Prisma.SortOrder
-  total_passenger_capacity?: Prisma.SortOrder
-  total_vehicle_capacity?: Prisma.SortOrder
+  register_code?: Prisma.SortOrder
+  capacity?: Prisma.SortOrder
+  operator_name?: Prisma.SortOrder
+  operator_phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  operator_email?: Prisma.SortOrderInput | Prisma.SortOrder
+  year_built?: Prisma.SortOrderInput | Prisma.SortOrder
   amenities?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.ferriesCountOrderByAggregateInput
   _avg?: Prisma.ferriesAvgOrderByAggregateInput
   _max?: Prisma.ferriesMaxOrderByAggregateInput
@@ -320,172 +336,178 @@ export type ferriesScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ferriesScalarWhereWithAggregatesInput | Prisma.ferriesScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"ferries"> | string
   name?: Prisma.StringWithAggregatesFilter<"ferries"> | string
-  code?: Prisma.StringWithAggregatesFilter<"ferries"> | string
-  total_passenger_capacity?: Prisma.IntWithAggregatesFilter<"ferries"> | number
-  total_vehicle_capacity?: Prisma.IntWithAggregatesFilter<"ferries"> | number
-  amenities?: Prisma.StringNullableListFilter<"ferries">
-  type?: Prisma.EnumFerryTypeWithAggregatesFilter<"ferries"> | $Enums.FerryType
+  register_code?: Prisma.StringWithAggregatesFilter<"ferries"> | string
+  capacity?: Prisma.IntWithAggregatesFilter<"ferries"> | number
+  operator_name?: Prisma.StringWithAggregatesFilter<"ferries"> | string
+  operator_phone?: Prisma.StringNullableWithAggregatesFilter<"ferries"> | string | null
+  operator_email?: Prisma.StringNullableWithAggregatesFilter<"ferries"> | string | null
+  year_built?: Prisma.IntNullableWithAggregatesFilter<"ferries"> | number | null
+  amenities?: Prisma.JsonWithAggregatesFilter<"ferries">
   status?: Prisma.EnumFerryStatusWithAggregatesFilter<"ferries"> | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"ferries"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ferries"> | Date | string
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"ferries"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"ferries"> | Date | string
 }
 
 export type ferriesCreateInput = {
   id?: string
   name: string
-  code: string
-  total_passenger_capacity: number
-  total_vehicle_capacity: number
-  amenities?: Prisma.ferriesCreateamenitiesInput | string[]
-  type?: $Enums.FerryType
+  register_code: string
+  capacity: number
+  operator_name: string
+  operator_phone?: string | null
+  operator_email?: string | null
+  year_built?: number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.FerryStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
   schedules?: Prisma.schedulesCreateNestedManyWithoutFerriesInput
-  trips?: Prisma.tripsCreateNestedManyWithoutFerriesInput
-  seat_configurations?: Prisma.seat_configurationsCreateNestedManyWithoutFerriesInput
 }
 
 export type ferriesUncheckedCreateInput = {
   id?: string
   name: string
-  code: string
-  total_passenger_capacity: number
-  total_vehicle_capacity: number
-  amenities?: Prisma.ferriesCreateamenitiesInput | string[]
-  type?: $Enums.FerryType
+  register_code: string
+  capacity: number
+  operator_name: string
+  operator_phone?: string | null
+  operator_email?: string | null
+  year_built?: number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.FerryStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
   schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutFerriesInput
-  trips?: Prisma.tripsUncheckedCreateNestedManyWithoutFerriesInput
-  seat_configurations?: Prisma.seat_configurationsUncheckedCreateNestedManyWithoutFerriesInput
 }
 
 export type ferriesUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  total_passenger_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  total_vehicle_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  amenities?: Prisma.ferriesUpdateamenitiesInput | string[]
-  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
+  register_code?: Prisma.StringFieldUpdateOperationsInput | string
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  operator_name?: Prisma.StringFieldUpdateOperationsInput | string
+  operator_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schedules?: Prisma.schedulesUpdateManyWithoutFerriesNestedInput
-  trips?: Prisma.tripsUpdateManyWithoutFerriesNestedInput
-  seat_configurations?: Prisma.seat_configurationsUpdateManyWithoutFerriesNestedInput
 }
 
 export type ferriesUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  total_passenger_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  total_vehicle_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  amenities?: Prisma.ferriesUpdateamenitiesInput | string[]
-  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
+  register_code?: Prisma.StringFieldUpdateOperationsInput | string
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  operator_name?: Prisma.StringFieldUpdateOperationsInput | string
+  operator_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schedules?: Prisma.schedulesUncheckedUpdateManyWithoutFerriesNestedInput
-  trips?: Prisma.tripsUncheckedUpdateManyWithoutFerriesNestedInput
-  seat_configurations?: Prisma.seat_configurationsUncheckedUpdateManyWithoutFerriesNestedInput
 }
 
 export type ferriesCreateManyInput = {
   id?: string
   name: string
-  code: string
-  total_passenger_capacity: number
-  total_vehicle_capacity: number
-  amenities?: Prisma.ferriesCreateamenitiesInput | string[]
-  type?: $Enums.FerryType
+  register_code: string
+  capacity: number
+  operator_name: string
+  operator_phone?: string | null
+  operator_email?: string | null
+  year_built?: number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.FerryStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type ferriesUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  total_passenger_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  total_vehicle_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  amenities?: Prisma.ferriesUpdateamenitiesInput | string[]
-  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
+  register_code?: Prisma.StringFieldUpdateOperationsInput | string
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  operator_name?: Prisma.StringFieldUpdateOperationsInput | string
+  operator_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ferriesUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  total_passenger_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  total_vehicle_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  amenities?: Prisma.ferriesUpdateamenitiesInput | string[]
-  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
+  register_code?: Prisma.StringFieldUpdateOperationsInput | string
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  operator_name?: Prisma.StringFieldUpdateOperationsInput | string
+  operator_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type StringNullableListFilter<$PrismaModel = never> = {
-  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
-  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
-  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
-  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
-  isEmpty?: boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ferriesCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  code?: Prisma.SortOrder
-  total_passenger_capacity?: Prisma.SortOrder
-  total_vehicle_capacity?: Prisma.SortOrder
+  register_code?: Prisma.SortOrder
+  capacity?: Prisma.SortOrder
+  operator_name?: Prisma.SortOrder
+  operator_phone?: Prisma.SortOrder
+  operator_email?: Prisma.SortOrder
+  year_built?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type ferriesAvgOrderByAggregateInput = {
-  total_passenger_capacity?: Prisma.SortOrder
-  total_vehicle_capacity?: Prisma.SortOrder
+  capacity?: Prisma.SortOrder
+  year_built?: Prisma.SortOrder
 }
 
 export type ferriesMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  code?: Prisma.SortOrder
-  total_passenger_capacity?: Prisma.SortOrder
-  total_vehicle_capacity?: Prisma.SortOrder
-  type?: Prisma.SortOrder
+  register_code?: Prisma.SortOrder
+  capacity?: Prisma.SortOrder
+  operator_name?: Prisma.SortOrder
+  operator_phone?: Prisma.SortOrder
+  operator_email?: Prisma.SortOrder
+  year_built?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type ferriesMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  code?: Prisma.SortOrder
-  total_passenger_capacity?: Prisma.SortOrder
-  total_vehicle_capacity?: Prisma.SortOrder
-  type?: Prisma.SortOrder
+  register_code?: Prisma.SortOrder
+  capacity?: Prisma.SortOrder
+  operator_name?: Prisma.SortOrder
+  operator_phone?: Prisma.SortOrder
+  operator_email?: Prisma.SortOrder
+  year_built?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type ferriesSumOrderByAggregateInput = {
-  total_passenger_capacity?: Prisma.SortOrder
-  total_vehicle_capacity?: Prisma.SortOrder
+  capacity?: Prisma.SortOrder
+  year_built?: Prisma.SortOrder
 }
 
 export type FerriesNullableScalarRelationFilter = {
@@ -493,25 +515,12 @@ export type FerriesNullableScalarRelationFilter = {
   isNot?: Prisma.ferriesWhereInput | null
 }
 
-export type ferriesCreateamenitiesInput = {
-  set: string[]
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
-}
-
-export type ferriesUpdateamenitiesInput = {
-  set?: string[]
-  push?: string | string[]
-}
-
-export type EnumFerryTypeFieldUpdateOperationsInput = {
-  set?: $Enums.FerryType
 }
 
 export type EnumFerryStatusFieldUpdateOperationsInput = {
@@ -534,66 +543,34 @@ export type ferriesUpdateOneWithoutSchedulesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ferriesUpdateToOneWithWhereWithoutSchedulesInput, Prisma.ferriesUpdateWithoutSchedulesInput>, Prisma.ferriesUncheckedUpdateWithoutSchedulesInput>
 }
 
-export type ferriesCreateNestedOneWithoutTripsInput = {
-  create?: Prisma.XOR<Prisma.ferriesCreateWithoutTripsInput, Prisma.ferriesUncheckedCreateWithoutTripsInput>
-  connectOrCreate?: Prisma.ferriesCreateOrConnectWithoutTripsInput
-  connect?: Prisma.ferriesWhereUniqueInput
-}
-
-export type ferriesUpdateOneWithoutTripsNestedInput = {
-  create?: Prisma.XOR<Prisma.ferriesCreateWithoutTripsInput, Prisma.ferriesUncheckedCreateWithoutTripsInput>
-  connectOrCreate?: Prisma.ferriesCreateOrConnectWithoutTripsInput
-  upsert?: Prisma.ferriesUpsertWithoutTripsInput
-  disconnect?: Prisma.ferriesWhereInput | boolean
-  delete?: Prisma.ferriesWhereInput | boolean
-  connect?: Prisma.ferriesWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ferriesUpdateToOneWithWhereWithoutTripsInput, Prisma.ferriesUpdateWithoutTripsInput>, Prisma.ferriesUncheckedUpdateWithoutTripsInput>
-}
-
-export type ferriesCreateNestedOneWithoutSeat_configurationsInput = {
-  create?: Prisma.XOR<Prisma.ferriesCreateWithoutSeat_configurationsInput, Prisma.ferriesUncheckedCreateWithoutSeat_configurationsInput>
-  connectOrCreate?: Prisma.ferriesCreateOrConnectWithoutSeat_configurationsInput
-  connect?: Prisma.ferriesWhereUniqueInput
-}
-
-export type ferriesUpdateOneWithoutSeat_configurationsNestedInput = {
-  create?: Prisma.XOR<Prisma.ferriesCreateWithoutSeat_configurationsInput, Prisma.ferriesUncheckedCreateWithoutSeat_configurationsInput>
-  connectOrCreate?: Prisma.ferriesCreateOrConnectWithoutSeat_configurationsInput
-  upsert?: Prisma.ferriesUpsertWithoutSeat_configurationsInput
-  disconnect?: Prisma.ferriesWhereInput | boolean
-  delete?: Prisma.ferriesWhereInput | boolean
-  connect?: Prisma.ferriesWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ferriesUpdateToOneWithWhereWithoutSeat_configurationsInput, Prisma.ferriesUpdateWithoutSeat_configurationsInput>, Prisma.ferriesUncheckedUpdateWithoutSeat_configurationsInput>
-}
-
 export type ferriesCreateWithoutSchedulesInput = {
   id?: string
   name: string
-  code: string
-  total_passenger_capacity: number
-  total_vehicle_capacity: number
-  amenities?: Prisma.ferriesCreateamenitiesInput | string[]
-  type?: $Enums.FerryType
+  register_code: string
+  capacity: number
+  operator_name: string
+  operator_phone?: string | null
+  operator_email?: string | null
+  year_built?: number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.FerryStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trips?: Prisma.tripsCreateNestedManyWithoutFerriesInput
-  seat_configurations?: Prisma.seat_configurationsCreateNestedManyWithoutFerriesInput
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type ferriesUncheckedCreateWithoutSchedulesInput = {
   id?: string
   name: string
-  code: string
-  total_passenger_capacity: number
-  total_vehicle_capacity: number
-  amenities?: Prisma.ferriesCreateamenitiesInput | string[]
-  type?: $Enums.FerryType
+  register_code: string
+  capacity: number
+  operator_name: string
+  operator_phone?: string | null
+  operator_email?: string | null
+  year_built?: number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.FerryStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trips?: Prisma.tripsUncheckedCreateNestedManyWithoutFerriesInput
-  seat_configurations?: Prisma.seat_configurationsUncheckedCreateNestedManyWithoutFerriesInput
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type ferriesCreateOrConnectWithoutSchedulesInput = {
@@ -615,183 +592,31 @@ export type ferriesUpdateToOneWithWhereWithoutSchedulesInput = {
 export type ferriesUpdateWithoutSchedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  total_passenger_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  total_vehicle_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  amenities?: Prisma.ferriesUpdateamenitiesInput | string[]
-  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
+  register_code?: Prisma.StringFieldUpdateOperationsInput | string
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  operator_name?: Prisma.StringFieldUpdateOperationsInput | string
+  operator_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trips?: Prisma.tripsUpdateManyWithoutFerriesNestedInput
-  seat_configurations?: Prisma.seat_configurationsUpdateManyWithoutFerriesNestedInput
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ferriesUncheckedUpdateWithoutSchedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  total_passenger_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  total_vehicle_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  amenities?: Prisma.ferriesUpdateamenitiesInput | string[]
-  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
+  register_code?: Prisma.StringFieldUpdateOperationsInput | string
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  operator_name?: Prisma.StringFieldUpdateOperationsInput | string
+  operator_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trips?: Prisma.tripsUncheckedUpdateManyWithoutFerriesNestedInput
-  seat_configurations?: Prisma.seat_configurationsUncheckedUpdateManyWithoutFerriesNestedInput
-}
-
-export type ferriesCreateWithoutTripsInput = {
-  id?: string
-  name: string
-  code: string
-  total_passenger_capacity: number
-  total_vehicle_capacity: number
-  amenities?: Prisma.ferriesCreateamenitiesInput | string[]
-  type?: $Enums.FerryType
-  status?: $Enums.FerryStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  schedules?: Prisma.schedulesCreateNestedManyWithoutFerriesInput
-  seat_configurations?: Prisma.seat_configurationsCreateNestedManyWithoutFerriesInput
-}
-
-export type ferriesUncheckedCreateWithoutTripsInput = {
-  id?: string
-  name: string
-  code: string
-  total_passenger_capacity: number
-  total_vehicle_capacity: number
-  amenities?: Prisma.ferriesCreateamenitiesInput | string[]
-  type?: $Enums.FerryType
-  status?: $Enums.FerryStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutFerriesInput
-  seat_configurations?: Prisma.seat_configurationsUncheckedCreateNestedManyWithoutFerriesInput
-}
-
-export type ferriesCreateOrConnectWithoutTripsInput = {
-  where: Prisma.ferriesWhereUniqueInput
-  create: Prisma.XOR<Prisma.ferriesCreateWithoutTripsInput, Prisma.ferriesUncheckedCreateWithoutTripsInput>
-}
-
-export type ferriesUpsertWithoutTripsInput = {
-  update: Prisma.XOR<Prisma.ferriesUpdateWithoutTripsInput, Prisma.ferriesUncheckedUpdateWithoutTripsInput>
-  create: Prisma.XOR<Prisma.ferriesCreateWithoutTripsInput, Prisma.ferriesUncheckedCreateWithoutTripsInput>
-  where?: Prisma.ferriesWhereInput
-}
-
-export type ferriesUpdateToOneWithWhereWithoutTripsInput = {
-  where?: Prisma.ferriesWhereInput
-  data: Prisma.XOR<Prisma.ferriesUpdateWithoutTripsInput, Prisma.ferriesUncheckedUpdateWithoutTripsInput>
-}
-
-export type ferriesUpdateWithoutTripsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  total_passenger_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  total_vehicle_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  amenities?: Prisma.ferriesUpdateamenitiesInput | string[]
-  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
-  status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  schedules?: Prisma.schedulesUpdateManyWithoutFerriesNestedInput
-  seat_configurations?: Prisma.seat_configurationsUpdateManyWithoutFerriesNestedInput
-}
-
-export type ferriesUncheckedUpdateWithoutTripsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  total_passenger_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  total_vehicle_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  amenities?: Prisma.ferriesUpdateamenitiesInput | string[]
-  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
-  status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  schedules?: Prisma.schedulesUncheckedUpdateManyWithoutFerriesNestedInput
-  seat_configurations?: Prisma.seat_configurationsUncheckedUpdateManyWithoutFerriesNestedInput
-}
-
-export type ferriesCreateWithoutSeat_configurationsInput = {
-  id?: string
-  name: string
-  code: string
-  total_passenger_capacity: number
-  total_vehicle_capacity: number
-  amenities?: Prisma.ferriesCreateamenitiesInput | string[]
-  type?: $Enums.FerryType
-  status?: $Enums.FerryStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  schedules?: Prisma.schedulesCreateNestedManyWithoutFerriesInput
-  trips?: Prisma.tripsCreateNestedManyWithoutFerriesInput
-}
-
-export type ferriesUncheckedCreateWithoutSeat_configurationsInput = {
-  id?: string
-  name: string
-  code: string
-  total_passenger_capacity: number
-  total_vehicle_capacity: number
-  amenities?: Prisma.ferriesCreateamenitiesInput | string[]
-  type?: $Enums.FerryType
-  status?: $Enums.FerryStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutFerriesInput
-  trips?: Prisma.tripsUncheckedCreateNestedManyWithoutFerriesInput
-}
-
-export type ferriesCreateOrConnectWithoutSeat_configurationsInput = {
-  where: Prisma.ferriesWhereUniqueInput
-  create: Prisma.XOR<Prisma.ferriesCreateWithoutSeat_configurationsInput, Prisma.ferriesUncheckedCreateWithoutSeat_configurationsInput>
-}
-
-export type ferriesUpsertWithoutSeat_configurationsInput = {
-  update: Prisma.XOR<Prisma.ferriesUpdateWithoutSeat_configurationsInput, Prisma.ferriesUncheckedUpdateWithoutSeat_configurationsInput>
-  create: Prisma.XOR<Prisma.ferriesCreateWithoutSeat_configurationsInput, Prisma.ferriesUncheckedCreateWithoutSeat_configurationsInput>
-  where?: Prisma.ferriesWhereInput
-}
-
-export type ferriesUpdateToOneWithWhereWithoutSeat_configurationsInput = {
-  where?: Prisma.ferriesWhereInput
-  data: Prisma.XOR<Prisma.ferriesUpdateWithoutSeat_configurationsInput, Prisma.ferriesUncheckedUpdateWithoutSeat_configurationsInput>
-}
-
-export type ferriesUpdateWithoutSeat_configurationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  total_passenger_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  total_vehicle_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  amenities?: Prisma.ferriesUpdateamenitiesInput | string[]
-  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
-  status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  schedules?: Prisma.schedulesUpdateManyWithoutFerriesNestedInput
-  trips?: Prisma.tripsUpdateManyWithoutFerriesNestedInput
-}
-
-export type ferriesUncheckedUpdateWithoutSeat_configurationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  total_passenger_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  total_vehicle_capacity?: Prisma.IntFieldUpdateOperationsInput | number
-  amenities?: Prisma.ferriesUpdateamenitiesInput | string[]
-  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
-  status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  schedules?: Prisma.schedulesUncheckedUpdateManyWithoutFerriesNestedInput
-  trips?: Prisma.tripsUncheckedUpdateManyWithoutFerriesNestedInput
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -801,14 +626,10 @@ export type ferriesUncheckedUpdateWithoutSeat_configurationsInput = {
 
 export type FerriesCountOutputType = {
   schedules: number
-  trips: number
-  seat_configurations: number
 }
 
 export type FerriesCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   schedules?: boolean | FerriesCountOutputTypeCountSchedulesArgs
-  trips?: boolean | FerriesCountOutputTypeCountTripsArgs
-  seat_configurations?: boolean | FerriesCountOutputTypeCountSeat_configurationsArgs
 }
 
 /**
@@ -828,82 +649,72 @@ export type FerriesCountOutputTypeCountSchedulesArgs<ExtArgs extends runtime.Typ
   where?: Prisma.schedulesWhereInput
 }
 
-/**
- * FerriesCountOutputType without action
- */
-export type FerriesCountOutputTypeCountTripsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.tripsWhereInput
-}
-
-/**
- * FerriesCountOutputType without action
- */
-export type FerriesCountOutputTypeCountSeat_configurationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.seat_configurationsWhereInput
-}
-
 
 export type ferriesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  code?: boolean
-  total_passenger_capacity?: boolean
-  total_vehicle_capacity?: boolean
+  register_code?: boolean
+  capacity?: boolean
+  operator_name?: boolean
+  operator_phone?: boolean
+  operator_email?: boolean
+  year_built?: boolean
   amenities?: boolean
-  type?: boolean
   status?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   schedules?: boolean | Prisma.ferries$schedulesArgs<ExtArgs>
-  trips?: boolean | Prisma.ferries$tripsArgs<ExtArgs>
-  seat_configurations?: boolean | Prisma.ferries$seat_configurationsArgs<ExtArgs>
   _count?: boolean | Prisma.FerriesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ferries"]>
 
 export type ferriesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  code?: boolean
-  total_passenger_capacity?: boolean
-  total_vehicle_capacity?: boolean
+  register_code?: boolean
+  capacity?: boolean
+  operator_name?: boolean
+  operator_phone?: boolean
+  operator_email?: boolean
+  year_built?: boolean
   amenities?: boolean
-  type?: boolean
   status?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }, ExtArgs["result"]["ferries"]>
 
 export type ferriesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  code?: boolean
-  total_passenger_capacity?: boolean
-  total_vehicle_capacity?: boolean
+  register_code?: boolean
+  capacity?: boolean
+  operator_name?: boolean
+  operator_phone?: boolean
+  operator_email?: boolean
+  year_built?: boolean
   amenities?: boolean
-  type?: boolean
   status?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }, ExtArgs["result"]["ferries"]>
 
 export type ferriesSelectScalar = {
   id?: boolean
   name?: boolean
-  code?: boolean
-  total_passenger_capacity?: boolean
-  total_vehicle_capacity?: boolean
+  register_code?: boolean
+  capacity?: boolean
+  operator_name?: boolean
+  operator_phone?: boolean
+  operator_email?: boolean
+  year_built?: boolean
   amenities?: boolean
-  type?: boolean
   status?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type ferriesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "total_passenger_capacity" | "total_vehicle_capacity" | "amenities" | "type" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["ferries"]>
+export type ferriesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "register_code" | "capacity" | "operator_name" | "operator_phone" | "operator_email" | "year_built" | "amenities" | "status" | "created_at" | "updated_at", ExtArgs["result"]["ferries"]>
 export type ferriesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   schedules?: boolean | Prisma.ferries$schedulesArgs<ExtArgs>
-  trips?: boolean | Prisma.ferries$tripsArgs<ExtArgs>
-  seat_configurations?: boolean | Prisma.ferries$seat_configurationsArgs<ExtArgs>
   _count?: boolean | Prisma.FerriesCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ferriesIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -913,20 +724,20 @@ export type $ferriesPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "ferries"
   objects: {
     schedules: Prisma.$schedulesPayload<ExtArgs>[]
-    trips: Prisma.$tripsPayload<ExtArgs>[]
-    seat_configurations: Prisma.$seat_configurationsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
-    code: string
-    total_passenger_capacity: number
-    total_vehicle_capacity: number
-    amenities: string[]
-    type: $Enums.FerryType
+    register_code: string
+    capacity: number
+    operator_name: string
+    operator_phone: string | null
+    operator_email: string | null
+    year_built: number | null
+    amenities: runtime.JsonValue
     status: $Enums.FerryStatus
-    createdAt: Date
-    updatedAt: Date
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["ferries"]>
   composites: {}
 }
@@ -1322,8 +1133,6 @@ readonly fields: ferriesFieldRefs;
 export interface Prisma__ferriesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   schedules<T extends Prisma.ferries$schedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ferries$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$schedulesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  trips<T extends Prisma.ferries$tripsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ferries$tripsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tripsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  seat_configurations<T extends Prisma.ferries$seat_configurationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ferries$seat_configurationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$seat_configurationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1355,14 +1164,16 @@ export interface Prisma__ferriesClient<T, Null = never, ExtArgs extends runtime.
 export interface ferriesFieldRefs {
   readonly id: Prisma.FieldRef<"ferries", 'String'>
   readonly name: Prisma.FieldRef<"ferries", 'String'>
-  readonly code: Prisma.FieldRef<"ferries", 'String'>
-  readonly total_passenger_capacity: Prisma.FieldRef<"ferries", 'Int'>
-  readonly total_vehicle_capacity: Prisma.FieldRef<"ferries", 'Int'>
-  readonly amenities: Prisma.FieldRef<"ferries", 'String[]'>
-  readonly type: Prisma.FieldRef<"ferries", 'FerryType'>
+  readonly register_code: Prisma.FieldRef<"ferries", 'String'>
+  readonly capacity: Prisma.FieldRef<"ferries", 'Int'>
+  readonly operator_name: Prisma.FieldRef<"ferries", 'String'>
+  readonly operator_phone: Prisma.FieldRef<"ferries", 'String'>
+  readonly operator_email: Prisma.FieldRef<"ferries", 'String'>
+  readonly year_built: Prisma.FieldRef<"ferries", 'Int'>
+  readonly amenities: Prisma.FieldRef<"ferries", 'Json'>
   readonly status: Prisma.FieldRef<"ferries", 'FerryStatus'>
-  readonly createdAt: Prisma.FieldRef<"ferries", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"ferries", 'DateTime'>
+  readonly created_at: Prisma.FieldRef<"ferries", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"ferries", 'DateTime'>
 }
     
 
@@ -1772,54 +1583,6 @@ export type ferries$schedulesArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.SchedulesScalarFieldEnum | Prisma.SchedulesScalarFieldEnum[]
-}
-
-/**
- * ferries.trips
- */
-export type ferries$tripsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the trips
-   */
-  select?: Prisma.tripsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the trips
-   */
-  omit?: Prisma.tripsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.tripsInclude<ExtArgs> | null
-  where?: Prisma.tripsWhereInput
-  orderBy?: Prisma.tripsOrderByWithRelationInput | Prisma.tripsOrderByWithRelationInput[]
-  cursor?: Prisma.tripsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TripsScalarFieldEnum | Prisma.TripsScalarFieldEnum[]
-}
-
-/**
- * ferries.seat_configurations
- */
-export type ferries$seat_configurationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the seat_configurations
-   */
-  select?: Prisma.seat_configurationsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the seat_configurations
-   */
-  omit?: Prisma.seat_configurationsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.seat_configurationsInclude<ExtArgs> | null
-  where?: Prisma.seat_configurationsWhereInput
-  orderBy?: Prisma.seat_configurationsOrderByWithRelationInput | Prisma.seat_configurationsOrderByWithRelationInput[]
-  cursor?: Prisma.seat_configurationsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.Seat_configurationsScalarFieldEnum | Prisma.Seat_configurationsScalarFieldEnum[]
 }
 
 /**

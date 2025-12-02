@@ -11,8 +11,8 @@ export class TripsService {
     return 'This action adds a new trip';
   }
 
-  findAll() {
-    return this.databasesService.trips.findMany({
+  async findAll() {
+    const trips = await this.databasesService.trips.findMany({
       include: {
         routes: {
           include: {
@@ -20,9 +20,38 @@ export class TripsService {
             destination_ports: true,
           },
         },
-        ferries: true,
+        ferries: {
+          include: {
+            seat_configurations: {
+              include: {
+                seats: true,
+              },
+            },
+          },
+        },
       },
     });
+
+    const newTrips = trips.map((trip) => {
+      let totalSeats = 0;
+      const ferries = trip.ferries;
+      if (ferries) {
+        totalSeats = ferries.seat_configurations.reduce(
+          (acc, cfg) => acc + cfg.seats.length,
+          0,
+        );
+      }
+
+      return {
+        ...trip,
+        totalSeats,
+      };
+    });
+    // const totalSeats = trip.ferries.seat_configurations.reduce(
+    //   (acc, cfg) => acc + cfg.seats.length,
+    //   0,
+    // );
+    return newTrips;
   }
 
   findOne(id: number) {

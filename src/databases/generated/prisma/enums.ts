@@ -9,105 +9,83 @@
 * 🟢 You can import this file directly.
 */
 
-export const Role = {
-  ADMIN: 'ADMIN',
-  SELLER: 'SELLER',
-  CUSTOMER: 'CUSTOMER'
+export const DocumentType = {
+  dni: 'dni',
+  passport: 'passport'
 } as const
 
-export type Role = (typeof Role)[keyof typeof Role]
-
-
-export const FerryType = {
-  STANDARD: 'STANDARD',
-  FAST: 'FAST',
-  PREMIUM: 'PREMIUM'
-} as const
-
-export type FerryType = (typeof FerryType)[keyof typeof FerryType]
+export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType]
 
 
 export const FerryStatus = {
-  ACTIVE: 'ACTIVE',
-  MAINTENANCE: 'MAINTENANCE',
-  RETIRED: 'RETIRED'
+  active: 'active',
+  maintenance: 'maintenance',
+  retired: 'retired'
 } as const
 
 export type FerryStatus = (typeof FerryStatus)[keyof typeof FerryStatus]
 
 
-export const RouteStatus = {
-  ACTIVE: 'ACTIVE',
-  INACTIVE: 'INACTIVE',
-  SEASONAL: 'SEASONAL'
-} as const
-
-export type RouteStatus = (typeof RouteStatus)[keyof typeof RouteStatus]
-
-
 export const ScheduleStatus = {
-  ACTIVE: 'ACTIVE',
-  SUSPENDED: 'SUSPENDED'
+  scheduled: 'scheduled',
+  boarding: 'boarding',
+  in_transit: 'in_transit',
+  completed: 'completed',
+  cancelled: 'cancelled'
 } as const
 
 export type ScheduleStatus = (typeof ScheduleStatus)[keyof typeof ScheduleStatus]
 
 
-export const TripStatus = {
-  SCHEDULED: 'SCHEDULED',
-  BOARDING: 'BOARDING',
-  DEPARTED: 'DEPARTED',
-  ARRIVED: 'ARRIVED',
-  CANCELLED: 'CANCELLED',
-  DELAYED: 'DELAYED'
+export const PaymentMethod = {
+  credit_card: 'credit_card',
+  debit_card: 'debit_card',
+  paypal: 'paypal',
+  bank_transfer: 'bank_transfer',
+  cash: 'cash'
 } as const
 
-export type TripStatus = (typeof TripStatus)[keyof typeof TripStatus]
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
 
 
-export const BookingStatus = {
-  PENDING: 'PENDING',
-  CONFIRMED: 'CONFIRMED',
-  CANCELLED: 'CANCELLED',
-  EXPIRED: 'EXPIRED'
+export const PaymentStatus = {
+  pending: 'pending',
+  processing: 'processing',
+  completed: 'completed',
+  failed: 'failed',
+  refunded: 'refunded',
+  partial_refund: 'partial_refund'
 } as const
 
-export type BookingStatus = (typeof BookingStatus)[keyof typeof BookingStatus]
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
 
-export const PassengerType = {
-  ADULT: 'ADULT',
-  CHILD: 'CHILD',
-  SENIOR: 'SENIOR',
-  INFANT: 'INFANT'
+export const SeatHoldsStatus = {
+  held: 'held',
+  confirmed: 'confirmed',
+  expired: 'expired',
+  released: 'released'
 } as const
 
-export type PassengerType = (typeof PassengerType)[keyof typeof PassengerType]
+export type SeatHoldsStatus = (typeof SeatHoldsStatus)[keyof typeof SeatHoldsStatus]
 
 
-export const TicketStatus = {
-  VALID: 'VALID',
-  USED: 'USED',
-  CANCELLED: 'CANCELLED',
-  REFUNDED: 'REFUNDED'
+export const TicketsTripType = {
+  one_way: 'one_way',
+  round_trip: 'round_trip'
 } as const
 
-export type TicketStatus = (typeof TicketStatus)[keyof typeof TicketStatus]
+export type TicketsTripType = (typeof TicketsTripType)[keyof typeof TicketsTripType]
 
 
-export const NotificationStatus = {
-  PENDING: 'PENDING',
-  SENT: 'SENT',
-  FAILED: 'FAILED'
+export const TicketsStatus = {
+  pending: 'pending',
+  confirmed: 'confirmed',
+  checked_in: 'checked_in',
+  completed: 'completed',
+  cancelled: 'cancelled',
+  refunded: 'refunded',
+  expired: 'expired'
 } as const
 
-export type NotificationStatus = (typeof NotificationStatus)[keyof typeof NotificationStatus]
-
-
-export const NotificationType = {
-  EMAIL: 'EMAIL',
-  SMS: 'SMS',
-  PUSH: 'PUSH'
-} as const
-
-export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+export type TicketsStatus = (typeof TicketsStatus)[keyof typeof TicketsStatus]

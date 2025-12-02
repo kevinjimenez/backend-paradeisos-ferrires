@@ -8,17 +8,14 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/users.js'
-export type * from './models/ferries.js'
+export type * from './models/islands.js'
 export type * from './models/ports.js'
 export type * from './models/routes.js'
+export type * from './models/ferries.js'
 export type * from './models/schedules.js'
-export type * from './models/trips.js'
-export type * from './models/seat_configurations.js'
-export type * from './models/seats.js'
-export type * from './models/bookings.js'
-export type * from './models/booking_passengers.js'
-export type * from './models/booking_vehicles.js'
+export type * from './models/users.js'
+export type * from './models/passengers.js'
+export type * from './models/payments.js'
+export type * from './models/seat_holds.js'
 export type * from './models/tickets.js'
-export type * from './models/notifications.js'
 export type * from './commonInputTypes.js'

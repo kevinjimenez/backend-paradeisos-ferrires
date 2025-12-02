@@ -5,8 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../databases/generated/prisma"
+  provider     = "prisma-client"
+  output       = "../databases/generated/prisma"
   moduleFormat = "cjs"
 }
 
@@ -14,334 +14,296 @@ datasource db {
   provider = "postgresql"
 }
 
-enum Role {
-  ADMIN
-  SELLER
-  CUSTOMER
+enum DocumentType {
+  dni // cedula
+  passport
 }
 
-enum FerryType {
-  STANDARD
-  FAST
-  PREMIUM
+// TABLE islands
+model islands {
+  id          String  @id @default(uuid())
+  name        String  @db.VarChar(100)
+  code        String  @unique @db.VarChar(10)
+  description String  @db.Text
+  is_active   Boolean @default(true)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  ports ports[]
 }
 
-enum FerryStatus {
-  ACTIVE
-  MAINTENANCE
-  RETIRED
-}
-
-enum RouteStatus {
-  ACTIVE
-  INACTIVE
-  SEASONAL
-}
-
-enum ScheduleStatus {
-  ACTIVE
-  SUSPENDED
-}
-
-enum TripStatus {
-  SCHEDULED
-  BOARDING
-  DEPARTED
-  ARRIVED
-  CANCELLED
-  DELAYED
-}
-
-enum BookingStatus {
-  PENDING
-  CONFIRMED
-  CANCELLED
-  EXPIRED
-}
-
-enum PassengerType {
-  ADULT
-  CHILD
-  SENIOR
-  INFANT
-}
-
-enum TicketStatus {
-  VALID
-  USED
-  CANCELLED
-  REFUNDED
-}
-
-enum NotificationStatus {
-  PENDING
-  SENT
-  FAILED
-}
-
-enum NotificationType {
-  EMAIL
-  SMS
-  PUSH
-}
-
-model users {
-  id        String @id @default(uuid())
-  email     String @unique
-  firstName String @db.VarChar(100)
-  lastName  String @db.VarChar(100)
-  phone     String @db.VarChar(20)
-
-  role Role @default(CUSTOMER)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  notifications notifications[]
-  bookings      bookings[]
-
-  @@index([email, role])
-}
-
-model ferries {
-  id                       String   @id @default(uuid())
-  name                     String   @db.VarChar(100)
-  code                     String   @unique @db.VarChar(20)
-  total_passenger_capacity Int
-  total_vehicle_capacity   Int
-  amenities                String[]
-
-  type   FerryType   @default(STANDARD)
-  status FerryStatus @default(ACTIVE)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  schedules           schedules[]
-  trips               trips[]
-  seat_configurations seat_configurations[]
-
-  @@index([code, status])
-}
-
+// TABLE ports
 model ports {
-  id   String @id @default(uuid())
-  name String @db.VarChar(100)
-  code String @unique @db.VarChar(20)
-  city String @db.VarChar(100)
+  id         String   @id @default(uuid())
+  islands    islands? @relation(fields: [islands_id], references: [id])
+  islands_id String?
 
-  role Role @default(CUSTOMER)
+  name          String   @db.VarChar(100)
+  code          String   @unique @db.VarChar(10)
+  address       String?  @db.VarChar(255)
+  contact_phone String?  @db.VarChar(20)
+  latitude      Decimal? @db.Decimal(10, 8)
+  longitude     Decimal? @db.Decimal(11, 8)
+  is_active     Boolean  @default(true)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  opening_time DateTime @default(now())
+  closing_time DateTime @default(now())
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   origin_routes      routes[] @relation("origin_routes")
   destination_routes routes[] @relation("destination_routes")
-
-  @@index([code, city])
 }
 
+// TABLE routes
 model routes {
-  id                         String @id @default(uuid())
-  estimated_duration_minutes Int
+  id                  String @id @default(uuid())
+  origin_port_id      String
+  origin_ports        ports  @relation("origin_routes", fields: [origin_port_id], references: [id])
+  destination_port_id String
+  destination_ports   ports  @relation("destination_routes", fields: [destination_port_id], references: [id])
 
-  status RouteStatus @default(ACTIVE)
+  distance_km         Decimal? @db.Decimal(6, 2)
+  duration_minutes    Int
+  base_price_resident Decimal  @db.Decimal(10, 2)
+  base_price_national Decimal  @db.Decimal(10, 2)
+  base_price_foreign  Decimal  @db.Decimal(10, 2)
+  is_active           Boolean  @default(true)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   schedules schedules[]
-  trips     trips[]
+}
 
-  origin_ports        ports  @relation("origin_routes", fields: [origin_port_id], references: [id])
-  origin_port_id      String
-  destination_ports   ports  @relation("destination_routes", fields: [destination_port_id], references: [id])
-  destination_port_id String
+// TABLE ferries
+enum FerryStatus {
+  active
+  maintenance
+  retired
+}
 
-  @@index([status, origin_port_id, destination_port_id])
+model ferries {
+  id             String  @id @default(uuid())
+  name           String  @db.VarChar(100)
+  register_code  String  @unique @db.VarChar(30)
+  capacity       Int
+  operator_name  String  @db.VarChar(100)
+  operator_phone String? @db.VarChar(20)
+  operator_email String? @db.VarChar(255)
+  year_built     Int?
+  amenities      Json    @default("{}") @db.JsonB
+
+  status FerryStatus @default(active)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  schedules schedules[]
+}
+
+// TABLE schedules
+enum ScheduleStatus {
+  scheduled
+  boarding
+  in_transit
+  completed
+  cancelled
 }
 
 model schedules {
-  id             String    @id @default(uuid())
-  departure_time DateTime
-  arrival_time   DateTime
-  days_of_week   String[]
-  valid_from     DateTime
-  valid_until    DateTime?
-
-  status ScheduleStatus @default(ACTIVE)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  trips trips[]
-
+  id         String   @id @default(uuid())
   routes     routes?  @relation(fields: [routes_id], references: [id])
   routes_id  String?
   ferries    ferries? @relation(fields: [ferries_id], references: [id])
   ferries_id String?
 
-  @@index([status, routes_id, ferries_id])
+  departure_date      DateTime
+  departure_time      DateTime
+  arrival_time        DateTime
+  total_capacity      Int
+  available_seats     Int
+  cancellation_reason String?  @db.Text
+  notes               String?  @db.Text
+
+  status ScheduleStatus @default(scheduled)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // tickets    tickets[]
+  seat_holds       seat_holds[]
+  return_tickets   tickets[]    @relation("return_tickets")
+  outbound_tickets tickets[]    @relation("outbound_tickets")
 }
 
-model trips {
-  id                        String   @id @default(uuid())
-  departure_date            DateTime
-  departure_time            DateTime
-  arrival_date              DateTime
-  arrival_time              DateTime
-  available_passenger_seats Int
+// TABLE users
+model users {
+  id              String  @id @default(uuid())
+  firstName       String  @db.VarChar(100)
+  lastName        String  @db.VarChar(100)
+  email           String  @unique @db.VarChar(255)
+  phone           String? @db.VarChar(20)
+  document_number String  @db.VarChar(50)
 
-  status TripStatus @default(SCHEDULED)
+  document_type DocumentType
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
-  bookings bookings[]
-
-  ferries      ferries?   @relation(fields: [ferries_id], references: [id])
-  ferries_id   String?
-  routes       routes?    @relation(fields: [routes_id], references: [id])
-  routes_id    String?
-  schedules    schedules? @relation(fields: [schedules_id], references: [id])
-  schedules_id String?
-
-  @@index([departure_date, status, routes_id])
-  @@index([ferries_id, schedules_id])
+  tickets    tickets[]
+  seat_holds seat_holds[]
 }
 
-model seat_configurations {
-  id          String @id @default(uuid())
-  total_seats Int
+// TABLE passengers
+model passengers {
+  id         String   @id @default(uuid())
+  tickets    tickets? @relation(fields: [tickets_id], references: [id])
+  tickets_id String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  first_name             String    @db.VarChar(100)
+  last_name              String    @db.VarChar(100)
+  email                  String?   @db.VarChar(255)
+  phone                  String?   @db.VarChar(20)
+  document_number        String    @db.VarChar(50)
+  unit_price             Decimal   @db.Decimal(10, 2)
+  is_primary             Boolean   @default(false)
+  checked_in_outbound    Boolean   @default(false)
+  checked_in_return      Boolean   @default(false)
+  checked_in_outbound_at DateTime?
+  checked_in_return_at   DateTime?
 
-  seats seats[]
+  document_type DocumentType
 
-  ferries    ferries? @relation(fields: [ferries_id], references: [id])
-  ferries_id String?
-
-  @@index([ferries_id])
+  created_at DateTime @default(now())
 }
 
-model seats {
-  id      String  @id @default(uuid())
-  is_free Boolean @default(true)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  booking_passengers booking_passengers[]
-
-  seat_configurations    seat_configurations? @relation(fields: [seat_configurations_id], references: [id])
-  seat_configurations_id String?
-
-  @@index([seat_configurations_id])
+// TABLE payments
+enum PaymentMethod {
+  credit_card
+  debit_card
+  paypal
+  bank_transfer
+  cash
 }
 
-model bookings {
-  id               String  @id @default(uuid())
-  total_passengers Int
-  total_vehicles   Int     @default(0)
-  subtotal         Decimal @db.Decimal(10, 2)
-  taxes            Decimal @default(0) @db.Decimal(10, 2)
-  discount_amount  Decimal @default(0) @db.Decimal(10, 2)
-  total_amount     Decimal @db.Decimal(10, 2)
-
-  status BookingStatus @default(PENDING)
-
-  expires_at DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  tickets            tickets[]
-  notifications      notifications[]
-  booking_passengers booking_passengers[]
-  booking_vehicles   booking_vehicles[]
-
-  users    users?  @relation(fields: [users_id], references: [id])
-  users_id String?
-  trips    trips?  @relation(fields: [trips_id], references: [id])
-  trips_id String?
-
-  @@index([status, users_id])
-  @@index([trips_id, expires_at])
+enum PaymentStatus {
+  pending
+  processing
+  completed
+  failed
+  refunded
+  partial_refund
 }
 
-model booking_passengers {
-  id         String  @id @default(uuid())
-  first_name String  @db.VarChar(100)
-  last_name  String  @db.VarChar(100)
-  id_number  String? @db.VarChar(50)
-  price      Decimal @db.Decimal(10, 2)
+model payments {
+  id         String   @id @default(uuid())
+  tickets    tickets? @relation(fields: [tickets_id], references: [id])
+  tickets_id String?
 
-  passenger_type PassengerType @default(ADULT)
+  payment_provider        String    @db.VarChar(50)
+  provider_transaction_id String?   @db.VarChar(255)
+  provider_payment_intent String?   @db.VarChar(255)
+  amount                  Decimal   @db.Decimal(10, 2)
+  currency                String    @default("USD") @db.VarChar(3)
+  error_code              String?   @db.VarChar(50)
+  error_message           String?   @db.Text
+  attempts                Int       @default(1)
+  paid_at                 DateTime? @default(now())
+  refunded_at             DateTime? @default(now())
+  refund_amount           Decimal?  @db.Decimal(10, 2)
+  refund_text             String?   @db.Text
+  metadata                Json?     @default("{}") @db.JsonB
+  ip_address              String?   @db.VarChar(45)
+  user_agent              String?   @db.Text
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  payment_method PaymentMethod
+  status         PaymentStatus @default(pending)
 
-  seats       seats?    @relation(fields: [seats_id], references: [id])
-  seats_id    String?
-  bookings    bookings? @relation(fields: [bookings_id], references: [id])
-  bookings_id String?
-
-  @@index([bookings_id, seats_id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
 
-model booking_vehicles {
-  id            String  @id @default(uuid())
-  license_plate String  @db.VarChar(20)
-  brand         String? @db.VarChar(50)
-  driver_name   String? @db.VarChar(200)
-  price         Decimal @db.Decimal(10, 2)
+// TABLE seat_holds
+enum SeatHoldsStatus {
+  held
+  confirmed
+  expired
+  released
+}
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model seat_holds {
+  id              String     @id @default(uuid())
+  users           users?     @relation(fields: [users_id], references: [id])
+  users_id        String?
+  schedules       schedules? @relation(fields: [schedules_id], references: [id])
+  schedules_id    String?
+  outbound_ticket tickets?   @relation("outbound_hold")
+  return_ticket   tickets?   @relation("return_hold")
 
-  bookings    bookings? @relation(fields: [bookings_id], references: [id])
-  bookings_id String?
+  quantity Int
 
-  @@index([bookings_id])
+  status SeatHoldsStatus @default(held)
+
+  held_at      DateTime  @default(now())
+  expires_at   DateTime  @default(now()) // held_at + 15min
+  confirmed_at DateTime?
+  released_at  DateTime?
+  created_at   DateTime  @default(now())
+}
+
+// TABLE tickets
+enum TicketsTripType {
+  one_way
+  round_trip
+}
+
+enum TicketsStatus {
+  pending
+  confirmed
+  checked_in
+  completed
+  cancelled
+  refunded
+  expired
 }
 
 model tickets {
-  id             String @id @default(uuid())
-  ticket_number  String @unique @db.VarChar(50)
-  qr_code        String
-  passenger_name String @db.VarChar(200)
+  id                    String     @id @default(uuid())
+  users                 users?     @relation(fields: [users_Id], references: [id])
+  users_Id              String?
+  return_schedules      schedules? @relation("return_tickets", fields: [return_schedules_id], references: [id])
+  return_schedules_id   String?
+  outbound_schedules    schedules? @relation("outbound_tickets", fields: [outbound_schedules_id], references: [id])
+  outbound_schedules_id String?
 
-  status TicketStatus
+  ticket_code         String          @unique @db.VarChar(20)
+  trip_type           TicketsTripType
+  total_passengers    Int
+  subtotal            Decimal         @db.Decimal(10, 2)
+  taxes               Decimal         @default(0) @db.Decimal(10, 2)
+  service_fee         Decimal         @default(0) @db.Decimal(10, 2)
+  discount            Decimal         @default(0) @db.Decimal(10, 2)
+  total               Decimal         @db.Decimal(10, 2)
+  currency            String          @default("USD") @db.VarChar(3)
+  qr_code             String?         @db.Text
+  cancellation_reason String?         @db.Text
 
-  used_at   DateTime
-  issued_at DateTime @default(now())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  status TicketsStatus @default(pending)
 
-  bookings    bookings? @relation(fields: [bookings_id], references: [id])
-  bookings_id String?
+  booking_expires_at DateTime?
+  confirmed_at       DateTime? @default(now())
+  cancelled_at       DateTime? @default(now())
+  created_at         DateTime  @default(now())
+  updated_at         DateTime  @updatedAt
 
-  @@index([ticket_number, qr_code])
-  @@index([bookings_id, status])
-}
+  outbound_hold    seat_holds? @relation("outbound_hold", fields: [outbound_hold_id], references: [id])
+  outbound_hold_id String?     @unique
+  return_hold    seat_holds? @relation("return_hold", fields: [return_hold_id], references: [id])
+  return_hold_id String?     @unique
 
-model notifications {
-  id      String  @id @default(uuid())
-  subject String? @db.VarChar(200)
-  content String
-
-  type   NotificationType   @default(EMAIL)
-  status NotificationStatus @default(PENDING)
-
-  sent_at   DateTime
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  users       users?    @relation(fields: [users_id], references: [id])
-  users_id    String?
-  bookings    bookings? @relation(fields: [bookings_id], references: [id])
-  bookings_id String?
-
-  @@index([status, createdAt])
-  @@index([users_id])
+  passengers passengers[]
+  payments   payments[]
 }

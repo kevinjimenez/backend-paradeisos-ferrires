@@ -20,90 +20,128 @@ export type schedulesModel = runtime.Types.Result.DefaultSelection<Prisma.$sched
 
 export type AggregateSchedules = {
   _count: SchedulesCountAggregateOutputType | null
+  _avg: SchedulesAvgAggregateOutputType | null
+  _sum: SchedulesSumAggregateOutputType | null
   _min: SchedulesMinAggregateOutputType | null
   _max: SchedulesMaxAggregateOutputType | null
 }
 
+export type SchedulesAvgAggregateOutputType = {
+  total_capacity: number | null
+  available_seats: number | null
+}
+
+export type SchedulesSumAggregateOutputType = {
+  total_capacity: number | null
+  available_seats: number | null
+}
+
 export type SchedulesMinAggregateOutputType = {
   id: string | null
-  departure_time: Date | null
-  arrival_time: Date | null
-  valid_from: Date | null
-  valid_until: Date | null
-  status: $Enums.ScheduleStatus | null
-  createdAt: Date | null
-  updatedAt: Date | null
   routes_id: string | null
   ferries_id: string | null
+  departure_date: Date | null
+  departure_time: Date | null
+  arrival_time: Date | null
+  total_capacity: number | null
+  available_seats: number | null
+  cancellation_reason: string | null
+  notes: string | null
+  status: $Enums.ScheduleStatus | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type SchedulesMaxAggregateOutputType = {
   id: string | null
-  departure_time: Date | null
-  arrival_time: Date | null
-  valid_from: Date | null
-  valid_until: Date | null
-  status: $Enums.ScheduleStatus | null
-  createdAt: Date | null
-  updatedAt: Date | null
   routes_id: string | null
   ferries_id: string | null
+  departure_date: Date | null
+  departure_time: Date | null
+  arrival_time: Date | null
+  total_capacity: number | null
+  available_seats: number | null
+  cancellation_reason: string | null
+  notes: string | null
+  status: $Enums.ScheduleStatus | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type SchedulesCountAggregateOutputType = {
   id: number
-  departure_time: number
-  arrival_time: number
-  days_of_week: number
-  valid_from: number
-  valid_until: number
-  status: number
-  createdAt: number
-  updatedAt: number
   routes_id: number
   ferries_id: number
+  departure_date: number
+  departure_time: number
+  arrival_time: number
+  total_capacity: number
+  available_seats: number
+  cancellation_reason: number
+  notes: number
+  status: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
 
+export type SchedulesAvgAggregateInputType = {
+  total_capacity?: true
+  available_seats?: true
+}
+
+export type SchedulesSumAggregateInputType = {
+  total_capacity?: true
+  available_seats?: true
+}
+
 export type SchedulesMinAggregateInputType = {
   id?: true
-  departure_time?: true
-  arrival_time?: true
-  valid_from?: true
-  valid_until?: true
-  status?: true
-  createdAt?: true
-  updatedAt?: true
   routes_id?: true
   ferries_id?: true
+  departure_date?: true
+  departure_time?: true
+  arrival_time?: true
+  total_capacity?: true
+  available_seats?: true
+  cancellation_reason?: true
+  notes?: true
+  status?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type SchedulesMaxAggregateInputType = {
   id?: true
-  departure_time?: true
-  arrival_time?: true
-  valid_from?: true
-  valid_until?: true
-  status?: true
-  createdAt?: true
-  updatedAt?: true
   routes_id?: true
   ferries_id?: true
+  departure_date?: true
+  departure_time?: true
+  arrival_time?: true
+  total_capacity?: true
+  available_seats?: true
+  cancellation_reason?: true
+  notes?: true
+  status?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type SchedulesCountAggregateInputType = {
   id?: true
-  departure_time?: true
-  arrival_time?: true
-  days_of_week?: true
-  valid_from?: true
-  valid_until?: true
-  status?: true
-  createdAt?: true
-  updatedAt?: true
   routes_id?: true
   ferries_id?: true
+  departure_date?: true
+  departure_time?: true
+  arrival_time?: true
+  total_capacity?: true
+  available_seats?: true
+  cancellation_reason?: true
+  notes?: true
+  status?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -145,6 +183,18 @@ export type SchedulesAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inte
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: SchedulesAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: SchedulesSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: SchedulesMinAggregateInputType
@@ -175,23 +225,29 @@ export type schedulesGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   _count?: SchedulesCountAggregateInputType | true
+  _avg?: SchedulesAvgAggregateInputType
+  _sum?: SchedulesSumAggregateInputType
   _min?: SchedulesMinAggregateInputType
   _max?: SchedulesMaxAggregateInputType
 }
 
 export type SchedulesGroupByOutputType = {
   id: string
-  departure_time: Date
-  arrival_time: Date
-  days_of_week: string[]
-  valid_from: Date
-  valid_until: Date | null
-  status: $Enums.ScheduleStatus
-  createdAt: Date
-  updatedAt: Date
   routes_id: string | null
   ferries_id: string | null
+  departure_date: Date
+  departure_time: Date
+  arrival_time: Date
+  total_capacity: number
+  available_seats: number
+  cancellation_reason: string | null
+  notes: string | null
+  status: $Enums.ScheduleStatus
+  created_at: Date
+  updated_at: Date
   _count: SchedulesCountAggregateOutputType | null
+  _avg: SchedulesAvgAggregateOutputType | null
+  _sum: SchedulesSumAggregateOutputType | null
   _min: SchedulesMinAggregateOutputType | null
   _max: SchedulesMaxAggregateOutputType | null
 }
@@ -216,36 +272,44 @@ export type schedulesWhereInput = {
   OR?: Prisma.schedulesWhereInput[]
   NOT?: Prisma.schedulesWhereInput | Prisma.schedulesWhereInput[]
   id?: Prisma.StringFilter<"schedules"> | string
-  departure_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  arrival_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  days_of_week?: Prisma.StringNullableListFilter<"schedules">
-  valid_from?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  valid_until?: Prisma.DateTimeNullableFilter<"schedules"> | Date | string | null
-  status?: Prisma.EnumScheduleStatusFilter<"schedules"> | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"schedules"> | Date | string
   routes_id?: Prisma.StringNullableFilter<"schedules"> | string | null
   ferries_id?: Prisma.StringNullableFilter<"schedules"> | string | null
-  trips?: Prisma.TripsListRelationFilter
+  departure_date?: Prisma.DateTimeFilter<"schedules"> | Date | string
+  departure_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
+  arrival_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
+  total_capacity?: Prisma.IntFilter<"schedules"> | number
+  available_seats?: Prisma.IntFilter<"schedules"> | number
+  cancellation_reason?: Prisma.StringNullableFilter<"schedules"> | string | null
+  notes?: Prisma.StringNullableFilter<"schedules"> | string | null
+  status?: Prisma.EnumScheduleStatusFilter<"schedules"> | $Enums.ScheduleStatus
+  created_at?: Prisma.DateTimeFilter<"schedules"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"schedules"> | Date | string
   routes?: Prisma.XOR<Prisma.RoutesNullableScalarRelationFilter, Prisma.routesWhereInput> | null
   ferries?: Prisma.XOR<Prisma.FerriesNullableScalarRelationFilter, Prisma.ferriesWhereInput> | null
+  seat_holds?: Prisma.Seat_holdsListRelationFilter
+  return_tickets?: Prisma.TicketsListRelationFilter
+  outbound_tickets?: Prisma.TicketsListRelationFilter
 }
 
 export type schedulesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  departure_time?: Prisma.SortOrder
-  arrival_time?: Prisma.SortOrder
-  days_of_week?: Prisma.SortOrder
-  valid_from?: Prisma.SortOrder
-  valid_until?: Prisma.SortOrderInput | Prisma.SortOrder
-  status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   routes_id?: Prisma.SortOrderInput | Prisma.SortOrder
   ferries_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  trips?: Prisma.tripsOrderByRelationAggregateInput
+  departure_date?: Prisma.SortOrder
+  departure_time?: Prisma.SortOrder
+  arrival_time?: Prisma.SortOrder
+  total_capacity?: Prisma.SortOrder
+  available_seats?: Prisma.SortOrder
+  cancellation_reason?: Prisma.SortOrderInput | Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   routes?: Prisma.routesOrderByWithRelationInput
   ferries?: Prisma.ferriesOrderByWithRelationInput
+  seat_holds?: Prisma.seat_holdsOrderByRelationAggregateInput
+  return_tickets?: Prisma.ticketsOrderByRelationAggregateInput
+  outbound_tickets?: Prisma.ticketsOrderByRelationAggregateInput
 }
 
 export type schedulesWhereUniqueInput = Prisma.AtLeast<{
@@ -253,36 +317,44 @@ export type schedulesWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.schedulesWhereInput | Prisma.schedulesWhereInput[]
   OR?: Prisma.schedulesWhereInput[]
   NOT?: Prisma.schedulesWhereInput | Prisma.schedulesWhereInput[]
-  departure_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  arrival_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  days_of_week?: Prisma.StringNullableListFilter<"schedules">
-  valid_from?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  valid_until?: Prisma.DateTimeNullableFilter<"schedules"> | Date | string | null
-  status?: Prisma.EnumScheduleStatusFilter<"schedules"> | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"schedules"> | Date | string
   routes_id?: Prisma.StringNullableFilter<"schedules"> | string | null
   ferries_id?: Prisma.StringNullableFilter<"schedules"> | string | null
-  trips?: Prisma.TripsListRelationFilter
+  departure_date?: Prisma.DateTimeFilter<"schedules"> | Date | string
+  departure_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
+  arrival_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
+  total_capacity?: Prisma.IntFilter<"schedules"> | number
+  available_seats?: Prisma.IntFilter<"schedules"> | number
+  cancellation_reason?: Prisma.StringNullableFilter<"schedules"> | string | null
+  notes?: Prisma.StringNullableFilter<"schedules"> | string | null
+  status?: Prisma.EnumScheduleStatusFilter<"schedules"> | $Enums.ScheduleStatus
+  created_at?: Prisma.DateTimeFilter<"schedules"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"schedules"> | Date | string
   routes?: Prisma.XOR<Prisma.RoutesNullableScalarRelationFilter, Prisma.routesWhereInput> | null
   ferries?: Prisma.XOR<Prisma.FerriesNullableScalarRelationFilter, Prisma.ferriesWhereInput> | null
+  seat_holds?: Prisma.Seat_holdsListRelationFilter
+  return_tickets?: Prisma.TicketsListRelationFilter
+  outbound_tickets?: Prisma.TicketsListRelationFilter
 }, "id">
 
 export type schedulesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  departure_time?: Prisma.SortOrder
-  arrival_time?: Prisma.SortOrder
-  days_of_week?: Prisma.SortOrder
-  valid_from?: Prisma.SortOrder
-  valid_until?: Prisma.SortOrderInput | Prisma.SortOrder
-  status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   routes_id?: Prisma.SortOrderInput | Prisma.SortOrder
   ferries_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  departure_date?: Prisma.SortOrder
+  departure_time?: Prisma.SortOrder
+  arrival_time?: Prisma.SortOrder
+  total_capacity?: Prisma.SortOrder
+  available_seats?: Prisma.SortOrder
+  cancellation_reason?: Prisma.SortOrderInput | Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.schedulesCountOrderByAggregateInput
+  _avg?: Prisma.schedulesAvgOrderByAggregateInput
   _max?: Prisma.schedulesMaxOrderByAggregateInput
   _min?: Prisma.schedulesMinOrderByAggregateInput
+  _sum?: Prisma.schedulesSumOrderByAggregateInput
 }
 
 export type schedulesScalarWhereWithAggregatesInput = {
@@ -290,116 +362,140 @@ export type schedulesScalarWhereWithAggregatesInput = {
   OR?: Prisma.schedulesScalarWhereWithAggregatesInput[]
   NOT?: Prisma.schedulesScalarWhereWithAggregatesInput | Prisma.schedulesScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"schedules"> | string
-  departure_time?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
-  arrival_time?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
-  days_of_week?: Prisma.StringNullableListFilter<"schedules">
-  valid_from?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
-  valid_until?: Prisma.DateTimeNullableWithAggregatesFilter<"schedules"> | Date | string | null
-  status?: Prisma.EnumScheduleStatusWithAggregatesFilter<"schedules"> | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
   routes_id?: Prisma.StringNullableWithAggregatesFilter<"schedules"> | string | null
   ferries_id?: Prisma.StringNullableWithAggregatesFilter<"schedules"> | string | null
+  departure_date?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
+  departure_time?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
+  arrival_time?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
+  total_capacity?: Prisma.IntWithAggregatesFilter<"schedules"> | number
+  available_seats?: Prisma.IntWithAggregatesFilter<"schedules"> | number
+  cancellation_reason?: Prisma.StringNullableWithAggregatesFilter<"schedules"> | string | null
+  notes?: Prisma.StringNullableWithAggregatesFilter<"schedules"> | string | null
+  status?: Prisma.EnumScheduleStatusWithAggregatesFilter<"schedules"> | $Enums.ScheduleStatus
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"schedules"> | Date | string
 }
 
 export type schedulesCreateInput = {
   id?: string
+  departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
-  days_of_week?: Prisma.schedulesCreatedays_of_weekInput | string[]
-  valid_from: Date | string
-  valid_until?: Date | string | null
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
   status?: $Enums.ScheduleStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trips?: Prisma.tripsCreateNestedManyWithoutSchedulesInput
+  created_at?: Date | string
+  updated_at?: Date | string
   routes?: Prisma.routesCreateNestedOneWithoutSchedulesInput
   ferries?: Prisma.ferriesCreateNestedOneWithoutSchedulesInput
+  seat_holds?: Prisma.seat_holdsCreateNestedManyWithoutSchedulesInput
+  return_tickets?: Prisma.ticketsCreateNestedManyWithoutReturn_schedulesInput
+  outbound_tickets?: Prisma.ticketsCreateNestedManyWithoutOutbound_schedulesInput
 }
 
 export type schedulesUncheckedCreateInput = {
   id?: string
-  departure_time: Date | string
-  arrival_time: Date | string
-  days_of_week?: Prisma.schedulesCreatedays_of_weekInput | string[]
-  valid_from: Date | string
-  valid_until?: Date | string | null
-  status?: $Enums.ScheduleStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
   routes_id?: string | null
   ferries_id?: string | null
-  trips?: Prisma.tripsUncheckedCreateNestedManyWithoutSchedulesInput
+  departure_date: Date | string
+  departure_time: Date | string
+  arrival_time: Date | string
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
+  status?: $Enums.ScheduleStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  seat_holds?: Prisma.seat_holdsUncheckedCreateNestedManyWithoutSchedulesInput
+  return_tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutReturn_schedulesInput
+  outbound_tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutOutbound_schedulesInput
 }
 
 export type schedulesUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  days_of_week?: Prisma.schedulesUpdatedays_of_weekInput | string[]
-  valid_from?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  valid_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trips?: Prisma.tripsUpdateManyWithoutSchedulesNestedInput
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   routes?: Prisma.routesUpdateOneWithoutSchedulesNestedInput
   ferries?: Prisma.ferriesUpdateOneWithoutSchedulesNestedInput
+  seat_holds?: Prisma.seat_holdsUpdateManyWithoutSchedulesNestedInput
+  return_tickets?: Prisma.ticketsUpdateManyWithoutReturn_schedulesNestedInput
+  outbound_tickets?: Prisma.ticketsUpdateManyWithoutOutbound_schedulesNestedInput
 }
 
 export type schedulesUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  days_of_week?: Prisma.schedulesUpdatedays_of_weekInput | string[]
-  valid_from?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  valid_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  trips?: Prisma.tripsUncheckedUpdateManyWithoutSchedulesNestedInput
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  seat_holds?: Prisma.seat_holdsUncheckedUpdateManyWithoutSchedulesNestedInput
+  return_tickets?: Prisma.ticketsUncheckedUpdateManyWithoutReturn_schedulesNestedInput
+  outbound_tickets?: Prisma.ticketsUncheckedUpdateManyWithoutOutbound_schedulesNestedInput
 }
 
 export type schedulesCreateManyInput = {
   id?: string
-  departure_time: Date | string
-  arrival_time: Date | string
-  days_of_week?: Prisma.schedulesCreatedays_of_weekInput | string[]
-  valid_from: Date | string
-  valid_until?: Date | string | null
-  status?: $Enums.ScheduleStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
   routes_id?: string | null
   ferries_id?: string | null
+  departure_date: Date | string
+  departure_time: Date | string
+  arrival_time: Date | string
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
+  status?: $Enums.ScheduleStatus
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type schedulesUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  days_of_week?: Prisma.schedulesUpdatedays_of_weekInput | string[]
-  valid_from?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  valid_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type schedulesUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  days_of_week?: Prisma.schedulesUpdatedays_of_weekInput | string[]
-  valid_from?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  valid_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SchedulesListRelationFilter = {
@@ -414,89 +510,65 @@ export type schedulesOrderByRelationAggregateInput = {
 
 export type schedulesCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  departure_time?: Prisma.SortOrder
-  arrival_time?: Prisma.SortOrder
-  days_of_week?: Prisma.SortOrder
-  valid_from?: Prisma.SortOrder
-  valid_until?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   routes_id?: Prisma.SortOrder
   ferries_id?: Prisma.SortOrder
+  departure_date?: Prisma.SortOrder
+  departure_time?: Prisma.SortOrder
+  arrival_time?: Prisma.SortOrder
+  total_capacity?: Prisma.SortOrder
+  available_seats?: Prisma.SortOrder
+  cancellation_reason?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+}
+
+export type schedulesAvgOrderByAggregateInput = {
+  total_capacity?: Prisma.SortOrder
+  available_seats?: Prisma.SortOrder
 }
 
 export type schedulesMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  departure_time?: Prisma.SortOrder
-  arrival_time?: Prisma.SortOrder
-  valid_from?: Prisma.SortOrder
-  valid_until?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   routes_id?: Prisma.SortOrder
   ferries_id?: Prisma.SortOrder
+  departure_date?: Prisma.SortOrder
+  departure_time?: Prisma.SortOrder
+  arrival_time?: Prisma.SortOrder
+  total_capacity?: Prisma.SortOrder
+  available_seats?: Prisma.SortOrder
+  cancellation_reason?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type schedulesMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  departure_time?: Prisma.SortOrder
-  arrival_time?: Prisma.SortOrder
-  valid_from?: Prisma.SortOrder
-  valid_until?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   routes_id?: Prisma.SortOrder
   ferries_id?: Prisma.SortOrder
+  departure_date?: Prisma.SortOrder
+  departure_time?: Prisma.SortOrder
+  arrival_time?: Prisma.SortOrder
+  total_capacity?: Prisma.SortOrder
+  available_seats?: Prisma.SortOrder
+  cancellation_reason?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+}
+
+export type schedulesSumOrderByAggregateInput = {
+  total_capacity?: Prisma.SortOrder
+  available_seats?: Prisma.SortOrder
 }
 
 export type SchedulesNullableScalarRelationFilter = {
   is?: Prisma.schedulesWhereInput | null
   isNot?: Prisma.schedulesWhereInput | null
-}
-
-export type schedulesCreateNestedManyWithoutFerriesInput = {
-  create?: Prisma.XOR<Prisma.schedulesCreateWithoutFerriesInput, Prisma.schedulesUncheckedCreateWithoutFerriesInput> | Prisma.schedulesCreateWithoutFerriesInput[] | Prisma.schedulesUncheckedCreateWithoutFerriesInput[]
-  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutFerriesInput | Prisma.schedulesCreateOrConnectWithoutFerriesInput[]
-  createMany?: Prisma.schedulesCreateManyFerriesInputEnvelope
-  connect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
-}
-
-export type schedulesUncheckedCreateNestedManyWithoutFerriesInput = {
-  create?: Prisma.XOR<Prisma.schedulesCreateWithoutFerriesInput, Prisma.schedulesUncheckedCreateWithoutFerriesInput> | Prisma.schedulesCreateWithoutFerriesInput[] | Prisma.schedulesUncheckedCreateWithoutFerriesInput[]
-  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutFerriesInput | Prisma.schedulesCreateOrConnectWithoutFerriesInput[]
-  createMany?: Prisma.schedulesCreateManyFerriesInputEnvelope
-  connect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
-}
-
-export type schedulesUpdateManyWithoutFerriesNestedInput = {
-  create?: Prisma.XOR<Prisma.schedulesCreateWithoutFerriesInput, Prisma.schedulesUncheckedCreateWithoutFerriesInput> | Prisma.schedulesCreateWithoutFerriesInput[] | Prisma.schedulesUncheckedCreateWithoutFerriesInput[]
-  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutFerriesInput | Prisma.schedulesCreateOrConnectWithoutFerriesInput[]
-  upsert?: Prisma.schedulesUpsertWithWhereUniqueWithoutFerriesInput | Prisma.schedulesUpsertWithWhereUniqueWithoutFerriesInput[]
-  createMany?: Prisma.schedulesCreateManyFerriesInputEnvelope
-  set?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
-  disconnect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
-  delete?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
-  connect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
-  update?: Prisma.schedulesUpdateWithWhereUniqueWithoutFerriesInput | Prisma.schedulesUpdateWithWhereUniqueWithoutFerriesInput[]
-  updateMany?: Prisma.schedulesUpdateManyWithWhereWithoutFerriesInput | Prisma.schedulesUpdateManyWithWhereWithoutFerriesInput[]
-  deleteMany?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
-}
-
-export type schedulesUncheckedUpdateManyWithoutFerriesNestedInput = {
-  create?: Prisma.XOR<Prisma.schedulesCreateWithoutFerriesInput, Prisma.schedulesUncheckedCreateWithoutFerriesInput> | Prisma.schedulesCreateWithoutFerriesInput[] | Prisma.schedulesUncheckedCreateWithoutFerriesInput[]
-  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutFerriesInput | Prisma.schedulesCreateOrConnectWithoutFerriesInput[]
-  upsert?: Prisma.schedulesUpsertWithWhereUniqueWithoutFerriesInput | Prisma.schedulesUpsertWithWhereUniqueWithoutFerriesInput[]
-  createMany?: Prisma.schedulesCreateManyFerriesInputEnvelope
-  set?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
-  disconnect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
-  delete?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
-  connect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
-  update?: Prisma.schedulesUpdateWithWhereUniqueWithoutFerriesInput | Prisma.schedulesUpdateWithWhereUniqueWithoutFerriesInput[]
-  updateMany?: Prisma.schedulesUpdateManyWithWhereWithoutFerriesInput | Prisma.schedulesUpdateManyWithWhereWithoutFerriesInput[]
-  deleteMany?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
 }
 
 export type schedulesCreateNestedManyWithoutRoutesInput = {
@@ -541,140 +613,134 @@ export type schedulesUncheckedUpdateManyWithoutRoutesNestedInput = {
   deleteMany?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
 }
 
-export type schedulesCreatedays_of_weekInput = {
-  set: string[]
+export type schedulesCreateNestedManyWithoutFerriesInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutFerriesInput, Prisma.schedulesUncheckedCreateWithoutFerriesInput> | Prisma.schedulesCreateWithoutFerriesInput[] | Prisma.schedulesUncheckedCreateWithoutFerriesInput[]
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutFerriesInput | Prisma.schedulesCreateOrConnectWithoutFerriesInput[]
+  createMany?: Prisma.schedulesCreateManyFerriesInputEnvelope
+  connect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
 }
 
-export type schedulesUpdatedays_of_weekInput = {
-  set?: string[]
-  push?: string | string[]
+export type schedulesUncheckedCreateNestedManyWithoutFerriesInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutFerriesInput, Prisma.schedulesUncheckedCreateWithoutFerriesInput> | Prisma.schedulesCreateWithoutFerriesInput[] | Prisma.schedulesUncheckedCreateWithoutFerriesInput[]
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutFerriesInput | Prisma.schedulesCreateOrConnectWithoutFerriesInput[]
+  createMany?: Prisma.schedulesCreateManyFerriesInputEnvelope
+  connect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
+export type schedulesUpdateManyWithoutFerriesNestedInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutFerriesInput, Prisma.schedulesUncheckedCreateWithoutFerriesInput> | Prisma.schedulesCreateWithoutFerriesInput[] | Prisma.schedulesUncheckedCreateWithoutFerriesInput[]
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutFerriesInput | Prisma.schedulesCreateOrConnectWithoutFerriesInput[]
+  upsert?: Prisma.schedulesUpsertWithWhereUniqueWithoutFerriesInput | Prisma.schedulesUpsertWithWhereUniqueWithoutFerriesInput[]
+  createMany?: Prisma.schedulesCreateManyFerriesInputEnvelope
+  set?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  disconnect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  delete?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  connect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  update?: Prisma.schedulesUpdateWithWhereUniqueWithoutFerriesInput | Prisma.schedulesUpdateWithWhereUniqueWithoutFerriesInput[]
+  updateMany?: Prisma.schedulesUpdateManyWithWhereWithoutFerriesInput | Prisma.schedulesUpdateManyWithWhereWithoutFerriesInput[]
+  deleteMany?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
+}
+
+export type schedulesUncheckedUpdateManyWithoutFerriesNestedInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutFerriesInput, Prisma.schedulesUncheckedCreateWithoutFerriesInput> | Prisma.schedulesCreateWithoutFerriesInput[] | Prisma.schedulesUncheckedCreateWithoutFerriesInput[]
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutFerriesInput | Prisma.schedulesCreateOrConnectWithoutFerriesInput[]
+  upsert?: Prisma.schedulesUpsertWithWhereUniqueWithoutFerriesInput | Prisma.schedulesUpsertWithWhereUniqueWithoutFerriesInput[]
+  createMany?: Prisma.schedulesCreateManyFerriesInputEnvelope
+  set?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  disconnect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  delete?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  connect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  update?: Prisma.schedulesUpdateWithWhereUniqueWithoutFerriesInput | Prisma.schedulesUpdateWithWhereUniqueWithoutFerriesInput[]
+  updateMany?: Prisma.schedulesUpdateManyWithWhereWithoutFerriesInput | Prisma.schedulesUpdateManyWithWhereWithoutFerriesInput[]
+  deleteMany?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
 }
 
 export type EnumScheduleStatusFieldUpdateOperationsInput = {
   set?: $Enums.ScheduleStatus
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
-export type schedulesCreateNestedOneWithoutTripsInput = {
-  create?: Prisma.XOR<Prisma.schedulesCreateWithoutTripsInput, Prisma.schedulesUncheckedCreateWithoutTripsInput>
-  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutTripsInput
+export type schedulesCreateNestedOneWithoutSeat_holdsInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutSeat_holdsInput, Prisma.schedulesUncheckedCreateWithoutSeat_holdsInput>
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutSeat_holdsInput
   connect?: Prisma.schedulesWhereUniqueInput
 }
 
-export type schedulesUpdateOneWithoutTripsNestedInput = {
-  create?: Prisma.XOR<Prisma.schedulesCreateWithoutTripsInput, Prisma.schedulesUncheckedCreateWithoutTripsInput>
-  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutTripsInput
-  upsert?: Prisma.schedulesUpsertWithoutTripsInput
+export type schedulesUpdateOneWithoutSeat_holdsNestedInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutSeat_holdsInput, Prisma.schedulesUncheckedCreateWithoutSeat_holdsInput>
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutSeat_holdsInput
+  upsert?: Prisma.schedulesUpsertWithoutSeat_holdsInput
   disconnect?: Prisma.schedulesWhereInput | boolean
   delete?: Prisma.schedulesWhereInput | boolean
   connect?: Prisma.schedulesWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.schedulesUpdateToOneWithWhereWithoutTripsInput, Prisma.schedulesUpdateWithoutTripsInput>, Prisma.schedulesUncheckedUpdateWithoutTripsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.schedulesUpdateToOneWithWhereWithoutSeat_holdsInput, Prisma.schedulesUpdateWithoutSeat_holdsInput>, Prisma.schedulesUncheckedUpdateWithoutSeat_holdsInput>
 }
 
-export type schedulesCreateWithoutFerriesInput = {
-  id?: string
-  departure_time: Date | string
-  arrival_time: Date | string
-  days_of_week?: Prisma.schedulesCreatedays_of_weekInput | string[]
-  valid_from: Date | string
-  valid_until?: Date | string | null
-  status?: $Enums.ScheduleStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trips?: Prisma.tripsCreateNestedManyWithoutSchedulesInput
-  routes?: Prisma.routesCreateNestedOneWithoutSchedulesInput
+export type schedulesCreateNestedOneWithoutReturn_ticketsInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutReturn_ticketsInput, Prisma.schedulesUncheckedCreateWithoutReturn_ticketsInput>
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutReturn_ticketsInput
+  connect?: Prisma.schedulesWhereUniqueInput
 }
 
-export type schedulesUncheckedCreateWithoutFerriesInput = {
-  id?: string
-  departure_time: Date | string
-  arrival_time: Date | string
-  days_of_week?: Prisma.schedulesCreatedays_of_weekInput | string[]
-  valid_from: Date | string
-  valid_until?: Date | string | null
-  status?: $Enums.ScheduleStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  routes_id?: string | null
-  trips?: Prisma.tripsUncheckedCreateNestedManyWithoutSchedulesInput
+export type schedulesCreateNestedOneWithoutOutbound_ticketsInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutOutbound_ticketsInput, Prisma.schedulesUncheckedCreateWithoutOutbound_ticketsInput>
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutOutbound_ticketsInput
+  connect?: Prisma.schedulesWhereUniqueInput
 }
 
-export type schedulesCreateOrConnectWithoutFerriesInput = {
-  where: Prisma.schedulesWhereUniqueInput
-  create: Prisma.XOR<Prisma.schedulesCreateWithoutFerriesInput, Prisma.schedulesUncheckedCreateWithoutFerriesInput>
+export type schedulesUpdateOneWithoutReturn_ticketsNestedInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutReturn_ticketsInput, Prisma.schedulesUncheckedCreateWithoutReturn_ticketsInput>
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutReturn_ticketsInput
+  upsert?: Prisma.schedulesUpsertWithoutReturn_ticketsInput
+  disconnect?: Prisma.schedulesWhereInput | boolean
+  delete?: Prisma.schedulesWhereInput | boolean
+  connect?: Prisma.schedulesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.schedulesUpdateToOneWithWhereWithoutReturn_ticketsInput, Prisma.schedulesUpdateWithoutReturn_ticketsInput>, Prisma.schedulesUncheckedUpdateWithoutReturn_ticketsInput>
 }
 
-export type schedulesCreateManyFerriesInputEnvelope = {
-  data: Prisma.schedulesCreateManyFerriesInput | Prisma.schedulesCreateManyFerriesInput[]
-  skipDuplicates?: boolean
-}
-
-export type schedulesUpsertWithWhereUniqueWithoutFerriesInput = {
-  where: Prisma.schedulesWhereUniqueInput
-  update: Prisma.XOR<Prisma.schedulesUpdateWithoutFerriesInput, Prisma.schedulesUncheckedUpdateWithoutFerriesInput>
-  create: Prisma.XOR<Prisma.schedulesCreateWithoutFerriesInput, Prisma.schedulesUncheckedCreateWithoutFerriesInput>
-}
-
-export type schedulesUpdateWithWhereUniqueWithoutFerriesInput = {
-  where: Prisma.schedulesWhereUniqueInput
-  data: Prisma.XOR<Prisma.schedulesUpdateWithoutFerriesInput, Prisma.schedulesUncheckedUpdateWithoutFerriesInput>
-}
-
-export type schedulesUpdateManyWithWhereWithoutFerriesInput = {
-  where: Prisma.schedulesScalarWhereInput
-  data: Prisma.XOR<Prisma.schedulesUpdateManyMutationInput, Prisma.schedulesUncheckedUpdateManyWithoutFerriesInput>
-}
-
-export type schedulesScalarWhereInput = {
-  AND?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
-  OR?: Prisma.schedulesScalarWhereInput[]
-  NOT?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
-  id?: Prisma.StringFilter<"schedules"> | string
-  departure_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  arrival_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  days_of_week?: Prisma.StringNullableListFilter<"schedules">
-  valid_from?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  valid_until?: Prisma.DateTimeNullableFilter<"schedules"> | Date | string | null
-  status?: Prisma.EnumScheduleStatusFilter<"schedules"> | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"schedules"> | Date | string
-  routes_id?: Prisma.StringNullableFilter<"schedules"> | string | null
-  ferries_id?: Prisma.StringNullableFilter<"schedules"> | string | null
+export type schedulesUpdateOneWithoutOutbound_ticketsNestedInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutOutbound_ticketsInput, Prisma.schedulesUncheckedCreateWithoutOutbound_ticketsInput>
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutOutbound_ticketsInput
+  upsert?: Prisma.schedulesUpsertWithoutOutbound_ticketsInput
+  disconnect?: Prisma.schedulesWhereInput | boolean
+  delete?: Prisma.schedulesWhereInput | boolean
+  connect?: Prisma.schedulesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.schedulesUpdateToOneWithWhereWithoutOutbound_ticketsInput, Prisma.schedulesUpdateWithoutOutbound_ticketsInput>, Prisma.schedulesUncheckedUpdateWithoutOutbound_ticketsInput>
 }
 
 export type schedulesCreateWithoutRoutesInput = {
   id?: string
+  departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
-  days_of_week?: Prisma.schedulesCreatedays_of_weekInput | string[]
-  valid_from: Date | string
-  valid_until?: Date | string | null
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
   status?: $Enums.ScheduleStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trips?: Prisma.tripsCreateNestedManyWithoutSchedulesInput
+  created_at?: Date | string
+  updated_at?: Date | string
   ferries?: Prisma.ferriesCreateNestedOneWithoutSchedulesInput
+  seat_holds?: Prisma.seat_holdsCreateNestedManyWithoutSchedulesInput
+  return_tickets?: Prisma.ticketsCreateNestedManyWithoutReturn_schedulesInput
+  outbound_tickets?: Prisma.ticketsCreateNestedManyWithoutOutbound_schedulesInput
 }
 
 export type schedulesUncheckedCreateWithoutRoutesInput = {
   id?: string
+  ferries_id?: string | null
+  departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
-  days_of_week?: Prisma.schedulesCreatedays_of_weekInput | string[]
-  valid_from: Date | string
-  valid_until?: Date | string | null
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
   status?: $Enums.ScheduleStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  ferries_id?: string | null
-  trips?: Prisma.tripsUncheckedCreateNestedManyWithoutSchedulesInput
+  created_at?: Date | string
+  updated_at?: Date | string
+  seat_holds?: Prisma.seat_holdsUncheckedCreateNestedManyWithoutSchedulesInput
+  return_tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutReturn_schedulesInput
+  outbound_tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutOutbound_schedulesInput
 }
 
 export type schedulesCreateOrConnectWithoutRoutesInput = {
@@ -703,184 +769,481 @@ export type schedulesUpdateManyWithWhereWithoutRoutesInput = {
   data: Prisma.XOR<Prisma.schedulesUpdateManyMutationInput, Prisma.schedulesUncheckedUpdateManyWithoutRoutesInput>
 }
 
-export type schedulesCreateWithoutTripsInput = {
+export type schedulesScalarWhereInput = {
+  AND?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
+  OR?: Prisma.schedulesScalarWhereInput[]
+  NOT?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
+  id?: Prisma.StringFilter<"schedules"> | string
+  routes_id?: Prisma.StringNullableFilter<"schedules"> | string | null
+  ferries_id?: Prisma.StringNullableFilter<"schedules"> | string | null
+  departure_date?: Prisma.DateTimeFilter<"schedules"> | Date | string
+  departure_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
+  arrival_time?: Prisma.DateTimeFilter<"schedules"> | Date | string
+  total_capacity?: Prisma.IntFilter<"schedules"> | number
+  available_seats?: Prisma.IntFilter<"schedules"> | number
+  cancellation_reason?: Prisma.StringNullableFilter<"schedules"> | string | null
+  notes?: Prisma.StringNullableFilter<"schedules"> | string | null
+  status?: Prisma.EnumScheduleStatusFilter<"schedules"> | $Enums.ScheduleStatus
+  created_at?: Prisma.DateTimeFilter<"schedules"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"schedules"> | Date | string
+}
+
+export type schedulesCreateWithoutFerriesInput = {
   id?: string
+  departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
-  days_of_week?: Prisma.schedulesCreatedays_of_weekInput | string[]
-  valid_from: Date | string
-  valid_until?: Date | string | null
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
   status?: $Enums.ScheduleStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
+  routes?: Prisma.routesCreateNestedOneWithoutSchedulesInput
+  seat_holds?: Prisma.seat_holdsCreateNestedManyWithoutSchedulesInput
+  return_tickets?: Prisma.ticketsCreateNestedManyWithoutReturn_schedulesInput
+  outbound_tickets?: Prisma.ticketsCreateNestedManyWithoutOutbound_schedulesInput
+}
+
+export type schedulesUncheckedCreateWithoutFerriesInput = {
+  id?: string
+  routes_id?: string | null
+  departure_date: Date | string
+  departure_time: Date | string
+  arrival_time: Date | string
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
+  status?: $Enums.ScheduleStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  seat_holds?: Prisma.seat_holdsUncheckedCreateNestedManyWithoutSchedulesInput
+  return_tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutReturn_schedulesInput
+  outbound_tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutOutbound_schedulesInput
+}
+
+export type schedulesCreateOrConnectWithoutFerriesInput = {
+  where: Prisma.schedulesWhereUniqueInput
+  create: Prisma.XOR<Prisma.schedulesCreateWithoutFerriesInput, Prisma.schedulesUncheckedCreateWithoutFerriesInput>
+}
+
+export type schedulesCreateManyFerriesInputEnvelope = {
+  data: Prisma.schedulesCreateManyFerriesInput | Prisma.schedulesCreateManyFerriesInput[]
+  skipDuplicates?: boolean
+}
+
+export type schedulesUpsertWithWhereUniqueWithoutFerriesInput = {
+  where: Prisma.schedulesWhereUniqueInput
+  update: Prisma.XOR<Prisma.schedulesUpdateWithoutFerriesInput, Prisma.schedulesUncheckedUpdateWithoutFerriesInput>
+  create: Prisma.XOR<Prisma.schedulesCreateWithoutFerriesInput, Prisma.schedulesUncheckedCreateWithoutFerriesInput>
+}
+
+export type schedulesUpdateWithWhereUniqueWithoutFerriesInput = {
+  where: Prisma.schedulesWhereUniqueInput
+  data: Prisma.XOR<Prisma.schedulesUpdateWithoutFerriesInput, Prisma.schedulesUncheckedUpdateWithoutFerriesInput>
+}
+
+export type schedulesUpdateManyWithWhereWithoutFerriesInput = {
+  where: Prisma.schedulesScalarWhereInput
+  data: Prisma.XOR<Prisma.schedulesUpdateManyMutationInput, Prisma.schedulesUncheckedUpdateManyWithoutFerriesInput>
+}
+
+export type schedulesCreateWithoutSeat_holdsInput = {
+  id?: string
+  departure_date: Date | string
+  departure_time: Date | string
+  arrival_time: Date | string
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
+  status?: $Enums.ScheduleStatus
+  created_at?: Date | string
+  updated_at?: Date | string
   routes?: Prisma.routesCreateNestedOneWithoutSchedulesInput
   ferries?: Prisma.ferriesCreateNestedOneWithoutSchedulesInput
+  return_tickets?: Prisma.ticketsCreateNestedManyWithoutReturn_schedulesInput
+  outbound_tickets?: Prisma.ticketsCreateNestedManyWithoutOutbound_schedulesInput
 }
 
-export type schedulesUncheckedCreateWithoutTripsInput = {
+export type schedulesUncheckedCreateWithoutSeat_holdsInput = {
   id?: string
-  departure_time: Date | string
-  arrival_time: Date | string
-  days_of_week?: Prisma.schedulesCreatedays_of_weekInput | string[]
-  valid_from: Date | string
-  valid_until?: Date | string | null
-  status?: $Enums.ScheduleStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
   routes_id?: string | null
   ferries_id?: string | null
-}
-
-export type schedulesCreateOrConnectWithoutTripsInput = {
-  where: Prisma.schedulesWhereUniqueInput
-  create: Prisma.XOR<Prisma.schedulesCreateWithoutTripsInput, Prisma.schedulesUncheckedCreateWithoutTripsInput>
-}
-
-export type schedulesUpsertWithoutTripsInput = {
-  update: Prisma.XOR<Prisma.schedulesUpdateWithoutTripsInput, Prisma.schedulesUncheckedUpdateWithoutTripsInput>
-  create: Prisma.XOR<Prisma.schedulesCreateWithoutTripsInput, Prisma.schedulesUncheckedCreateWithoutTripsInput>
-  where?: Prisma.schedulesWhereInput
-}
-
-export type schedulesUpdateToOneWithWhereWithoutTripsInput = {
-  where?: Prisma.schedulesWhereInput
-  data: Prisma.XOR<Prisma.schedulesUpdateWithoutTripsInput, Prisma.schedulesUncheckedUpdateWithoutTripsInput>
-}
-
-export type schedulesUpdateWithoutTripsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  days_of_week?: Prisma.schedulesUpdatedays_of_weekInput | string[]
-  valid_from?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  valid_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  routes?: Prisma.routesUpdateOneWithoutSchedulesNestedInput
-  ferries?: Prisma.ferriesUpdateOneWithoutSchedulesNestedInput
-}
-
-export type schedulesUncheckedUpdateWithoutTripsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  days_of_week?: Prisma.schedulesUpdatedays_of_weekInput | string[]
-  valid_from?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  valid_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type schedulesCreateManyFerriesInput = {
-  id?: string
+  departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
-  days_of_week?: Prisma.schedulesCreatedays_of_weekInput | string[]
-  valid_from: Date | string
-  valid_until?: Date | string | null
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
   status?: $Enums.ScheduleStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  routes_id?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  return_tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutReturn_schedulesInput
+  outbound_tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutOutbound_schedulesInput
 }
 
-export type schedulesUpdateWithoutFerriesInput = {
+export type schedulesCreateOrConnectWithoutSeat_holdsInput = {
+  where: Prisma.schedulesWhereUniqueInput
+  create: Prisma.XOR<Prisma.schedulesCreateWithoutSeat_holdsInput, Prisma.schedulesUncheckedCreateWithoutSeat_holdsInput>
+}
+
+export type schedulesUpsertWithoutSeat_holdsInput = {
+  update: Prisma.XOR<Prisma.schedulesUpdateWithoutSeat_holdsInput, Prisma.schedulesUncheckedUpdateWithoutSeat_holdsInput>
+  create: Prisma.XOR<Prisma.schedulesCreateWithoutSeat_holdsInput, Prisma.schedulesUncheckedCreateWithoutSeat_holdsInput>
+  where?: Prisma.schedulesWhereInput
+}
+
+export type schedulesUpdateToOneWithWhereWithoutSeat_holdsInput = {
+  where?: Prisma.schedulesWhereInput
+  data: Prisma.XOR<Prisma.schedulesUpdateWithoutSeat_holdsInput, Prisma.schedulesUncheckedUpdateWithoutSeat_holdsInput>
+}
+
+export type schedulesUpdateWithoutSeat_holdsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  days_of_week?: Prisma.schedulesUpdatedays_of_weekInput | string[]
-  valid_from?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  valid_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trips?: Prisma.tripsUpdateManyWithoutSchedulesNestedInput
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   routes?: Prisma.routesUpdateOneWithoutSchedulesNestedInput
+  ferries?: Prisma.ferriesUpdateOneWithoutSchedulesNestedInput
+  return_tickets?: Prisma.ticketsUpdateManyWithoutReturn_schedulesNestedInput
+  outbound_tickets?: Prisma.ticketsUpdateManyWithoutOutbound_schedulesNestedInput
 }
 
-export type schedulesUncheckedUpdateWithoutFerriesInput = {
+export type schedulesUncheckedUpdateWithoutSeat_holdsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  days_of_week?: Prisma.schedulesUpdatedays_of_weekInput | string[]
-  valid_from?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  valid_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  trips?: Prisma.tripsUncheckedUpdateManyWithoutSchedulesNestedInput
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  return_tickets?: Prisma.ticketsUncheckedUpdateManyWithoutReturn_schedulesNestedInput
+  outbound_tickets?: Prisma.ticketsUncheckedUpdateManyWithoutOutbound_schedulesNestedInput
 }
 
-export type schedulesUncheckedUpdateManyWithoutFerriesInput = {
+export type schedulesCreateWithoutReturn_ticketsInput = {
+  id?: string
+  departure_date: Date | string
+  departure_time: Date | string
+  arrival_time: Date | string
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
+  status?: $Enums.ScheduleStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  routes?: Prisma.routesCreateNestedOneWithoutSchedulesInput
+  ferries?: Prisma.ferriesCreateNestedOneWithoutSchedulesInput
+  seat_holds?: Prisma.seat_holdsCreateNestedManyWithoutSchedulesInput
+  outbound_tickets?: Prisma.ticketsCreateNestedManyWithoutOutbound_schedulesInput
+}
+
+export type schedulesUncheckedCreateWithoutReturn_ticketsInput = {
+  id?: string
+  routes_id?: string | null
+  ferries_id?: string | null
+  departure_date: Date | string
+  departure_time: Date | string
+  arrival_time: Date | string
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
+  status?: $Enums.ScheduleStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  seat_holds?: Prisma.seat_holdsUncheckedCreateNestedManyWithoutSchedulesInput
+  outbound_tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutOutbound_schedulesInput
+}
+
+export type schedulesCreateOrConnectWithoutReturn_ticketsInput = {
+  where: Prisma.schedulesWhereUniqueInput
+  create: Prisma.XOR<Prisma.schedulesCreateWithoutReturn_ticketsInput, Prisma.schedulesUncheckedCreateWithoutReturn_ticketsInput>
+}
+
+export type schedulesCreateWithoutOutbound_ticketsInput = {
+  id?: string
+  departure_date: Date | string
+  departure_time: Date | string
+  arrival_time: Date | string
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
+  status?: $Enums.ScheduleStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  routes?: Prisma.routesCreateNestedOneWithoutSchedulesInput
+  ferries?: Prisma.ferriesCreateNestedOneWithoutSchedulesInput
+  seat_holds?: Prisma.seat_holdsCreateNestedManyWithoutSchedulesInput
+  return_tickets?: Prisma.ticketsCreateNestedManyWithoutReturn_schedulesInput
+}
+
+export type schedulesUncheckedCreateWithoutOutbound_ticketsInput = {
+  id?: string
+  routes_id?: string | null
+  ferries_id?: string | null
+  departure_date: Date | string
+  departure_time: Date | string
+  arrival_time: Date | string
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
+  status?: $Enums.ScheduleStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  seat_holds?: Prisma.seat_holdsUncheckedCreateNestedManyWithoutSchedulesInput
+  return_tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutReturn_schedulesInput
+}
+
+export type schedulesCreateOrConnectWithoutOutbound_ticketsInput = {
+  where: Prisma.schedulesWhereUniqueInput
+  create: Prisma.XOR<Prisma.schedulesCreateWithoutOutbound_ticketsInput, Prisma.schedulesUncheckedCreateWithoutOutbound_ticketsInput>
+}
+
+export type schedulesUpsertWithoutReturn_ticketsInput = {
+  update: Prisma.XOR<Prisma.schedulesUpdateWithoutReturn_ticketsInput, Prisma.schedulesUncheckedUpdateWithoutReturn_ticketsInput>
+  create: Prisma.XOR<Prisma.schedulesCreateWithoutReturn_ticketsInput, Prisma.schedulesUncheckedCreateWithoutReturn_ticketsInput>
+  where?: Prisma.schedulesWhereInput
+}
+
+export type schedulesUpdateToOneWithWhereWithoutReturn_ticketsInput = {
+  where?: Prisma.schedulesWhereInput
+  data: Prisma.XOR<Prisma.schedulesUpdateWithoutReturn_ticketsInput, Prisma.schedulesUncheckedUpdateWithoutReturn_ticketsInput>
+}
+
+export type schedulesUpdateWithoutReturn_ticketsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  days_of_week?: Prisma.schedulesUpdatedays_of_weekInput | string[]
-  valid_from?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  valid_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  routes?: Prisma.routesUpdateOneWithoutSchedulesNestedInput
+  ferries?: Prisma.ferriesUpdateOneWithoutSchedulesNestedInput
+  seat_holds?: Prisma.seat_holdsUpdateManyWithoutSchedulesNestedInput
+  outbound_tickets?: Prisma.ticketsUpdateManyWithoutOutbound_schedulesNestedInput
+}
+
+export type schedulesUncheckedUpdateWithoutReturn_ticketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  seat_holds?: Prisma.seat_holdsUncheckedUpdateManyWithoutSchedulesNestedInput
+  outbound_tickets?: Prisma.ticketsUncheckedUpdateManyWithoutOutbound_schedulesNestedInput
+}
+
+export type schedulesUpsertWithoutOutbound_ticketsInput = {
+  update: Prisma.XOR<Prisma.schedulesUpdateWithoutOutbound_ticketsInput, Prisma.schedulesUncheckedUpdateWithoutOutbound_ticketsInput>
+  create: Prisma.XOR<Prisma.schedulesCreateWithoutOutbound_ticketsInput, Prisma.schedulesUncheckedCreateWithoutOutbound_ticketsInput>
+  where?: Prisma.schedulesWhereInput
+}
+
+export type schedulesUpdateToOneWithWhereWithoutOutbound_ticketsInput = {
+  where?: Prisma.schedulesWhereInput
+  data: Prisma.XOR<Prisma.schedulesUpdateWithoutOutbound_ticketsInput, Prisma.schedulesUncheckedUpdateWithoutOutbound_ticketsInput>
+}
+
+export type schedulesUpdateWithoutOutbound_ticketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  routes?: Prisma.routesUpdateOneWithoutSchedulesNestedInput
+  ferries?: Prisma.ferriesUpdateOneWithoutSchedulesNestedInput
+  seat_holds?: Prisma.seat_holdsUpdateManyWithoutSchedulesNestedInput
+  return_tickets?: Prisma.ticketsUpdateManyWithoutReturn_schedulesNestedInput
+}
+
+export type schedulesUncheckedUpdateWithoutOutbound_ticketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  seat_holds?: Prisma.seat_holdsUncheckedUpdateManyWithoutSchedulesNestedInput
+  return_tickets?: Prisma.ticketsUncheckedUpdateManyWithoutReturn_schedulesNestedInput
 }
 
 export type schedulesCreateManyRoutesInput = {
   id?: string
+  ferries_id?: string | null
+  departure_date: Date | string
   departure_time: Date | string
   arrival_time: Date | string
-  days_of_week?: Prisma.schedulesCreatedays_of_weekInput | string[]
-  valid_from: Date | string
-  valid_until?: Date | string | null
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
   status?: $Enums.ScheduleStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  ferries_id?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type schedulesUpdateWithoutRoutesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  days_of_week?: Prisma.schedulesUpdatedays_of_weekInput | string[]
-  valid_from?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  valid_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trips?: Prisma.tripsUpdateManyWithoutSchedulesNestedInput
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ferries?: Prisma.ferriesUpdateOneWithoutSchedulesNestedInput
+  seat_holds?: Prisma.seat_holdsUpdateManyWithoutSchedulesNestedInput
+  return_tickets?: Prisma.ticketsUpdateManyWithoutReturn_schedulesNestedInput
+  outbound_tickets?: Prisma.ticketsUpdateManyWithoutOutbound_schedulesNestedInput
 }
 
 export type schedulesUncheckedUpdateWithoutRoutesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  days_of_week?: Prisma.schedulesUpdatedays_of_weekInput | string[]
-  valid_from?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  valid_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  trips?: Prisma.tripsUncheckedUpdateManyWithoutSchedulesNestedInput
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  seat_holds?: Prisma.seat_holdsUncheckedUpdateManyWithoutSchedulesNestedInput
+  return_tickets?: Prisma.ticketsUncheckedUpdateManyWithoutReturn_schedulesNestedInput
+  outbound_tickets?: Prisma.ticketsUncheckedUpdateManyWithoutOutbound_schedulesNestedInput
 }
 
 export type schedulesUncheckedUpdateManyWithoutRoutesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  days_of_week?: Prisma.schedulesUpdatedays_of_weekInput | string[]
-  valid_from?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  valid_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ferries_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type schedulesCreateManyFerriesInput = {
+  id?: string
+  routes_id?: string | null
+  departure_date: Date | string
+  departure_time: Date | string
+  arrival_time: Date | string
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
+  status?: $Enums.ScheduleStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type schedulesUpdateWithoutFerriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  routes?: Prisma.routesUpdateOneWithoutSchedulesNestedInput
+  seat_holds?: Prisma.seat_holdsUpdateManyWithoutSchedulesNestedInput
+  return_tickets?: Prisma.ticketsUpdateManyWithoutReturn_schedulesNestedInput
+  outbound_tickets?: Prisma.ticketsUpdateManyWithoutOutbound_schedulesNestedInput
+}
+
+export type schedulesUncheckedUpdateWithoutFerriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  seat_holds?: Prisma.seat_holdsUncheckedUpdateManyWithoutSchedulesNestedInput
+  return_tickets?: Prisma.ticketsUncheckedUpdateManyWithoutReturn_schedulesNestedInput
+  outbound_tickets?: Prisma.ticketsUncheckedUpdateManyWithoutOutbound_schedulesNestedInput
+}
+
+export type schedulesUncheckedUpdateManyWithoutFerriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  routes_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -889,11 +1252,15 @@ export type schedulesUncheckedUpdateManyWithoutRoutesInput = {
  */
 
 export type SchedulesCountOutputType = {
-  trips: number
+  seat_holds: number
+  return_tickets: number
+  outbound_tickets: number
 }
 
 export type SchedulesCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trips?: boolean | SchedulesCountOutputTypeCountTripsArgs
+  seat_holds?: boolean | SchedulesCountOutputTypeCountSeat_holdsArgs
+  return_tickets?: boolean | SchedulesCountOutputTypeCountReturn_ticketsArgs
+  outbound_tickets?: boolean | SchedulesCountOutputTypeCountOutbound_ticketsArgs
 }
 
 /**
@@ -909,80 +1276,106 @@ export type SchedulesCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ex
 /**
  * SchedulesCountOutputType without action
  */
-export type SchedulesCountOutputTypeCountTripsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.tripsWhereInput
+export type SchedulesCountOutputTypeCountSeat_holdsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.seat_holdsWhereInput
+}
+
+/**
+ * SchedulesCountOutputType without action
+ */
+export type SchedulesCountOutputTypeCountReturn_ticketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ticketsWhereInput
+}
+
+/**
+ * SchedulesCountOutputType without action
+ */
+export type SchedulesCountOutputTypeCountOutbound_ticketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ticketsWhereInput
 }
 
 
 export type schedulesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  departure_time?: boolean
-  arrival_time?: boolean
-  days_of_week?: boolean
-  valid_from?: boolean
-  valid_until?: boolean
-  status?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
   routes_id?: boolean
   ferries_id?: boolean
-  trips?: boolean | Prisma.schedules$tripsArgs<ExtArgs>
+  departure_date?: boolean
+  departure_time?: boolean
+  arrival_time?: boolean
+  total_capacity?: boolean
+  available_seats?: boolean
+  cancellation_reason?: boolean
+  notes?: boolean
+  status?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   routes?: boolean | Prisma.schedules$routesArgs<ExtArgs>
   ferries?: boolean | Prisma.schedules$ferriesArgs<ExtArgs>
+  seat_holds?: boolean | Prisma.schedules$seat_holdsArgs<ExtArgs>
+  return_tickets?: boolean | Prisma.schedules$return_ticketsArgs<ExtArgs>
+  outbound_tickets?: boolean | Prisma.schedules$outbound_ticketsArgs<ExtArgs>
   _count?: boolean | Prisma.SchedulesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["schedules"]>
 
 export type schedulesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  departure_time?: boolean
-  arrival_time?: boolean
-  days_of_week?: boolean
-  valid_from?: boolean
-  valid_until?: boolean
-  status?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
   routes_id?: boolean
   ferries_id?: boolean
+  departure_date?: boolean
+  departure_time?: boolean
+  arrival_time?: boolean
+  total_capacity?: boolean
+  available_seats?: boolean
+  cancellation_reason?: boolean
+  notes?: boolean
+  status?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   routes?: boolean | Prisma.schedules$routesArgs<ExtArgs>
   ferries?: boolean | Prisma.schedules$ferriesArgs<ExtArgs>
 }, ExtArgs["result"]["schedules"]>
 
 export type schedulesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  departure_time?: boolean
-  arrival_time?: boolean
-  days_of_week?: boolean
-  valid_from?: boolean
-  valid_until?: boolean
-  status?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
   routes_id?: boolean
   ferries_id?: boolean
+  departure_date?: boolean
+  departure_time?: boolean
+  arrival_time?: boolean
+  total_capacity?: boolean
+  available_seats?: boolean
+  cancellation_reason?: boolean
+  notes?: boolean
+  status?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   routes?: boolean | Prisma.schedules$routesArgs<ExtArgs>
   ferries?: boolean | Prisma.schedules$ferriesArgs<ExtArgs>
 }, ExtArgs["result"]["schedules"]>
 
 export type schedulesSelectScalar = {
   id?: boolean
-  departure_time?: boolean
-  arrival_time?: boolean
-  days_of_week?: boolean
-  valid_from?: boolean
-  valid_until?: boolean
-  status?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
   routes_id?: boolean
   ferries_id?: boolean
+  departure_date?: boolean
+  departure_time?: boolean
+  arrival_time?: boolean
+  total_capacity?: boolean
+  available_seats?: boolean
+  cancellation_reason?: boolean
+  notes?: boolean
+  status?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type schedulesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "departure_time" | "arrival_time" | "days_of_week" | "valid_from" | "valid_until" | "status" | "createdAt" | "updatedAt" | "routes_id" | "ferries_id", ExtArgs["result"]["schedules"]>
+export type schedulesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "routes_id" | "ferries_id" | "departure_date" | "departure_time" | "arrival_time" | "total_capacity" | "available_seats" | "cancellation_reason" | "notes" | "status" | "created_at" | "updated_at", ExtArgs["result"]["schedules"]>
 export type schedulesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trips?: boolean | Prisma.schedules$tripsArgs<ExtArgs>
   routes?: boolean | Prisma.schedules$routesArgs<ExtArgs>
   ferries?: boolean | Prisma.schedules$ferriesArgs<ExtArgs>
+  seat_holds?: boolean | Prisma.schedules$seat_holdsArgs<ExtArgs>
+  return_tickets?: boolean | Prisma.schedules$return_ticketsArgs<ExtArgs>
+  outbound_tickets?: boolean | Prisma.schedules$outbound_ticketsArgs<ExtArgs>
   _count?: boolean | Prisma.SchedulesCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type schedulesIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -997,22 +1390,26 @@ export type schedulesIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 export type $schedulesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "schedules"
   objects: {
-    trips: Prisma.$tripsPayload<ExtArgs>[]
     routes: Prisma.$routesPayload<ExtArgs> | null
     ferries: Prisma.$ferriesPayload<ExtArgs> | null
+    seat_holds: Prisma.$seat_holdsPayload<ExtArgs>[]
+    return_tickets: Prisma.$ticketsPayload<ExtArgs>[]
+    outbound_tickets: Prisma.$ticketsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    departure_time: Date
-    arrival_time: Date
-    days_of_week: string[]
-    valid_from: Date
-    valid_until: Date | null
-    status: $Enums.ScheduleStatus
-    createdAt: Date
-    updatedAt: Date
     routes_id: string | null
     ferries_id: string | null
+    departure_date: Date
+    departure_time: Date
+    arrival_time: Date
+    total_capacity: number
+    available_seats: number
+    cancellation_reason: string | null
+    notes: string | null
+    status: $Enums.ScheduleStatus
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["schedules"]>
   composites: {}
 }
@@ -1407,9 +1804,11 @@ readonly fields: schedulesFieldRefs;
  */
 export interface Prisma__schedulesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  trips<T extends Prisma.schedules$tripsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.schedules$tripsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tripsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   routes<T extends Prisma.schedules$routesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.schedules$routesArgs<ExtArgs>>): Prisma.Prisma__routesClient<runtime.Types.Result.GetResult<Prisma.$routesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   ferries<T extends Prisma.schedules$ferriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.schedules$ferriesArgs<ExtArgs>>): Prisma.Prisma__ferriesClient<runtime.Types.Result.GetResult<Prisma.$ferriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  seat_holds<T extends Prisma.schedules$seat_holdsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.schedules$seat_holdsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$seat_holdsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  return_tickets<T extends Prisma.schedules$return_ticketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.schedules$return_ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ticketsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  outbound_tickets<T extends Prisma.schedules$outbound_ticketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.schedules$outbound_ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ticketsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1440,16 +1839,18 @@ export interface Prisma__schedulesClient<T, Null = never, ExtArgs extends runtim
  */
 export interface schedulesFieldRefs {
   readonly id: Prisma.FieldRef<"schedules", 'String'>
-  readonly departure_time: Prisma.FieldRef<"schedules", 'DateTime'>
-  readonly arrival_time: Prisma.FieldRef<"schedules", 'DateTime'>
-  readonly days_of_week: Prisma.FieldRef<"schedules", 'String[]'>
-  readonly valid_from: Prisma.FieldRef<"schedules", 'DateTime'>
-  readonly valid_until: Prisma.FieldRef<"schedules", 'DateTime'>
-  readonly status: Prisma.FieldRef<"schedules", 'ScheduleStatus'>
-  readonly createdAt: Prisma.FieldRef<"schedules", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"schedules", 'DateTime'>
   readonly routes_id: Prisma.FieldRef<"schedules", 'String'>
   readonly ferries_id: Prisma.FieldRef<"schedules", 'String'>
+  readonly departure_date: Prisma.FieldRef<"schedules", 'DateTime'>
+  readonly departure_time: Prisma.FieldRef<"schedules", 'DateTime'>
+  readonly arrival_time: Prisma.FieldRef<"schedules", 'DateTime'>
+  readonly total_capacity: Prisma.FieldRef<"schedules", 'Int'>
+  readonly available_seats: Prisma.FieldRef<"schedules", 'Int'>
+  readonly cancellation_reason: Prisma.FieldRef<"schedules", 'String'>
+  readonly notes: Prisma.FieldRef<"schedules", 'String'>
+  readonly status: Prisma.FieldRef<"schedules", 'ScheduleStatus'>
+  readonly created_at: Prisma.FieldRef<"schedules", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"schedules", 'DateTime'>
 }
     
 
@@ -1846,30 +2247,6 @@ export type schedulesDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * schedules.trips
- */
-export type schedules$tripsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the trips
-   */
-  select?: Prisma.tripsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the trips
-   */
-  omit?: Prisma.tripsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.tripsInclude<ExtArgs> | null
-  where?: Prisma.tripsWhereInput
-  orderBy?: Prisma.tripsOrderByWithRelationInput | Prisma.tripsOrderByWithRelationInput[]
-  cursor?: Prisma.tripsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TripsScalarFieldEnum | Prisma.TripsScalarFieldEnum[]
-}
-
-/**
  * schedules.routes
  */
 export type schedules$routesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1905,6 +2282,78 @@ export type schedules$ferriesArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   include?: Prisma.ferriesInclude<ExtArgs> | null
   where?: Prisma.ferriesWhereInput
+}
+
+/**
+ * schedules.seat_holds
+ */
+export type schedules$seat_holdsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the seat_holds
+   */
+  select?: Prisma.seat_holdsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the seat_holds
+   */
+  omit?: Prisma.seat_holdsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.seat_holdsInclude<ExtArgs> | null
+  where?: Prisma.seat_holdsWhereInput
+  orderBy?: Prisma.seat_holdsOrderByWithRelationInput | Prisma.seat_holdsOrderByWithRelationInput[]
+  cursor?: Prisma.seat_holdsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Seat_holdsScalarFieldEnum | Prisma.Seat_holdsScalarFieldEnum[]
+}
+
+/**
+ * schedules.return_tickets
+ */
+export type schedules$return_ticketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tickets
+   */
+  select?: Prisma.ticketsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tickets
+   */
+  omit?: Prisma.ticketsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ticketsInclude<ExtArgs> | null
+  where?: Prisma.ticketsWhereInput
+  orderBy?: Prisma.ticketsOrderByWithRelationInput | Prisma.ticketsOrderByWithRelationInput[]
+  cursor?: Prisma.ticketsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketsScalarFieldEnum | Prisma.TicketsScalarFieldEnum[]
+}
+
+/**
+ * schedules.outbound_tickets
+ */
+export type schedules$outbound_ticketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tickets
+   */
+  select?: Prisma.ticketsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tickets
+   */
+  omit?: Prisma.ticketsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ticketsInclude<ExtArgs> | null
+  where?: Prisma.ticketsWhereInput
+  orderBy?: Prisma.ticketsOrderByWithRelationInput | Prisma.ticketsOrderByWithRelationInput[]
+  cursor?: Prisma.ticketsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketsScalarFieldEnum | Prisma.TicketsScalarFieldEnum[]
 }
 
 /**
