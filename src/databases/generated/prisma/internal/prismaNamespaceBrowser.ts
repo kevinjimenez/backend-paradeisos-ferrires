@@ -138,6 +138,7 @@ export const FerriesScalarFieldEnum = {
   operator_email: 'operator_email',
   year_built: 'year_built',
   amenities: 'amenities',
+  type: 'type',
   status: 'status',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -150,14 +151,14 @@ export const SchedulesScalarFieldEnum = {
   id: 'id',
   route_id: 'route_id',
   ferry_id: 'ferry_id',
-  departure_date: 'departure_date',
-  departure_time: 'departure_time',
-  arrival_time: 'arrival_time',
   total_capacity: 'total_capacity',
   available_seats: 'available_seats',
   cancellation_reason: 'cancellation_reason',
   notes: 'notes',
   status: 'status',
+  departure_date: 'departure_date',
+  departure_time: 'departure_time',
+  arrival_time: 'arrival_time',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -192,9 +193,9 @@ export const PassengersScalarFieldEnum = {
   is_primary: 'is_primary',
   checked_in_outbound: 'checked_in_outbound',
   checked_in_return: 'checked_in_return',
+  document_type: 'document_type',
   checked_in_outbound_at: 'checked_in_outbound_at',
   checked_in_return_at: 'checked_in_return_at',
-  document_type: 'document_type',
   created_at: 'created_at'
 } as const
 
@@ -212,8 +213,6 @@ export const PaymentsScalarFieldEnum = {
   error_code: 'error_code',
   error_message: 'error_message',
   attempts: 'attempts',
-  paid_at: 'paid_at',
-  refunded_at: 'refunded_at',
   refund_amount: 'refund_amount',
   refund_text: 'refund_text',
   metadata: 'metadata',
@@ -221,6 +220,8 @@ export const PaymentsScalarFieldEnum = {
   user_agent: 'user_agent',
   payment_method: 'payment_method',
   status: 'status',
+  paid_at: 'paid_at',
+  refunded_at: 'refunded_at',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -246,11 +247,12 @@ export type Seat_holdsScalarFieldEnum = (typeof Seat_holdsScalarFieldEnum)[keyof
 
 export const TicketsScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
   return_schedule_id: 'return_schedule_id',
+  user_id: 'user_id',
   outbound_schedule_id: 'outbound_schedule_id',
+  return_hold_id: 'return_hold_id',
+  outbound_hold_id: 'outbound_hold_id',
   ticket_code: 'ticket_code',
-  trip_type: 'trip_type',
   total_passengers: 'total_passengers',
   subtotal: 'subtotal',
   taxes: 'taxes',
@@ -260,14 +262,13 @@ export const TicketsScalarFieldEnum = {
   currency: 'currency',
   qr_code: 'qr_code',
   cancellation_reason: 'cancellation_reason',
+  trip_type: 'trip_type',
   status: 'status',
   booking_expires_at: 'booking_expires_at',
   confirmed_at: 'confirmed_at',
   cancelled_at: 'cancelled_at',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  outbound_hold_id: 'outbound_hold_id',
-  return_hold_id: 'return_hold_id'
+  updated_at: 'updated_at'
 } as const
 
 export type TicketsScalarFieldEnum = (typeof TicketsScalarFieldEnum)[keyof typeof TicketsScalarFieldEnum]

@@ -6,10 +6,12 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CreateScheduleDto } from './dto/create-schedule.dto';
 import { UpdateScheduleDto } from './dto/update-schedule.dto';
 import { SchedulesService } from './schedules.service';
+import { SchedulesFilterDto } from './dto/schedules-filter.dto';
 
 @Controller('schedules')
 export class SchedulesController {
@@ -21,8 +23,9 @@ export class SchedulesController {
   }
 
   @Get()
-  findAll() {
-    return this.schedulesService.findAll();
+  findAll(@Query() filters: SchedulesFilterDto) {
+    console.log({ filters });
+    return this.schedulesService.findAll(filters);
   }
 
   @Get(':id')

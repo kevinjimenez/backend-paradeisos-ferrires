@@ -46,9 +46,9 @@ export type PassengersMinAggregateOutputType = {
   is_primary: boolean | null
   checked_in_outbound: boolean | null
   checked_in_return: boolean | null
+  document_type: $Enums.DocumentType | null
   checked_in_outbound_at: Date | null
   checked_in_return_at: Date | null
-  document_type: $Enums.DocumentType | null
   created_at: Date | null
 }
 
@@ -64,9 +64,9 @@ export type PassengersMaxAggregateOutputType = {
   is_primary: boolean | null
   checked_in_outbound: boolean | null
   checked_in_return: boolean | null
+  document_type: $Enums.DocumentType | null
   checked_in_outbound_at: Date | null
   checked_in_return_at: Date | null
-  document_type: $Enums.DocumentType | null
   created_at: Date | null
 }
 
@@ -82,9 +82,9 @@ export type PassengersCountAggregateOutputType = {
   is_primary: number
   checked_in_outbound: number
   checked_in_return: number
+  document_type: number
   checked_in_outbound_at: number
   checked_in_return_at: number
-  document_type: number
   created_at: number
   _all: number
 }
@@ -110,9 +110,9 @@ export type PassengersMinAggregateInputType = {
   is_primary?: true
   checked_in_outbound?: true
   checked_in_return?: true
+  document_type?: true
   checked_in_outbound_at?: true
   checked_in_return_at?: true
-  document_type?: true
   created_at?: true
 }
 
@@ -128,9 +128,9 @@ export type PassengersMaxAggregateInputType = {
   is_primary?: true
   checked_in_outbound?: true
   checked_in_return?: true
+  document_type?: true
   checked_in_outbound_at?: true
   checked_in_return_at?: true
-  document_type?: true
   created_at?: true
 }
 
@@ -146,9 +146,9 @@ export type PassengersCountAggregateInputType = {
   is_primary?: true
   checked_in_outbound?: true
   checked_in_return?: true
+  document_type?: true
   checked_in_outbound_at?: true
   checked_in_return_at?: true
-  document_type?: true
   created_at?: true
   _all?: true
 }
@@ -251,9 +251,9 @@ export type PassengersGroupByOutputType = {
   is_primary: boolean
   checked_in_outbound: boolean
   checked_in_return: boolean
+  document_type: $Enums.DocumentType
   checked_in_outbound_at: Date | null
   checked_in_return_at: Date | null
-  document_type: $Enums.DocumentType
   created_at: Date
   _count: PassengersCountAggregateOutputType | null
   _avg: PassengersAvgAggregateOutputType | null
@@ -292,9 +292,9 @@ export type passengersWhereInput = {
   is_primary?: Prisma.BoolFilter<"passengers"> | boolean
   checked_in_outbound?: Prisma.BoolFilter<"passengers"> | boolean
   checked_in_return?: Prisma.BoolFilter<"passengers"> | boolean
+  document_type?: Prisma.EnumDocumentTypeFilter<"passengers"> | $Enums.DocumentType
   checked_in_outbound_at?: Prisma.DateTimeNullableFilter<"passengers"> | Date | string | null
   checked_in_return_at?: Prisma.DateTimeNullableFilter<"passengers"> | Date | string | null
-  document_type?: Prisma.EnumDocumentTypeFilter<"passengers"> | $Enums.DocumentType
   created_at?: Prisma.DateTimeFilter<"passengers"> | Date | string
   tickets?: Prisma.XOR<Prisma.TicketsNullableScalarRelationFilter, Prisma.ticketsWhereInput> | null
 }
@@ -311,9 +311,9 @@ export type passengersOrderByWithRelationInput = {
   is_primary?: Prisma.SortOrder
   checked_in_outbound?: Prisma.SortOrder
   checked_in_return?: Prisma.SortOrder
+  document_type?: Prisma.SortOrder
   checked_in_outbound_at?: Prisma.SortOrderInput | Prisma.SortOrder
   checked_in_return_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  document_type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   tickets?: Prisma.ticketsOrderByWithRelationInput
 }
@@ -333,9 +333,9 @@ export type passengersWhereUniqueInput = Prisma.AtLeast<{
   is_primary?: Prisma.BoolFilter<"passengers"> | boolean
   checked_in_outbound?: Prisma.BoolFilter<"passengers"> | boolean
   checked_in_return?: Prisma.BoolFilter<"passengers"> | boolean
+  document_type?: Prisma.EnumDocumentTypeFilter<"passengers"> | $Enums.DocumentType
   checked_in_outbound_at?: Prisma.DateTimeNullableFilter<"passengers"> | Date | string | null
   checked_in_return_at?: Prisma.DateTimeNullableFilter<"passengers"> | Date | string | null
-  document_type?: Prisma.EnumDocumentTypeFilter<"passengers"> | $Enums.DocumentType
   created_at?: Prisma.DateTimeFilter<"passengers"> | Date | string
   tickets?: Prisma.XOR<Prisma.TicketsNullableScalarRelationFilter, Prisma.ticketsWhereInput> | null
 }, "id">
@@ -352,9 +352,9 @@ export type passengersOrderByWithAggregationInput = {
   is_primary?: Prisma.SortOrder
   checked_in_outbound?: Prisma.SortOrder
   checked_in_return?: Prisma.SortOrder
+  document_type?: Prisma.SortOrder
   checked_in_outbound_at?: Prisma.SortOrderInput | Prisma.SortOrder
   checked_in_return_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  document_type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   _count?: Prisma.passengersCountOrderByAggregateInput
   _avg?: Prisma.passengersAvgOrderByAggregateInput
@@ -378,9 +378,9 @@ export type passengersScalarWhereWithAggregatesInput = {
   is_primary?: Prisma.BoolWithAggregatesFilter<"passengers"> | boolean
   checked_in_outbound?: Prisma.BoolWithAggregatesFilter<"passengers"> | boolean
   checked_in_return?: Prisma.BoolWithAggregatesFilter<"passengers"> | boolean
+  document_type?: Prisma.EnumDocumentTypeWithAggregatesFilter<"passengers"> | $Enums.DocumentType
   checked_in_outbound_at?: Prisma.DateTimeNullableWithAggregatesFilter<"passengers"> | Date | string | null
   checked_in_return_at?: Prisma.DateTimeNullableWithAggregatesFilter<"passengers"> | Date | string | null
-  document_type?: Prisma.EnumDocumentTypeWithAggregatesFilter<"passengers"> | $Enums.DocumentType
   created_at?: Prisma.DateTimeWithAggregatesFilter<"passengers"> | Date | string
 }
 
@@ -395,9 +395,9 @@ export type passengersCreateInput = {
   is_primary?: boolean
   checked_in_outbound?: boolean
   checked_in_return?: boolean
+  document_type: $Enums.DocumentType
   checked_in_outbound_at?: Date | string | null
   checked_in_return_at?: Date | string | null
-  document_type: $Enums.DocumentType
   created_at?: Date | string
   tickets?: Prisma.ticketsCreateNestedOneWithoutPassengersInput
 }
@@ -414,9 +414,9 @@ export type passengersUncheckedCreateInput = {
   is_primary?: boolean
   checked_in_outbound?: boolean
   checked_in_return?: boolean
+  document_type: $Enums.DocumentType
   checked_in_outbound_at?: Date | string | null
   checked_in_return_at?: Date | string | null
-  document_type: $Enums.DocumentType
   created_at?: Date | string
 }
 
@@ -431,9 +431,9 @@ export type passengersUpdateInput = {
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_return?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   checked_in_outbound_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   checked_in_return_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.ticketsUpdateOneWithoutPassengersNestedInput
 }
@@ -450,9 +450,9 @@ export type passengersUncheckedUpdateInput = {
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_return?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   checked_in_outbound_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   checked_in_return_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -468,9 +468,9 @@ export type passengersCreateManyInput = {
   is_primary?: boolean
   checked_in_outbound?: boolean
   checked_in_return?: boolean
+  document_type: $Enums.DocumentType
   checked_in_outbound_at?: Date | string | null
   checked_in_return_at?: Date | string | null
-  document_type: $Enums.DocumentType
   created_at?: Date | string
 }
 
@@ -485,9 +485,9 @@ export type passengersUpdateManyMutationInput = {
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_return?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   checked_in_outbound_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   checked_in_return_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -503,9 +503,9 @@ export type passengersUncheckedUpdateManyInput = {
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_return?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   checked_in_outbound_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   checked_in_return_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -521,9 +521,9 @@ export type passengersCountOrderByAggregateInput = {
   is_primary?: Prisma.SortOrder
   checked_in_outbound?: Prisma.SortOrder
   checked_in_return?: Prisma.SortOrder
+  document_type?: Prisma.SortOrder
   checked_in_outbound_at?: Prisma.SortOrder
   checked_in_return_at?: Prisma.SortOrder
-  document_type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
@@ -543,9 +543,9 @@ export type passengersMaxOrderByAggregateInput = {
   is_primary?: Prisma.SortOrder
   checked_in_outbound?: Prisma.SortOrder
   checked_in_return?: Prisma.SortOrder
+  document_type?: Prisma.SortOrder
   checked_in_outbound_at?: Prisma.SortOrder
   checked_in_return_at?: Prisma.SortOrder
-  document_type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
@@ -561,9 +561,9 @@ export type passengersMinOrderByAggregateInput = {
   is_primary?: Prisma.SortOrder
   checked_in_outbound?: Prisma.SortOrder
   checked_in_return?: Prisma.SortOrder
+  document_type?: Prisma.SortOrder
   checked_in_outbound_at?: Prisma.SortOrder
   checked_in_return_at?: Prisma.SortOrder
-  document_type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
@@ -638,9 +638,9 @@ export type passengersCreateWithoutTicketsInput = {
   is_primary?: boolean
   checked_in_outbound?: boolean
   checked_in_return?: boolean
+  document_type: $Enums.DocumentType
   checked_in_outbound_at?: Date | string | null
   checked_in_return_at?: Date | string | null
-  document_type: $Enums.DocumentType
   created_at?: Date | string
 }
 
@@ -655,9 +655,9 @@ export type passengersUncheckedCreateWithoutTicketsInput = {
   is_primary?: boolean
   checked_in_outbound?: boolean
   checked_in_return?: boolean
+  document_type: $Enums.DocumentType
   checked_in_outbound_at?: Date | string | null
   checked_in_return_at?: Date | string | null
-  document_type: $Enums.DocumentType
   created_at?: Date | string
 }
 
@@ -702,9 +702,9 @@ export type passengersScalarWhereInput = {
   is_primary?: Prisma.BoolFilter<"passengers"> | boolean
   checked_in_outbound?: Prisma.BoolFilter<"passengers"> | boolean
   checked_in_return?: Prisma.BoolFilter<"passengers"> | boolean
+  document_type?: Prisma.EnumDocumentTypeFilter<"passengers"> | $Enums.DocumentType
   checked_in_outbound_at?: Prisma.DateTimeNullableFilter<"passengers"> | Date | string | null
   checked_in_return_at?: Prisma.DateTimeNullableFilter<"passengers"> | Date | string | null
-  document_type?: Prisma.EnumDocumentTypeFilter<"passengers"> | $Enums.DocumentType
   created_at?: Prisma.DateTimeFilter<"passengers"> | Date | string
 }
 
@@ -719,9 +719,9 @@ export type passengersCreateManyTicketsInput = {
   is_primary?: boolean
   checked_in_outbound?: boolean
   checked_in_return?: boolean
+  document_type: $Enums.DocumentType
   checked_in_outbound_at?: Date | string | null
   checked_in_return_at?: Date | string | null
-  document_type: $Enums.DocumentType
   created_at?: Date | string
 }
 
@@ -736,9 +736,9 @@ export type passengersUpdateWithoutTicketsInput = {
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_return?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   checked_in_outbound_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   checked_in_return_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -753,9 +753,9 @@ export type passengersUncheckedUpdateWithoutTicketsInput = {
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_return?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   checked_in_outbound_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   checked_in_return_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -770,9 +770,9 @@ export type passengersUncheckedUpdateManyWithoutTicketsInput = {
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_return?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   checked_in_outbound_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   checked_in_return_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -790,9 +790,9 @@ export type passengersSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   is_primary?: boolean
   checked_in_outbound?: boolean
   checked_in_return?: boolean
+  document_type?: boolean
   checked_in_outbound_at?: boolean
   checked_in_return_at?: boolean
-  document_type?: boolean
   created_at?: boolean
   tickets?: boolean | Prisma.passengers$ticketsArgs<ExtArgs>
 }, ExtArgs["result"]["passengers"]>
@@ -809,9 +809,9 @@ export type passengersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   is_primary?: boolean
   checked_in_outbound?: boolean
   checked_in_return?: boolean
+  document_type?: boolean
   checked_in_outbound_at?: boolean
   checked_in_return_at?: boolean
-  document_type?: boolean
   created_at?: boolean
   tickets?: boolean | Prisma.passengers$ticketsArgs<ExtArgs>
 }, ExtArgs["result"]["passengers"]>
@@ -828,9 +828,9 @@ export type passengersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   is_primary?: boolean
   checked_in_outbound?: boolean
   checked_in_return?: boolean
+  document_type?: boolean
   checked_in_outbound_at?: boolean
   checked_in_return_at?: boolean
-  document_type?: boolean
   created_at?: boolean
   tickets?: boolean | Prisma.passengers$ticketsArgs<ExtArgs>
 }, ExtArgs["result"]["passengers"]>
@@ -847,13 +847,13 @@ export type passengersSelectScalar = {
   is_primary?: boolean
   checked_in_outbound?: boolean
   checked_in_return?: boolean
+  document_type?: boolean
   checked_in_outbound_at?: boolean
   checked_in_return_at?: boolean
-  document_type?: boolean
   created_at?: boolean
 }
 
-export type passengersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ticket_id" | "first_name" | "last_name" | "email" | "phone" | "document_number" | "unit_price" | "is_primary" | "checked_in_outbound" | "checked_in_return" | "checked_in_outbound_at" | "checked_in_return_at" | "document_type" | "created_at", ExtArgs["result"]["passengers"]>
+export type passengersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ticket_id" | "first_name" | "last_name" | "email" | "phone" | "document_number" | "unit_price" | "is_primary" | "checked_in_outbound" | "checked_in_return" | "document_type" | "checked_in_outbound_at" | "checked_in_return_at" | "created_at", ExtArgs["result"]["passengers"]>
 export type passengersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tickets?: boolean | Prisma.passengers$ticketsArgs<ExtArgs>
 }
@@ -881,9 +881,9 @@ export type $passengersPayload<ExtArgs extends runtime.Types.Extensions.Internal
     is_primary: boolean
     checked_in_outbound: boolean
     checked_in_return: boolean
+    document_type: $Enums.DocumentType
     checked_in_outbound_at: Date | null
     checked_in_return_at: Date | null
-    document_type: $Enums.DocumentType
     created_at: Date
   }, ExtArgs["result"]["passengers"]>
   composites: {}
@@ -1320,9 +1320,9 @@ export interface passengersFieldRefs {
   readonly is_primary: Prisma.FieldRef<"passengers", 'Boolean'>
   readonly checked_in_outbound: Prisma.FieldRef<"passengers", 'Boolean'>
   readonly checked_in_return: Prisma.FieldRef<"passengers", 'Boolean'>
+  readonly document_type: Prisma.FieldRef<"passengers", 'DocumentType'>
   readonly checked_in_outbound_at: Prisma.FieldRef<"passengers", 'DateTime'>
   readonly checked_in_return_at: Prisma.FieldRef<"passengers", 'DateTime'>
-  readonly document_type: Prisma.FieldRef<"passengers", 'DocumentType'>
   readonly created_at: Prisma.FieldRef<"passengers", 'DateTime'>
 }
     

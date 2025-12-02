@@ -46,11 +46,12 @@ export type TicketsSumAggregateOutputType = {
 
 export type TicketsMinAggregateOutputType = {
   id: string | null
-  user_id: string | null
   return_schedule_id: string | null
+  user_id: string | null
   outbound_schedule_id: string | null
+  return_hold_id: string | null
+  outbound_hold_id: string | null
   ticket_code: string | null
-  trip_type: $Enums.TicketsTripType | null
   total_passengers: number | null
   subtotal: runtime.Decimal | null
   taxes: runtime.Decimal | null
@@ -60,23 +61,23 @@ export type TicketsMinAggregateOutputType = {
   currency: string | null
   qr_code: string | null
   cancellation_reason: string | null
+  trip_type: $Enums.TicketsTripType | null
   status: $Enums.TicketsStatus | null
   booking_expires_at: Date | null
   confirmed_at: Date | null
   cancelled_at: Date | null
   created_at: Date | null
   updated_at: Date | null
-  outbound_hold_id: string | null
-  return_hold_id: string | null
 }
 
 export type TicketsMaxAggregateOutputType = {
   id: string | null
-  user_id: string | null
   return_schedule_id: string | null
+  user_id: string | null
   outbound_schedule_id: string | null
+  return_hold_id: string | null
+  outbound_hold_id: string | null
   ticket_code: string | null
-  trip_type: $Enums.TicketsTripType | null
   total_passengers: number | null
   subtotal: runtime.Decimal | null
   taxes: runtime.Decimal | null
@@ -86,23 +87,23 @@ export type TicketsMaxAggregateOutputType = {
   currency: string | null
   qr_code: string | null
   cancellation_reason: string | null
+  trip_type: $Enums.TicketsTripType | null
   status: $Enums.TicketsStatus | null
   booking_expires_at: Date | null
   confirmed_at: Date | null
   cancelled_at: Date | null
   created_at: Date | null
   updated_at: Date | null
-  outbound_hold_id: string | null
-  return_hold_id: string | null
 }
 
 export type TicketsCountAggregateOutputType = {
   id: number
-  user_id: number
   return_schedule_id: number
+  user_id: number
   outbound_schedule_id: number
+  return_hold_id: number
+  outbound_hold_id: number
   ticket_code: number
-  trip_type: number
   total_passengers: number
   subtotal: number
   taxes: number
@@ -112,14 +113,13 @@ export type TicketsCountAggregateOutputType = {
   currency: number
   qr_code: number
   cancellation_reason: number
+  trip_type: number
   status: number
   booking_expires_at: number
   confirmed_at: number
   cancelled_at: number
   created_at: number
   updated_at: number
-  outbound_hold_id: number
-  return_hold_id: number
   _all: number
 }
 
@@ -144,11 +144,12 @@ export type TicketsSumAggregateInputType = {
 
 export type TicketsMinAggregateInputType = {
   id?: true
-  user_id?: true
   return_schedule_id?: true
+  user_id?: true
   outbound_schedule_id?: true
+  return_hold_id?: true
+  outbound_hold_id?: true
   ticket_code?: true
-  trip_type?: true
   total_passengers?: true
   subtotal?: true
   taxes?: true
@@ -158,23 +159,23 @@ export type TicketsMinAggregateInputType = {
   currency?: true
   qr_code?: true
   cancellation_reason?: true
+  trip_type?: true
   status?: true
   booking_expires_at?: true
   confirmed_at?: true
   cancelled_at?: true
   created_at?: true
   updated_at?: true
-  outbound_hold_id?: true
-  return_hold_id?: true
 }
 
 export type TicketsMaxAggregateInputType = {
   id?: true
-  user_id?: true
   return_schedule_id?: true
+  user_id?: true
   outbound_schedule_id?: true
+  return_hold_id?: true
+  outbound_hold_id?: true
   ticket_code?: true
-  trip_type?: true
   total_passengers?: true
   subtotal?: true
   taxes?: true
@@ -184,23 +185,23 @@ export type TicketsMaxAggregateInputType = {
   currency?: true
   qr_code?: true
   cancellation_reason?: true
+  trip_type?: true
   status?: true
   booking_expires_at?: true
   confirmed_at?: true
   cancelled_at?: true
   created_at?: true
   updated_at?: true
-  outbound_hold_id?: true
-  return_hold_id?: true
 }
 
 export type TicketsCountAggregateInputType = {
   id?: true
-  user_id?: true
   return_schedule_id?: true
+  user_id?: true
   outbound_schedule_id?: true
+  return_hold_id?: true
+  outbound_hold_id?: true
   ticket_code?: true
-  trip_type?: true
   total_passengers?: true
   subtotal?: true
   taxes?: true
@@ -210,14 +211,13 @@ export type TicketsCountAggregateInputType = {
   currency?: true
   qr_code?: true
   cancellation_reason?: true
+  trip_type?: true
   status?: true
   booking_expires_at?: true
   confirmed_at?: true
   cancelled_at?: true
   created_at?: true
   updated_at?: true
-  outbound_hold_id?: true
-  return_hold_id?: true
   _all?: true
 }
 
@@ -309,11 +309,12 @@ export type ticketsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type TicketsGroupByOutputType = {
   id: string
-  user_id: string | null
   return_schedule_id: string | null
+  user_id: string | null
   outbound_schedule_id: string | null
+  return_hold_id: string | null
+  outbound_hold_id: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal
   taxes: runtime.Decimal
@@ -323,14 +324,13 @@ export type TicketsGroupByOutputType = {
   currency: string
   qr_code: string | null
   cancellation_reason: string | null
+  trip_type: $Enums.TicketsTripType
   status: $Enums.TicketsStatus
   booking_expires_at: Date | null
   confirmed_at: Date | null
   cancelled_at: Date | null
   created_at: Date
   updated_at: Date
-  outbound_hold_id: string | null
-  return_hold_id: string | null
   _count: TicketsCountAggregateOutputType | null
   _avg: TicketsAvgAggregateOutputType | null
   _sum: TicketsSumAggregateOutputType | null
@@ -358,11 +358,12 @@ export type ticketsWhereInput = {
   OR?: Prisma.ticketsWhereInput[]
   NOT?: Prisma.ticketsWhereInput | Prisma.ticketsWhereInput[]
   id?: Prisma.StringFilter<"tickets"> | string
-  user_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   return_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  user_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   outbound_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  return_hold_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  outbound_hold_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   ticket_code?: Prisma.StringFilter<"tickets"> | string
-  trip_type?: Prisma.EnumTicketsTripTypeFilter<"tickets"> | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFilter<"tickets"> | number
   subtotal?: Prisma.DecimalFilter<"tickets"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFilter<"tickets"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -372,14 +373,13 @@ export type ticketsWhereInput = {
   currency?: Prisma.StringFilter<"tickets"> | string
   qr_code?: Prisma.StringNullableFilter<"tickets"> | string | null
   cancellation_reason?: Prisma.StringNullableFilter<"tickets"> | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFilter<"tickets"> | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFilter<"tickets"> | $Enums.TicketsStatus
   booking_expires_at?: Prisma.DateTimeNullableFilter<"tickets"> | Date | string | null
   confirmed_at?: Prisma.DateTimeNullableFilter<"tickets"> | Date | string | null
   cancelled_at?: Prisma.DateTimeNullableFilter<"tickets"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"tickets"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"tickets"> | Date | string
-  outbound_hold_id?: Prisma.StringNullableFilter<"tickets"> | string | null
-  return_hold_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
   return_schedules?: Prisma.XOR<Prisma.SchedulesNullableScalarRelationFilter, Prisma.schedulesWhereInput> | null
   outbound_schedules?: Prisma.XOR<Prisma.SchedulesNullableScalarRelationFilter, Prisma.schedulesWhereInput> | null
@@ -391,11 +391,12 @@ export type ticketsWhereInput = {
 
 export type ticketsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrderInput | Prisma.SortOrder
   return_schedule_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  user_id?: Prisma.SortOrderInput | Prisma.SortOrder
   outbound_schedule_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  return_hold_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  outbound_hold_id?: Prisma.SortOrderInput | Prisma.SortOrder
   ticket_code?: Prisma.SortOrder
-  trip_type?: Prisma.SortOrder
   total_passengers?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   taxes?: Prisma.SortOrder
@@ -405,14 +406,13 @@ export type ticketsOrderByWithRelationInput = {
   currency?: Prisma.SortOrder
   qr_code?: Prisma.SortOrderInput | Prisma.SortOrder
   cancellation_reason?: Prisma.SortOrderInput | Prisma.SortOrder
+  trip_type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   booking_expires_at?: Prisma.SortOrderInput | Prisma.SortOrder
   confirmed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   cancelled_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  outbound_hold_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  return_hold_id?: Prisma.SortOrderInput | Prisma.SortOrder
   users?: Prisma.usersOrderByWithRelationInput
   return_schedules?: Prisma.schedulesOrderByWithRelationInput
   outbound_schedules?: Prisma.schedulesOrderByWithRelationInput
@@ -424,16 +424,15 @@ export type ticketsOrderByWithRelationInput = {
 
 export type ticketsWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  ticket_code?: string
-  outbound_hold_id?: string
   return_hold_id?: string
+  outbound_hold_id?: string
+  ticket_code?: string
   AND?: Prisma.ticketsWhereInput | Prisma.ticketsWhereInput[]
   OR?: Prisma.ticketsWhereInput[]
   NOT?: Prisma.ticketsWhereInput | Prisma.ticketsWhereInput[]
-  user_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   return_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  user_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   outbound_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
-  trip_type?: Prisma.EnumTicketsTripTypeFilter<"tickets"> | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFilter<"tickets"> | number
   subtotal?: Prisma.DecimalFilter<"tickets"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFilter<"tickets"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -443,6 +442,7 @@ export type ticketsWhereUniqueInput = Prisma.AtLeast<{
   currency?: Prisma.StringFilter<"tickets"> | string
   qr_code?: Prisma.StringNullableFilter<"tickets"> | string | null
   cancellation_reason?: Prisma.StringNullableFilter<"tickets"> | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFilter<"tickets"> | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFilter<"tickets"> | $Enums.TicketsStatus
   booking_expires_at?: Prisma.DateTimeNullableFilter<"tickets"> | Date | string | null
   confirmed_at?: Prisma.DateTimeNullableFilter<"tickets"> | Date | string | null
@@ -456,15 +456,16 @@ export type ticketsWhereUniqueInput = Prisma.AtLeast<{
   return_hold?: Prisma.XOR<Prisma.Seat_holdsNullableScalarRelationFilter, Prisma.seat_holdsWhereInput> | null
   passengers?: Prisma.PassengersListRelationFilter
   payments?: Prisma.PaymentsListRelationFilter
-}, "id" | "ticket_code" | "outbound_hold_id" | "return_hold_id">
+}, "id" | "return_hold_id" | "outbound_hold_id" | "ticket_code">
 
 export type ticketsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrderInput | Prisma.SortOrder
   return_schedule_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  user_id?: Prisma.SortOrderInput | Prisma.SortOrder
   outbound_schedule_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  return_hold_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  outbound_hold_id?: Prisma.SortOrderInput | Prisma.SortOrder
   ticket_code?: Prisma.SortOrder
-  trip_type?: Prisma.SortOrder
   total_passengers?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   taxes?: Prisma.SortOrder
@@ -474,14 +475,13 @@ export type ticketsOrderByWithAggregationInput = {
   currency?: Prisma.SortOrder
   qr_code?: Prisma.SortOrderInput | Prisma.SortOrder
   cancellation_reason?: Prisma.SortOrderInput | Prisma.SortOrder
+  trip_type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   booking_expires_at?: Prisma.SortOrderInput | Prisma.SortOrder
   confirmed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   cancelled_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  outbound_hold_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  return_hold_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ticketsCountOrderByAggregateInput
   _avg?: Prisma.ticketsAvgOrderByAggregateInput
   _max?: Prisma.ticketsMaxOrderByAggregateInput
@@ -494,11 +494,12 @@ export type ticketsScalarWhereWithAggregatesInput = {
   OR?: Prisma.ticketsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ticketsScalarWhereWithAggregatesInput | Prisma.ticketsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"tickets"> | string
-  user_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
   return_schedule_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
+  user_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
   outbound_schedule_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
+  return_hold_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
+  outbound_hold_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
   ticket_code?: Prisma.StringWithAggregatesFilter<"tickets"> | string
-  trip_type?: Prisma.EnumTicketsTripTypeWithAggregatesFilter<"tickets"> | $Enums.TicketsTripType
   total_passengers?: Prisma.IntWithAggregatesFilter<"tickets"> | number
   subtotal?: Prisma.DecimalWithAggregatesFilter<"tickets"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalWithAggregatesFilter<"tickets"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -508,20 +509,18 @@ export type ticketsScalarWhereWithAggregatesInput = {
   currency?: Prisma.StringWithAggregatesFilter<"tickets"> | string
   qr_code?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
   cancellation_reason?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeWithAggregatesFilter<"tickets"> | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusWithAggregatesFilter<"tickets"> | $Enums.TicketsStatus
   booking_expires_at?: Prisma.DateTimeNullableWithAggregatesFilter<"tickets"> | Date | string | null
   confirmed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"tickets"> | Date | string | null
   cancelled_at?: Prisma.DateTimeNullableWithAggregatesFilter<"tickets"> | Date | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"tickets"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"tickets"> | Date | string
-  outbound_hold_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
-  return_hold_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
 }
 
 export type ticketsCreateInput = {
   id?: string
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -531,6 +530,7 @@ export type ticketsCreateInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
@@ -548,11 +548,12 @@ export type ticketsCreateInput = {
 
 export type ticketsUncheckedCreateInput = {
   id?: string
-  user_id?: string | null
   return_schedule_id?: string | null
+  user_id?: string | null
   outbound_schedule_id?: string | null
+  return_hold_id?: string | null
+  outbound_hold_id?: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -562,14 +563,13 @@ export type ticketsUncheckedCreateInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  outbound_hold_id?: string | null
-  return_hold_id?: string | null
   passengers?: Prisma.passengersUncheckedCreateNestedManyWithoutTicketsInput
   payments?: Prisma.paymentsUncheckedCreateNestedManyWithoutTicketsInput
 }
@@ -577,7 +577,6 @@ export type ticketsUncheckedCreateInput = {
 export type ticketsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -587,6 +586,7 @@ export type ticketsUpdateInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -604,11 +604,12 @@ export type ticketsUpdateInput = {
 
 export type ticketsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -618,25 +619,25 @@ export type ticketsUncheckedUpdateInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengers?: Prisma.passengersUncheckedUpdateManyWithoutTicketsNestedInput
   payments?: Prisma.paymentsUncheckedUpdateManyWithoutTicketsNestedInput
 }
 
 export type ticketsCreateManyInput = {
   id?: string
-  user_id?: string | null
   return_schedule_id?: string | null
+  user_id?: string | null
   outbound_schedule_id?: string | null
+  return_hold_id?: string | null
+  outbound_hold_id?: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -646,20 +647,18 @@ export type ticketsCreateManyInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  outbound_hold_id?: string | null
-  return_hold_id?: string | null
 }
 
 export type ticketsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -669,6 +668,7 @@ export type ticketsUpdateManyMutationInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -679,11 +679,12 @@ export type ticketsUpdateManyMutationInput = {
 
 export type ticketsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -693,14 +694,13 @@ export type ticketsUncheckedUpdateManyInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TicketsListRelationFilter = {
@@ -720,11 +720,12 @@ export type TicketsNullableScalarRelationFilter = {
 
 export type ticketsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
   return_schedule_id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   outbound_schedule_id?: Prisma.SortOrder
+  return_hold_id?: Prisma.SortOrder
+  outbound_hold_id?: Prisma.SortOrder
   ticket_code?: Prisma.SortOrder
-  trip_type?: Prisma.SortOrder
   total_passengers?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   taxes?: Prisma.SortOrder
@@ -734,14 +735,13 @@ export type ticketsCountOrderByAggregateInput = {
   currency?: Prisma.SortOrder
   qr_code?: Prisma.SortOrder
   cancellation_reason?: Prisma.SortOrder
+  trip_type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   booking_expires_at?: Prisma.SortOrder
   confirmed_at?: Prisma.SortOrder
   cancelled_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  outbound_hold_id?: Prisma.SortOrder
-  return_hold_id?: Prisma.SortOrder
 }
 
 export type ticketsAvgOrderByAggregateInput = {
@@ -755,11 +755,12 @@ export type ticketsAvgOrderByAggregateInput = {
 
 export type ticketsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
   return_schedule_id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   outbound_schedule_id?: Prisma.SortOrder
+  return_hold_id?: Prisma.SortOrder
+  outbound_hold_id?: Prisma.SortOrder
   ticket_code?: Prisma.SortOrder
-  trip_type?: Prisma.SortOrder
   total_passengers?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   taxes?: Prisma.SortOrder
@@ -769,23 +770,23 @@ export type ticketsMaxOrderByAggregateInput = {
   currency?: Prisma.SortOrder
   qr_code?: Prisma.SortOrder
   cancellation_reason?: Prisma.SortOrder
+  trip_type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   booking_expires_at?: Prisma.SortOrder
   confirmed_at?: Prisma.SortOrder
   cancelled_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  outbound_hold_id?: Prisma.SortOrder
-  return_hold_id?: Prisma.SortOrder
 }
 
 export type ticketsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
   return_schedule_id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   outbound_schedule_id?: Prisma.SortOrder
+  return_hold_id?: Prisma.SortOrder
+  outbound_hold_id?: Prisma.SortOrder
   ticket_code?: Prisma.SortOrder
-  trip_type?: Prisma.SortOrder
   total_passengers?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   taxes?: Prisma.SortOrder
@@ -795,14 +796,13 @@ export type ticketsMinOrderByAggregateInput = {
   currency?: Prisma.SortOrder
   qr_code?: Prisma.SortOrder
   cancellation_reason?: Prisma.SortOrder
+  trip_type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   booking_expires_at?: Prisma.SortOrder
   confirmed_at?: Prisma.SortOrder
   cancelled_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  outbound_hold_id?: Prisma.SortOrder
-  return_hold_id?: Prisma.SortOrder
 }
 
 export type ticketsSumOrderByAggregateInput = {
@@ -1047,7 +1047,6 @@ export type EnumTicketsStatusFieldUpdateOperationsInput = {
 export type ticketsCreateWithoutReturn_schedulesInput = {
   id?: string
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1057,6 +1056,7 @@ export type ticketsCreateWithoutReturn_schedulesInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
@@ -1075,8 +1075,9 @@ export type ticketsUncheckedCreateWithoutReturn_schedulesInput = {
   id?: string
   user_id?: string | null
   outbound_schedule_id?: string | null
+  return_hold_id?: string | null
+  outbound_hold_id?: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1086,14 +1087,13 @@ export type ticketsUncheckedCreateWithoutReturn_schedulesInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  outbound_hold_id?: string | null
-  return_hold_id?: string | null
   passengers?: Prisma.passengersUncheckedCreateNestedManyWithoutTicketsInput
   payments?: Prisma.paymentsUncheckedCreateNestedManyWithoutTicketsInput
 }
@@ -1111,7 +1111,6 @@ export type ticketsCreateManyReturn_schedulesInputEnvelope = {
 export type ticketsCreateWithoutOutbound_schedulesInput = {
   id?: string
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1121,6 +1120,7 @@ export type ticketsCreateWithoutOutbound_schedulesInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
@@ -1137,10 +1137,11 @@ export type ticketsCreateWithoutOutbound_schedulesInput = {
 
 export type ticketsUncheckedCreateWithoutOutbound_schedulesInput = {
   id?: string
-  user_id?: string | null
   return_schedule_id?: string | null
+  user_id?: string | null
+  return_hold_id?: string | null
+  outbound_hold_id?: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1150,14 +1151,13 @@ export type ticketsUncheckedCreateWithoutOutbound_schedulesInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  outbound_hold_id?: string | null
-  return_hold_id?: string | null
   passengers?: Prisma.passengersUncheckedCreateNestedManyWithoutTicketsInput
   payments?: Prisma.paymentsUncheckedCreateNestedManyWithoutTicketsInput
 }
@@ -1193,11 +1193,12 @@ export type ticketsScalarWhereInput = {
   OR?: Prisma.ticketsScalarWhereInput[]
   NOT?: Prisma.ticketsScalarWhereInput | Prisma.ticketsScalarWhereInput[]
   id?: Prisma.StringFilter<"tickets"> | string
-  user_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   return_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  user_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   outbound_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  return_hold_id?: Prisma.StringNullableFilter<"tickets"> | string | null
+  outbound_hold_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   ticket_code?: Prisma.StringFilter<"tickets"> | string
-  trip_type?: Prisma.EnumTicketsTripTypeFilter<"tickets"> | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFilter<"tickets"> | number
   subtotal?: Prisma.DecimalFilter<"tickets"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFilter<"tickets"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1207,14 +1208,13 @@ export type ticketsScalarWhereInput = {
   currency?: Prisma.StringFilter<"tickets"> | string
   qr_code?: Prisma.StringNullableFilter<"tickets"> | string | null
   cancellation_reason?: Prisma.StringNullableFilter<"tickets"> | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFilter<"tickets"> | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFilter<"tickets"> | $Enums.TicketsStatus
   booking_expires_at?: Prisma.DateTimeNullableFilter<"tickets"> | Date | string | null
   confirmed_at?: Prisma.DateTimeNullableFilter<"tickets"> | Date | string | null
   cancelled_at?: Prisma.DateTimeNullableFilter<"tickets"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"tickets"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"tickets"> | Date | string
-  outbound_hold_id?: Prisma.StringNullableFilter<"tickets"> | string | null
-  return_hold_id?: Prisma.StringNullableFilter<"tickets"> | string | null
 }
 
 export type ticketsUpsertWithWhereUniqueWithoutOutbound_schedulesInput = {
@@ -1236,7 +1236,6 @@ export type ticketsUpdateManyWithWhereWithoutOutbound_schedulesInput = {
 export type ticketsCreateWithoutUsersInput = {
   id?: string
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1246,6 +1245,7 @@ export type ticketsCreateWithoutUsersInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
@@ -1264,8 +1264,9 @@ export type ticketsUncheckedCreateWithoutUsersInput = {
   id?: string
   return_schedule_id?: string | null
   outbound_schedule_id?: string | null
+  return_hold_id?: string | null
+  outbound_hold_id?: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1275,14 +1276,13 @@ export type ticketsUncheckedCreateWithoutUsersInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  outbound_hold_id?: string | null
-  return_hold_id?: string | null
   passengers?: Prisma.passengersUncheckedCreateNestedManyWithoutTicketsInput
   payments?: Prisma.paymentsUncheckedCreateNestedManyWithoutTicketsInput
 }
@@ -1316,7 +1316,6 @@ export type ticketsUpdateManyWithWhereWithoutUsersInput = {
 export type ticketsCreateWithoutPassengersInput = {
   id?: string
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1326,6 +1325,7 @@ export type ticketsCreateWithoutPassengersInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
@@ -1342,11 +1342,12 @@ export type ticketsCreateWithoutPassengersInput = {
 
 export type ticketsUncheckedCreateWithoutPassengersInput = {
   id?: string
-  user_id?: string | null
   return_schedule_id?: string | null
+  user_id?: string | null
   outbound_schedule_id?: string | null
+  return_hold_id?: string | null
+  outbound_hold_id?: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1356,14 +1357,13 @@ export type ticketsUncheckedCreateWithoutPassengersInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  outbound_hold_id?: string | null
-  return_hold_id?: string | null
   payments?: Prisma.paymentsUncheckedCreateNestedManyWithoutTicketsInput
 }
 
@@ -1386,7 +1386,6 @@ export type ticketsUpdateToOneWithWhereWithoutPassengersInput = {
 export type ticketsUpdateWithoutPassengersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1396,6 +1395,7 @@ export type ticketsUpdateWithoutPassengersInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1412,11 +1412,12 @@ export type ticketsUpdateWithoutPassengersInput = {
 
 export type ticketsUncheckedUpdateWithoutPassengersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1426,21 +1427,19 @@ export type ticketsUncheckedUpdateWithoutPassengersInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payments?: Prisma.paymentsUncheckedUpdateManyWithoutTicketsNestedInput
 }
 
 export type ticketsCreateWithoutPaymentsInput = {
   id?: string
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1450,6 +1449,7 @@ export type ticketsCreateWithoutPaymentsInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
@@ -1466,11 +1466,12 @@ export type ticketsCreateWithoutPaymentsInput = {
 
 export type ticketsUncheckedCreateWithoutPaymentsInput = {
   id?: string
-  user_id?: string | null
   return_schedule_id?: string | null
+  user_id?: string | null
   outbound_schedule_id?: string | null
+  return_hold_id?: string | null
+  outbound_hold_id?: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1480,14 +1481,13 @@ export type ticketsUncheckedCreateWithoutPaymentsInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  outbound_hold_id?: string | null
-  return_hold_id?: string | null
   passengers?: Prisma.passengersUncheckedCreateNestedManyWithoutTicketsInput
 }
 
@@ -1510,7 +1510,6 @@ export type ticketsUpdateToOneWithWhereWithoutPaymentsInput = {
 export type ticketsUpdateWithoutPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1520,6 +1519,7 @@ export type ticketsUpdateWithoutPaymentsInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1536,11 +1536,12 @@ export type ticketsUpdateWithoutPaymentsInput = {
 
 export type ticketsUncheckedUpdateWithoutPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1550,21 +1551,19 @@ export type ticketsUncheckedUpdateWithoutPaymentsInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengers?: Prisma.passengersUncheckedUpdateManyWithoutTicketsNestedInput
 }
 
 export type ticketsCreateWithoutOutbound_holdInput = {
   id?: string
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1574,6 +1573,7 @@ export type ticketsCreateWithoutOutbound_holdInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
@@ -1590,11 +1590,11 @@ export type ticketsCreateWithoutOutbound_holdInput = {
 
 export type ticketsUncheckedCreateWithoutOutbound_holdInput = {
   id?: string
-  user_id?: string | null
   return_schedule_id?: string | null
+  user_id?: string | null
   outbound_schedule_id?: string | null
+  return_hold_id?: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1604,13 +1604,13 @@ export type ticketsUncheckedCreateWithoutOutbound_holdInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  return_hold_id?: string | null
   passengers?: Prisma.passengersUncheckedCreateNestedManyWithoutTicketsInput
   payments?: Prisma.paymentsUncheckedCreateNestedManyWithoutTicketsInput
 }
@@ -1623,7 +1623,6 @@ export type ticketsCreateOrConnectWithoutOutbound_holdInput = {
 export type ticketsCreateWithoutReturn_holdInput = {
   id?: string
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1633,6 +1632,7 @@ export type ticketsCreateWithoutReturn_holdInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
@@ -1649,11 +1649,11 @@ export type ticketsCreateWithoutReturn_holdInput = {
 
 export type ticketsUncheckedCreateWithoutReturn_holdInput = {
   id?: string
-  user_id?: string | null
   return_schedule_id?: string | null
+  user_id?: string | null
   outbound_schedule_id?: string | null
+  outbound_hold_id?: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1663,13 +1663,13 @@ export type ticketsUncheckedCreateWithoutReturn_holdInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  outbound_hold_id?: string | null
   passengers?: Prisma.passengersUncheckedCreateNestedManyWithoutTicketsInput
   payments?: Prisma.paymentsUncheckedCreateNestedManyWithoutTicketsInput
 }
@@ -1693,7 +1693,6 @@ export type ticketsUpdateToOneWithWhereWithoutOutbound_holdInput = {
 export type ticketsUpdateWithoutOutbound_holdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1703,6 +1702,7 @@ export type ticketsUpdateWithoutOutbound_holdInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1719,11 +1719,11 @@ export type ticketsUpdateWithoutOutbound_holdInput = {
 
 export type ticketsUncheckedUpdateWithoutOutbound_holdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1733,13 +1733,13 @@ export type ticketsUncheckedUpdateWithoutOutbound_holdInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengers?: Prisma.passengersUncheckedUpdateManyWithoutTicketsNestedInput
   payments?: Prisma.paymentsUncheckedUpdateManyWithoutTicketsNestedInput
 }
@@ -1758,7 +1758,6 @@ export type ticketsUpdateToOneWithWhereWithoutReturn_holdInput = {
 export type ticketsUpdateWithoutReturn_holdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1768,6 +1767,7 @@ export type ticketsUpdateWithoutReturn_holdInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1784,11 +1784,11 @@ export type ticketsUpdateWithoutReturn_holdInput = {
 
 export type ticketsUncheckedUpdateWithoutReturn_holdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1798,13 +1798,13 @@ export type ticketsUncheckedUpdateWithoutReturn_holdInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengers?: Prisma.passengersUncheckedUpdateManyWithoutTicketsNestedInput
   payments?: Prisma.paymentsUncheckedUpdateManyWithoutTicketsNestedInput
 }
@@ -1813,8 +1813,9 @@ export type ticketsCreateManyReturn_schedulesInput = {
   id?: string
   user_id?: string | null
   outbound_schedule_id?: string | null
+  return_hold_id?: string | null
+  outbound_hold_id?: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1824,22 +1825,22 @@ export type ticketsCreateManyReturn_schedulesInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  outbound_hold_id?: string | null
-  return_hold_id?: string | null
 }
 
 export type ticketsCreateManyOutbound_schedulesInput = {
   id?: string
-  user_id?: string | null
   return_schedule_id?: string | null
+  user_id?: string | null
+  return_hold_id?: string | null
+  outbound_hold_id?: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1849,20 +1850,18 @@ export type ticketsCreateManyOutbound_schedulesInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  outbound_hold_id?: string | null
-  return_hold_id?: string | null
 }
 
 export type ticketsUpdateWithoutReturn_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1872,6 +1871,7 @@ export type ticketsUpdateWithoutReturn_schedulesInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1890,8 +1890,9 @@ export type ticketsUncheckedUpdateWithoutReturn_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1901,14 +1902,13 @@ export type ticketsUncheckedUpdateWithoutReturn_schedulesInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengers?: Prisma.passengersUncheckedUpdateManyWithoutTicketsNestedInput
   payments?: Prisma.paymentsUncheckedUpdateManyWithoutTicketsNestedInput
 }
@@ -1917,8 +1917,9 @@ export type ticketsUncheckedUpdateManyWithoutReturn_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1928,20 +1929,18 @@ export type ticketsUncheckedUpdateManyWithoutReturn_schedulesInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ticketsUpdateWithoutOutbound_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1951,6 +1950,7 @@ export type ticketsUpdateWithoutOutbound_schedulesInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1967,10 +1967,11 @@ export type ticketsUpdateWithoutOutbound_schedulesInput = {
 
 export type ticketsUncheckedUpdateWithoutOutbound_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1980,24 +1981,24 @@ export type ticketsUncheckedUpdateWithoutOutbound_schedulesInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengers?: Prisma.passengersUncheckedUpdateManyWithoutTicketsNestedInput
   payments?: Prisma.paymentsUncheckedUpdateManyWithoutTicketsNestedInput
 }
 
 export type ticketsUncheckedUpdateManyWithoutOutbound_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2007,22 +2008,22 @@ export type ticketsUncheckedUpdateManyWithoutOutbound_schedulesInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ticketsCreateManyUsersInput = {
   id?: string
   return_schedule_id?: string | null
   outbound_schedule_id?: string | null
+  return_hold_id?: string | null
+  outbound_hold_id?: string | null
   ticket_code: string
-  trip_type: $Enums.TicketsTripType
   total_passengers: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2032,20 +2033,18 @@ export type ticketsCreateManyUsersInput = {
   currency?: string
   qr_code?: string | null
   cancellation_reason?: string | null
+  trip_type: $Enums.TicketsTripType
   status?: $Enums.TicketsStatus
   booking_expires_at?: Date | string | null
   confirmed_at?: Date | string | null
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  outbound_hold_id?: string | null
-  return_hold_id?: string | null
 }
 
 export type ticketsUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2055,6 +2054,7 @@ export type ticketsUpdateWithoutUsersInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2073,8 +2073,9 @@ export type ticketsUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2084,14 +2085,13 @@ export type ticketsUncheckedUpdateWithoutUsersInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passengers?: Prisma.passengersUncheckedUpdateManyWithoutTicketsNestedInput
   payments?: Prisma.paymentsUncheckedUpdateManyWithoutTicketsNestedInput
 }
@@ -2100,8 +2100,9 @@ export type ticketsUncheckedUpdateManyWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
-  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxes?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2111,14 +2112,13 @@ export type ticketsUncheckedUpdateManyWithoutUsersInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   qr_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  trip_type?: Prisma.EnumTicketsTripTypeFieldUpdateOperationsInput | $Enums.TicketsTripType
   status?: Prisma.EnumTicketsStatusFieldUpdateOperationsInput | $Enums.TicketsStatus
   booking_expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -2163,11 +2163,12 @@ export type TicketsCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Type
 
 export type ticketsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  user_id?: boolean
   return_schedule_id?: boolean
+  user_id?: boolean
   outbound_schedule_id?: boolean
+  return_hold_id?: boolean
+  outbound_hold_id?: boolean
   ticket_code?: boolean
-  trip_type?: boolean
   total_passengers?: boolean
   subtotal?: boolean
   taxes?: boolean
@@ -2177,14 +2178,13 @@ export type ticketsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   currency?: boolean
   qr_code?: boolean
   cancellation_reason?: boolean
+  trip_type?: boolean
   status?: boolean
   booking_expires_at?: boolean
   confirmed_at?: boolean
   cancelled_at?: boolean
   created_at?: boolean
   updated_at?: boolean
-  outbound_hold_id?: boolean
-  return_hold_id?: boolean
   users?: boolean | Prisma.tickets$usersArgs<ExtArgs>
   return_schedules?: boolean | Prisma.tickets$return_schedulesArgs<ExtArgs>
   outbound_schedules?: boolean | Prisma.tickets$outbound_schedulesArgs<ExtArgs>
@@ -2197,11 +2197,12 @@ export type ticketsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 
 export type ticketsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  user_id?: boolean
   return_schedule_id?: boolean
+  user_id?: boolean
   outbound_schedule_id?: boolean
+  return_hold_id?: boolean
+  outbound_hold_id?: boolean
   ticket_code?: boolean
-  trip_type?: boolean
   total_passengers?: boolean
   subtotal?: boolean
   taxes?: boolean
@@ -2211,14 +2212,13 @@ export type ticketsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   currency?: boolean
   qr_code?: boolean
   cancellation_reason?: boolean
+  trip_type?: boolean
   status?: boolean
   booking_expires_at?: boolean
   confirmed_at?: boolean
   cancelled_at?: boolean
   created_at?: boolean
   updated_at?: boolean
-  outbound_hold_id?: boolean
-  return_hold_id?: boolean
   users?: boolean | Prisma.tickets$usersArgs<ExtArgs>
   return_schedules?: boolean | Prisma.tickets$return_schedulesArgs<ExtArgs>
   outbound_schedules?: boolean | Prisma.tickets$outbound_schedulesArgs<ExtArgs>
@@ -2228,11 +2228,12 @@ export type ticketsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type ticketsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  user_id?: boolean
   return_schedule_id?: boolean
+  user_id?: boolean
   outbound_schedule_id?: boolean
+  return_hold_id?: boolean
+  outbound_hold_id?: boolean
   ticket_code?: boolean
-  trip_type?: boolean
   total_passengers?: boolean
   subtotal?: boolean
   taxes?: boolean
@@ -2242,14 +2243,13 @@ export type ticketsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   currency?: boolean
   qr_code?: boolean
   cancellation_reason?: boolean
+  trip_type?: boolean
   status?: boolean
   booking_expires_at?: boolean
   confirmed_at?: boolean
   cancelled_at?: boolean
   created_at?: boolean
   updated_at?: boolean
-  outbound_hold_id?: boolean
-  return_hold_id?: boolean
   users?: boolean | Prisma.tickets$usersArgs<ExtArgs>
   return_schedules?: boolean | Prisma.tickets$return_schedulesArgs<ExtArgs>
   outbound_schedules?: boolean | Prisma.tickets$outbound_schedulesArgs<ExtArgs>
@@ -2259,11 +2259,12 @@ export type ticketsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type ticketsSelectScalar = {
   id?: boolean
-  user_id?: boolean
   return_schedule_id?: boolean
+  user_id?: boolean
   outbound_schedule_id?: boolean
+  return_hold_id?: boolean
+  outbound_hold_id?: boolean
   ticket_code?: boolean
-  trip_type?: boolean
   total_passengers?: boolean
   subtotal?: boolean
   taxes?: boolean
@@ -2273,17 +2274,16 @@ export type ticketsSelectScalar = {
   currency?: boolean
   qr_code?: boolean
   cancellation_reason?: boolean
+  trip_type?: boolean
   status?: boolean
   booking_expires_at?: boolean
   confirmed_at?: boolean
   cancelled_at?: boolean
   created_at?: boolean
   updated_at?: boolean
-  outbound_hold_id?: boolean
-  return_hold_id?: boolean
 }
 
-export type ticketsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "return_schedule_id" | "outbound_schedule_id" | "ticket_code" | "trip_type" | "total_passengers" | "subtotal" | "taxes" | "service_fee" | "discount" | "total" | "currency" | "qr_code" | "cancellation_reason" | "status" | "booking_expires_at" | "confirmed_at" | "cancelled_at" | "created_at" | "updated_at" | "outbound_hold_id" | "return_hold_id", ExtArgs["result"]["tickets"]>
+export type ticketsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "return_schedule_id" | "user_id" | "outbound_schedule_id" | "return_hold_id" | "outbound_hold_id" | "ticket_code" | "total_passengers" | "subtotal" | "taxes" | "service_fee" | "discount" | "total" | "currency" | "qr_code" | "cancellation_reason" | "trip_type" | "status" | "booking_expires_at" | "confirmed_at" | "cancelled_at" | "created_at" | "updated_at", ExtArgs["result"]["tickets"]>
 export type ticketsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.tickets$usersArgs<ExtArgs>
   return_schedules?: boolean | Prisma.tickets$return_schedulesArgs<ExtArgs>
@@ -2322,11 +2322,12 @@ export type $ticketsPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    user_id: string | null
     return_schedule_id: string | null
+    user_id: string | null
     outbound_schedule_id: string | null
+    return_hold_id: string | null
+    outbound_hold_id: string | null
     ticket_code: string
-    trip_type: $Enums.TicketsTripType
     total_passengers: number
     subtotal: runtime.Decimal
     taxes: runtime.Decimal
@@ -2336,14 +2337,13 @@ export type $ticketsPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     currency: string
     qr_code: string | null
     cancellation_reason: string | null
+    trip_type: $Enums.TicketsTripType
     status: $Enums.TicketsStatus
     booking_expires_at: Date | null
     confirmed_at: Date | null
     cancelled_at: Date | null
     created_at: Date
     updated_at: Date
-    outbound_hold_id: string | null
-    return_hold_id: string | null
   }, ExtArgs["result"]["tickets"]>
   composites: {}
 }
@@ -2775,11 +2775,12 @@ export interface Prisma__ticketsClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface ticketsFieldRefs {
   readonly id: Prisma.FieldRef<"tickets", 'String'>
-  readonly user_id: Prisma.FieldRef<"tickets", 'String'>
   readonly return_schedule_id: Prisma.FieldRef<"tickets", 'String'>
+  readonly user_id: Prisma.FieldRef<"tickets", 'String'>
   readonly outbound_schedule_id: Prisma.FieldRef<"tickets", 'String'>
+  readonly return_hold_id: Prisma.FieldRef<"tickets", 'String'>
+  readonly outbound_hold_id: Prisma.FieldRef<"tickets", 'String'>
   readonly ticket_code: Prisma.FieldRef<"tickets", 'String'>
-  readonly trip_type: Prisma.FieldRef<"tickets", 'TicketsTripType'>
   readonly total_passengers: Prisma.FieldRef<"tickets", 'Int'>
   readonly subtotal: Prisma.FieldRef<"tickets", 'Decimal'>
   readonly taxes: Prisma.FieldRef<"tickets", 'Decimal'>
@@ -2789,14 +2790,13 @@ export interface ticketsFieldRefs {
   readonly currency: Prisma.FieldRef<"tickets", 'String'>
   readonly qr_code: Prisma.FieldRef<"tickets", 'String'>
   readonly cancellation_reason: Prisma.FieldRef<"tickets", 'String'>
+  readonly trip_type: Prisma.FieldRef<"tickets", 'TicketsTripType'>
   readonly status: Prisma.FieldRef<"tickets", 'TicketsStatus'>
   readonly booking_expires_at: Prisma.FieldRef<"tickets", 'DateTime'>
   readonly confirmed_at: Prisma.FieldRef<"tickets", 'DateTime'>
   readonly cancelled_at: Prisma.FieldRef<"tickets", 'DateTime'>
   readonly created_at: Prisma.FieldRef<"tickets", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"tickets", 'DateTime'>
-  readonly outbound_hold_id: Prisma.FieldRef<"tickets", 'String'>
-  readonly return_hold_id: Prisma.FieldRef<"tickets", 'String'>
 }
     
 

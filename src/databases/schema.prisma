@@ -82,6 +82,12 @@ model routes {
 }
 
 // TABLE ferries
+enum FerryType {
+  normal
+  premium
+  fast
+}
+
 enum FerryStatus {
   active
   maintenance
@@ -99,6 +105,7 @@ model ferries {
   year_built     Int?
   amenities      Json    @default("{}") @db.JsonB
 
+  type   FerryType   @default(normal)
   status FerryStatus @default(active)
 
   created_at DateTime    @default(now())

@@ -17,6 +17,15 @@ export const DocumentType = {
 export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType]
 
 
+export const FerryType = {
+  normal: 'normal',
+  premium: 'premium',
+  fast: 'fast'
+} as const
+
+export type FerryType = (typeof FerryType)[keyof typeof FerryType]
+
+
 export const FerryStatus = {
   active: 'active',
   maintenance: 'maintenance',

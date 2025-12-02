@@ -49,14 +49,14 @@ export type PaymentsMinAggregateOutputType = {
   error_code: string | null
   error_message: string | null
   attempts: number | null
-  paid_at: Date | null
-  refunded_at: Date | null
   refund_amount: runtime.Decimal | null
   refund_text: string | null
   ip_address: string | null
   user_agent: string | null
   payment_method: $Enums.PaymentMethod | null
   status: $Enums.PaymentStatus | null
+  paid_at: Date | null
+  refunded_at: Date | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -72,14 +72,14 @@ export type PaymentsMaxAggregateOutputType = {
   error_code: string | null
   error_message: string | null
   attempts: number | null
-  paid_at: Date | null
-  refunded_at: Date | null
   refund_amount: runtime.Decimal | null
   refund_text: string | null
   ip_address: string | null
   user_agent: string | null
   payment_method: $Enums.PaymentMethod | null
   status: $Enums.PaymentStatus | null
+  paid_at: Date | null
+  refunded_at: Date | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -95,8 +95,6 @@ export type PaymentsCountAggregateOutputType = {
   error_code: number
   error_message: number
   attempts: number
-  paid_at: number
-  refunded_at: number
   refund_amount: number
   refund_text: number
   metadata: number
@@ -104,6 +102,8 @@ export type PaymentsCountAggregateOutputType = {
   user_agent: number
   payment_method: number
   status: number
+  paid_at: number
+  refunded_at: number
   created_at: number
   updated_at: number
   _all: number
@@ -133,14 +133,14 @@ export type PaymentsMinAggregateInputType = {
   error_code?: true
   error_message?: true
   attempts?: true
-  paid_at?: true
-  refunded_at?: true
   refund_amount?: true
   refund_text?: true
   ip_address?: true
   user_agent?: true
   payment_method?: true
   status?: true
+  paid_at?: true
+  refunded_at?: true
   created_at?: true
   updated_at?: true
 }
@@ -156,14 +156,14 @@ export type PaymentsMaxAggregateInputType = {
   error_code?: true
   error_message?: true
   attempts?: true
-  paid_at?: true
-  refunded_at?: true
   refund_amount?: true
   refund_text?: true
   ip_address?: true
   user_agent?: true
   payment_method?: true
   status?: true
+  paid_at?: true
+  refunded_at?: true
   created_at?: true
   updated_at?: true
 }
@@ -179,8 +179,6 @@ export type PaymentsCountAggregateInputType = {
   error_code?: true
   error_message?: true
   attempts?: true
-  paid_at?: true
-  refunded_at?: true
   refund_amount?: true
   refund_text?: true
   metadata?: true
@@ -188,6 +186,8 @@ export type PaymentsCountAggregateInputType = {
   user_agent?: true
   payment_method?: true
   status?: true
+  paid_at?: true
+  refunded_at?: true
   created_at?: true
   updated_at?: true
   _all?: true
@@ -290,8 +290,6 @@ export type PaymentsGroupByOutputType = {
   error_code: string | null
   error_message: string | null
   attempts: number
-  paid_at: Date | null
-  refunded_at: Date | null
   refund_amount: runtime.Decimal | null
   refund_text: string | null
   metadata: runtime.JsonValue | null
@@ -299,6 +297,8 @@ export type PaymentsGroupByOutputType = {
   user_agent: string | null
   payment_method: $Enums.PaymentMethod
   status: $Enums.PaymentStatus
+  paid_at: Date | null
+  refunded_at: Date | null
   created_at: Date
   updated_at: Date
   _count: PaymentsCountAggregateOutputType | null
@@ -337,8 +337,6 @@ export type paymentsWhereInput = {
   error_code?: Prisma.StringNullableFilter<"payments"> | string | null
   error_message?: Prisma.StringNullableFilter<"payments"> | string | null
   attempts?: Prisma.IntFilter<"payments"> | number
-  paid_at?: Prisma.DateTimeNullableFilter<"payments"> | Date | string | null
-  refunded_at?: Prisma.DateTimeNullableFilter<"payments"> | Date | string | null
   refund_amount?: Prisma.DecimalNullableFilter<"payments"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: Prisma.StringNullableFilter<"payments"> | string | null
   metadata?: Prisma.JsonNullableFilter<"payments">
@@ -346,6 +344,8 @@ export type paymentsWhereInput = {
   user_agent?: Prisma.StringNullableFilter<"payments"> | string | null
   payment_method?: Prisma.EnumPaymentMethodFilter<"payments"> | $Enums.PaymentMethod
   status?: Prisma.EnumPaymentStatusFilter<"payments"> | $Enums.PaymentStatus
+  paid_at?: Prisma.DateTimeNullableFilter<"payments"> | Date | string | null
+  refunded_at?: Prisma.DateTimeNullableFilter<"payments"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"payments"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"payments"> | Date | string
   tickets?: Prisma.XOR<Prisma.TicketsNullableScalarRelationFilter, Prisma.ticketsWhereInput> | null
@@ -362,8 +362,6 @@ export type paymentsOrderByWithRelationInput = {
   error_code?: Prisma.SortOrderInput | Prisma.SortOrder
   error_message?: Prisma.SortOrderInput | Prisma.SortOrder
   attempts?: Prisma.SortOrder
-  paid_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  refunded_at?: Prisma.SortOrderInput | Prisma.SortOrder
   refund_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   refund_text?: Prisma.SortOrderInput | Prisma.SortOrder
   metadata?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -371,6 +369,8 @@ export type paymentsOrderByWithRelationInput = {
   user_agent?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_method?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paid_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  refunded_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   tickets?: Prisma.ticketsOrderByWithRelationInput
@@ -390,8 +390,6 @@ export type paymentsWhereUniqueInput = Prisma.AtLeast<{
   error_code?: Prisma.StringNullableFilter<"payments"> | string | null
   error_message?: Prisma.StringNullableFilter<"payments"> | string | null
   attempts?: Prisma.IntFilter<"payments"> | number
-  paid_at?: Prisma.DateTimeNullableFilter<"payments"> | Date | string | null
-  refunded_at?: Prisma.DateTimeNullableFilter<"payments"> | Date | string | null
   refund_amount?: Prisma.DecimalNullableFilter<"payments"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: Prisma.StringNullableFilter<"payments"> | string | null
   metadata?: Prisma.JsonNullableFilter<"payments">
@@ -399,6 +397,8 @@ export type paymentsWhereUniqueInput = Prisma.AtLeast<{
   user_agent?: Prisma.StringNullableFilter<"payments"> | string | null
   payment_method?: Prisma.EnumPaymentMethodFilter<"payments"> | $Enums.PaymentMethod
   status?: Prisma.EnumPaymentStatusFilter<"payments"> | $Enums.PaymentStatus
+  paid_at?: Prisma.DateTimeNullableFilter<"payments"> | Date | string | null
+  refunded_at?: Prisma.DateTimeNullableFilter<"payments"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"payments"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"payments"> | Date | string
   tickets?: Prisma.XOR<Prisma.TicketsNullableScalarRelationFilter, Prisma.ticketsWhereInput> | null
@@ -415,8 +415,6 @@ export type paymentsOrderByWithAggregationInput = {
   error_code?: Prisma.SortOrderInput | Prisma.SortOrder
   error_message?: Prisma.SortOrderInput | Prisma.SortOrder
   attempts?: Prisma.SortOrder
-  paid_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  refunded_at?: Prisma.SortOrderInput | Prisma.SortOrder
   refund_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   refund_text?: Prisma.SortOrderInput | Prisma.SortOrder
   metadata?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -424,6 +422,8 @@ export type paymentsOrderByWithAggregationInput = {
   user_agent?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_method?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paid_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  refunded_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   _count?: Prisma.paymentsCountOrderByAggregateInput
@@ -447,8 +447,6 @@ export type paymentsScalarWhereWithAggregatesInput = {
   error_code?: Prisma.StringNullableWithAggregatesFilter<"payments"> | string | null
   error_message?: Prisma.StringNullableWithAggregatesFilter<"payments"> | string | null
   attempts?: Prisma.IntWithAggregatesFilter<"payments"> | number
-  paid_at?: Prisma.DateTimeNullableWithAggregatesFilter<"payments"> | Date | string | null
-  refunded_at?: Prisma.DateTimeNullableWithAggregatesFilter<"payments"> | Date | string | null
   refund_amount?: Prisma.DecimalNullableWithAggregatesFilter<"payments"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: Prisma.StringNullableWithAggregatesFilter<"payments"> | string | null
   metadata?: Prisma.JsonNullableWithAggregatesFilter<"payments">
@@ -456,6 +454,8 @@ export type paymentsScalarWhereWithAggregatesInput = {
   user_agent?: Prisma.StringNullableWithAggregatesFilter<"payments"> | string | null
   payment_method?: Prisma.EnumPaymentMethodWithAggregatesFilter<"payments"> | $Enums.PaymentMethod
   status?: Prisma.EnumPaymentStatusWithAggregatesFilter<"payments"> | $Enums.PaymentStatus
+  paid_at?: Prisma.DateTimeNullableWithAggregatesFilter<"payments"> | Date | string | null
+  refunded_at?: Prisma.DateTimeNullableWithAggregatesFilter<"payments"> | Date | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"payments"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"payments"> | Date | string
 }
@@ -470,8 +470,6 @@ export type paymentsCreateInput = {
   error_code?: string | null
   error_message?: string | null
   attempts?: number
-  paid_at?: Date | string | null
-  refunded_at?: Date | string | null
   refund_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -479,6 +477,8 @@ export type paymentsCreateInput = {
   user_agent?: string | null
   payment_method: $Enums.PaymentMethod
   status?: $Enums.PaymentStatus
+  paid_at?: Date | string | null
+  refunded_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
   tickets?: Prisma.ticketsCreateNestedOneWithoutPaymentsInput
@@ -495,8 +495,6 @@ export type paymentsUncheckedCreateInput = {
   error_code?: string | null
   error_message?: string | null
   attempts?: number
-  paid_at?: Date | string | null
-  refunded_at?: Date | string | null
   refund_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -504,6 +502,8 @@ export type paymentsUncheckedCreateInput = {
   user_agent?: string | null
   payment_method: $Enums.PaymentMethod
   status?: $Enums.PaymentStatus
+  paid_at?: Date | string | null
+  refunded_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -518,8 +518,6 @@ export type paymentsUpdateInput = {
   error_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refund_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -527,6 +525,8 @@ export type paymentsUpdateInput = {
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.ticketsUpdateOneWithoutPaymentsNestedInput
@@ -543,8 +543,6 @@ export type paymentsUncheckedUpdateInput = {
   error_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refund_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -552,6 +550,8 @@ export type paymentsUncheckedUpdateInput = {
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -567,8 +567,6 @@ export type paymentsCreateManyInput = {
   error_code?: string | null
   error_message?: string | null
   attempts?: number
-  paid_at?: Date | string | null
-  refunded_at?: Date | string | null
   refund_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -576,6 +574,8 @@ export type paymentsCreateManyInput = {
   user_agent?: string | null
   payment_method: $Enums.PaymentMethod
   status?: $Enums.PaymentStatus
+  paid_at?: Date | string | null
+  refunded_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -590,8 +590,6 @@ export type paymentsUpdateManyMutationInput = {
   error_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refund_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -599,6 +597,8 @@ export type paymentsUpdateManyMutationInput = {
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -614,8 +614,6 @@ export type paymentsUncheckedUpdateManyInput = {
   error_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refund_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -623,6 +621,8 @@ export type paymentsUncheckedUpdateManyInput = {
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -638,8 +638,6 @@ export type paymentsCountOrderByAggregateInput = {
   error_code?: Prisma.SortOrder
   error_message?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
-  paid_at?: Prisma.SortOrder
-  refunded_at?: Prisma.SortOrder
   refund_amount?: Prisma.SortOrder
   refund_text?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
@@ -647,6 +645,8 @@ export type paymentsCountOrderByAggregateInput = {
   user_agent?: Prisma.SortOrder
   payment_method?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paid_at?: Prisma.SortOrder
+  refunded_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -668,14 +668,14 @@ export type paymentsMaxOrderByAggregateInput = {
   error_code?: Prisma.SortOrder
   error_message?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
-  paid_at?: Prisma.SortOrder
-  refunded_at?: Prisma.SortOrder
   refund_amount?: Prisma.SortOrder
   refund_text?: Prisma.SortOrder
   ip_address?: Prisma.SortOrder
   user_agent?: Prisma.SortOrder
   payment_method?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paid_at?: Prisma.SortOrder
+  refunded_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -691,14 +691,14 @@ export type paymentsMinOrderByAggregateInput = {
   error_code?: Prisma.SortOrder
   error_message?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
-  paid_at?: Prisma.SortOrder
-  refunded_at?: Prisma.SortOrder
   refund_amount?: Prisma.SortOrder
   refund_text?: Prisma.SortOrder
   ip_address?: Prisma.SortOrder
   user_agent?: Prisma.SortOrder
   payment_method?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paid_at?: Prisma.SortOrder
+  refunded_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -779,8 +779,6 @@ export type paymentsCreateWithoutTicketsInput = {
   error_code?: string | null
   error_message?: string | null
   attempts?: number
-  paid_at?: Date | string | null
-  refunded_at?: Date | string | null
   refund_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -788,6 +786,8 @@ export type paymentsCreateWithoutTicketsInput = {
   user_agent?: string | null
   payment_method: $Enums.PaymentMethod
   status?: $Enums.PaymentStatus
+  paid_at?: Date | string | null
+  refunded_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -802,8 +802,6 @@ export type paymentsUncheckedCreateWithoutTicketsInput = {
   error_code?: string | null
   error_message?: string | null
   attempts?: number
-  paid_at?: Date | string | null
-  refunded_at?: Date | string | null
   refund_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -811,6 +809,8 @@ export type paymentsUncheckedCreateWithoutTicketsInput = {
   user_agent?: string | null
   payment_method: $Enums.PaymentMethod
   status?: $Enums.PaymentStatus
+  paid_at?: Date | string | null
+  refunded_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -855,8 +855,6 @@ export type paymentsScalarWhereInput = {
   error_code?: Prisma.StringNullableFilter<"payments"> | string | null
   error_message?: Prisma.StringNullableFilter<"payments"> | string | null
   attempts?: Prisma.IntFilter<"payments"> | number
-  paid_at?: Prisma.DateTimeNullableFilter<"payments"> | Date | string | null
-  refunded_at?: Prisma.DateTimeNullableFilter<"payments"> | Date | string | null
   refund_amount?: Prisma.DecimalNullableFilter<"payments"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: Prisma.StringNullableFilter<"payments"> | string | null
   metadata?: Prisma.JsonNullableFilter<"payments">
@@ -864,6 +862,8 @@ export type paymentsScalarWhereInput = {
   user_agent?: Prisma.StringNullableFilter<"payments"> | string | null
   payment_method?: Prisma.EnumPaymentMethodFilter<"payments"> | $Enums.PaymentMethod
   status?: Prisma.EnumPaymentStatusFilter<"payments"> | $Enums.PaymentStatus
+  paid_at?: Prisma.DateTimeNullableFilter<"payments"> | Date | string | null
+  refunded_at?: Prisma.DateTimeNullableFilter<"payments"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"payments"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"payments"> | Date | string
 }
@@ -878,8 +878,6 @@ export type paymentsCreateManyTicketsInput = {
   error_code?: string | null
   error_message?: string | null
   attempts?: number
-  paid_at?: Date | string | null
-  refunded_at?: Date | string | null
   refund_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -887,6 +885,8 @@ export type paymentsCreateManyTicketsInput = {
   user_agent?: string | null
   payment_method: $Enums.PaymentMethod
   status?: $Enums.PaymentStatus
+  paid_at?: Date | string | null
+  refunded_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -901,8 +901,6 @@ export type paymentsUpdateWithoutTicketsInput = {
   error_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refund_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -910,6 +908,8 @@ export type paymentsUpdateWithoutTicketsInput = {
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -924,8 +924,6 @@ export type paymentsUncheckedUpdateWithoutTicketsInput = {
   error_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refund_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -933,6 +931,8 @@ export type paymentsUncheckedUpdateWithoutTicketsInput = {
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -947,8 +947,6 @@ export type paymentsUncheckedUpdateManyWithoutTicketsInput = {
   error_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refund_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   refund_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -956,6 +954,8 @@ export type paymentsUncheckedUpdateManyWithoutTicketsInput = {
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paid_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  refunded_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -973,8 +973,6 @@ export type paymentsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   error_code?: boolean
   error_message?: boolean
   attempts?: boolean
-  paid_at?: boolean
-  refunded_at?: boolean
   refund_amount?: boolean
   refund_text?: boolean
   metadata?: boolean
@@ -982,6 +980,8 @@ export type paymentsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   user_agent?: boolean
   payment_method?: boolean
   status?: boolean
+  paid_at?: boolean
+  refunded_at?: boolean
   created_at?: boolean
   updated_at?: boolean
   tickets?: boolean | Prisma.payments$ticketsArgs<ExtArgs>
@@ -998,8 +998,6 @@ export type paymentsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   error_code?: boolean
   error_message?: boolean
   attempts?: boolean
-  paid_at?: boolean
-  refunded_at?: boolean
   refund_amount?: boolean
   refund_text?: boolean
   metadata?: boolean
@@ -1007,6 +1005,8 @@ export type paymentsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   user_agent?: boolean
   payment_method?: boolean
   status?: boolean
+  paid_at?: boolean
+  refunded_at?: boolean
   created_at?: boolean
   updated_at?: boolean
   tickets?: boolean | Prisma.payments$ticketsArgs<ExtArgs>
@@ -1023,8 +1023,6 @@ export type paymentsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   error_code?: boolean
   error_message?: boolean
   attempts?: boolean
-  paid_at?: boolean
-  refunded_at?: boolean
   refund_amount?: boolean
   refund_text?: boolean
   metadata?: boolean
@@ -1032,6 +1030,8 @@ export type paymentsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   user_agent?: boolean
   payment_method?: boolean
   status?: boolean
+  paid_at?: boolean
+  refunded_at?: boolean
   created_at?: boolean
   updated_at?: boolean
   tickets?: boolean | Prisma.payments$ticketsArgs<ExtArgs>
@@ -1048,8 +1048,6 @@ export type paymentsSelectScalar = {
   error_code?: boolean
   error_message?: boolean
   attempts?: boolean
-  paid_at?: boolean
-  refunded_at?: boolean
   refund_amount?: boolean
   refund_text?: boolean
   metadata?: boolean
@@ -1057,11 +1055,13 @@ export type paymentsSelectScalar = {
   user_agent?: boolean
   payment_method?: boolean
   status?: boolean
+  paid_at?: boolean
+  refunded_at?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type paymentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ticket_id" | "payment_provider" | "provider_transaction_id" | "provider_payment_intent" | "amount" | "currency" | "error_code" | "error_message" | "attempts" | "paid_at" | "refunded_at" | "refund_amount" | "refund_text" | "metadata" | "ip_address" | "user_agent" | "payment_method" | "status" | "created_at" | "updated_at", ExtArgs["result"]["payments"]>
+export type paymentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ticket_id" | "payment_provider" | "provider_transaction_id" | "provider_payment_intent" | "amount" | "currency" | "error_code" | "error_message" | "attempts" | "refund_amount" | "refund_text" | "metadata" | "ip_address" | "user_agent" | "payment_method" | "status" | "paid_at" | "refunded_at" | "created_at" | "updated_at", ExtArgs["result"]["payments"]>
 export type paymentsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tickets?: boolean | Prisma.payments$ticketsArgs<ExtArgs>
 }
@@ -1088,8 +1088,6 @@ export type $paymentsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     error_code: string | null
     error_message: string | null
     attempts: number
-    paid_at: Date | null
-    refunded_at: Date | null
     refund_amount: runtime.Decimal | null
     refund_text: string | null
     metadata: runtime.JsonValue | null
@@ -1097,6 +1095,8 @@ export type $paymentsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     user_agent: string | null
     payment_method: $Enums.PaymentMethod
     status: $Enums.PaymentStatus
+    paid_at: Date | null
+    refunded_at: Date | null
     created_at: Date
     updated_at: Date
   }, ExtArgs["result"]["payments"]>
@@ -1533,8 +1533,6 @@ export interface paymentsFieldRefs {
   readonly error_code: Prisma.FieldRef<"payments", 'String'>
   readonly error_message: Prisma.FieldRef<"payments", 'String'>
   readonly attempts: Prisma.FieldRef<"payments", 'Int'>
-  readonly paid_at: Prisma.FieldRef<"payments", 'DateTime'>
-  readonly refunded_at: Prisma.FieldRef<"payments", 'DateTime'>
   readonly refund_amount: Prisma.FieldRef<"payments", 'Decimal'>
   readonly refund_text: Prisma.FieldRef<"payments", 'String'>
   readonly metadata: Prisma.FieldRef<"payments", 'Json'>
@@ -1542,6 +1540,8 @@ export interface paymentsFieldRefs {
   readonly user_agent: Prisma.FieldRef<"payments", 'String'>
   readonly payment_method: Prisma.FieldRef<"payments", 'PaymentMethod'>
   readonly status: Prisma.FieldRef<"payments", 'PaymentStatus'>
+  readonly paid_at: Prisma.FieldRef<"payments", 'DateTime'>
+  readonly refunded_at: Prisma.FieldRef<"payments", 'DateTime'>
   readonly created_at: Prisma.FieldRef<"payments", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"payments", 'DateTime'>
 }

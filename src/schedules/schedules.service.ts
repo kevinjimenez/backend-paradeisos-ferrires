@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { DatabasesService } from './../databases/databases.service';
 import { CreateScheduleDto } from './dto/create-schedule.dto';
+import { SchedulesFilterDto } from './dto/schedules-filter.dto';
 import { UpdateScheduleDto } from './dto/update-schedule.dto';
+import { Prisma } from 'src/databases/generated/prisma/client';
+import { ApiResponseDto } from 'src/common/dtos/api-response.dto';
 
 @Injectable()
 export class SchedulesService {
@@ -11,8 +14,22 @@ export class SchedulesService {
     return 'This action adds a new schedule';
   }
 
-  findAll() {
-    return this.databasesService.schedules.findMany();
+  async findAll(filters: SchedulesFilterDto) {
+    const where = this.buildWhereFromFilters(filters);
+    const data = await this.databasesService.schedules.findMany({
+      include: {
+        ferries: true,
+        routes: {
+          include: {
+            origin_ports: true,
+            destination_ports: true,
+          },
+        },
+      },
+      where,
+    });
+
+    return { data };
   }
 
   findOne(id: number) {
@@ -25,5 +42,36 @@ export class SchedulesService {
 
   remove(id: number) {
     return `This action removes a #${id} schedule`;
+  }
+
+  private buildWhereFromFilters(
+    filters: SchedulesFilterDto,
+  ): Prisma.schedulesWhereInput {
+    const { departureDate, returnDate, from, to } = filters;
+
+    const dateFilter =
+      departureDate || returnDate
+        ? {
+            departure_date: {
+              ...(departureDate && { gte: new Date(departureDate) }),
+              ...(returnDate && { lte: new Date(returnDate) }),
+            },
+          }
+        : {};
+
+    const routesFilter =
+      from || to
+        ? {
+            routes: {
+              ...(from && { origin_port_id: from }),
+              ...(to && { destination_port_id: to }),
+            },
+          }
+        : {};
+
+    return {
+      ...dateFilter,
+      ...routesFilter,
+    };
   }
 }

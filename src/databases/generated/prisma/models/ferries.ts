@@ -45,6 +45,7 @@ export type FerriesMinAggregateOutputType = {
   operator_phone: string | null
   operator_email: string | null
   year_built: number | null
+  type: $Enums.FerryType | null
   status: $Enums.FerryStatus | null
   created_at: Date | null
   updated_at: Date | null
@@ -59,6 +60,7 @@ export type FerriesMaxAggregateOutputType = {
   operator_phone: string | null
   operator_email: string | null
   year_built: number | null
+  type: $Enums.FerryType | null
   status: $Enums.FerryStatus | null
   created_at: Date | null
   updated_at: Date | null
@@ -74,6 +76,7 @@ export type FerriesCountAggregateOutputType = {
   operator_email: number
   year_built: number
   amenities: number
+  type: number
   status: number
   created_at: number
   updated_at: number
@@ -100,6 +103,7 @@ export type FerriesMinAggregateInputType = {
   operator_phone?: true
   operator_email?: true
   year_built?: true
+  type?: true
   status?: true
   created_at?: true
   updated_at?: true
@@ -114,6 +118,7 @@ export type FerriesMaxAggregateInputType = {
   operator_phone?: true
   operator_email?: true
   year_built?: true
+  type?: true
   status?: true
   created_at?: true
   updated_at?: true
@@ -129,6 +134,7 @@ export type FerriesCountAggregateInputType = {
   operator_email?: true
   year_built?: true
   amenities?: true
+  type?: true
   status?: true
   created_at?: true
   updated_at?: true
@@ -231,6 +237,7 @@ export type FerriesGroupByOutputType = {
   operator_email: string | null
   year_built: number | null
   amenities: runtime.JsonValue
+  type: $Enums.FerryType
   status: $Enums.FerryStatus
   created_at: Date
   updated_at: Date
@@ -269,6 +276,7 @@ export type ferriesWhereInput = {
   operator_email?: Prisma.StringNullableFilter<"ferries"> | string | null
   year_built?: Prisma.IntNullableFilter<"ferries"> | number | null
   amenities?: Prisma.JsonFilter<"ferries">
+  type?: Prisma.EnumFerryTypeFilter<"ferries"> | $Enums.FerryType
   status?: Prisma.EnumFerryStatusFilter<"ferries"> | $Enums.FerryStatus
   created_at?: Prisma.DateTimeFilter<"ferries"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ferries"> | Date | string
@@ -285,6 +293,7 @@ export type ferriesOrderByWithRelationInput = {
   operator_email?: Prisma.SortOrderInput | Prisma.SortOrder
   year_built?: Prisma.SortOrderInput | Prisma.SortOrder
   amenities?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -304,6 +313,7 @@ export type ferriesWhereUniqueInput = Prisma.AtLeast<{
   operator_email?: Prisma.StringNullableFilter<"ferries"> | string | null
   year_built?: Prisma.IntNullableFilter<"ferries"> | number | null
   amenities?: Prisma.JsonFilter<"ferries">
+  type?: Prisma.EnumFerryTypeFilter<"ferries"> | $Enums.FerryType
   status?: Prisma.EnumFerryStatusFilter<"ferries"> | $Enums.FerryStatus
   created_at?: Prisma.DateTimeFilter<"ferries"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ferries"> | Date | string
@@ -320,6 +330,7 @@ export type ferriesOrderByWithAggregationInput = {
   operator_email?: Prisma.SortOrderInput | Prisma.SortOrder
   year_built?: Prisma.SortOrderInput | Prisma.SortOrder
   amenities?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -343,6 +354,7 @@ export type ferriesScalarWhereWithAggregatesInput = {
   operator_email?: Prisma.StringNullableWithAggregatesFilter<"ferries"> | string | null
   year_built?: Prisma.IntNullableWithAggregatesFilter<"ferries"> | number | null
   amenities?: Prisma.JsonWithAggregatesFilter<"ferries">
+  type?: Prisma.EnumFerryTypeWithAggregatesFilter<"ferries"> | $Enums.FerryType
   status?: Prisma.EnumFerryStatusWithAggregatesFilter<"ferries"> | $Enums.FerryStatus
   created_at?: Prisma.DateTimeWithAggregatesFilter<"ferries"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"ferries"> | Date | string
@@ -358,6 +370,7 @@ export type ferriesCreateInput = {
   operator_email?: string | null
   year_built?: number | null
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: $Enums.FerryType
   status?: $Enums.FerryStatus
   created_at?: Date | string
   updated_at?: Date | string
@@ -374,6 +387,7 @@ export type ferriesUncheckedCreateInput = {
   operator_email?: string | null
   year_built?: number | null
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: $Enums.FerryType
   status?: $Enums.FerryStatus
   created_at?: Date | string
   updated_at?: Date | string
@@ -390,6 +404,7 @@ export type ferriesUpdateInput = {
   operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -406,6 +421,7 @@ export type ferriesUncheckedUpdateInput = {
   operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -422,6 +438,7 @@ export type ferriesCreateManyInput = {
   operator_email?: string | null
   year_built?: number | null
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: $Enums.FerryType
   status?: $Enums.FerryStatus
   created_at?: Date | string
   updated_at?: Date | string
@@ -437,6 +454,7 @@ export type ferriesUpdateManyMutationInput = {
   operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -452,6 +470,7 @@ export type ferriesUncheckedUpdateManyInput = {
   operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -467,6 +486,7 @@ export type ferriesCountOrderByAggregateInput = {
   operator_email?: Prisma.SortOrder
   year_built?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -486,6 +506,7 @@ export type ferriesMaxOrderByAggregateInput = {
   operator_phone?: Prisma.SortOrder
   operator_email?: Prisma.SortOrder
   year_built?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -500,6 +521,7 @@ export type ferriesMinOrderByAggregateInput = {
   operator_phone?: Prisma.SortOrder
   operator_email?: Prisma.SortOrder
   year_built?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -521,6 +543,10 @@ export type NullableIntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type EnumFerryTypeFieldUpdateOperationsInput = {
+  set?: $Enums.FerryType
 }
 
 export type EnumFerryStatusFieldUpdateOperationsInput = {
@@ -553,6 +579,7 @@ export type ferriesCreateWithoutSchedulesInput = {
   operator_email?: string | null
   year_built?: number | null
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: $Enums.FerryType
   status?: $Enums.FerryStatus
   created_at?: Date | string
   updated_at?: Date | string
@@ -568,6 +595,7 @@ export type ferriesUncheckedCreateWithoutSchedulesInput = {
   operator_email?: string | null
   year_built?: number | null
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: $Enums.FerryType
   status?: $Enums.FerryStatus
   created_at?: Date | string
   updated_at?: Date | string
@@ -599,6 +627,7 @@ export type ferriesUpdateWithoutSchedulesInput = {
   operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -614,6 +643,7 @@ export type ferriesUncheckedUpdateWithoutSchedulesInput = {
   operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -660,6 +690,7 @@ export type ferriesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   operator_email?: boolean
   year_built?: boolean
   amenities?: boolean
+  type?: boolean
   status?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -677,6 +708,7 @@ export type ferriesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   operator_email?: boolean
   year_built?: boolean
   amenities?: boolean
+  type?: boolean
   status?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -692,6 +724,7 @@ export type ferriesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   operator_email?: boolean
   year_built?: boolean
   amenities?: boolean
+  type?: boolean
   status?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -707,12 +740,13 @@ export type ferriesSelectScalar = {
   operator_email?: boolean
   year_built?: boolean
   amenities?: boolean
+  type?: boolean
   status?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type ferriesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "register_code" | "capacity" | "operator_name" | "operator_phone" | "operator_email" | "year_built" | "amenities" | "status" | "created_at" | "updated_at", ExtArgs["result"]["ferries"]>
+export type ferriesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "register_code" | "capacity" | "operator_name" | "operator_phone" | "operator_email" | "year_built" | "amenities" | "type" | "status" | "created_at" | "updated_at", ExtArgs["result"]["ferries"]>
 export type ferriesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   schedules?: boolean | Prisma.ferries$schedulesArgs<ExtArgs>
   _count?: boolean | Prisma.FerriesCountOutputTypeDefaultArgs<ExtArgs>
@@ -735,6 +769,7 @@ export type $ferriesPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     operator_email: string | null
     year_built: number | null
     amenities: runtime.JsonValue
+    type: $Enums.FerryType
     status: $Enums.FerryStatus
     created_at: Date
     updated_at: Date
@@ -1171,6 +1206,7 @@ export interface ferriesFieldRefs {
   readonly operator_email: Prisma.FieldRef<"ferries", 'String'>
   readonly year_built: Prisma.FieldRef<"ferries", 'Int'>
   readonly amenities: Prisma.FieldRef<"ferries", 'Json'>
+  readonly type: Prisma.FieldRef<"ferries", 'FerryType'>
   readonly status: Prisma.FieldRef<"ferries", 'FerryStatus'>
   readonly created_at: Prisma.FieldRef<"ferries", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"ferries", 'DateTime'>

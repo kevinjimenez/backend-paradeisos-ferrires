@@ -86,6 +86,26 @@ async function main() {
     },
   });
 
+  const portValencia = await prisma.ports.create({
+    data: {
+      island_id: mainland.id,
+      name: 'Port de València',
+      code: 'VLC',
+      address: 'València, España',
+      contact_phone: '+34 000000003',
+    },
+  });
+
+  const portIbiza = await prisma.ports.create({
+    data: {
+      island_id: balearic.id,
+      name: "Port d'Eivissa",
+      code: 'IBZ',
+      address: 'Eivissa, España',
+      contact_phone: '+34 000000004',
+    },
+  });
+
   // FERRIES
   console.log('⛴ Creating ferries...');
   const ferry1 = await prisma.ferries.create({
@@ -102,12 +122,81 @@ async function main() {
     },
   });
 
+  const ferry2 = await prisma.ferries.create({
+    data: {
+      name: 'Paradeisos Premium',
+      register_code: 'MED-002',
+      capacity: 300,
+      operator_name: 'Paradeisos Ferries',
+      operator_phone: '+34 222222222',
+      operator_email: 'premium@paradeisos.com',
+      year_built: 2020,
+      amenities: ['WiFi', 'Restaurant', 'VIP Lounge'],
+      type: 'premium',
+      status: 'active',
+    },
+  });
+
+  const ferry3 = await prisma.ferries.create({
+    data: {
+      name: 'Paradeisos Fast',
+      register_code: 'MED-003',
+      capacity: 200,
+      operator_name: 'Paradeisos Ferries',
+      operator_phone: '+34 333333333',
+      operator_email: 'fast@paradeisos.com',
+      year_built: 2018,
+      amenities: ['WiFi'],
+      type: 'fast',
+      status: 'active',
+    },
+  });
+
   // ROUTES
   console.log('🗺 Creating routes...');
   const route1 = await prisma.routes.create({
     data: {
       origin_port_id: portBarcelona.id,
       destination_port_id: portPalma.id,
+      distance_km: 200,
+      duration_minutes: 480,
+      base_price_resident: 50,
+      base_price_national: 70,
+      base_price_foreign: 90,
+      is_active: true,
+    },
+  });
+
+  const route2 = await prisma.routes.create({
+    data: {
+      origin_port_id: portBarcelona.id,
+      destination_port_id: portIbiza.id,
+      distance_km: 280,
+      duration_minutes: 420,
+      base_price_resident: 45,
+      base_price_national: 65,
+      base_price_foreign: 85,
+      is_active: true,
+    },
+  });
+
+  const route3 = await prisma.routes.create({
+    data: {
+      origin_port_id: portValencia.id,
+      destination_port_id: portPalma.id,
+      distance_km: 260,
+      duration_minutes: 360,
+      base_price_resident: 40,
+      base_price_national: 60,
+      base_price_foreign: 80,
+      is_active: true,
+    },
+  });
+
+  const route4 = await prisma.routes.create({
+    data: {
+      origin_port_id: portPalma.id,
+      destination_port_id: portBarcelona.id,
       distance_km: 200,
       duration_minutes: 480,
       base_price_resident: 50,
@@ -134,6 +223,152 @@ async function main() {
       available_seats: ferry1.capacity - 10,
       status: 'scheduled',
       notes: 'Ruta diaria de prueba',
+    },
+  });
+
+  const base = new Date(departure.getTime());
+
+  const departure2 = new Date(base.getTime() + 1 * 24 * 60 * 60 * 1000);
+  const arrival2 = new Date(departure2.getTime() + 7 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route1.id,
+      ferry_id: ferry2.id,
+      departure_date: departure2,
+      departure_time: departure2,
+      arrival_time: arrival2,
+      total_capacity: ferry2.capacity,
+      available_seats: ferry2.capacity - 50,
+      status: 'scheduled',
+      notes: 'BCN → PMI (premium) nocturno',
+    },
+  });
+
+  const departure3 = new Date(base.getTime() + 2 * 24 * 60 * 60 * 1000);
+  const arrival3 = new Date(departure3.getTime() + 6 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route2.id,
+      ferry_id: ferry3.id,
+      departure_date: departure3,
+      departure_time: departure3,
+      arrival_time: arrival3,
+      total_capacity: ferry3.capacity,
+      available_seats: ferry3.capacity - 80,
+      status: 'scheduled',
+      notes: 'BCN → IBZ (fast) diurno',
+    },
+  });
+
+  const departure4 = new Date(base.getTime() + 3 * 24 * 60 * 60 * 1000);
+  const arrival4 = new Date(departure4.getTime() + 6 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route2.id,
+      ferry_id: ferry1.id,
+      departure_date: departure4,
+      departure_time: departure4,
+      arrival_time: arrival4,
+      total_capacity: ferry1.capacity,
+      available_seats: ferry1.capacity - 120,
+      status: 'scheduled',
+      notes: 'BCN → IBZ (normal) fin de semana',
+    },
+  });
+
+  const departure5 = new Date(base.getTime() + 4 * 24 * 60 * 60 * 1000);
+  const arrival5 = new Date(departure5.getTime() + 5 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route3.id,
+      ferry_id: ferry2.id,
+      departure_date: departure5,
+      departure_time: departure5,
+      arrival_time: arrival5,
+      total_capacity: ferry2.capacity,
+      available_seats: ferry2.capacity - 150,
+      status: 'scheduled',
+      notes: 'VLC → PMI (premium) tarde',
+    },
+  });
+
+  const departure6 = new Date(base.getTime() + 5 * 24 * 60 * 60 * 1000);
+  const arrival6 = new Date(departure6.getTime() + 5 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route3.id,
+      ferry_id: ferry3.id,
+      departure_date: departure6,
+      departure_time: departure6,
+      arrival_time: arrival6,
+      total_capacity: ferry3.capacity,
+      available_seats: ferry3.capacity - 90,
+      status: 'scheduled',
+      notes: 'VLC → PMI (fast) mañana',
+    },
+  });
+
+  const departure7 = new Date(base.getTime() + 6 * 24 * 60 * 60 * 1000);
+  const arrival7 = new Date(departure7.getTime() + 8 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route4.id,
+      ferry_id: ferry1.id,
+      departure_date: departure7,
+      departure_time: departure7,
+      arrival_time: arrival7,
+      total_capacity: ferry1.capacity,
+      available_seats: ferry1.capacity - 200,
+      status: 'scheduled',
+      notes: 'PMI → BCN (normal) diurno',
+    },
+  });
+
+  const departure8 = new Date(base.getTime() + 7 * 24 * 60 * 60 * 1000);
+  const arrival8 = new Date(departure8.getTime() + 7 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route4.id,
+      ferry_id: ferry2.id,
+      departure_date: departure8,
+      departure_time: departure8,
+      arrival_time: arrival8,
+      total_capacity: ferry2.capacity,
+      available_seats: ferry2.capacity - 80,
+      status: 'scheduled',
+      notes: 'PMI → BCN (premium) noche',
+    },
+  });
+
+  const departure9 = new Date(base.getTime() + 8 * 24 * 60 * 60 * 1000);
+  const arrival9 = new Date(departure9.getTime() + 4 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route2.id,
+      ferry_id: ferry3.id,
+      departure_date: departure9,
+      departure_time: departure9,
+      arrival_time: arrival9,
+      total_capacity: ferry3.capacity,
+      available_seats: ferry3.capacity - 50,
+      status: 'scheduled',
+      notes: 'BCN → IBZ (fast) especial',
+    },
+  });
+
+  const departure10 = new Date(base.getTime() + 9 * 24 * 60 * 60 * 1000);
+  const arrival10 = new Date(departure10.getTime() + 8 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route1.id,
+      ferry_id: ferry1.id,
+      departure_date: departure10,
+      departure_time: departure10,
+      arrival_time: arrival10,
+      total_capacity: ferry1.capacity,
+      available_seats: ferry1.capacity - 30,
+      status: 'scheduled',
+      notes: 'BCN → PMI (normal) fin de mes',
     },
   });
 

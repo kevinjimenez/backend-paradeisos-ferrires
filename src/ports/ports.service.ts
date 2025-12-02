@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { DatabasesService } from './../databases/databases.service';
 import { CreatePortDto } from './dto/create-port.dto';
 import { UpdatePortDto } from './dto/update-port.dto';
+import { console } from 'inspector';
 
 @Injectable()
 export class PortsService {
@@ -11,8 +12,22 @@ export class PortsService {
     return 'This action adds a new port';
   }
 
-  findAll() {
-    return this.databasesService.ports.findMany();
+  async findAll() {
+    try {
+      const data = await this.databasesService.ports.findMany();
+      return {
+        data,
+        meta: {
+          page: 0,
+          limit: 0,
+          total: 0,
+          totalPages: 0,
+        },
+      };
+    } catch (error) {
+      console.log({ error });
+      throw new NotFoundException('not found');
+    }
   }
 
   findOne(id: number) {

@@ -239,6 +239,13 @@ export type JsonFilterBase<$PrismaModel = never> = {
   not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
 }
 
+export type EnumFerryTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.FerryType | Prisma.EnumFerryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.FerryType[] | Prisma.ListEnumFerryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FerryType[] | Prisma.ListEnumFerryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFerryTypeFilter<$PrismaModel> | $Enums.FerryType
+}
+
 export type EnumFerryStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.FerryStatus | Prisma.EnumFerryStatusFieldRefInput<$PrismaModel>
   in?: $Enums.FerryStatus[] | Prisma.ListEnumFerryStatusFieldRefInput<$PrismaModel>
@@ -287,6 +294,16 @@ export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedJsonFilter<$PrismaModel>
   _max?: Prisma.NestedJsonFilter<$PrismaModel>
+}
+
+export type EnumFerryTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FerryType | Prisma.EnumFerryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.FerryType[] | Prisma.ListEnumFerryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FerryType[] | Prisma.ListEnumFerryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFerryTypeWithAggregatesFilter<$PrismaModel> | $Enums.FerryType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFerryTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFerryTypeFilter<$PrismaModel>
 }
 
 export type EnumFerryStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -697,6 +714,13 @@ export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDecimalFilter<$PrismaModel>
 }
 
+export type NestedEnumFerryTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.FerryType | Prisma.EnumFerryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.FerryType[] | Prisma.ListEnumFerryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FerryType[] | Prisma.ListEnumFerryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFerryTypeFilter<$PrismaModel> | $Enums.FerryType
+}
+
 export type NestedEnumFerryStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.FerryStatus | Prisma.EnumFerryStatusFieldRefInput<$PrismaModel>
   in?: $Enums.FerryStatus[] | Prisma.ListEnumFerryStatusFieldRefInput<$PrismaModel>
@@ -753,6 +777,16 @@ export type NestedJsonFilterBase<$PrismaModel = never> = {
   gt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   gte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
+}
+
+export type NestedEnumFerryTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FerryType | Prisma.EnumFerryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.FerryType[] | Prisma.ListEnumFerryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FerryType[] | Prisma.ListEnumFerryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFerryTypeWithAggregatesFilter<$PrismaModel> | $Enums.FerryType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFerryTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFerryTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumFerryStatusWithAggregatesFilter<$PrismaModel = never> = {
