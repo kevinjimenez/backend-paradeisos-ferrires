@@ -27,6 +27,7 @@ const envsSchema = joi
     DB_PORT: joi.number().required(),
     DB_USERNAME: joi.string().required(),
     DB_PASSWORD: joi.string().required(),
+    DATABASE_URL: joi.string().required(),
 
     PAGINATION_LIMIT: joi.number().required(),
     PAGINATION_PAGE: joi.number().required(),
@@ -55,7 +56,7 @@ export const envs = {
   dbPort: envVars.DB_PORT,
   dbUsername: envVars.DB_USERNAME,
   dbPassword: envVars.DB_PASSWORD,
-  databaseUrl: `postgresql://${envVars.DB_USERNAME}:${envVars.DB_PASSWORD}@${envVars.DB_HOST}:${envVars.DB_PORT}/${envVars.DB_NAME}?${envVars.NODE_ENV === 'prod' ? 'sslmode=require&channel_binding=require' : 'schema=public'}`,
+  databaseUrl: envVars.DATABASE_URL,
 
   paginationLimit: envVars.PAGINATION_LIMIT,
   paginationPage: envVars.PAGINATION_PAGE,
