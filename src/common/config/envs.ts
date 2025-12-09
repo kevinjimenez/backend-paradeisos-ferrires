@@ -55,7 +55,7 @@ export const envs = {
   dbPort: envVars.DB_PORT,
   dbUsername: envVars.DB_USERNAME,
   dbPassword: envVars.DB_PASSWORD,
-  databaseUrl: `postgresql://${envVars.DB_USERNAME}:${envVars.DB_PASSWORD}@${envVars.DB_HOST}:${envVars.DB_PORT}/${envVars.DB_NAME}?schema=public`,
+  databaseUrl: `postgresql://${envVars.DB_USERNAME}:${envVars.DB_PASSWORD}@${envVars.DB_HOST}:${envVars.DB_PORT}/${envVars.DB_NAME}?${envVars.NODE_ENV === 'prod' ? 'sslmode=require&channel_binding=require' : 'schema=public'}`,
 
   paginationLimit: envVars.PAGINATION_LIMIT,
   paginationPage: envVars.PAGINATION_PAGE,
