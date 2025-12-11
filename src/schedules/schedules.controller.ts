@@ -24,7 +24,6 @@ export class SchedulesController {
 
   @Get()
   findAll(@Query() filters: SchedulesFilterDto) {
-    console.log({ filters });
     return this.schedulesService.findAll(filters);
   }
 
