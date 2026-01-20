@@ -18,6 +18,9 @@ export class DatabasesService
   constructor() {
     const adapter = new PrismaPg({
       connectionString: envs.databaseUrl,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     });
     super({ adapter });
   }
