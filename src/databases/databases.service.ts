@@ -18,9 +18,13 @@ export class DatabasesService
   constructor() {
     const adapter = new PrismaPg({
       connectionString: envs.databaseUrl,
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      ...(envs.nodeEnv !== 'local'
+        ? {
+            ssl: {
+              rejectUnauthorized: false,
+            },
+          }
+        : {}),
     });
     super({ adapter });
   }
