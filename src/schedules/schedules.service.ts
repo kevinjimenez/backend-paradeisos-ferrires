@@ -13,6 +13,7 @@ export class SchedulesService {
     return 'This action adds a new schedule';
   }
 
+  // TODO: validar bien rango de fecha o mejor los ferrys que salen en una fecha
   async findAll(filters: SchedulesFilterDto) {
     const where = this.buildWhereFromFilters(filters);
     const data = await this.databasesService.schedules.findMany({
@@ -46,17 +47,20 @@ export class SchedulesService {
   private buildWhereFromFilters(
     filters: SchedulesFilterDto,
   ): Prisma.schedulesWhereInput {
-    const { departureDate, returnDate, from, to } = filters;
+    // const { departureDate, returnDate, from, to } = filters;
+    const { departureDate, from, to } = filters;
 
-    const dateFilter =
-      departureDate || returnDate
-        ? {
-            departure_date: {
-              ...(departureDate && { gte: new Date(departureDate) }),
-              ...(returnDate && { lte: new Date(returnDate) }),
-            },
-          }
-        : {};
+    const dateFilter = departureDate
+      ? {
+          departure_date: {
+            gte: new Date(new Date(departureDate).setHours(0, 0, 0, 0)),
+            lt: new Date(
+              new Date(departureDate).setHours(0, 0, 0, 0) +
+                24 * 60 * 60 * 1000,
+            ),
+          },
+        }
+      : {};
 
     const routesFilter =
       from || to
