@@ -11,7 +11,8 @@ export class BookingService {
   constructor(private databasesService: DatabasesService) {}
 
   async create(createBookingDto: CreateBookingDto) {
-    const { outboundScheduleId, totalPassengers } = createBookingDto;
+    const { outboundScheduleId, returnScheduleId, totalPassengers } =
+      createBookingDto;
 
     // if (!userId && !sessionId) {
     //   throw new BadRequestException('Se requiere userId o sessionId');
@@ -28,11 +29,21 @@ export class BookingService {
         expiresAt,
       );
 
+      const returnHold = returnScheduleId
+        ? await this.createHoldForSchedule(
+            tx,
+            returnScheduleId,
+            totalPassengers,
+            expiresAt,
+          )
+        : null;
+
       return {
         outboundHold,
+        returnHold,
         expiresAt,
         totalPassengers,
-        tripType: 'round_trip',
+        tripType: returnScheduleId ? 'round_trip' : 'one_way',
       };
     });
 

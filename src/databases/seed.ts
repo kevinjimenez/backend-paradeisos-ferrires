@@ -222,6 +222,59 @@ async function main() {
     },
   });
 
+  // Rutas de vuelta (inversas)
+  const route5 = await prisma.routes.create({
+    data: {
+      origin_port_id: portBaquerizo.id,
+      destination_port_id: portAyora.id,
+      distance_km: 95,
+      duration_minutes: 150,
+      base_price_resident: 50,
+      base_price_national: 70,
+      base_price_foreign: 90,
+      is_active: true,
+    },
+  });
+
+  const route6 = await prisma.routes.create({
+    data: {
+      origin_port_id: portAyora.id,
+      destination_port_id: portBaltra.id,
+      distance_km: 30,
+      duration_minutes: 60,
+      base_price_resident: 45,
+      base_price_national: 65,
+      base_price_foreign: 85,
+      is_active: true,
+    },
+  });
+
+  const route7 = await prisma.routes.create({
+    data: {
+      origin_port_id: portVillamil.id,
+      destination_port_id: portAyora.id,
+      distance_km: 110,
+      duration_minutes: 180,
+      base_price_resident: 40,
+      base_price_national: 60,
+      base_price_foreign: 80,
+      is_active: true,
+    },
+  });
+
+  const route8 = await prisma.routes.create({
+    data: {
+      origin_port_id: portBaltra.id,
+      destination_port_id: portBaquerizo.id,
+      distance_km: 60,
+      duration_minutes: 120,
+      base_price_resident: 50,
+      base_price_national: 70,
+      base_price_foreign: 90,
+      is_active: true,
+    },
+  });
+
   // SCHEDULES
   console.log('📅 Creating schedules...');
   const today = new Date();
@@ -407,6 +460,151 @@ async function main() {
       available_seats: ferry1.capacity - 30,
       status: 'scheduled',
       notes: 'Puerto Ayora → Puerto Baquerizo Moreno (normal) fin de mes',
+    },
+  });
+
+  // Schedules adicionales de vuelta
+  const departure11 = new Date(base);
+  departure11.setDate(base.getDate() + 1);
+  departure11.setHours(16, 30, 0, 0);
+  const arrival11 = new Date(departure11.getTime() + 2.5 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route5.id,
+      ferry_id: ferry2.id,
+      departure_date: departure11,
+      departure_time: departure11,
+      arrival_time: arrival11,
+      total_capacity: ferry2.capacity,
+      available_seats: ferry2.capacity - 40,
+      status: 'scheduled',
+      notes: 'Puerto Baquerizo Moreno → Puerto Ayora (vuelta tarde)',
+    },
+  });
+
+  const departure12 = new Date(base);
+  departure12.setDate(base.getDate() + 2);
+  departure12.setHours(9, 30, 0, 0);
+  const arrival12 = new Date(departure12.getTime() + 1 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route6.id,
+      ferry_id: ferry3.id,
+      departure_date: departure12,
+      departure_time: departure12,
+      arrival_time: arrival12,
+      total_capacity: ferry3.capacity,
+      available_seats: ferry3.capacity - 60,
+      status: 'scheduled',
+      notes: 'Puerto Ayora → Baltra (vuelta mañana)',
+    },
+  });
+
+  const departure13 = new Date(base);
+  departure13.setDate(base.getDate() + 3);
+  departure13.setHours(12, 0, 0, 0);
+  const arrival13 = new Date(departure13.getTime() + 3 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route7.id,
+      ferry_id: ferry1.id,
+      departure_date: departure13,
+      departure_time: departure13,
+      arrival_time: arrival13,
+      total_capacity: ferry1.capacity,
+      available_seats: ferry1.capacity - 100,
+      status: 'scheduled',
+      notes: 'Puerto Villamil → Puerto Ayora (vuelta mediodía)',
+    },
+  });
+
+  const departure14 = new Date(base);
+  departure14.setDate(base.getDate() + 4);
+  departure14.setHours(14, 30, 0, 0);
+  const arrival14 = new Date(departure14.getTime() + 2 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route8.id,
+      ferry_id: ferry2.id,
+      departure_date: departure14,
+      departure_time: departure14,
+      arrival_time: arrival14,
+      total_capacity: ferry2.capacity,
+      available_seats: ferry2.capacity - 70,
+      status: 'scheduled',
+      notes: 'Baltra → Puerto Baquerizo Moreno (vuelta tarde)',
+    },
+  });
+
+  const departure15 = new Date(base);
+  departure15.setDate(base.getDate() + 5);
+  departure15.setHours(7, 0, 0, 0);
+  const arrival15 = new Date(departure15.getTime() + 2.5 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route5.id,
+      ferry_id: ferry1.id,
+      departure_date: departure15,
+      departure_time: departure15,
+      arrival_time: arrival15,
+      total_capacity: ferry1.capacity,
+      available_seats: ferry1.capacity - 55,
+      status: 'scheduled',
+      notes: 'Puerto Baquerizo Moreno → Puerto Ayora (vuelta temprano)',
+    },
+  });
+
+  const departure16 = new Date(base);
+  departure16.setDate(base.getDate() + 6);
+  departure16.setHours(16, 0, 0, 0);
+  const arrival16 = new Date(departure16.getTime() + 1 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route6.id,
+      ferry_id: ferry3.id,
+      departure_date: departure16,
+      departure_time: departure16,
+      arrival_time: arrival16,
+      total_capacity: ferry3.capacity,
+      available_seats: ferry3.capacity - 45,
+      status: 'scheduled',
+      notes: 'Puerto Ayora → Baltra (vuelta tarde)',
+    },
+  });
+
+  const departure17 = new Date(base);
+  departure17.setDate(base.getDate() + 7);
+  departure17.setHours(10, 30, 0, 0);
+  const arrival17 = new Date(departure17.getTime() + 3 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route7.id,
+      ferry_id: ferry2.id,
+      departure_date: departure17,
+      departure_time: departure17,
+      arrival_time: arrival17,
+      total_capacity: ferry2.capacity,
+      available_seats: ferry2.capacity - 85,
+      status: 'scheduled',
+      notes: 'Puerto Villamil → Puerto Ayora (vuelta mañana)',
+    },
+  });
+
+  const departure18 = new Date(base);
+  departure18.setDate(base.getDate() + 8);
+  departure18.setHours(17, 30, 0, 0);
+  const arrival18 = new Date(departure18.getTime() + 2 * 60 * 60 * 1000);
+  await prisma.schedules.create({
+    data: {
+      route_id: route8.id,
+      ferry_id: ferry1.id,
+      departure_date: departure18,
+      departure_time: departure18,
+      arrival_time: arrival18,
+      total_capacity: ferry1.capacity,
+      available_seats: ferry1.capacity - 110,
+      status: 'scheduled',
+      notes: 'Baltra → Puerto Baquerizo Moreno (vuelta noche)',
     },
   });
 
