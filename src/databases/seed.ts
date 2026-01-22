@@ -50,59 +50,75 @@ async function main() {
 
   // ISLANDS & PORTS
   console.log('🏝 Creating islands & ports...');
-  const mainland = await prisma.islands.create({
+  const santaCruz = await prisma.islands.create({
     data: {
-      name: 'Península',
-      code: 'MAIN',
-      description: 'Mainland ports',
+      name: 'Santa Cruz',
+      code: 'SCZ',
+      description: 'Galápagos - Santa Cruz',
     },
   });
 
-  const balearic = await prisma.islands.create({
+  const sanCristobal = await prisma.islands.create({
     data: {
-      name: 'Islas Baleares',
-      code: 'BAL',
-      description: 'Balearic islands',
+      name: 'San Cristóbal',
+      code: 'SCB',
+      description: 'Galápagos - San Cristóbal',
     },
   });
 
-  const portBarcelona = await prisma.ports.create({
+  const isabela = await prisma.islands.create({
     data: {
-      island_id: mainland.id,
-      name: 'Port de Barcelona',
-      code: 'BCN',
-      address: 'Barcelona, España',
-      contact_phone: '+34 000000001',
+      name: 'Isabela',
+      code: 'ISB',
+      description: 'Galápagos - Isabela',
     },
   });
 
-  const portPalma = await prisma.ports.create({
+  const baltraIsland = await prisma.islands.create({
     data: {
-      island_id: balearic.id,
-      name: 'Port de Palma',
-      code: 'PMI',
-      address: 'Palma de Mallorca, España',
-      contact_phone: '+34 000000002',
+      name: 'Baltra',
+      code: 'BLT',
+      description: 'Galápagos - Baltra',
     },
   });
 
-  const portValencia = await prisma.ports.create({
+  const portAyora = await prisma.ports.create({
     data: {
-      island_id: mainland.id,
-      name: 'Port de València',
-      code: 'VLC',
-      address: 'València, España',
-      contact_phone: '+34 000000003',
+      island_id: santaCruz.id,
+      name: 'Puerto Ayora',
+      code: 'AYO',
+      address: 'Santa Cruz, Galápagos, Ecuador',
+      contact_phone: '+593 000000001',
     },
   });
 
-  const portIbiza = await prisma.ports.create({
+  const portBaquerizo = await prisma.ports.create({
     data: {
-      island_id: balearic.id,
-      name: "Port d'Eivissa",
-      code: 'IBZ',
-      address: 'Eivissa, España',
-      contact_phone: '+34 000000004',
+      island_id: sanCristobal.id,
+      name: 'Puerto Baquerizo Moreno',
+      code: 'BQM',
+      address: 'San Cristóbal, Galápagos, Ecuador',
+      contact_phone: '+593 000000002',
+    },
+  });
+
+  const portVillamil = await prisma.ports.create({
+    data: {
+      island_id: isabela.id,
+      name: 'Puerto Villamil',
+      code: 'VIL',
+      address: 'Isabela, Galápagos, Ecuador',
+      contact_phone: '+593 000000003',
+    },
+  });
+
+  const portBaltra = await prisma.ports.create({
+    data: {
+      island_id: baltraIsland.id,
+      name: 'Baltra',
+      code: 'BTR',
+      address: 'Baltra, Galápagos, Ecuador',
+      contact_phone: '+593 000000004',
     },
   });
 
@@ -156,10 +172,10 @@ async function main() {
   console.log('🗺 Creating routes...');
   const route1 = await prisma.routes.create({
     data: {
-      origin_port_id: portBarcelona.id,
-      destination_port_id: portPalma.id,
-      distance_km: 200,
-      duration_minutes: 480,
+      origin_port_id: portAyora.id,
+      destination_port_id: portBaquerizo.id,
+      distance_km: 95,
+      duration_minutes: 150,
       base_price_resident: 50,
       base_price_national: 70,
       base_price_foreign: 90,
@@ -169,10 +185,10 @@ async function main() {
 
   const route2 = await prisma.routes.create({
     data: {
-      origin_port_id: portBarcelona.id,
-      destination_port_id: portIbiza.id,
-      distance_km: 280,
-      duration_minutes: 420,
+      origin_port_id: portBaltra.id,
+      destination_port_id: portAyora.id,
+      distance_km: 30,
+      duration_minutes: 60,
       base_price_resident: 45,
       base_price_national: 65,
       base_price_foreign: 85,
@@ -182,10 +198,10 @@ async function main() {
 
   const route3 = await prisma.routes.create({
     data: {
-      origin_port_id: portValencia.id,
-      destination_port_id: portPalma.id,
-      distance_km: 260,
-      duration_minutes: 360,
+      origin_port_id: portAyora.id,
+      destination_port_id: portVillamil.id,
+      distance_km: 110,
+      duration_minutes: 180,
       base_price_resident: 40,
       base_price_national: 60,
       base_price_foreign: 80,
@@ -195,10 +211,10 @@ async function main() {
 
   const route4 = await prisma.routes.create({
     data: {
-      origin_port_id: portPalma.id,
-      destination_port_id: portBarcelona.id,
-      distance_km: 200,
-      duration_minutes: 480,
+      origin_port_id: portBaquerizo.id,
+      destination_port_id: portBaltra.id,
+      distance_km: 60,
+      duration_minutes: 120,
       base_price_resident: 50,
       base_price_national: 70,
       base_price_foreign: 90,
@@ -208,9 +224,13 @@ async function main() {
 
   // SCHEDULES
   console.log('📅 Creating schedules...');
-  const departure = new Date();
-  departure.setHours(departure.getHours() + 24);
-  const arrival = new Date(departure.getTime() + 8 * 60 * 60 * 1000);
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(8, 0, 0, 0);
+
+  const departure = new Date(tomorrow);
+  const arrival = new Date(departure.getTime() + 2.5 * 60 * 60 * 1000);
 
   const schedule1 = await prisma.schedules.create({
     data: {
@@ -226,10 +246,12 @@ async function main() {
     },
   });
 
-  const base = new Date(departure.getTime());
+  const base = new Date(tomorrow);
 
-  const departure2 = new Date(base.getTime() + 1 * 24 * 60 * 60 * 1000);
-  const arrival2 = new Date(departure2.getTime() + 7 * 60 * 60 * 1000);
+  const departure2 = new Date(base);
+  departure2.setDate(base.getDate() + 1);
+  departure2.setHours(14, 0, 0, 0);
+  const arrival2 = new Date(departure2.getTime() + 2.5 * 60 * 60 * 1000);
   await prisma.schedules.create({
     data: {
       route_id: route1.id,
@@ -240,12 +262,14 @@ async function main() {
       total_capacity: ferry2.capacity,
       available_seats: ferry2.capacity - 50,
       status: 'scheduled',
-      notes: 'BCN → PMI (premium) nocturno',
+      notes: 'Puerto Ayora → Puerto Baquerizo Moreno (premium) nocturno',
     },
   });
 
-  const departure3 = new Date(base.getTime() + 2 * 24 * 60 * 60 * 1000);
-  const arrival3 = new Date(departure3.getTime() + 6 * 60 * 60 * 1000);
+  const departure3 = new Date(base);
+  departure3.setDate(base.getDate() + 2);
+  departure3.setHours(7, 30, 0, 0);
+  const arrival3 = new Date(departure3.getTime() + 1 * 60 * 60 * 1000);
   await prisma.schedules.create({
     data: {
       route_id: route2.id,
@@ -256,12 +280,14 @@ async function main() {
       total_capacity: ferry3.capacity,
       available_seats: ferry3.capacity - 80,
       status: 'scheduled',
-      notes: 'BCN → IBZ (fast) diurno',
+      notes: 'Baltra → Puerto Ayora (fast) diurno',
     },
   });
 
-  const departure4 = new Date(base.getTime() + 3 * 24 * 60 * 60 * 1000);
-  const arrival4 = new Date(departure4.getTime() + 6 * 60 * 60 * 1000);
+  const departure4 = new Date(base);
+  departure4.setDate(base.getDate() + 3);
+  departure4.setHours(15, 0, 0, 0);
+  const arrival4 = new Date(departure4.getTime() + 1 * 60 * 60 * 1000);
   await prisma.schedules.create({
     data: {
       route_id: route2.id,
@@ -272,12 +298,14 @@ async function main() {
       total_capacity: ferry1.capacity,
       available_seats: ferry1.capacity - 120,
       status: 'scheduled',
-      notes: 'BCN → IBZ (normal) fin de semana',
+      notes: 'Baltra → Puerto Ayora (normal) fin de semana',
     },
   });
 
-  const departure5 = new Date(base.getTime() + 4 * 24 * 60 * 60 * 1000);
-  const arrival5 = new Date(departure5.getTime() + 5 * 60 * 60 * 1000);
+  const departure5 = new Date(base);
+  departure5.setDate(base.getDate() + 4);
+  departure5.setHours(9, 0, 0, 0);
+  const arrival5 = new Date(departure5.getTime() + 3 * 60 * 60 * 1000);
   await prisma.schedules.create({
     data: {
       route_id: route3.id,
@@ -288,12 +316,14 @@ async function main() {
       total_capacity: ferry2.capacity,
       available_seats: ferry2.capacity - 150,
       status: 'scheduled',
-      notes: 'VLC → PMI (premium) tarde',
+      notes: 'Puerto Ayora → Puerto Villamil (premium) tarde',
     },
   });
 
-  const departure6 = new Date(base.getTime() + 5 * 24 * 60 * 60 * 1000);
-  const arrival6 = new Date(departure6.getTime() + 5 * 60 * 60 * 1000);
+  const departure6 = new Date(base);
+  departure6.setDate(base.getDate() + 5);
+  departure6.setHours(13, 30, 0, 0);
+  const arrival6 = new Date(departure6.getTime() + 3 * 60 * 60 * 1000);
   await prisma.schedules.create({
     data: {
       route_id: route3.id,
@@ -304,12 +334,14 @@ async function main() {
       total_capacity: ferry3.capacity,
       available_seats: ferry3.capacity - 90,
       status: 'scheduled',
-      notes: 'VLC → PMI (fast) mañana',
+      notes: 'Puerto Ayora → Puerto Villamil (fast) mañana',
     },
   });
 
-  const departure7 = new Date(base.getTime() + 6 * 24 * 60 * 60 * 1000);
-  const arrival7 = new Date(departure7.getTime() + 8 * 60 * 60 * 1000);
+  const departure7 = new Date(base);
+  departure7.setDate(base.getDate() + 6);
+  departure7.setHours(10, 0, 0, 0);
+  const arrival7 = new Date(departure7.getTime() + 2 * 60 * 60 * 1000);
   await prisma.schedules.create({
     data: {
       route_id: route4.id,
@@ -320,12 +352,14 @@ async function main() {
       total_capacity: ferry1.capacity,
       available_seats: ferry1.capacity - 200,
       status: 'scheduled',
-      notes: 'PMI → BCN (normal) diurno',
+      notes: 'Puerto Baquerizo Moreno → Baltra (normal) diurno',
     },
   });
 
-  const departure8 = new Date(base.getTime() + 7 * 24 * 60 * 60 * 1000);
-  const arrival8 = new Date(departure8.getTime() + 7 * 60 * 60 * 1000);
+  const departure8 = new Date(base);
+  departure8.setDate(base.getDate() + 7);
+  departure8.setHours(18, 0, 0, 0);
+  const arrival8 = new Date(departure8.getTime() + 2 * 60 * 60 * 1000);
   await prisma.schedules.create({
     data: {
       route_id: route4.id,
@@ -336,12 +370,14 @@ async function main() {
       total_capacity: ferry2.capacity,
       available_seats: ferry2.capacity - 80,
       status: 'scheduled',
-      notes: 'PMI → BCN (premium) noche',
+      notes: 'Puerto Baquerizo Moreno → Baltra (premium) noche',
     },
   });
 
-  const departure9 = new Date(base.getTime() + 8 * 24 * 60 * 60 * 1000);
-  const arrival9 = new Date(departure9.getTime() + 4 * 60 * 60 * 1000);
+  const departure9 = new Date(base);
+  departure9.setDate(base.getDate() + 8);
+  departure9.setHours(6, 30, 0, 0);
+  const arrival9 = new Date(departure9.getTime() + 1 * 60 * 60 * 1000);
   await prisma.schedules.create({
     data: {
       route_id: route2.id,
@@ -352,12 +388,14 @@ async function main() {
       total_capacity: ferry3.capacity,
       available_seats: ferry3.capacity - 50,
       status: 'scheduled',
-      notes: 'BCN → IBZ (fast) especial',
+      notes: 'Baltra → Puerto Ayora (fast) especial',
     },
   });
 
-  const departure10 = new Date(base.getTime() + 9 * 24 * 60 * 60 * 1000);
-  const arrival10 = new Date(departure10.getTime() + 8 * 60 * 60 * 1000);
+  const departure10 = new Date(base);
+  departure10.setDate(base.getDate() + 9);
+  departure10.setHours(11, 0, 0, 0);
+  const arrival10 = new Date(departure10.getTime() + 2.5 * 60 * 60 * 1000);
   await prisma.schedules.create({
     data: {
       route_id: route1.id,
@@ -368,7 +406,7 @@ async function main() {
       total_capacity: ferry1.capacity,
       available_seats: ferry1.capacity - 30,
       status: 'scheduled',
-      notes: 'BCN → PMI (normal) fin de mes',
+      notes: 'Puerto Ayora → Puerto Baquerizo Moreno (normal) fin de mes',
     },
   });
 
@@ -398,7 +436,7 @@ async function main() {
       discount: 0,
       total: 110,
       currency: 'USD',
-      qr_code: 'QR-BCN-PMI-001',
+      qr_code: 'QR-AYO-BQM-001',
       status: 'confirmed',
       booking_expires_at: new Date(departure.getTime() - 2 * 60 * 60 * 1000),
       outbound_hold_id: hold1.id,
