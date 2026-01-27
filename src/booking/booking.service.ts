@@ -95,8 +95,16 @@ export class BookingService {
     });
 
     // 3. Decrementar asientos disponibles
-    await tx.schedules.update({
+    const updatedSchedule = await tx.schedules.update({
       where: { id: scheduleId },
+      include: {
+        ferries: true,
+        routes: {
+          select: {
+            base_price_national: true,
+          },
+        },
+      },
       data: {
         available_seats: {
           decrement: quantity,
@@ -106,10 +114,7 @@ export class BookingService {
 
     return {
       ...seatHold,
-      schedule: {
-        id: schedule.id,
-        remainingSeats: schedule.available_seats - quantity,
-      },
+      schedule: updatedSchedule,
     };
 
     // if (!schedule) {

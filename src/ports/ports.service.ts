@@ -14,7 +14,16 @@ export class PortsService {
 
   async findAll() {
     try {
-      const data = await this.databasesService.ports.findMany();
+      const data = await this.databasesService.ports.findMany({
+        include: {
+          islands: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+      });
       return {
         data,
         meta: {
