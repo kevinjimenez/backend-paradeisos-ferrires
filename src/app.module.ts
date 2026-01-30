@@ -18,6 +18,7 @@ import { SeatHoldsModule } from './seat-holds/seat-holds.module';
 import { TasksModule } from './tasks/tasks.module';
 import { TicketsModule } from './tickets/tickets.module';
 import { UsersModule } from './users/users.module';
+import { SeatHoldsHistoryModule } from './seat-holds-history/seat-holds-history.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { UsersModule } from './users/users.module';
     SeatHoldsModule,
     BookingModule,
     TasksModule,
+    SeatHoldsHistoryModule,
   ],
   controllers: [AppController],
 })

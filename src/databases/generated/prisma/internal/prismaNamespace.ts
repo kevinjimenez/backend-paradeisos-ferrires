@@ -393,6 +393,7 @@ export const ModelName = {
   passengers: 'passengers',
   payments: 'payments',
   seat_holds: 'seat_holds',
+  seat_holds_history: 'seat_holds_history',
   tickets: 'tickets'
 } as const
 
@@ -409,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "islands" | "ports" | "routes" | "ferries" | "schedules" | "users" | "passengers" | "payments" | "seat_holds" | "tickets"
+    modelProps: "islands" | "ports" | "routes" | "ferries" | "schedules" | "users" | "passengers" | "payments" | "seat_holds" | "seat_holds_history" | "tickets"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1079,6 +1080,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    seat_holds_history: {
+      payload: Prisma.$seat_holds_historyPayload<ExtArgs>
+      fields: Prisma.seat_holds_historyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.seat_holds_historyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$seat_holds_historyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.seat_holds_historyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$seat_holds_historyPayload>
+        }
+        findFirst: {
+          args: Prisma.seat_holds_historyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$seat_holds_historyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.seat_holds_historyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$seat_holds_historyPayload>
+        }
+        findMany: {
+          args: Prisma.seat_holds_historyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$seat_holds_historyPayload>[]
+        }
+        create: {
+          args: Prisma.seat_holds_historyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$seat_holds_historyPayload>
+        }
+        createMany: {
+          args: Prisma.seat_holds_historyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.seat_holds_historyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$seat_holds_historyPayload>[]
+        }
+        delete: {
+          args: Prisma.seat_holds_historyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$seat_holds_historyPayload>
+        }
+        update: {
+          args: Prisma.seat_holds_historyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$seat_holds_historyPayload>
+        }
+        deleteMany: {
+          args: Prisma.seat_holds_historyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.seat_holds_historyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.seat_holds_historyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$seat_holds_historyPayload>[]
+        }
+        upsert: {
+          args: Prisma.seat_holds_historyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$seat_holds_historyPayload>
+        }
+        aggregate: {
+          args: Prisma.Seat_holds_historyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSeat_holds_history>
+        }
+        groupBy: {
+          args: Prisma.seat_holds_historyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Seat_holds_historyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.seat_holds_historyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Seat_holds_historyCountAggregateOutputType> | number
+        }
+      }
+    }
     tickets: {
       payload: Prisma.$ticketsPayload<ExtArgs>
       fields: Prisma.ticketsFieldRefs
@@ -1356,6 +1431,16 @@ export const Seat_holdsScalarFieldEnum = {
 } as const
 
 export type Seat_holdsScalarFieldEnum = (typeof Seat_holdsScalarFieldEnum)[keyof typeof Seat_holdsScalarFieldEnum]
+
+
+export const Seat_holds_historyScalarFieldEnum = {
+  id: 'id',
+  outbound_seat_hold_id: 'outbound_seat_hold_id',
+  return_seat_hold_id: 'return_seat_hold_id',
+  created_at: 'created_at'
+} as const
+
+export type Seat_holds_historyScalarFieldEnum = (typeof Seat_holds_historyScalarFieldEnum)[keyof typeof Seat_holds_historyScalarFieldEnum]
 
 
 export const TicketsScalarFieldEnum = {
@@ -1745,6 +1830,7 @@ export type GlobalOmitConfig = {
   passengers?: Prisma.passengersOmit
   payments?: Prisma.paymentsOmit
   seat_holds?: Prisma.seat_holdsOmit
+  seat_holds_history?: Prisma.seat_holds_historyOmit
   tickets?: Prisma.ticketsOmit
 }
 
