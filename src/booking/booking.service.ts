@@ -38,12 +38,15 @@ export class BookingService {
           )
         : null;
 
+      const { id } = await tx.seat_holds_history.create({
+        data: {
+          outbound_seat_hold_id: outboundHold.id,
+          return_seat_hold_id: returnHold?.id,
+        },
+      });
+
       return {
-        outboundHold,
-        returnHold,
-        expiresAt,
-        totalPassengers,
-        tripType: returnScheduleId ? 'round_trip' : 'one_way',
+        seatHoldsHistory: id,
       };
     });
 
@@ -67,7 +70,6 @@ export class BookingService {
       WHERE id = ${scheduleId}
       FOR UPDATE
     `;
-
     const schedule = schedules[0];
 
     if (!schedule) {
@@ -87,6 +89,9 @@ export class BookingService {
     }
 
     const seatHold = await tx.seat_holds.create({
+      select: {
+        id: true,
+      },
       data: {
         schedule_id: scheduleId,
         quantity,
@@ -95,16 +100,8 @@ export class BookingService {
     });
 
     // 3. Decrementar asientos disponibles
-    const updatedSchedule = await tx.schedules.update({
+    await tx.schedules.update({
       where: { id: scheduleId },
-      include: {
-        ferries: true,
-        routes: {
-          select: {
-            base_price_national: true,
-          },
-        },
-      },
       data: {
         available_seats: {
           decrement: quantity,
@@ -112,10 +109,7 @@ export class BookingService {
       },
     });
 
-    return {
-      ...seatHold,
-      schedule: updatedSchedule,
-    };
+    return seatHold;
 
     // if (!schedule) {
     //   throw new BadRequestException(`Viaje ${scheduleId} no encontrado`);

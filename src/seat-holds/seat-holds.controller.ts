@@ -6,10 +6,12 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CreateSeatHoldDto } from './dto/create-seat-hold.dto';
 import { UpdateSeatHoldDto } from './dto/update-seat-hold.dto';
 import { SeatHoldsService } from './seat-holds.service';
+import { FindReservedSeatsDto } from './dto/find-reserved-seats.dto';
 
 @Controller('seat-holds')
 export class SeatHoldsController {
@@ -25,9 +27,16 @@ export class SeatHoldsController {
     return this.seatHoldsService.findAll();
   }
 
+  @Get('reserved-seats')
+  findReservedSeats(@Query() query: FindReservedSeatsDto) {
+    console.log(query.outbound);
+    console.log(query.return);
+    return this.seatHoldsService.findReservedSeats(query);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.seatHoldsService.findOne(+id);
+    return this.seatHoldsService.findOne(id);
   }
 
   @Patch(':id')

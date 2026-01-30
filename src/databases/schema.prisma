@@ -262,14 +262,34 @@ model seat_holds {
 
   status SeatHoldsStatus @default(held)
 
-  held_at         DateTime  @default(now())
-  expires_at      DateTime  @default(now()) // held_at + 15min
-  confirmed_at    DateTime?
-  released_at     DateTime?
-  created_at      DateTime  @default(now())
+  held_at          DateTime             @default(now())
+  expires_at       DateTime             @default(now()) // held_at + 15min
+  confirmed_at     DateTime?
+  released_at      DateTime?
+  created_at       DateTime             @default(now())
   // Relations one-to-one
-  outbound_ticket tickets?  @relation("outbound_hold")
-  return_ticket   tickets?  @relation("return_hold")
+  outbound_ticket  tickets?             @relation("outbound_hold")
+  return_ticket    tickets?             @relation("return_hold")
+  // Relations one-to-many
+  outbound_history seat_holds_history[] @relation("outbound_history")
+  return_history   seat_holds_history[] @relation("return_history")
+}
+
+// TABLE seat_holds_history
+model seat_holds_history {
+  id                  String      @id @default(uuid())
+  // Relations many-to-one
+  outbound_seat_holds seat_holds? @relation("outbound_history", fields: [outbound_seat_hold_id], references: [id])
+  return_seat_holds   seat_holds? @relation("return_history", fields: [return_seat_hold_id], references: [id])
+
+  outbound_seat_hold_id String?
+  return_seat_hold_id   String?
+  //
+  created_at            DateTime @default(now())
+
+  @@index([outbound_seat_hold_id])
+  @@index([return_seat_hold_id])
+  @@index([created_at])
 }
 
 // TABLE tickets

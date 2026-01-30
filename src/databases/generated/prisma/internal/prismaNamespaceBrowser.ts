@@ -60,6 +60,7 @@ export const ModelName = {
   passengers: 'passengers',
   payments: 'payments',
   seat_holds: 'seat_holds',
+  seat_holds_history: 'seat_holds_history',
   tickets: 'tickets'
 } as const
 
@@ -243,6 +244,16 @@ export const Seat_holdsScalarFieldEnum = {
 } as const
 
 export type Seat_holdsScalarFieldEnum = (typeof Seat_holdsScalarFieldEnum)[keyof typeof Seat_holdsScalarFieldEnum]
+
+
+export const Seat_holds_historyScalarFieldEnum = {
+  id: 'id',
+  outbound_seat_hold_id: 'outbound_seat_hold_id',
+  return_seat_hold_id: 'return_seat_hold_id',
+  created_at: 'created_at'
+} as const
+
+export type Seat_holds_historyScalarFieldEnum = (typeof Seat_holds_historyScalarFieldEnum)[keyof typeof Seat_holds_historyScalarFieldEnum]
 
 
 export const TicketsScalarFieldEnum = {

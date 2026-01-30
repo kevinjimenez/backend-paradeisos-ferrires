@@ -83,6 +83,11 @@ export type payments = Prisma.paymentsModel
  */
 export type seat_holds = Prisma.seat_holdsModel
 /**
+ * Model seat_holds_history
+ * 
+ */
+export type seat_holds_history = Prisma.seat_holds_historyModel
+/**
  * Model tickets
  * 
  */

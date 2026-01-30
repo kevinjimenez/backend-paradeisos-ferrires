@@ -260,6 +260,8 @@ export type seat_holdsWhereInput = {
   schedules?: Prisma.XOR<Prisma.SchedulesNullableScalarRelationFilter, Prisma.schedulesWhereInput> | null
   outbound_ticket?: Prisma.XOR<Prisma.TicketsNullableScalarRelationFilter, Prisma.ticketsWhereInput> | null
   return_ticket?: Prisma.XOR<Prisma.TicketsNullableScalarRelationFilter, Prisma.ticketsWhereInput> | null
+  outbound_history?: Prisma.Seat_holds_historyListRelationFilter
+  return_history?: Prisma.Seat_holds_historyListRelationFilter
 }
 
 export type seat_holdsOrderByWithRelationInput = {
@@ -277,6 +279,8 @@ export type seat_holdsOrderByWithRelationInput = {
   schedules?: Prisma.schedulesOrderByWithRelationInput
   outbound_ticket?: Prisma.ticketsOrderByWithRelationInput
   return_ticket?: Prisma.ticketsOrderByWithRelationInput
+  outbound_history?: Prisma.seat_holds_historyOrderByRelationAggregateInput
+  return_history?: Prisma.seat_holds_historyOrderByRelationAggregateInput
 }
 
 export type seat_holdsWhereUniqueInput = Prisma.AtLeast<{
@@ -297,6 +301,8 @@ export type seat_holdsWhereUniqueInput = Prisma.AtLeast<{
   schedules?: Prisma.XOR<Prisma.SchedulesNullableScalarRelationFilter, Prisma.schedulesWhereInput> | null
   outbound_ticket?: Prisma.XOR<Prisma.TicketsNullableScalarRelationFilter, Prisma.ticketsWhereInput> | null
   return_ticket?: Prisma.XOR<Prisma.TicketsNullableScalarRelationFilter, Prisma.ticketsWhereInput> | null
+  outbound_history?: Prisma.Seat_holds_historyListRelationFilter
+  return_history?: Prisma.Seat_holds_historyListRelationFilter
 }, "id">
 
 export type seat_holdsOrderByWithAggregationInput = {
@@ -346,6 +352,8 @@ export type seat_holdsCreateInput = {
   schedules?: Prisma.schedulesCreateNestedOneWithoutSeat_holdsInput
   outbound_ticket?: Prisma.ticketsCreateNestedOneWithoutOutbound_holdInput
   return_ticket?: Prisma.ticketsCreateNestedOneWithoutReturn_holdInput
+  outbound_history?: Prisma.seat_holds_historyCreateNestedManyWithoutOutbound_seat_holdsInput
+  return_history?: Prisma.seat_holds_historyCreateNestedManyWithoutReturn_seat_holdsInput
 }
 
 export type seat_holdsUncheckedCreateInput = {
@@ -361,6 +369,8 @@ export type seat_holdsUncheckedCreateInput = {
   created_at?: Date | string
   outbound_ticket?: Prisma.ticketsUncheckedCreateNestedOneWithoutOutbound_holdInput
   return_ticket?: Prisma.ticketsUncheckedCreateNestedOneWithoutReturn_holdInput
+  outbound_history?: Prisma.seat_holds_historyUncheckedCreateNestedManyWithoutOutbound_seat_holdsInput
+  return_history?: Prisma.seat_holds_historyUncheckedCreateNestedManyWithoutReturn_seat_holdsInput
 }
 
 export type seat_holdsUpdateInput = {
@@ -376,6 +386,8 @@ export type seat_holdsUpdateInput = {
   schedules?: Prisma.schedulesUpdateOneWithoutSeat_holdsNestedInput
   outbound_ticket?: Prisma.ticketsUpdateOneWithoutOutbound_holdNestedInput
   return_ticket?: Prisma.ticketsUpdateOneWithoutReturn_holdNestedInput
+  outbound_history?: Prisma.seat_holds_historyUpdateManyWithoutOutbound_seat_holdsNestedInput
+  return_history?: Prisma.seat_holds_historyUpdateManyWithoutReturn_seat_holdsNestedInput
 }
 
 export type seat_holdsUncheckedUpdateInput = {
@@ -391,6 +403,8 @@ export type seat_holdsUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   outbound_ticket?: Prisma.ticketsUncheckedUpdateOneWithoutOutbound_holdNestedInput
   return_ticket?: Prisma.ticketsUncheckedUpdateOneWithoutReturn_holdNestedInput
+  outbound_history?: Prisma.seat_holds_historyUncheckedUpdateManyWithoutOutbound_seat_holdsNestedInput
+  return_history?: Prisma.seat_holds_historyUncheckedUpdateManyWithoutReturn_seat_holdsNestedInput
 }
 
 export type seat_holdsCreateManyInput = {
@@ -580,6 +594,38 @@ export type EnumSeatHoldsStatusFieldUpdateOperationsInput = {
   set?: $Enums.SeatHoldsStatus
 }
 
+export type seat_holdsCreateNestedOneWithoutOutbound_historyInput = {
+  create?: Prisma.XOR<Prisma.seat_holdsCreateWithoutOutbound_historyInput, Prisma.seat_holdsUncheckedCreateWithoutOutbound_historyInput>
+  connectOrCreate?: Prisma.seat_holdsCreateOrConnectWithoutOutbound_historyInput
+  connect?: Prisma.seat_holdsWhereUniqueInput
+}
+
+export type seat_holdsCreateNestedOneWithoutReturn_historyInput = {
+  create?: Prisma.XOR<Prisma.seat_holdsCreateWithoutReturn_historyInput, Prisma.seat_holdsUncheckedCreateWithoutReturn_historyInput>
+  connectOrCreate?: Prisma.seat_holdsCreateOrConnectWithoutReturn_historyInput
+  connect?: Prisma.seat_holdsWhereUniqueInput
+}
+
+export type seat_holdsUpdateOneWithoutOutbound_historyNestedInput = {
+  create?: Prisma.XOR<Prisma.seat_holdsCreateWithoutOutbound_historyInput, Prisma.seat_holdsUncheckedCreateWithoutOutbound_historyInput>
+  connectOrCreate?: Prisma.seat_holdsCreateOrConnectWithoutOutbound_historyInput
+  upsert?: Prisma.seat_holdsUpsertWithoutOutbound_historyInput
+  disconnect?: Prisma.seat_holdsWhereInput | boolean
+  delete?: Prisma.seat_holdsWhereInput | boolean
+  connect?: Prisma.seat_holdsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.seat_holdsUpdateToOneWithWhereWithoutOutbound_historyInput, Prisma.seat_holdsUpdateWithoutOutbound_historyInput>, Prisma.seat_holdsUncheckedUpdateWithoutOutbound_historyInput>
+}
+
+export type seat_holdsUpdateOneWithoutReturn_historyNestedInput = {
+  create?: Prisma.XOR<Prisma.seat_holdsCreateWithoutReturn_historyInput, Prisma.seat_holdsUncheckedCreateWithoutReturn_historyInput>
+  connectOrCreate?: Prisma.seat_holdsCreateOrConnectWithoutReturn_historyInput
+  upsert?: Prisma.seat_holdsUpsertWithoutReturn_historyInput
+  disconnect?: Prisma.seat_holdsWhereInput | boolean
+  delete?: Prisma.seat_holdsWhereInput | boolean
+  connect?: Prisma.seat_holdsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.seat_holdsUpdateToOneWithWhereWithoutReturn_historyInput, Prisma.seat_holdsUpdateWithoutReturn_historyInput>, Prisma.seat_holdsUncheckedUpdateWithoutReturn_historyInput>
+}
+
 export type seat_holdsCreateNestedOneWithoutOutbound_ticketInput = {
   create?: Prisma.XOR<Prisma.seat_holdsCreateWithoutOutbound_ticketInput, Prisma.seat_holdsUncheckedCreateWithoutOutbound_ticketInput>
   connectOrCreate?: Prisma.seat_holdsCreateOrConnectWithoutOutbound_ticketInput
@@ -624,6 +670,8 @@ export type seat_holdsCreateWithoutSchedulesInput = {
   users?: Prisma.usersCreateNestedOneWithoutSeat_holdsInput
   outbound_ticket?: Prisma.ticketsCreateNestedOneWithoutOutbound_holdInput
   return_ticket?: Prisma.ticketsCreateNestedOneWithoutReturn_holdInput
+  outbound_history?: Prisma.seat_holds_historyCreateNestedManyWithoutOutbound_seat_holdsInput
+  return_history?: Prisma.seat_holds_historyCreateNestedManyWithoutReturn_seat_holdsInput
 }
 
 export type seat_holdsUncheckedCreateWithoutSchedulesInput = {
@@ -638,6 +686,8 @@ export type seat_holdsUncheckedCreateWithoutSchedulesInput = {
   created_at?: Date | string
   outbound_ticket?: Prisma.ticketsUncheckedCreateNestedOneWithoutOutbound_holdInput
   return_ticket?: Prisma.ticketsUncheckedCreateNestedOneWithoutReturn_holdInput
+  outbound_history?: Prisma.seat_holds_historyUncheckedCreateNestedManyWithoutOutbound_seat_holdsInput
+  return_history?: Prisma.seat_holds_historyUncheckedCreateNestedManyWithoutReturn_seat_holdsInput
 }
 
 export type seat_holdsCreateOrConnectWithoutSchedulesInput = {
@@ -694,6 +744,8 @@ export type seat_holdsCreateWithoutUsersInput = {
   schedules?: Prisma.schedulesCreateNestedOneWithoutSeat_holdsInput
   outbound_ticket?: Prisma.ticketsCreateNestedOneWithoutOutbound_holdInput
   return_ticket?: Prisma.ticketsCreateNestedOneWithoutReturn_holdInput
+  outbound_history?: Prisma.seat_holds_historyCreateNestedManyWithoutOutbound_seat_holdsInput
+  return_history?: Prisma.seat_holds_historyCreateNestedManyWithoutReturn_seat_holdsInput
 }
 
 export type seat_holdsUncheckedCreateWithoutUsersInput = {
@@ -708,6 +760,8 @@ export type seat_holdsUncheckedCreateWithoutUsersInput = {
   created_at?: Date | string
   outbound_ticket?: Prisma.ticketsUncheckedCreateNestedOneWithoutOutbound_holdInput
   return_ticket?: Prisma.ticketsUncheckedCreateNestedOneWithoutReturn_holdInput
+  outbound_history?: Prisma.seat_holds_historyUncheckedCreateNestedManyWithoutOutbound_seat_holdsInput
+  return_history?: Prisma.seat_holds_historyUncheckedCreateNestedManyWithoutReturn_seat_holdsInput
 }
 
 export type seat_holdsCreateOrConnectWithoutUsersInput = {
@@ -736,6 +790,166 @@ export type seat_holdsUpdateManyWithWhereWithoutUsersInput = {
   data: Prisma.XOR<Prisma.seat_holdsUpdateManyMutationInput, Prisma.seat_holdsUncheckedUpdateManyWithoutUsersInput>
 }
 
+export type seat_holdsCreateWithoutOutbound_historyInput = {
+  id?: string
+  quantity: number
+  status?: $Enums.SeatHoldsStatus
+  held_at?: Date | string
+  expires_at?: Date | string
+  confirmed_at?: Date | string | null
+  released_at?: Date | string | null
+  created_at?: Date | string
+  users?: Prisma.usersCreateNestedOneWithoutSeat_holdsInput
+  schedules?: Prisma.schedulesCreateNestedOneWithoutSeat_holdsInput
+  outbound_ticket?: Prisma.ticketsCreateNestedOneWithoutOutbound_holdInput
+  return_ticket?: Prisma.ticketsCreateNestedOneWithoutReturn_holdInput
+  return_history?: Prisma.seat_holds_historyCreateNestedManyWithoutReturn_seat_holdsInput
+}
+
+export type seat_holdsUncheckedCreateWithoutOutbound_historyInput = {
+  id?: string
+  user_id?: string | null
+  schedule_id?: string | null
+  quantity: number
+  status?: $Enums.SeatHoldsStatus
+  held_at?: Date | string
+  expires_at?: Date | string
+  confirmed_at?: Date | string | null
+  released_at?: Date | string | null
+  created_at?: Date | string
+  outbound_ticket?: Prisma.ticketsUncheckedCreateNestedOneWithoutOutbound_holdInput
+  return_ticket?: Prisma.ticketsUncheckedCreateNestedOneWithoutReturn_holdInput
+  return_history?: Prisma.seat_holds_historyUncheckedCreateNestedManyWithoutReturn_seat_holdsInput
+}
+
+export type seat_holdsCreateOrConnectWithoutOutbound_historyInput = {
+  where: Prisma.seat_holdsWhereUniqueInput
+  create: Prisma.XOR<Prisma.seat_holdsCreateWithoutOutbound_historyInput, Prisma.seat_holdsUncheckedCreateWithoutOutbound_historyInput>
+}
+
+export type seat_holdsCreateWithoutReturn_historyInput = {
+  id?: string
+  quantity: number
+  status?: $Enums.SeatHoldsStatus
+  held_at?: Date | string
+  expires_at?: Date | string
+  confirmed_at?: Date | string | null
+  released_at?: Date | string | null
+  created_at?: Date | string
+  users?: Prisma.usersCreateNestedOneWithoutSeat_holdsInput
+  schedules?: Prisma.schedulesCreateNestedOneWithoutSeat_holdsInput
+  outbound_ticket?: Prisma.ticketsCreateNestedOneWithoutOutbound_holdInput
+  return_ticket?: Prisma.ticketsCreateNestedOneWithoutReturn_holdInput
+  outbound_history?: Prisma.seat_holds_historyCreateNestedManyWithoutOutbound_seat_holdsInput
+}
+
+export type seat_holdsUncheckedCreateWithoutReturn_historyInput = {
+  id?: string
+  user_id?: string | null
+  schedule_id?: string | null
+  quantity: number
+  status?: $Enums.SeatHoldsStatus
+  held_at?: Date | string
+  expires_at?: Date | string
+  confirmed_at?: Date | string | null
+  released_at?: Date | string | null
+  created_at?: Date | string
+  outbound_ticket?: Prisma.ticketsUncheckedCreateNestedOneWithoutOutbound_holdInput
+  return_ticket?: Prisma.ticketsUncheckedCreateNestedOneWithoutReturn_holdInput
+  outbound_history?: Prisma.seat_holds_historyUncheckedCreateNestedManyWithoutOutbound_seat_holdsInput
+}
+
+export type seat_holdsCreateOrConnectWithoutReturn_historyInput = {
+  where: Prisma.seat_holdsWhereUniqueInput
+  create: Prisma.XOR<Prisma.seat_holdsCreateWithoutReturn_historyInput, Prisma.seat_holdsUncheckedCreateWithoutReturn_historyInput>
+}
+
+export type seat_holdsUpsertWithoutOutbound_historyInput = {
+  update: Prisma.XOR<Prisma.seat_holdsUpdateWithoutOutbound_historyInput, Prisma.seat_holdsUncheckedUpdateWithoutOutbound_historyInput>
+  create: Prisma.XOR<Prisma.seat_holdsCreateWithoutOutbound_historyInput, Prisma.seat_holdsUncheckedCreateWithoutOutbound_historyInput>
+  where?: Prisma.seat_holdsWhereInput
+}
+
+export type seat_holdsUpdateToOneWithWhereWithoutOutbound_historyInput = {
+  where?: Prisma.seat_holdsWhereInput
+  data: Prisma.XOR<Prisma.seat_holdsUpdateWithoutOutbound_historyInput, Prisma.seat_holdsUncheckedUpdateWithoutOutbound_historyInput>
+}
+
+export type seat_holdsUpdateWithoutOutbound_historyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumSeatHoldsStatusFieldUpdateOperationsInput | $Enums.SeatHoldsStatus
+  held_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expires_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  released_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.usersUpdateOneWithoutSeat_holdsNestedInput
+  schedules?: Prisma.schedulesUpdateOneWithoutSeat_holdsNestedInput
+  outbound_ticket?: Prisma.ticketsUpdateOneWithoutOutbound_holdNestedInput
+  return_ticket?: Prisma.ticketsUpdateOneWithoutReturn_holdNestedInput
+  return_history?: Prisma.seat_holds_historyUpdateManyWithoutReturn_seat_holdsNestedInput
+}
+
+export type seat_holdsUncheckedUpdateWithoutOutbound_historyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumSeatHoldsStatusFieldUpdateOperationsInput | $Enums.SeatHoldsStatus
+  held_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expires_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  released_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  outbound_ticket?: Prisma.ticketsUncheckedUpdateOneWithoutOutbound_holdNestedInput
+  return_ticket?: Prisma.ticketsUncheckedUpdateOneWithoutReturn_holdNestedInput
+  return_history?: Prisma.seat_holds_historyUncheckedUpdateManyWithoutReturn_seat_holdsNestedInput
+}
+
+export type seat_holdsUpsertWithoutReturn_historyInput = {
+  update: Prisma.XOR<Prisma.seat_holdsUpdateWithoutReturn_historyInput, Prisma.seat_holdsUncheckedUpdateWithoutReturn_historyInput>
+  create: Prisma.XOR<Prisma.seat_holdsCreateWithoutReturn_historyInput, Prisma.seat_holdsUncheckedCreateWithoutReturn_historyInput>
+  where?: Prisma.seat_holdsWhereInput
+}
+
+export type seat_holdsUpdateToOneWithWhereWithoutReturn_historyInput = {
+  where?: Prisma.seat_holdsWhereInput
+  data: Prisma.XOR<Prisma.seat_holdsUpdateWithoutReturn_historyInput, Prisma.seat_holdsUncheckedUpdateWithoutReturn_historyInput>
+}
+
+export type seat_holdsUpdateWithoutReturn_historyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumSeatHoldsStatusFieldUpdateOperationsInput | $Enums.SeatHoldsStatus
+  held_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expires_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  released_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.usersUpdateOneWithoutSeat_holdsNestedInput
+  schedules?: Prisma.schedulesUpdateOneWithoutSeat_holdsNestedInput
+  outbound_ticket?: Prisma.ticketsUpdateOneWithoutOutbound_holdNestedInput
+  return_ticket?: Prisma.ticketsUpdateOneWithoutReturn_holdNestedInput
+  outbound_history?: Prisma.seat_holds_historyUpdateManyWithoutOutbound_seat_holdsNestedInput
+}
+
+export type seat_holdsUncheckedUpdateWithoutReturn_historyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumSeatHoldsStatusFieldUpdateOperationsInput | $Enums.SeatHoldsStatus
+  held_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expires_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  released_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  outbound_ticket?: Prisma.ticketsUncheckedUpdateOneWithoutOutbound_holdNestedInput
+  return_ticket?: Prisma.ticketsUncheckedUpdateOneWithoutReturn_holdNestedInput
+  outbound_history?: Prisma.seat_holds_historyUncheckedUpdateManyWithoutOutbound_seat_holdsNestedInput
+}
+
 export type seat_holdsCreateWithoutOutbound_ticketInput = {
   id?: string
   quantity: number
@@ -748,6 +962,8 @@ export type seat_holdsCreateWithoutOutbound_ticketInput = {
   users?: Prisma.usersCreateNestedOneWithoutSeat_holdsInput
   schedules?: Prisma.schedulesCreateNestedOneWithoutSeat_holdsInput
   return_ticket?: Prisma.ticketsCreateNestedOneWithoutReturn_holdInput
+  outbound_history?: Prisma.seat_holds_historyCreateNestedManyWithoutOutbound_seat_holdsInput
+  return_history?: Prisma.seat_holds_historyCreateNestedManyWithoutReturn_seat_holdsInput
 }
 
 export type seat_holdsUncheckedCreateWithoutOutbound_ticketInput = {
@@ -762,6 +978,8 @@ export type seat_holdsUncheckedCreateWithoutOutbound_ticketInput = {
   released_at?: Date | string | null
   created_at?: Date | string
   return_ticket?: Prisma.ticketsUncheckedCreateNestedOneWithoutReturn_holdInput
+  outbound_history?: Prisma.seat_holds_historyUncheckedCreateNestedManyWithoutOutbound_seat_holdsInput
+  return_history?: Prisma.seat_holds_historyUncheckedCreateNestedManyWithoutReturn_seat_holdsInput
 }
 
 export type seat_holdsCreateOrConnectWithoutOutbound_ticketInput = {
@@ -781,6 +999,8 @@ export type seat_holdsCreateWithoutReturn_ticketInput = {
   users?: Prisma.usersCreateNestedOneWithoutSeat_holdsInput
   schedules?: Prisma.schedulesCreateNestedOneWithoutSeat_holdsInput
   outbound_ticket?: Prisma.ticketsCreateNestedOneWithoutOutbound_holdInput
+  outbound_history?: Prisma.seat_holds_historyCreateNestedManyWithoutOutbound_seat_holdsInput
+  return_history?: Prisma.seat_holds_historyCreateNestedManyWithoutReturn_seat_holdsInput
 }
 
 export type seat_holdsUncheckedCreateWithoutReturn_ticketInput = {
@@ -795,6 +1015,8 @@ export type seat_holdsUncheckedCreateWithoutReturn_ticketInput = {
   released_at?: Date | string | null
   created_at?: Date | string
   outbound_ticket?: Prisma.ticketsUncheckedCreateNestedOneWithoutOutbound_holdInput
+  outbound_history?: Prisma.seat_holds_historyUncheckedCreateNestedManyWithoutOutbound_seat_holdsInput
+  return_history?: Prisma.seat_holds_historyUncheckedCreateNestedManyWithoutReturn_seat_holdsInput
 }
 
 export type seat_holdsCreateOrConnectWithoutReturn_ticketInput = {
@@ -825,6 +1047,8 @@ export type seat_holdsUpdateWithoutOutbound_ticketInput = {
   users?: Prisma.usersUpdateOneWithoutSeat_holdsNestedInput
   schedules?: Prisma.schedulesUpdateOneWithoutSeat_holdsNestedInput
   return_ticket?: Prisma.ticketsUpdateOneWithoutReturn_holdNestedInput
+  outbound_history?: Prisma.seat_holds_historyUpdateManyWithoutOutbound_seat_holdsNestedInput
+  return_history?: Prisma.seat_holds_historyUpdateManyWithoutReturn_seat_holdsNestedInput
 }
 
 export type seat_holdsUncheckedUpdateWithoutOutbound_ticketInput = {
@@ -839,6 +1063,8 @@ export type seat_holdsUncheckedUpdateWithoutOutbound_ticketInput = {
   released_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   return_ticket?: Prisma.ticketsUncheckedUpdateOneWithoutReturn_holdNestedInput
+  outbound_history?: Prisma.seat_holds_historyUncheckedUpdateManyWithoutOutbound_seat_holdsNestedInput
+  return_history?: Prisma.seat_holds_historyUncheckedUpdateManyWithoutReturn_seat_holdsNestedInput
 }
 
 export type seat_holdsUpsertWithoutReturn_ticketInput = {
@@ -864,6 +1090,8 @@ export type seat_holdsUpdateWithoutReturn_ticketInput = {
   users?: Prisma.usersUpdateOneWithoutSeat_holdsNestedInput
   schedules?: Prisma.schedulesUpdateOneWithoutSeat_holdsNestedInput
   outbound_ticket?: Prisma.ticketsUpdateOneWithoutOutbound_holdNestedInput
+  outbound_history?: Prisma.seat_holds_historyUpdateManyWithoutOutbound_seat_holdsNestedInput
+  return_history?: Prisma.seat_holds_historyUpdateManyWithoutReturn_seat_holdsNestedInput
 }
 
 export type seat_holdsUncheckedUpdateWithoutReturn_ticketInput = {
@@ -878,6 +1106,8 @@ export type seat_holdsUncheckedUpdateWithoutReturn_ticketInput = {
   released_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   outbound_ticket?: Prisma.ticketsUncheckedUpdateOneWithoutOutbound_holdNestedInput
+  outbound_history?: Prisma.seat_holds_historyUncheckedUpdateManyWithoutOutbound_seat_holdsNestedInput
+  return_history?: Prisma.seat_holds_historyUncheckedUpdateManyWithoutReturn_seat_holdsNestedInput
 }
 
 export type seat_holdsCreateManySchedulesInput = {
@@ -904,6 +1134,8 @@ export type seat_holdsUpdateWithoutSchedulesInput = {
   users?: Prisma.usersUpdateOneWithoutSeat_holdsNestedInput
   outbound_ticket?: Prisma.ticketsUpdateOneWithoutOutbound_holdNestedInput
   return_ticket?: Prisma.ticketsUpdateOneWithoutReturn_holdNestedInput
+  outbound_history?: Prisma.seat_holds_historyUpdateManyWithoutOutbound_seat_holdsNestedInput
+  return_history?: Prisma.seat_holds_historyUpdateManyWithoutReturn_seat_holdsNestedInput
 }
 
 export type seat_holdsUncheckedUpdateWithoutSchedulesInput = {
@@ -918,6 +1150,8 @@ export type seat_holdsUncheckedUpdateWithoutSchedulesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   outbound_ticket?: Prisma.ticketsUncheckedUpdateOneWithoutOutbound_holdNestedInput
   return_ticket?: Prisma.ticketsUncheckedUpdateOneWithoutReturn_holdNestedInput
+  outbound_history?: Prisma.seat_holds_historyUncheckedUpdateManyWithoutOutbound_seat_holdsNestedInput
+  return_history?: Prisma.seat_holds_historyUncheckedUpdateManyWithoutReturn_seat_holdsNestedInput
 }
 
 export type seat_holdsUncheckedUpdateManyWithoutSchedulesInput = {
@@ -956,6 +1190,8 @@ export type seat_holdsUpdateWithoutUsersInput = {
   schedules?: Prisma.schedulesUpdateOneWithoutSeat_holdsNestedInput
   outbound_ticket?: Prisma.ticketsUpdateOneWithoutOutbound_holdNestedInput
   return_ticket?: Prisma.ticketsUpdateOneWithoutReturn_holdNestedInput
+  outbound_history?: Prisma.seat_holds_historyUpdateManyWithoutOutbound_seat_holdsNestedInput
+  return_history?: Prisma.seat_holds_historyUpdateManyWithoutReturn_seat_holdsNestedInput
 }
 
 export type seat_holdsUncheckedUpdateWithoutUsersInput = {
@@ -970,6 +1206,8 @@ export type seat_holdsUncheckedUpdateWithoutUsersInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   outbound_ticket?: Prisma.ticketsUncheckedUpdateOneWithoutOutbound_holdNestedInput
   return_ticket?: Prisma.ticketsUncheckedUpdateOneWithoutReturn_holdNestedInput
+  outbound_history?: Prisma.seat_holds_historyUncheckedUpdateManyWithoutOutbound_seat_holdsNestedInput
+  return_history?: Prisma.seat_holds_historyUncheckedUpdateManyWithoutReturn_seat_holdsNestedInput
 }
 
 export type seat_holdsUncheckedUpdateManyWithoutUsersInput = {
@@ -984,6 +1222,44 @@ export type seat_holdsUncheckedUpdateManyWithoutUsersInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type Seat_holdsCountOutputType
+ */
+
+export type Seat_holdsCountOutputType = {
+  outbound_history: number
+  return_history: number
+}
+
+export type Seat_holdsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  outbound_history?: boolean | Seat_holdsCountOutputTypeCountOutbound_historyArgs
+  return_history?: boolean | Seat_holdsCountOutputTypeCountReturn_historyArgs
+}
+
+/**
+ * Seat_holdsCountOutputType without action
+ */
+export type Seat_holdsCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Seat_holdsCountOutputType
+   */
+  select?: Prisma.Seat_holdsCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * Seat_holdsCountOutputType without action
+ */
+export type Seat_holdsCountOutputTypeCountOutbound_historyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.seat_holds_historyWhereInput
+}
+
+/**
+ * Seat_holdsCountOutputType without action
+ */
+export type Seat_holdsCountOutputTypeCountReturn_historyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.seat_holds_historyWhereInput
+}
 
 
 export type seat_holdsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1001,6 +1277,9 @@ export type seat_holdsSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   schedules?: boolean | Prisma.seat_holds$schedulesArgs<ExtArgs>
   outbound_ticket?: boolean | Prisma.seat_holds$outbound_ticketArgs<ExtArgs>
   return_ticket?: boolean | Prisma.seat_holds$return_ticketArgs<ExtArgs>
+  outbound_history?: boolean | Prisma.seat_holds$outbound_historyArgs<ExtArgs>
+  return_history?: boolean | Prisma.seat_holds$return_historyArgs<ExtArgs>
+  _count?: boolean | Prisma.Seat_holdsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["seat_holds"]>
 
 export type seat_holdsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1052,6 +1331,9 @@ export type seat_holdsInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   schedules?: boolean | Prisma.seat_holds$schedulesArgs<ExtArgs>
   outbound_ticket?: boolean | Prisma.seat_holds$outbound_ticketArgs<ExtArgs>
   return_ticket?: boolean | Prisma.seat_holds$return_ticketArgs<ExtArgs>
+  outbound_history?: boolean | Prisma.seat_holds$outbound_historyArgs<ExtArgs>
+  return_history?: boolean | Prisma.seat_holds$return_historyArgs<ExtArgs>
+  _count?: boolean | Prisma.Seat_holdsCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type seat_holdsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.seat_holds$usersArgs<ExtArgs>
@@ -1069,6 +1351,8 @@ export type $seat_holdsPayload<ExtArgs extends runtime.Types.Extensions.Internal
     schedules: Prisma.$schedulesPayload<ExtArgs> | null
     outbound_ticket: Prisma.$ticketsPayload<ExtArgs> | null
     return_ticket: Prisma.$ticketsPayload<ExtArgs> | null
+    outbound_history: Prisma.$seat_holds_historyPayload<ExtArgs>[]
+    return_history: Prisma.$seat_holds_historyPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1479,6 +1763,8 @@ export interface Prisma__seat_holdsClient<T, Null = never, ExtArgs extends runti
   schedules<T extends Prisma.seat_holds$schedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.seat_holds$schedulesArgs<ExtArgs>>): Prisma.Prisma__schedulesClient<runtime.Types.Result.GetResult<Prisma.$schedulesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   outbound_ticket<T extends Prisma.seat_holds$outbound_ticketArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.seat_holds$outbound_ticketArgs<ExtArgs>>): Prisma.Prisma__ticketsClient<runtime.Types.Result.GetResult<Prisma.$ticketsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   return_ticket<T extends Prisma.seat_holds$return_ticketArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.seat_holds$return_ticketArgs<ExtArgs>>): Prisma.Prisma__ticketsClient<runtime.Types.Result.GetResult<Prisma.$ticketsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  outbound_history<T extends Prisma.seat_holds$outbound_historyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.seat_holds$outbound_historyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$seat_holds_historyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  return_history<T extends Prisma.seat_holds$return_historyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.seat_holds$return_historyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$seat_holds_historyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1987,6 +2273,54 @@ export type seat_holds$return_ticketArgs<ExtArgs extends runtime.Types.Extension
    */
   include?: Prisma.ticketsInclude<ExtArgs> | null
   where?: Prisma.ticketsWhereInput
+}
+
+/**
+ * seat_holds.outbound_history
+ */
+export type seat_holds$outbound_historyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the seat_holds_history
+   */
+  select?: Prisma.seat_holds_historySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the seat_holds_history
+   */
+  omit?: Prisma.seat_holds_historyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.seat_holds_historyInclude<ExtArgs> | null
+  where?: Prisma.seat_holds_historyWhereInput
+  orderBy?: Prisma.seat_holds_historyOrderByWithRelationInput | Prisma.seat_holds_historyOrderByWithRelationInput[]
+  cursor?: Prisma.seat_holds_historyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Seat_holds_historyScalarFieldEnum | Prisma.Seat_holds_historyScalarFieldEnum[]
+}
+
+/**
+ * seat_holds.return_history
+ */
+export type seat_holds$return_historyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the seat_holds_history
+   */
+  select?: Prisma.seat_holds_historySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the seat_holds_history
+   */
+  omit?: Prisma.seat_holds_historyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.seat_holds_historyInclude<ExtArgs> | null
+  where?: Prisma.seat_holds_historyWhereInput
+  orderBy?: Prisma.seat_holds_historyOrderByWithRelationInput | Prisma.seat_holds_historyOrderByWithRelationInput[]
+  cursor?: Prisma.seat_holds_historyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Seat_holds_historyScalarFieldEnum | Prisma.Seat_holds_historyScalarFieldEnum[]
 }
 
 /**
