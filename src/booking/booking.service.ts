@@ -1,47 +1,50 @@
+import { PrismaTransaction } from './../databases/prisma.types';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateBookingDto } from './dto/create-booking.dto';
 import { DatabasesService } from 'src/databases/databases.service';
-import { Prisma, PrismaClient } from 'src/databases/generated/prisma/client';
+import { Prisma } from 'src/databases/generated/prisma/client';
+import { envs } from './../common/config/envs';
+import { CreateBookingDto } from './dto/create-booking.dto';
+import { CreateSeatHoldParams } from './interfaces/create-seat-hold-params.interface';
+import { SeatHoldResult } from './interfaces/seat-hold-result.interface';
 
 @Injectable()
 export class BookingService {
-  // Tiempo de expiración del hold (15 minutos)
-  private readonly HOLD_EXPIRATION_MINUTES = 15;
-
   constructor(private databasesService: DatabasesService) {}
 
   async create(createBookingDto: CreateBookingDto) {
     const { outboundScheduleId, returnScheduleId, totalPassengers } =
       createBookingDto;
 
-    // if (!userId && !sessionId) {
-    //   throw new BadRequestException('Se requiere userId o sessionId');
-    // }
-
     const expiresAt = new Date();
-    expiresAt.setMinutes(expiresAt.getMinutes() + this.HOLD_EXPIRATION_MINUTES);
+    const minutes = expiresAt.getMinutes() + envs.holdExpirationMinutes;
+    expiresAt.setMinutes(minutes);
 
     return await this.databasesService.$transaction(async (tx) => {
-      const outboundHold = await this.createHoldForSchedule(
-        tx,
-        outboundScheduleId,
-        totalPassengers,
-        expiresAt,
-      );
+      const holdParams = {
+        seatsToReserve: totalPassengers,
+        holdExpiresAt: expiresAt,
+      };
 
-      const returnHold = returnScheduleId
-        ? await this.createHoldForSchedule(
-            tx,
-            returnScheduleId,
-            totalPassengers,
-            expiresAt,
-          )
-        : null;
+      const outboundParams = {
+        scheduleId: outboundScheduleId,
+        ...holdParams,
+      };
+
+      const outboundHold = await this.createHoldForSchedule(tx, outboundParams);
+
+      let returnHold: SeatHoldResult | null = null;
+      if (returnScheduleId) {
+        const returnParams = {
+          scheduleId: returnScheduleId,
+          ...holdParams,
+        };
+        returnHold = await this.createHoldForSchedule(tx, returnParams);
+      }
 
       const { id } = await tx.seat_holds_history.create({
         data: {
           outbound_seat_hold_id: outboundHold.id,
-          return_seat_hold_id: returnHold?.id,
+          ...(returnHold && { return_seat_hold_id: returnHold.id }),
         },
       });
 
@@ -49,64 +52,63 @@ export class BookingService {
         seatHoldsHistory: id,
       };
     });
-
-    // return 'This action adds a new booking';
   }
 
   private async createHoldForSchedule(
-    tx: Omit<
-      PrismaClient,
-      '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
-    >,
-    scheduleId: string,
-    quantity: number,
-    expiresAt: Date,
+    transaction: PrismaTransaction,
+    params: CreateSeatHoldParams,
   ) {
-    // 1. Obtener schedule CON LOCK para evitar race conditions
-    //    Usamos "FOR UPDATE" mediante una raw query
-    const schedules: Prisma.schedulesModel[] = await tx.$queryRaw`
+    const { scheduleId, seatsToReserve, holdExpiresAt } = params;
+
+    const schedules: Prisma.schedulesModel[] = await transaction.$queryRaw`
       SELECT id, available_seats, total_capacity, status
       FROM schedules
       WHERE id = ${scheduleId}
       FOR UPDATE
     `;
+
     const schedule = schedules[0];
 
     if (!schedule) {
-      throw new BadRequestException(`Viaje ${scheduleId} no encontrado`);
+      throw new BadRequestException(`Schedule ${scheduleId} not found`);
     }
 
     if (schedule.status !== 'scheduled') {
       throw new BadRequestException(
-        `Viaje no disponible (estado: ${schedule.status})`,
+        `Schedule not available (status: ${schedule.status})`,
       );
     }
 
-    if (schedule.available_seats < quantity) {
+    if (schedule.available_seats < seatsToReserve) {
       throw new BadRequestException(
-        `No hay suficientes asientos. Disponibles: ${schedule.available_seats}, Solicitados: ${quantity}`,
+        `Not enough seats available. Available: ${schedule.available_seats}, Requested: ${seatsToReserve}`,
       );
     }
 
-    const seatHold = await tx.seat_holds.create({
+    const seatHoldToCreate = {
+      schedule_id: scheduleId,
+      quantity: seatsToReserve,
+      expires_at: holdExpiresAt,
+    };
+
+    const seatHold = await transaction.seat_holds.create({
       select: {
         id: true,
       },
-      data: {
-        schedule_id: scheduleId,
-        quantity,
-        expires_at: expiresAt,
-      },
+      data: seatHoldToCreate,
     });
 
     // 3. Decrementar asientos disponibles
-    await tx.schedules.update({
-      where: { id: scheduleId },
-      data: {
-        available_seats: {
-          decrement: quantity,
-        },
+    const querySchedules: Prisma.schedulesWhereUniqueInput = { id: scheduleId };
+    const scheduleToUpdate: Prisma.schedulesUpdateInput = {
+      available_seats: {
+        decrement: seatsToReserve,
       },
+    };
+
+    await transaction.schedules.update({
+      where: querySchedules,
+      data: scheduleToUpdate,
     });
 
     return seatHold;

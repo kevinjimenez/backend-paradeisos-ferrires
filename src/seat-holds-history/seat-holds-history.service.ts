@@ -1,97 +1,89 @@
-import { Injectable } from '@nestjs/common';
-import { CreateSeatHoldsHistoryDto } from './dto/create-seat-holds-history.dto';
-import { UpdateSeatHoldsHistoryDto } from './dto/update-seat-holds-history.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { DatabasesService } from 'src/databases/databases.service';
+import { Prisma } from 'src/databases/generated/prisma/client';
 
 @Injectable()
 export class SeatHoldsHistoryService {
   constructor(private databasesService: DatabasesService) {}
 
-  async create(createSeatHoldsHistoryDto: CreateSeatHoldsHistoryDto) {
-    const { outbound_seat_hold_id, return_seat_hold_id } =
-      createSeatHoldsHistoryDto;
-
-    return await this.databasesService.seat_holds_history.create({
-      data: {
-        ...(outbound_seat_hold_id && { outbound_seat_hold_id }),
-        ...(return_seat_hold_id && { return_seat_hold_id }),
-      },
-    });
-  }
-
-  findAll() {
-    return `This action returns all seatHoldsHistory`;
-  }
-
-  findOne(id: string) {
-    return this.databasesService.seat_holds_history.findUnique({
-      where: {
-        id,
-      },
-      include: {
-        outbound_seat_holds: {
-          where: {
-            status: 'held',
-          },
-          select: {
-            status: true,
-            schedules: {
-              select: {
-                arrival_time: true,
-                departure_time: true,
-                ferries: {
-                  select: {
-                    name: true,
-                    register_code: true,
-                    type: true,
-                    amenities: true,
-                  },
-                },
-                routes: {
-                  select: {
-                    base_price_national: true,
-                  },
-                },
-              },
+  async findOne(id: string) {
+    const query: Prisma.seat_holdsWhereInput = { status: 'held' };
+    const seatHoldWithRelation = {
+      status: true,
+      quantity: true,
+      held_at: true,
+      expires_at: true,
+      schedules: {
+        select: {
+          id: true,
+          departure_date: true,
+          arrival_time: true,
+          departure_time: true,
+          available_seats: true,
+          status: true,
+          ferries: {
+            select: {
+              id: true,
+              name: true,
+              register_code: true,
+              type: true,
+              capacity: true,
+              amenities: true,
             },
           },
-        },
-        return_seat_holds: {
-          where: {
-            status: 'held',
-          },
-          select: {
-            status: true,
-            schedules: {
-              select: {
-                arrival_time: true,
-                departure_time: true,
-                ferries: {
-                  select: {
-                    name: true,
-                    register_code: true,
-                    type: true,
-                    amenities: true,
-                  },
+          routes: {
+            select: {
+              id: true,
+              base_price_national: true,
+              base_price_resident: true,
+              base_price_foreign: true,
+              distance_km: true,
+              duration_minutes: true,
+              origin_ports: {
+                select: {
+                  id: true,
+                  name: true,
+                  code: true,
                 },
-                routes: {
-                  select: {
-                    base_price_national: true,
-                  },
+              },
+              destination_ports: {
+                select: {
+                  id: true,
+                  name: true,
+                  code: true,
                 },
               },
             },
           },
         },
       },
-    });
-  }
+    };
 
-  update(id: number, updateSeatHoldsHistoryDto: UpdateSeatHoldsHistoryDto) {
-    return `This action updates a #${id} seatHoldsHistory`;
-  }
+    const seatHoldHistoryWithRelation: Prisma.seat_holds_historySelect = {
+      id: true,
+      outbound_seat_hold_id: true,
+      return_seat_hold_id: true,
+      created_at: true,
+      outbound_seat_holds: {
+        where: query,
+        select: seatHoldWithRelation,
+      },
+      return_seat_holds: {
+        where: query,
+        select: seatHoldWithRelation,
+      },
+    };
 
-  remove(id: number) {
-    return `This action removes a #${id} seatHoldsHistory`;
+    const seatHoldsHistory =
+      await this.databasesService.seat_holds_history.findUnique({
+        where: { id },
+        select: seatHoldHistoryWithRelation,
+      });
+
+    if (!seatHoldsHistory) {
+      throw new NotFoundException(`Seat holds history with ID ${id} not found`);
+    }
+
+    return seatHoldsHistory;
   }
 }

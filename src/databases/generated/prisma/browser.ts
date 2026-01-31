@@ -43,10 +43,10 @@ export type ferries = Prisma.ferriesModel
  */
 export type schedules = Prisma.schedulesModel
 /**
- * Model users
+ * Model contacts
  * 
  */
-export type users = Prisma.usersModel
+export type contacts = Prisma.contactsModel
 /**
  * Model passengers
  * 

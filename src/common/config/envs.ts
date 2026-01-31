@@ -15,6 +15,14 @@ interface EnvVars {
 
   PAGINATION_LIMIT: number;
   PAGINATION_PAGE: number;
+
+  TAXES_VALUE: number;
+  SERVICE_FEE_VALUE: number;
+  DISCOUNT_VALUE: number;
+
+  HOLD_EXPIRATION_MINUTES: number;
+
+  TICKET_CODE_PREFIX: string;
 }
 
 const envsSchema = joi
@@ -31,6 +39,14 @@ const envsSchema = joi
 
     PAGINATION_LIMIT: joi.number().required(),
     PAGINATION_PAGE: joi.number().required(),
+
+    TAXES_VALUE: joi.number().default(0),
+    SERVICE_FEE_VALUE: joi.number().default(0),
+    DISCOUNT_VALUE: joi.number().default(0),
+
+    HOLD_EXPIRATION_MINUTES: joi.number().default(15),
+
+    TICKET_CODE_PREFIX: joi.string().default('TKT'),
   })
   .unknown(true);
 
@@ -60,4 +76,12 @@ export const envs = {
 
   paginationLimit: envVars.PAGINATION_LIMIT,
   paginationPage: envVars.PAGINATION_PAGE,
+
+  taxesValue: envVars.TAXES_VALUE,
+  serviceFeeValue: envVars.SERVICE_FEE_VALUE,
+  discountValue: envVars.DISCOUNT_VALUE,
+
+  holdExpirationMinutes: envVars.HOLD_EXPIRATION_MINUTES,
+
+  ticketCodePrefix: envVars.TICKET_CODE_PREFIX,
 };

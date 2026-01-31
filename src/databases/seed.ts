@@ -22,14 +22,14 @@ async function main() {
   await prisma.ferries.deleteMany();
   await prisma.ports.deleteMany();
   await prisma.islands.deleteMany();
-  await prisma.users.deleteMany();
+  await prisma.contacts.deleteMany();
 
-  // USERS
-  console.log('👥 Creating users...');
-  const user1 = await prisma.users.create({
+  // CONTACTS
+  console.log('👥 Creating contacts...');
+  const contact1 = await prisma.contacts.create({
     data: {
-      firstName: 'Juan',
-      lastName: 'Pérez',
+      first_name: 'Juan',
+      last_name: 'Pérez',
       email: 'juan@example.com',
       phone: '+123456789',
       document_number: '12345678A',
@@ -37,10 +37,10 @@ async function main() {
     },
   });
 
-  await prisma.users.create({
+  await prisma.contacts.create({
     data: {
-      firstName: 'María',
-      lastName: 'García',
+      first_name: 'María',
+      last_name: 'García',
       email: 'maria@example.com',
       phone: '+123456780',
       document_number: 'X1234567',
@@ -612,7 +612,7 @@ async function main() {
   console.log('⏳ Creating seat holds...');
   const hold1 = await prisma.seat_holds.create({
     data: {
-      user_id: user1.id,
+      contact_id: contact1.id,
       schedule_id: schedule1.id,
       quantity: 2,
       status: 'held',
@@ -623,7 +623,7 @@ async function main() {
   console.log('🎫 Creating tickets...');
   const ticket1 = await prisma.tickets.create({
     data: {
-      user_id: user1.id,
+      contacts_id: contact1.id,
       outbound_schedule_id: schedule1.id,
       ticket_code: 'TKT-2025-001',
       trip_type: 'one_way',
@@ -694,7 +694,7 @@ async function main() {
 
   console.log('✅ Seed completed successfully!');
   console.log('\n📊 Summary:');
-  console.log(`   - Users: ${await prisma.users.count()}`);
+  console.log(`   - Contacts: ${await prisma.contacts.count()}`);
   console.log(`   - Islands: ${await prisma.islands.count()}`);
   console.log(`   - Ports: ${await prisma.ports.count()}`);
   console.log(`   - Ferries: ${await prisma.ferries.count()}`);

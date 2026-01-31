@@ -5,20 +5,16 @@ import { AppController } from './app.controller';
 import { BookingModule } from './booking/booking.module';
 import { CommonModule } from './common/common.module';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
+import { ContactsModule } from './contacts/contacts.module';
 import { DatabasesModule } from './databases/databases.module';
-import { FerriesModule } from './ferries/ferries.module';
 import { HealthModule } from './health/health.module';
-import { IslandsModule } from './islands/islands.module';
 import { PassengersModule } from './passengers/passengers.module';
 import { PaymentsModule } from './payments/payments.module';
 import { PortsModule } from './ports/ports.module';
-import { RoutesModule } from './routes/routes.module';
 import { SchedulesModule } from './schedules/schedules.module';
-import { SeatHoldsModule } from './seat-holds/seat-holds.module';
+import { SeatHoldsHistoryModule } from './seat-holds-history/seat-holds-history.module';
 import { TasksModule } from './tasks/tasks.module';
 import { TicketsModule } from './tickets/tickets.module';
-import { UsersModule } from './users/users.module';
-import { SeatHoldsHistoryModule } from './seat-holds-history/seat-holds-history.module';
 
 @Module({
   imports: [
@@ -27,19 +23,15 @@ import { SeatHoldsHistoryModule } from './seat-holds-history/seat-holds-history.
     CommonModule,
     HealthModule,
     DatabasesModule,
-    UsersModule,
-    FerriesModule,
     PortsModule,
-    RoutesModule,
     SchedulesModule,
     TicketsModule,
-    IslandsModule,
     PassengersModule,
     PaymentsModule,
-    SeatHoldsModule,
     BookingModule,
     TasksModule,
     SeatHoldsHistoryModule,
+    ContactsModule,
   ],
   controllers: [AppController],
 })

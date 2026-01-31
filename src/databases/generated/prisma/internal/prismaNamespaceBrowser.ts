@@ -56,7 +56,7 @@ export const ModelName = {
   routes: 'routes',
   ferries: 'ferries',
   schedules: 'schedules',
-  users: 'users',
+  contacts: 'contacts',
   passengers: 'passengers',
   payments: 'payments',
   seat_holds: 'seat_holds',
@@ -167,10 +167,10 @@ export const SchedulesScalarFieldEnum = {
 export type SchedulesScalarFieldEnum = (typeof SchedulesScalarFieldEnum)[keyof typeof SchedulesScalarFieldEnum]
 
 
-export const UsersScalarFieldEnum = {
+export const ContactsScalarFieldEnum = {
   id: 'id',
-  firstName: 'firstName',
-  lastName: 'lastName',
+  first_name: 'first_name',
+  last_name: 'last_name',
   email: 'email',
   phone: 'phone',
   document_number: 'document_number',
@@ -179,7 +179,7 @@ export const UsersScalarFieldEnum = {
   updated_at: 'updated_at'
 } as const
 
-export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+export type ContactsScalarFieldEnum = (typeof ContactsScalarFieldEnum)[keyof typeof ContactsScalarFieldEnum]
 
 
 export const PassengersScalarFieldEnum = {
@@ -232,7 +232,7 @@ export type PaymentsScalarFieldEnum = (typeof PaymentsScalarFieldEnum)[keyof typ
 
 export const Seat_holdsScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
+  contact_id: 'contact_id',
   schedule_id: 'schedule_id',
   quantity: 'quantity',
   status: 'status',
@@ -258,8 +258,8 @@ export type Seat_holds_historyScalarFieldEnum = (typeof Seat_holds_historyScalar
 
 export const TicketsScalarFieldEnum = {
   id: 'id',
+  contacts_id: 'contacts_id',
   return_schedule_id: 'return_schedule_id',
-  user_id: 'user_id',
   outbound_schedule_id: 'outbound_schedule_id',
   return_hold_id: 'return_hold_id',
   outbound_hold_id: 'outbound_hold_id',
