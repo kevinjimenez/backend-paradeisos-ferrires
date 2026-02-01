@@ -15,20 +15,20 @@ export class PortsService {
 
   async findAll(): Promise<ApiResponse<PortResponse[]>> {
     try {
-      const query = {
-        select: {
-          id: true,
-          name: true,
-          islands: {
-            select: {
-              id: true,
-              name: true,
-            },
+      const portsWithRelation = {
+        id: true,
+        name: true,
+        islands: {
+          select: {
+            id: true,
+            name: true,
           },
         },
       };
 
-      const data = await this.databasesService.ports.findMany(query);
+      const data = await this.databasesService.ports.findMany({
+        select: portsWithRelation,
+      });
 
       return {
         data,

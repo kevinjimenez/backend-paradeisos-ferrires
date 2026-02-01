@@ -1,38 +1,53 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
+import { ApiResponse } from 'src/common/interfaces/api-response.interface';
 import { Prisma } from 'src/databases/generated/prisma/client';
 import { DatabasesService } from './../databases/databases.service';
 import { SchedulesFilterDto } from './dto/schedules-filter.dto';
+import { ScheduleResponse } from './interfaces/schedule-response.interface';
 
 @Injectable()
 export class SchedulesService {
+  private readonly logger = new Logger(SchedulesService.name);
+
   constructor(private databasesService: DatabasesService) {}
 
-  async findAll(filters: SchedulesFilterDto) {
-    const scheduleWithRelations = {
-      id: true,
-      departure_time: true,
-      arrival_time: true,
-      available_seats: true,
-      ferries: {
-        select: {
-          name: true,
-          amenities: true,
-          type: true,
+  async findAll(
+    filters: SchedulesFilterDto,
+  ): Promise<ApiResponse<ScheduleResponse[]>> {
+    try {
+      const scheduleWithRelations = {
+        id: true,
+        departure_time: true,
+        arrival_time: true,
+        available_seats: true,
+        ferries: {
+          select: {
+            name: true,
+            amenities: true,
+            type: true,
+          },
         },
-      },
-      routes: {
-        select: {
-          base_price_national: true,
+        routes: {
+          select: {
+            base_price_national: true,
+          },
         },
-      },
-    };
-    const where = this.buildWhereFromFilters(filters);
-    const data = await this.databasesService.schedules.findMany({
-      select: scheduleWithRelations,
-      where,
-    });
+      };
+      const where = this.buildWhereFromFilters(filters);
+      const data = await this.databasesService.schedules.findMany({
+        select: scheduleWithRelations,
+        where,
+      });
 
-    return { data };
+      return { data };
+    } catch (error) {
+      this.logger.error('Error fetching schedules', error);
+      throw new InternalServerErrorException('Failed to fetch schedules');
+    }
   }
 
   private buildWhereFromFilters(

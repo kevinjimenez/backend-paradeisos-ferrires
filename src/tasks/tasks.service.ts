@@ -1,7 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { DatabasesService } from 'src/databases/databases.service';
-import { Prisma, PrismaClient } from 'src/databases/generated/prisma/client';
+import {
+  Prisma,
+  PrismaClient,
+  SeatHoldsStatus,
+} from 'src/databases/generated/prisma/client';
 
 @Injectable()
 export class TasksService {
@@ -41,7 +45,7 @@ export class TasksService {
       schedules: true,
     };
     const queryHolds: Prisma.seat_holdsWhereInput = {
-      status: 'held',
+      status: SeatHoldsStatus.held,
       expires_at: {
         lt: expiredDate,
       },
