@@ -5,16 +5,16 @@ export interface ScheduleResponse {
   departure_time: Date;
   arrival_time: Date;
   available_seats: number;
-  ferries: Ferries | null;
-  routes: Routes | null;
+  ferries: FerriesSchedule | null;
+  routes: RoutesSchedule | null;
 }
 
-export interface Ferries {
+export interface FerriesSchedule {
   name: string;
   amenities: Prisma.JsonValue;
   type: FerryType;
 }
 
-export interface Routes {
+export interface RoutesSchedule {
   base_price_national: Prisma.Decimal;
 }
