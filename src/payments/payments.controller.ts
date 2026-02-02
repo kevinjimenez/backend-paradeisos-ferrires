@@ -7,8 +7,9 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiResponseDto } from 'src/common/dtos/api-response.dto';
-import { Prisma } from 'src/databases/generated/prisma/client';
+import { ApiResponseDto } from './../common/dtos/api-response.dto';
+
+import { Prisma } from './../databases/generated/prisma/client';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
 import { PaymentsService } from './payments.service';
@@ -18,12 +19,16 @@ export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
   @Post()
-  create(@Body() createPaymentDto: CreatePaymentDto) {
+  create(
+    @Body() createPaymentDto: CreatePaymentDto,
+  ): Promise<ApiResponseDto<Prisma.paymentsModel>> {
     return this.paymentsService.create(createPaymentDto);
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseUUIDPipe) id: string) {
+  findOne(
+    @Param('id', ParseUUIDPipe) id: string,
+  ): Promise<ApiResponseDto<Prisma.paymentsModel>> {
     return this.paymentsService.findOne(id);
   }
 
