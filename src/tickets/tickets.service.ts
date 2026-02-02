@@ -4,10 +4,10 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
-import { ApiResponse } from 'src/common/interfaces/api-response.interface';
-import { Prisma } from 'src/databases/generated/prisma/client';
+import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { ContactsService } from './../contacts/contacts.service';
 import { DatabasesService } from './../databases/databases.service';
+import { Prisma } from './../databases/generated/prisma/client';
 import { PassengersService } from './../passengers/passengers.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { CreateTicketResponse } from './interfaces/create-ticket-response.interface';

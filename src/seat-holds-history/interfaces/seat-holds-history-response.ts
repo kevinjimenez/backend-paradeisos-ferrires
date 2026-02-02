@@ -1,7 +1,7 @@
 import {
   FerriesSchedule,
   RoutesSchedule,
-} from 'src/schedules/interfaces/schedule-response.interface';
+} from './../../schedules/interfaces/schedule-response.interface';
 
 export interface SeatHoldsHistoryResponse {
   id: string;
@@ -29,4 +29,5 @@ export interface FerriesSeatHold extends FerriesSchedule {
   register_code: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface RoutesSeatHold extends RoutesSchedule {}

@@ -7,8 +7,8 @@ import {
   IsUUID,
   ValidateNested,
 } from 'class-validator';
-import { CreateContactDto } from 'src/contacts/dto/create-contact.dto';
-import { CreatePassengerDto } from 'src/passengers/dto/create-passenger.dto';
+import { CreateContactDto } from './../../contacts/dto/create-contact.dto';
+import { CreatePassengerDto } from './../../passengers/dto/create-passenger.dto';
 
 export class CreateTicketDto {
   @IsNotEmpty()

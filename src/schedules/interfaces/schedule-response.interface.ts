@@ -1,4 +1,4 @@
-import { FerryType, Prisma } from 'src/databases/generated/prisma/client';
+import { FerryType, Prisma } from '../../databases/generated/prisma/client';
 
 export interface ScheduleResponse {
   id: string;

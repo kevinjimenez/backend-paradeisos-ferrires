@@ -1,6 +1,6 @@
-import { generateUniqueCode } from 'src/common/utils/code-generator.util';
 import { CreateTicketDto } from '../dto/create-ticket.dto';
-import { envs } from 'src/common/config/envs';
+import { envs } from './../../common/config/envs';
+import { generateUniqueCode } from './../../common/utils/code-generator.util';
 
 export class TicketDtoMapper {
   static toPrismaCreate(dto: CreateTicketDto, contact: string) {

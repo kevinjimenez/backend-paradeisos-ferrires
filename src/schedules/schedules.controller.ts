@@ -1,8 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
+import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { SchedulesFilterDto } from './dto/schedules-filter.dto';
-import { SchedulesService } from './schedules.service';
-import { ApiResponse } from 'src/common/interfaces/api-response.interface';
 import { ScheduleResponse } from './interfaces/schedule-response.interface';
+import { SchedulesService } from './schedules.service';
 
 @Controller('schedules')
 export class SchedulesController {

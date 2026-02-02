@@ -3,9 +3,9 @@ import {
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
-import { ApiResponse } from 'src/common/interfaces/api-response.interface';
-import { Prisma } from 'src/databases/generated/prisma/client';
+import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { DatabasesService } from './../databases/databases.service';
+import { Prisma } from './../databases/generated/prisma/client';
 import { SchedulesFilterDto } from './dto/schedules-filter.dto';
 import { ScheduleResponse } from './interfaces/schedule-response.interface';
 

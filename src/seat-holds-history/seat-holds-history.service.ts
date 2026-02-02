@@ -4,9 +4,12 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
-import { ApiResponse } from 'src/common/interfaces/api-response.interface';
-import { DatabasesService } from 'src/databases/databases.service';
-import { Prisma, SeatHoldsStatus } from 'src/databases/generated/prisma/client';
+import { ApiResponse } from './../common/interfaces/api-response.interface';
+import { DatabasesService } from './../databases/databases.service';
+import {
+  Prisma,
+  SeatHoldsStatus,
+} from './../databases/generated/prisma/client';
 import { SeatHoldsHistoryResponse } from './interfaces/seat-holds-history-response';
 
 @Injectable()

@@ -1,11 +1,11 @@
+import { DatabasesService } from './../databases/databases.service';
 import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
-import { DatabasesService } from 'src/databases/databases.service';
-import { Prisma } from 'src/databases/generated/prisma/client';
+import { Prisma } from './../databases/generated/prisma/client';
 import { envs } from './../common/config/envs';
 import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { PrismaTransaction } from './../databases/prisma.types';

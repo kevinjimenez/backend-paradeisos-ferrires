@@ -1,8 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { DatabasesService } from 'src/databases/databases.service';
-import { Prisma, SeatHoldsStatus } from 'src/databases/generated/prisma/client';
-import { PrismaTransaction } from 'src/databases/prisma.types';
+import { DatabasesService } from './../databases/databases.service';
+import {
+  Prisma,
+  SeatHoldsStatus,
+} from './../databases/generated/prisma/client';
+import { PrismaTransaction } from './../databases/prisma.types';
 
 @Injectable()
 export class TasksService {

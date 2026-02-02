@@ -3,7 +3,7 @@ import {
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
-import { ApiResponse } from 'src/common/interfaces/api-response.interface';
+import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { DatabasesService } from './../databases/databases.service';
 import { PortResponse } from './interfaces/port-response.interface';
 

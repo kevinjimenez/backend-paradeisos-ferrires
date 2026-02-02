@@ -3,11 +3,11 @@ import {
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
-import { DatabasesService } from 'src/databases/databases.service';
+import { ApiResponse } from './../common/interfaces/api-response.interface';
+import { DatabasesService } from './../databases/databases.service';
+import { Prisma } from './../databases/generated/prisma/client';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { ContactDtoMapper } from './mappers/contact-dto.mapper';
-import { ApiResponse } from 'src/common/interfaces/api-response.interface';
-import { Prisma } from 'src/databases/generated/prisma/client';
 
 @Injectable()
 export class ContactsService {

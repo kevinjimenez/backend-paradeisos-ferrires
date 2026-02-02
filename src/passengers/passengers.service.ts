@@ -3,11 +3,11 @@ import {
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
+import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { DatabasesService } from './../databases/databases.service';
+import { Prisma } from './../databases/generated/prisma/client';
 import { CreatePassengerDto } from './dto/create-passenger.dto';
 import { PassengerDtoMapper } from './mappers/passenger-dto.mapper';
-import { ApiResponse } from 'src/common/interfaces/api-response.interface';
-import { Prisma } from 'src/databases/generated/prisma/client';
 
 @Injectable()
 export class PassengersService {

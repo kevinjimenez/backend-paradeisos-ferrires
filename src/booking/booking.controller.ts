@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ApiResponse } from 'src/common/interfaces/api-response.interface';
+import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { BookingService } from './booking.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { BookingResponse } from './interfaces/booking-response.interface';

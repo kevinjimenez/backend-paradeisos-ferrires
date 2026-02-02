@@ -1,6 +1,6 @@
 import { Transform } from 'class-transformer';
 import { IsOptional, IsString, IsUUID } from 'class-validator';
-import { QueryParamsDto } from 'src/common/dtos/query-params.dto';
+import { QueryParamsDto } from './../../common/dtos/query-params.dto';
 
 export class SchedulesFilterDto extends QueryParamsDto {
   @IsOptional()
