@@ -23,5 +23,5 @@ export class CreatePaymentDto {
 
   @IsOptional()
   @IsString()
-  paymentProvider: string = 'payphone';
+  paymentProvider: string = 'payphone'; // agregar variable de entorno luego
 }

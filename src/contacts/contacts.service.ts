@@ -7,7 +7,7 @@ import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { DatabasesService } from './../databases/databases.service';
 import { Prisma } from './../databases/generated/prisma/client';
 import { CreateContactDto } from './dto/create-contact.dto';
-import { ContactDtoMapper } from './mappers/contact-dto.mapper';
+import { ContactMapper } from './mappers/contact.mapper';
 
 @Injectable()
 export class ContactsService {
@@ -19,7 +19,7 @@ export class ContactsService {
     createContactDto: CreateContactDto,
   ): Promise<ApiResponse<Prisma.contactsCreateInput>> {
     try {
-      const contactToCreate = ContactDtoMapper.toPrismaCreate(createContactDto);
+      const contactToCreate = ContactMapper.toPrismaCreate(createContactDto);
 
       const newContact = await this.databasesService.contacts.upsert({
         where: {

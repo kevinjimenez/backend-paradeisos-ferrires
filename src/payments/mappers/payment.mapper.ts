@@ -1,6 +1,6 @@
 import { CreatePaymentDto } from '../dto/create-payment.dto';
 
-export class PaymentDtoMapper {
+export class PaymentMapper {
   static toPrismaCreate(dto: CreatePaymentDto) {
     return {
       amount: dto.amount,

@@ -1,8 +1,10 @@
 import { CreateTicketDto } from '../dto/create-ticket.dto';
-import { envs } from './../../common/config/envs';
-import { generateUniqueCode } from './../../common/utils/code-generator.util';
+import { TicketPdf } from '../interfaces/ticket-pdf.interface';
+import { TicketResponse } from '../interfaces/ticket-response.interface';
+import { envs } from '../../common/config/envs';
+import { generateUniqueCode } from '../../common/utils/code-generator.util';
 
-export class TicketDtoMapper {
+export class TicketMapper {
   static toPrismaCreate(dto: CreateTicketDto, contact: string) {
     const code = generateUniqueCode();
     const totalPassengers = dto.passenger.length;
@@ -29,6 +31,20 @@ export class TicketDtoMapper {
       discount: envs.discountValue,
       total_passengers: totalPassengers,
       qr_code: code,
+    };
+  }
+
+  static toTicketResponse(ticket: TicketResponse): TicketPdf {
+    return {
+      ticketCode: ticket.ticket_code,
+      passengers: ticket.passengers.map((p) => ({
+        name: `${p.first_name} ${p.last_name}`,
+        code: p.document_number,
+        country: 'USA',
+      })),
+      checkinTime: '10:00',
+      date: '2025-03-15',
+      ferryName: ticket.outbound_schedules.ferries.name,
     };
   }
 }

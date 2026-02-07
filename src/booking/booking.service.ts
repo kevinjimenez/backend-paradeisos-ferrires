@@ -5,7 +5,7 @@ import {
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
-import { Prisma } from './../databases/generated/prisma/client';
+import { Prisma, ScheduleStatus } from './../databases/generated/prisma/client';
 import { envs } from './../common/config/envs';
 import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { PrismaTransaction } from './../databases/prisma.types';
@@ -98,7 +98,7 @@ export class BookingService {
       throw new BadRequestException(`Schedule ${scheduleId} not found`);
     }
 
-    if (schedule.status !== 'scheduled') {
+    if (schedule.status !== ScheduleStatus.scheduled) {
       throw new BadRequestException(
         `Schedule not available (status: ${schedule.status})`,
       );
@@ -122,6 +122,8 @@ export class BookingService {
       },
       data: seatHoldToCreate,
     });
+
+    console.log('Created seat hold:', seatHold);
 
     // 3. Decrementar asientos disponibles
     const querySchedules: Prisma.schedulesWhereUniqueInput = { id: scheduleId };

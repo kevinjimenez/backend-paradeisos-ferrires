@@ -1,6 +1,6 @@
 import { CreatePassengerDto } from '../dto/create-passenger.dto';
 
-export class PassengerDtoMapper {
+export class PassengerMapper {
   static toPrismaCreate(dto: CreatePassengerDto) {
     return {
       first_name: dto.firstName,

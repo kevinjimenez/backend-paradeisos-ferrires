@@ -5,22 +5,29 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { ApiResponse } from './../common/interfaces/api-response.interface';
+import { PdfService } from './../common/services/pdf/pdf.service';
 import { ContactsService } from './../contacts/contacts.service';
 import { DatabasesService } from './../databases/databases.service';
 import { Prisma } from './../databases/generated/prisma/client';
 import { PassengersService } from './../passengers/passengers.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
+import { TicketPdfGenerator } from './generators/ticket-pdf.generator';
 import { CreateTicketResponse } from './interfaces/create-ticket-response.interface';
-import { TicketDtoMapper } from './mappers/ticket-dto.mapper';
+import { TicketResponse } from './interfaces/ticket-response.interface';
+import { TicketMapper } from './mappers/ticket.mapper';
+import { UpdateTicketDto } from './dto/update-ticket.dto';
+import { ApiResponseDto } from 'src/common/dtos/api-response.dto';
 
 @Injectable()
 export class TicketsService {
   private readonly logger = new Logger(TicketsService.name);
 
   constructor(
-    private databasesService: DatabasesService,
-    private contactsService: ContactsService,
-    private passengersService: PassengersService,
+    private readonly databasesService: DatabasesService,
+    private readonly contactsService: ContactsService,
+    private readonly passengersService: PassengersService,
+    private readonly ticketGenerator: TicketPdfGenerator,
+    private readonly pdfService: PdfService,
   ) {}
 
   async create(
@@ -37,7 +44,7 @@ export class TicketsService {
       }
 
       //2: create ticket
-      const ticketToCreate = TicketDtoMapper.toPrismaCreate(
+      const ticketToCreate = TicketMapper.toPrismaCreate(
         createTicketDto,
         newContact.id,
       );
@@ -67,15 +74,132 @@ export class TicketsService {
     }
   }
 
-  async findOne(id: string): Promise<ApiResponse<Prisma.ticketsModel>> {
+  async findOne(id: string): Promise<ApiResponse<TicketResponse>> {
+    const ticketWithRelations = {
+      id: true,
+      status: true,
+      ticket_code: true,
+      qr_code: true,
+      passengers: {
+        select: {
+          first_name: true,
+          last_name: true,
+          document_number: true,
+        },
+      },
+      outbound_schedules: {
+        select: {
+          departure_date: true,
+          departure_time: true,
+          arrival_time: true,
+          routes: {
+            select: {
+              origin_ports: {
+                select: {
+                  name: true,
+                  islands: {
+                    select: {
+                      name: true,
+                    },
+                  },
+                },
+              },
+              destination_ports: {
+                select: {
+                  name: true,
+                  islands: {
+                    select: {
+                      name: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+          ferries: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+      return_schedules: {
+        select: {
+          departure_date: true,
+          departure_time: true,
+          arrival_time: true,
+          routes: {
+            select: {
+              origin_ports: {
+                select: {
+                  name: true,
+                  islands: {
+                    select: {
+                      name: true,
+                    },
+                  },
+                },
+              },
+              destination_ports: {
+                select: {
+                  name: true,
+                  islands: {
+                    select: {
+                      name: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+          ferries: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+    };
     const ticket = await this.databasesService.tickets.findUnique({
       where: { id },
+      select: ticketWithRelations,
     });
 
     if (!ticket) {
       throw new NotFoundException('Ticket not found');
     }
 
-    return { data: ticket };
+    return { data: ticket as TicketResponse };
+  }
+
+  async findAll(): Promise<ApiResponse<Prisma.ticketsModel[]>> {
+    const tickets = await this.databasesService.tickets.findMany();
+    return { data: tickets };
+  }
+
+  async update(
+    id: string,
+    updateTicketDto: UpdateTicketDto,
+  ): Promise<ApiResponseDto<Prisma.ticketsModel>> {
+    const { data: ticketToUpdate } = await this.findOne(id);
+
+    const ticketUpdated = await this.databasesService.tickets.update({
+      where: { id: ticketToUpdate.id },
+      data: updateTicketDto,
+    });
+
+    return {
+      data: ticketUpdated,
+    };
+  }
+
+  async generateTicketPdf(id: string) {
+    const data = await this.findOne(id);
+
+    const { data: ticket } = data;
+
+    const ticketData = TicketMapper.toTicketResponse(ticket);
+
+    return await this.pdfService.generate(this.ticketGenerator, ticketData);
   }
 }

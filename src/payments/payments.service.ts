@@ -4,7 +4,7 @@ import { ApiResponseDto } from './../common/dtos/api-response.dto';
 import { Prisma } from './../databases/generated/prisma/client';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
-import { PaymentDtoMapper } from './mappers/payment-dto.mapper';
+import { PaymentMapper } from './mappers/payment.mapper';
 
 @Injectable()
 export class PaymentsService {
@@ -13,7 +13,7 @@ export class PaymentsService {
   async create(
     createPaymentDto: CreatePaymentDto,
   ): Promise<ApiResponseDto<Prisma.paymentsModel>> {
-    const paymentToCreate = PaymentDtoMapper.toPrismaCreate(createPaymentDto);
+    const paymentToCreate = PaymentMapper.toPrismaCreate(createPaymentDto);
     const newPayment = await this.databasesService.payments.create({
       data: paymentToCreate,
     });
@@ -42,10 +42,12 @@ export class PaymentsService {
     updatePaymentDto: UpdatePaymentDto,
   ): Promise<ApiResponseDto<Prisma.paymentsModel>> {
     const { data: paymentToUpdate } = await this.findOne(id);
+
     const paymentUpdated = await this.databasesService.payments.update({
       where: { id: paymentToUpdate.id },
       data: updatePaymentDto,
     });
+
     return {
       data: paymentUpdated,
     };

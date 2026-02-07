@@ -7,7 +7,7 @@ import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { DatabasesService } from './../databases/databases.service';
 import { Prisma } from './../databases/generated/prisma/client';
 import { CreatePassengerDto } from './dto/create-passenger.dto';
-import { PassengerDtoMapper } from './mappers/passenger-dto.mapper';
+import { PassengerMapper } from './mappers/passenger.mapper';
 
 @Injectable()
 export class PassengersService {
@@ -20,7 +20,7 @@ export class PassengersService {
   ): Promise<ApiResponse<Prisma.passengersCreateInput>> {
     try {
       const passengerToCreate =
-        PassengerDtoMapper.toPrismaCreate(createPassengerDto);
+        PassengerMapper.toPrismaCreate(createPassengerDto);
 
       const query: Prisma.passengersWhereUniqueInput = {
         document_number: passengerToCreate.document_number,

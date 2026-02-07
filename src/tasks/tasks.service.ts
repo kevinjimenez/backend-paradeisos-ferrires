@@ -4,6 +4,7 @@ import { DatabasesService } from './../databases/databases.service';
 import {
   Prisma,
   SeatHoldsStatus,
+  TicketsStatus,
 } from './../databases/generated/prisma/client';
 import { PrismaTransaction } from './../databases/prisma.types';
 
@@ -85,7 +86,7 @@ export class TasksService {
         id: hold.id,
       };
       const holdData: Prisma.seat_holdsUpdateInput = {
-        status: 'expired',
+        status: SeatHoldsStatus.expired,
         released_at: releasedDate,
       };
 
@@ -109,11 +110,22 @@ export class TasksService {
         data: scheduleData,
       });
 
-      // TODO: Update ticket status to expired
-      const outboundTicket = updatedHold.outbound_ticket?.id;
-      const returnTicket = updatedHold.return_ticket?.id;
-      console.log({ outboundTicket });
-      console.log({ returnTicket });
+      // Update ticket status to expired
+      const ticketIds = [
+        updatedHold.outbound_ticket?.id,
+        updatedHold.return_ticket?.id,
+      ].filter(Boolean) as string[];
+
+      const hasExpiresTickets =
+        updatedHold.outbound_ticket?.status === TicketsStatus.pending &&
+        ticketIds.length > 0;
+
+      if (hasExpiresTickets) {
+        await tx.tickets.updateMany({
+          where: { id: { in: ticketIds } },
+          data: { status: TicketsStatus.expired },
+        });
+      }
 
       this.logger.debug(
         `Hold ${hold.id} released: +${hold.quantity} seats for schedule ${hold.schedule_id}`,

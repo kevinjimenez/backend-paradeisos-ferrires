@@ -1,6 +1,6 @@
 import { CreateContactDto } from '../dto/create-contact.dto';
 
-export class ContactDtoMapper {
+export class ContactMapper {
   static toPrismaCreate(dto: CreateContactDto) {
     return {
       first_name: dto.firstName,
