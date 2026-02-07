@@ -41,11 +41,13 @@ export class PaymentsService {
     id: string,
     updatePaymentDto: UpdatePaymentDto,
   ): Promise<ApiResponseDto<Prisma.paymentsModel>> {
-    const { data: paymentToUpdate } = await this.findOne(id);
+    const { data } = await this.findOne(id);
+
+    const paymentToUpdate = PaymentMapper.toPrismaUpdate(updatePaymentDto);
 
     const paymentUpdated = await this.databasesService.payments.update({
-      where: { id: paymentToUpdate.id },
-      data: updatePaymentDto,
+      where: { id: data.id },
+      data: paymentToUpdate,
     });
 
     return {
