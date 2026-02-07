@@ -1,3 +1,4 @@
+import { ApiResponseDto } from './../common/dtos/api-response.dto';
 import {
   Injectable,
   InternalServerErrorException,
@@ -16,7 +17,6 @@ import { CreateTicketResponse } from './interfaces/create-ticket-response.interf
 import { TicketResponse } from './interfaces/ticket-response.interface';
 import { TicketMapper } from './mappers/ticket.mapper';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
-import { ApiResponseDto } from 'src/common/dtos/api-response.dto';
 
 @Injectable()
 export class TicketsService {
