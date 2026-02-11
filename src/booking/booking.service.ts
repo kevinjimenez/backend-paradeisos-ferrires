@@ -65,7 +65,7 @@ export class BookingService {
           });
 
           return {
-            seatHoldsHistory: id,
+            id,
           };
         },
       );

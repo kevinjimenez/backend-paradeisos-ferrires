@@ -1,3 +1,3 @@
 export interface BookingResponse {
-  seatHoldsHistory: string;
+  id: string;
 }
