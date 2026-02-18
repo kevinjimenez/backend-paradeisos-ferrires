@@ -1,6 +1,7 @@
-import { IsNumber, IsOptional, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsUUID } from 'class-validator';
 
 export class CreateBookingDto {
+  @IsNotEmpty()
   @IsUUID()
   outboundScheduleId: string;
 
@@ -8,12 +9,7 @@ export class CreateBookingDto {
   @IsUUID()
   returnScheduleId?: string;
 
+  @IsNotEmpty()
   @IsNumber()
   totalPassengers: number;
-
-  @IsOptional()
-  userId?: string;
-
-  @IsOptional()
-  sessionId?: string;
 }

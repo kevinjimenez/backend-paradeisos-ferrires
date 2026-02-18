@@ -46,8 +46,8 @@ export type TicketsSumAggregateOutputType = {
 
 export type TicketsMinAggregateOutputType = {
   id: string | null
+  contacts_id: string | null
   return_schedule_id: string | null
-  user_id: string | null
   outbound_schedule_id: string | null
   return_hold_id: string | null
   outbound_hold_id: string | null
@@ -72,8 +72,8 @@ export type TicketsMinAggregateOutputType = {
 
 export type TicketsMaxAggregateOutputType = {
   id: string | null
+  contacts_id: string | null
   return_schedule_id: string | null
-  user_id: string | null
   outbound_schedule_id: string | null
   return_hold_id: string | null
   outbound_hold_id: string | null
@@ -98,8 +98,8 @@ export type TicketsMaxAggregateOutputType = {
 
 export type TicketsCountAggregateOutputType = {
   id: number
+  contacts_id: number
   return_schedule_id: number
-  user_id: number
   outbound_schedule_id: number
   return_hold_id: number
   outbound_hold_id: number
@@ -144,8 +144,8 @@ export type TicketsSumAggregateInputType = {
 
 export type TicketsMinAggregateInputType = {
   id?: true
+  contacts_id?: true
   return_schedule_id?: true
-  user_id?: true
   outbound_schedule_id?: true
   return_hold_id?: true
   outbound_hold_id?: true
@@ -170,8 +170,8 @@ export type TicketsMinAggregateInputType = {
 
 export type TicketsMaxAggregateInputType = {
   id?: true
+  contacts_id?: true
   return_schedule_id?: true
-  user_id?: true
   outbound_schedule_id?: true
   return_hold_id?: true
   outbound_hold_id?: true
@@ -196,8 +196,8 @@ export type TicketsMaxAggregateInputType = {
 
 export type TicketsCountAggregateInputType = {
   id?: true
+  contacts_id?: true
   return_schedule_id?: true
-  user_id?: true
   outbound_schedule_id?: true
   return_hold_id?: true
   outbound_hold_id?: true
@@ -309,8 +309,8 @@ export type ticketsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type TicketsGroupByOutputType = {
   id: string
+  contacts_id: string | null
   return_schedule_id: string | null
-  user_id: string | null
   outbound_schedule_id: string | null
   return_hold_id: string | null
   outbound_hold_id: string | null
@@ -358,8 +358,8 @@ export type ticketsWhereInput = {
   OR?: Prisma.ticketsWhereInput[]
   NOT?: Prisma.ticketsWhereInput | Prisma.ticketsWhereInput[]
   id?: Prisma.StringFilter<"tickets"> | string
+  contacts_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   return_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
-  user_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   outbound_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   return_hold_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   outbound_hold_id?: Prisma.StringNullableFilter<"tickets"> | string | null
@@ -380,7 +380,7 @@ export type ticketsWhereInput = {
   cancelled_at?: Prisma.DateTimeNullableFilter<"tickets"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"tickets"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"tickets"> | Date | string
-  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
+  contacts?: Prisma.XOR<Prisma.ContactsNullableScalarRelationFilter, Prisma.contactsWhereInput> | null
   return_schedules?: Prisma.XOR<Prisma.SchedulesNullableScalarRelationFilter, Prisma.schedulesWhereInput> | null
   outbound_schedules?: Prisma.XOR<Prisma.SchedulesNullableScalarRelationFilter, Prisma.schedulesWhereInput> | null
   outbound_hold?: Prisma.XOR<Prisma.Seat_holdsNullableScalarRelationFilter, Prisma.seat_holdsWhereInput> | null
@@ -391,8 +391,8 @@ export type ticketsWhereInput = {
 
 export type ticketsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  contacts_id?: Prisma.SortOrderInput | Prisma.SortOrder
   return_schedule_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  user_id?: Prisma.SortOrderInput | Prisma.SortOrder
   outbound_schedule_id?: Prisma.SortOrderInput | Prisma.SortOrder
   return_hold_id?: Prisma.SortOrderInput | Prisma.SortOrder
   outbound_hold_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -413,7 +413,7 @@ export type ticketsOrderByWithRelationInput = {
   cancelled_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  users?: Prisma.usersOrderByWithRelationInput
+  contacts?: Prisma.contactsOrderByWithRelationInput
   return_schedules?: Prisma.schedulesOrderByWithRelationInput
   outbound_schedules?: Prisma.schedulesOrderByWithRelationInput
   outbound_hold?: Prisma.seat_holdsOrderByWithRelationInput
@@ -430,8 +430,8 @@ export type ticketsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ticketsWhereInput | Prisma.ticketsWhereInput[]
   OR?: Prisma.ticketsWhereInput[]
   NOT?: Prisma.ticketsWhereInput | Prisma.ticketsWhereInput[]
+  contacts_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   return_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
-  user_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   outbound_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   total_passengers?: Prisma.IntFilter<"tickets"> | number
   subtotal?: Prisma.DecimalFilter<"tickets"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -449,7 +449,7 @@ export type ticketsWhereUniqueInput = Prisma.AtLeast<{
   cancelled_at?: Prisma.DateTimeNullableFilter<"tickets"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"tickets"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"tickets"> | Date | string
-  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
+  contacts?: Prisma.XOR<Prisma.ContactsNullableScalarRelationFilter, Prisma.contactsWhereInput> | null
   return_schedules?: Prisma.XOR<Prisma.SchedulesNullableScalarRelationFilter, Prisma.schedulesWhereInput> | null
   outbound_schedules?: Prisma.XOR<Prisma.SchedulesNullableScalarRelationFilter, Prisma.schedulesWhereInput> | null
   outbound_hold?: Prisma.XOR<Prisma.Seat_holdsNullableScalarRelationFilter, Prisma.seat_holdsWhereInput> | null
@@ -460,8 +460,8 @@ export type ticketsWhereUniqueInput = Prisma.AtLeast<{
 
 export type ticketsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  contacts_id?: Prisma.SortOrderInput | Prisma.SortOrder
   return_schedule_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  user_id?: Prisma.SortOrderInput | Prisma.SortOrder
   outbound_schedule_id?: Prisma.SortOrderInput | Prisma.SortOrder
   return_hold_id?: Prisma.SortOrderInput | Prisma.SortOrder
   outbound_hold_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -494,8 +494,8 @@ export type ticketsScalarWhereWithAggregatesInput = {
   OR?: Prisma.ticketsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ticketsScalarWhereWithAggregatesInput | Prisma.ticketsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"tickets"> | string
+  contacts_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
   return_schedule_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
-  user_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
   outbound_schedule_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
   return_hold_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
   outbound_hold_id?: Prisma.StringNullableWithAggregatesFilter<"tickets"> | string | null
@@ -537,7 +537,7 @@ export type ticketsCreateInput = {
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutTicketsInput
+  contacts?: Prisma.contactsCreateNestedOneWithoutTicketsInput
   return_schedules?: Prisma.schedulesCreateNestedOneWithoutReturn_ticketsInput
   outbound_schedules?: Prisma.schedulesCreateNestedOneWithoutOutbound_ticketsInput
   outbound_hold?: Prisma.seat_holdsCreateNestedOneWithoutOutbound_ticketInput
@@ -548,8 +548,8 @@ export type ticketsCreateInput = {
 
 export type ticketsUncheckedCreateInput = {
   id?: string
+  contacts_id?: string | null
   return_schedule_id?: string | null
-  user_id?: string | null
   outbound_schedule_id?: string | null
   return_hold_id?: string | null
   outbound_hold_id?: string | null
@@ -593,7 +593,7 @@ export type ticketsUpdateInput = {
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutTicketsNestedInput
+  contacts?: Prisma.contactsUpdateOneWithoutTicketsNestedInput
   return_schedules?: Prisma.schedulesUpdateOneWithoutReturn_ticketsNestedInput
   outbound_schedules?: Prisma.schedulesUpdateOneWithoutOutbound_ticketsNestedInput
   outbound_hold?: Prisma.seat_holdsUpdateOneWithoutOutbound_ticketNestedInput
@@ -604,8 +604,8 @@ export type ticketsUpdateInput = {
 
 export type ticketsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contacts_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -632,8 +632,8 @@ export type ticketsUncheckedUpdateInput = {
 
 export type ticketsCreateManyInput = {
   id?: string
+  contacts_id?: string | null
   return_schedule_id?: string | null
-  user_id?: string | null
   outbound_schedule_id?: string | null
   return_hold_id?: string | null
   outbound_hold_id?: string | null
@@ -679,8 +679,8 @@ export type ticketsUpdateManyMutationInput = {
 
 export type ticketsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contacts_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -720,8 +720,8 @@ export type TicketsNullableScalarRelationFilter = {
 
 export type ticketsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  contacts_id?: Prisma.SortOrder
   return_schedule_id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
   outbound_schedule_id?: Prisma.SortOrder
   return_hold_id?: Prisma.SortOrder
   outbound_hold_id?: Prisma.SortOrder
@@ -755,8 +755,8 @@ export type ticketsAvgOrderByAggregateInput = {
 
 export type ticketsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  contacts_id?: Prisma.SortOrder
   return_schedule_id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
   outbound_schedule_id?: Prisma.SortOrder
   return_hold_id?: Prisma.SortOrder
   outbound_hold_id?: Prisma.SortOrder
@@ -781,8 +781,8 @@ export type ticketsMaxOrderByAggregateInput = {
 
 export type ticketsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  contacts_id?: Prisma.SortOrder
   return_schedule_id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
   outbound_schedule_id?: Prisma.SortOrder
   return_hold_id?: Prisma.SortOrder
   outbound_hold_id?: Prisma.SortOrder
@@ -898,45 +898,45 @@ export type ticketsUncheckedUpdateManyWithoutOutbound_schedulesNestedInput = {
   deleteMany?: Prisma.ticketsScalarWhereInput | Prisma.ticketsScalarWhereInput[]
 }
 
-export type ticketsCreateNestedManyWithoutUsersInput = {
-  create?: Prisma.XOR<Prisma.ticketsCreateWithoutUsersInput, Prisma.ticketsUncheckedCreateWithoutUsersInput> | Prisma.ticketsCreateWithoutUsersInput[] | Prisma.ticketsUncheckedCreateWithoutUsersInput[]
-  connectOrCreate?: Prisma.ticketsCreateOrConnectWithoutUsersInput | Prisma.ticketsCreateOrConnectWithoutUsersInput[]
-  createMany?: Prisma.ticketsCreateManyUsersInputEnvelope
+export type ticketsCreateNestedManyWithoutContactsInput = {
+  create?: Prisma.XOR<Prisma.ticketsCreateWithoutContactsInput, Prisma.ticketsUncheckedCreateWithoutContactsInput> | Prisma.ticketsCreateWithoutContactsInput[] | Prisma.ticketsUncheckedCreateWithoutContactsInput[]
+  connectOrCreate?: Prisma.ticketsCreateOrConnectWithoutContactsInput | Prisma.ticketsCreateOrConnectWithoutContactsInput[]
+  createMany?: Prisma.ticketsCreateManyContactsInputEnvelope
   connect?: Prisma.ticketsWhereUniqueInput | Prisma.ticketsWhereUniqueInput[]
 }
 
-export type ticketsUncheckedCreateNestedManyWithoutUsersInput = {
-  create?: Prisma.XOR<Prisma.ticketsCreateWithoutUsersInput, Prisma.ticketsUncheckedCreateWithoutUsersInput> | Prisma.ticketsCreateWithoutUsersInput[] | Prisma.ticketsUncheckedCreateWithoutUsersInput[]
-  connectOrCreate?: Prisma.ticketsCreateOrConnectWithoutUsersInput | Prisma.ticketsCreateOrConnectWithoutUsersInput[]
-  createMany?: Prisma.ticketsCreateManyUsersInputEnvelope
+export type ticketsUncheckedCreateNestedManyWithoutContactsInput = {
+  create?: Prisma.XOR<Prisma.ticketsCreateWithoutContactsInput, Prisma.ticketsUncheckedCreateWithoutContactsInput> | Prisma.ticketsCreateWithoutContactsInput[] | Prisma.ticketsUncheckedCreateWithoutContactsInput[]
+  connectOrCreate?: Prisma.ticketsCreateOrConnectWithoutContactsInput | Prisma.ticketsCreateOrConnectWithoutContactsInput[]
+  createMany?: Prisma.ticketsCreateManyContactsInputEnvelope
   connect?: Prisma.ticketsWhereUniqueInput | Prisma.ticketsWhereUniqueInput[]
 }
 
-export type ticketsUpdateManyWithoutUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.ticketsCreateWithoutUsersInput, Prisma.ticketsUncheckedCreateWithoutUsersInput> | Prisma.ticketsCreateWithoutUsersInput[] | Prisma.ticketsUncheckedCreateWithoutUsersInput[]
-  connectOrCreate?: Prisma.ticketsCreateOrConnectWithoutUsersInput | Prisma.ticketsCreateOrConnectWithoutUsersInput[]
-  upsert?: Prisma.ticketsUpsertWithWhereUniqueWithoutUsersInput | Prisma.ticketsUpsertWithWhereUniqueWithoutUsersInput[]
-  createMany?: Prisma.ticketsCreateManyUsersInputEnvelope
+export type ticketsUpdateManyWithoutContactsNestedInput = {
+  create?: Prisma.XOR<Prisma.ticketsCreateWithoutContactsInput, Prisma.ticketsUncheckedCreateWithoutContactsInput> | Prisma.ticketsCreateWithoutContactsInput[] | Prisma.ticketsUncheckedCreateWithoutContactsInput[]
+  connectOrCreate?: Prisma.ticketsCreateOrConnectWithoutContactsInput | Prisma.ticketsCreateOrConnectWithoutContactsInput[]
+  upsert?: Prisma.ticketsUpsertWithWhereUniqueWithoutContactsInput | Prisma.ticketsUpsertWithWhereUniqueWithoutContactsInput[]
+  createMany?: Prisma.ticketsCreateManyContactsInputEnvelope
   set?: Prisma.ticketsWhereUniqueInput | Prisma.ticketsWhereUniqueInput[]
   disconnect?: Prisma.ticketsWhereUniqueInput | Prisma.ticketsWhereUniqueInput[]
   delete?: Prisma.ticketsWhereUniqueInput | Prisma.ticketsWhereUniqueInput[]
   connect?: Prisma.ticketsWhereUniqueInput | Prisma.ticketsWhereUniqueInput[]
-  update?: Prisma.ticketsUpdateWithWhereUniqueWithoutUsersInput | Prisma.ticketsUpdateWithWhereUniqueWithoutUsersInput[]
-  updateMany?: Prisma.ticketsUpdateManyWithWhereWithoutUsersInput | Prisma.ticketsUpdateManyWithWhereWithoutUsersInput[]
+  update?: Prisma.ticketsUpdateWithWhereUniqueWithoutContactsInput | Prisma.ticketsUpdateWithWhereUniqueWithoutContactsInput[]
+  updateMany?: Prisma.ticketsUpdateManyWithWhereWithoutContactsInput | Prisma.ticketsUpdateManyWithWhereWithoutContactsInput[]
   deleteMany?: Prisma.ticketsScalarWhereInput | Prisma.ticketsScalarWhereInput[]
 }
 
-export type ticketsUncheckedUpdateManyWithoutUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.ticketsCreateWithoutUsersInput, Prisma.ticketsUncheckedCreateWithoutUsersInput> | Prisma.ticketsCreateWithoutUsersInput[] | Prisma.ticketsUncheckedCreateWithoutUsersInput[]
-  connectOrCreate?: Prisma.ticketsCreateOrConnectWithoutUsersInput | Prisma.ticketsCreateOrConnectWithoutUsersInput[]
-  upsert?: Prisma.ticketsUpsertWithWhereUniqueWithoutUsersInput | Prisma.ticketsUpsertWithWhereUniqueWithoutUsersInput[]
-  createMany?: Prisma.ticketsCreateManyUsersInputEnvelope
+export type ticketsUncheckedUpdateManyWithoutContactsNestedInput = {
+  create?: Prisma.XOR<Prisma.ticketsCreateWithoutContactsInput, Prisma.ticketsUncheckedCreateWithoutContactsInput> | Prisma.ticketsCreateWithoutContactsInput[] | Prisma.ticketsUncheckedCreateWithoutContactsInput[]
+  connectOrCreate?: Prisma.ticketsCreateOrConnectWithoutContactsInput | Prisma.ticketsCreateOrConnectWithoutContactsInput[]
+  upsert?: Prisma.ticketsUpsertWithWhereUniqueWithoutContactsInput | Prisma.ticketsUpsertWithWhereUniqueWithoutContactsInput[]
+  createMany?: Prisma.ticketsCreateManyContactsInputEnvelope
   set?: Prisma.ticketsWhereUniqueInput | Prisma.ticketsWhereUniqueInput[]
   disconnect?: Prisma.ticketsWhereUniqueInput | Prisma.ticketsWhereUniqueInput[]
   delete?: Prisma.ticketsWhereUniqueInput | Prisma.ticketsWhereUniqueInput[]
   connect?: Prisma.ticketsWhereUniqueInput | Prisma.ticketsWhereUniqueInput[]
-  update?: Prisma.ticketsUpdateWithWhereUniqueWithoutUsersInput | Prisma.ticketsUpdateWithWhereUniqueWithoutUsersInput[]
-  updateMany?: Prisma.ticketsUpdateManyWithWhereWithoutUsersInput | Prisma.ticketsUpdateManyWithWhereWithoutUsersInput[]
+  update?: Prisma.ticketsUpdateWithWhereUniqueWithoutContactsInput | Prisma.ticketsUpdateWithWhereUniqueWithoutContactsInput[]
+  updateMany?: Prisma.ticketsUpdateManyWithWhereWithoutContactsInput | Prisma.ticketsUpdateManyWithWhereWithoutContactsInput[]
   deleteMany?: Prisma.ticketsScalarWhereInput | Prisma.ticketsScalarWhereInput[]
 }
 
@@ -1063,7 +1063,7 @@ export type ticketsCreateWithoutReturn_schedulesInput = {
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutTicketsInput
+  contacts?: Prisma.contactsCreateNestedOneWithoutTicketsInput
   outbound_schedules?: Prisma.schedulesCreateNestedOneWithoutOutbound_ticketsInput
   outbound_hold?: Prisma.seat_holdsCreateNestedOneWithoutOutbound_ticketInput
   return_hold?: Prisma.seat_holdsCreateNestedOneWithoutReturn_ticketInput
@@ -1073,7 +1073,7 @@ export type ticketsCreateWithoutReturn_schedulesInput = {
 
 export type ticketsUncheckedCreateWithoutReturn_schedulesInput = {
   id?: string
-  user_id?: string | null
+  contacts_id?: string | null
   outbound_schedule_id?: string | null
   return_hold_id?: string | null
   outbound_hold_id?: string | null
@@ -1127,7 +1127,7 @@ export type ticketsCreateWithoutOutbound_schedulesInput = {
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutTicketsInput
+  contacts?: Prisma.contactsCreateNestedOneWithoutTicketsInput
   return_schedules?: Prisma.schedulesCreateNestedOneWithoutReturn_ticketsInput
   outbound_hold?: Prisma.seat_holdsCreateNestedOneWithoutOutbound_ticketInput
   return_hold?: Prisma.seat_holdsCreateNestedOneWithoutReturn_ticketInput
@@ -1137,8 +1137,8 @@ export type ticketsCreateWithoutOutbound_schedulesInput = {
 
 export type ticketsUncheckedCreateWithoutOutbound_schedulesInput = {
   id?: string
+  contacts_id?: string | null
   return_schedule_id?: string | null
-  user_id?: string | null
   return_hold_id?: string | null
   outbound_hold_id?: string | null
   ticket_code: string
@@ -1193,8 +1193,8 @@ export type ticketsScalarWhereInput = {
   OR?: Prisma.ticketsScalarWhereInput[]
   NOT?: Prisma.ticketsScalarWhereInput | Prisma.ticketsScalarWhereInput[]
   id?: Prisma.StringFilter<"tickets"> | string
+  contacts_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   return_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
-  user_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   outbound_schedule_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   return_hold_id?: Prisma.StringNullableFilter<"tickets"> | string | null
   outbound_hold_id?: Prisma.StringNullableFilter<"tickets"> | string | null
@@ -1233,7 +1233,7 @@ export type ticketsUpdateManyWithWhereWithoutOutbound_schedulesInput = {
   data: Prisma.XOR<Prisma.ticketsUpdateManyMutationInput, Prisma.ticketsUncheckedUpdateManyWithoutOutbound_schedulesInput>
 }
 
-export type ticketsCreateWithoutUsersInput = {
+export type ticketsCreateWithoutContactsInput = {
   id?: string
   ticket_code: string
   total_passengers: number
@@ -1260,7 +1260,7 @@ export type ticketsCreateWithoutUsersInput = {
   payments?: Prisma.paymentsCreateNestedManyWithoutTicketsInput
 }
 
-export type ticketsUncheckedCreateWithoutUsersInput = {
+export type ticketsUncheckedCreateWithoutContactsInput = {
   id?: string
   return_schedule_id?: string | null
   outbound_schedule_id?: string | null
@@ -1287,30 +1287,30 @@ export type ticketsUncheckedCreateWithoutUsersInput = {
   payments?: Prisma.paymentsUncheckedCreateNestedManyWithoutTicketsInput
 }
 
-export type ticketsCreateOrConnectWithoutUsersInput = {
+export type ticketsCreateOrConnectWithoutContactsInput = {
   where: Prisma.ticketsWhereUniqueInput
-  create: Prisma.XOR<Prisma.ticketsCreateWithoutUsersInput, Prisma.ticketsUncheckedCreateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.ticketsCreateWithoutContactsInput, Prisma.ticketsUncheckedCreateWithoutContactsInput>
 }
 
-export type ticketsCreateManyUsersInputEnvelope = {
-  data: Prisma.ticketsCreateManyUsersInput | Prisma.ticketsCreateManyUsersInput[]
+export type ticketsCreateManyContactsInputEnvelope = {
+  data: Prisma.ticketsCreateManyContactsInput | Prisma.ticketsCreateManyContactsInput[]
   skipDuplicates?: boolean
 }
 
-export type ticketsUpsertWithWhereUniqueWithoutUsersInput = {
+export type ticketsUpsertWithWhereUniqueWithoutContactsInput = {
   where: Prisma.ticketsWhereUniqueInput
-  update: Prisma.XOR<Prisma.ticketsUpdateWithoutUsersInput, Prisma.ticketsUncheckedUpdateWithoutUsersInput>
-  create: Prisma.XOR<Prisma.ticketsCreateWithoutUsersInput, Prisma.ticketsUncheckedCreateWithoutUsersInput>
+  update: Prisma.XOR<Prisma.ticketsUpdateWithoutContactsInput, Prisma.ticketsUncheckedUpdateWithoutContactsInput>
+  create: Prisma.XOR<Prisma.ticketsCreateWithoutContactsInput, Prisma.ticketsUncheckedCreateWithoutContactsInput>
 }
 
-export type ticketsUpdateWithWhereUniqueWithoutUsersInput = {
+export type ticketsUpdateWithWhereUniqueWithoutContactsInput = {
   where: Prisma.ticketsWhereUniqueInput
-  data: Prisma.XOR<Prisma.ticketsUpdateWithoutUsersInput, Prisma.ticketsUncheckedUpdateWithoutUsersInput>
+  data: Prisma.XOR<Prisma.ticketsUpdateWithoutContactsInput, Prisma.ticketsUncheckedUpdateWithoutContactsInput>
 }
 
-export type ticketsUpdateManyWithWhereWithoutUsersInput = {
+export type ticketsUpdateManyWithWhereWithoutContactsInput = {
   where: Prisma.ticketsScalarWhereInput
-  data: Prisma.XOR<Prisma.ticketsUpdateManyMutationInput, Prisma.ticketsUncheckedUpdateManyWithoutUsersInput>
+  data: Prisma.XOR<Prisma.ticketsUpdateManyMutationInput, Prisma.ticketsUncheckedUpdateManyWithoutContactsInput>
 }
 
 export type ticketsCreateWithoutPassengersInput = {
@@ -1332,7 +1332,7 @@ export type ticketsCreateWithoutPassengersInput = {
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutTicketsInput
+  contacts?: Prisma.contactsCreateNestedOneWithoutTicketsInput
   return_schedules?: Prisma.schedulesCreateNestedOneWithoutReturn_ticketsInput
   outbound_schedules?: Prisma.schedulesCreateNestedOneWithoutOutbound_ticketsInput
   outbound_hold?: Prisma.seat_holdsCreateNestedOneWithoutOutbound_ticketInput
@@ -1342,8 +1342,8 @@ export type ticketsCreateWithoutPassengersInput = {
 
 export type ticketsUncheckedCreateWithoutPassengersInput = {
   id?: string
+  contacts_id?: string | null
   return_schedule_id?: string | null
-  user_id?: string | null
   outbound_schedule_id?: string | null
   return_hold_id?: string | null
   outbound_hold_id?: string | null
@@ -1402,7 +1402,7 @@ export type ticketsUpdateWithoutPassengersInput = {
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutTicketsNestedInput
+  contacts?: Prisma.contactsUpdateOneWithoutTicketsNestedInput
   return_schedules?: Prisma.schedulesUpdateOneWithoutReturn_ticketsNestedInput
   outbound_schedules?: Prisma.schedulesUpdateOneWithoutOutbound_ticketsNestedInput
   outbound_hold?: Prisma.seat_holdsUpdateOneWithoutOutbound_ticketNestedInput
@@ -1412,8 +1412,8 @@ export type ticketsUpdateWithoutPassengersInput = {
 
 export type ticketsUncheckedUpdateWithoutPassengersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contacts_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1456,7 +1456,7 @@ export type ticketsCreateWithoutPaymentsInput = {
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutTicketsInput
+  contacts?: Prisma.contactsCreateNestedOneWithoutTicketsInput
   return_schedules?: Prisma.schedulesCreateNestedOneWithoutReturn_ticketsInput
   outbound_schedules?: Prisma.schedulesCreateNestedOneWithoutOutbound_ticketsInput
   outbound_hold?: Prisma.seat_holdsCreateNestedOneWithoutOutbound_ticketInput
@@ -1466,8 +1466,8 @@ export type ticketsCreateWithoutPaymentsInput = {
 
 export type ticketsUncheckedCreateWithoutPaymentsInput = {
   id?: string
+  contacts_id?: string | null
   return_schedule_id?: string | null
-  user_id?: string | null
   outbound_schedule_id?: string | null
   return_hold_id?: string | null
   outbound_hold_id?: string | null
@@ -1526,7 +1526,7 @@ export type ticketsUpdateWithoutPaymentsInput = {
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutTicketsNestedInput
+  contacts?: Prisma.contactsUpdateOneWithoutTicketsNestedInput
   return_schedules?: Prisma.schedulesUpdateOneWithoutReturn_ticketsNestedInput
   outbound_schedules?: Prisma.schedulesUpdateOneWithoutOutbound_ticketsNestedInput
   outbound_hold?: Prisma.seat_holdsUpdateOneWithoutOutbound_ticketNestedInput
@@ -1536,8 +1536,8 @@ export type ticketsUpdateWithoutPaymentsInput = {
 
 export type ticketsUncheckedUpdateWithoutPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contacts_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1580,7 +1580,7 @@ export type ticketsCreateWithoutOutbound_holdInput = {
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutTicketsInput
+  contacts?: Prisma.contactsCreateNestedOneWithoutTicketsInput
   return_schedules?: Prisma.schedulesCreateNestedOneWithoutReturn_ticketsInput
   outbound_schedules?: Prisma.schedulesCreateNestedOneWithoutOutbound_ticketsInput
   return_hold?: Prisma.seat_holdsCreateNestedOneWithoutReturn_ticketInput
@@ -1590,8 +1590,8 @@ export type ticketsCreateWithoutOutbound_holdInput = {
 
 export type ticketsUncheckedCreateWithoutOutbound_holdInput = {
   id?: string
+  contacts_id?: string | null
   return_schedule_id?: string | null
-  user_id?: string | null
   outbound_schedule_id?: string | null
   return_hold_id?: string | null
   ticket_code: string
@@ -1639,7 +1639,7 @@ export type ticketsCreateWithoutReturn_holdInput = {
   cancelled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  users?: Prisma.usersCreateNestedOneWithoutTicketsInput
+  contacts?: Prisma.contactsCreateNestedOneWithoutTicketsInput
   return_schedules?: Prisma.schedulesCreateNestedOneWithoutReturn_ticketsInput
   outbound_schedules?: Prisma.schedulesCreateNestedOneWithoutOutbound_ticketsInput
   outbound_hold?: Prisma.seat_holdsCreateNestedOneWithoutOutbound_ticketInput
@@ -1649,8 +1649,8 @@ export type ticketsCreateWithoutReturn_holdInput = {
 
 export type ticketsUncheckedCreateWithoutReturn_holdInput = {
   id?: string
+  contacts_id?: string | null
   return_schedule_id?: string | null
-  user_id?: string | null
   outbound_schedule_id?: string | null
   outbound_hold_id?: string | null
   ticket_code: string
@@ -1709,7 +1709,7 @@ export type ticketsUpdateWithoutOutbound_holdInput = {
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutTicketsNestedInput
+  contacts?: Prisma.contactsUpdateOneWithoutTicketsNestedInput
   return_schedules?: Prisma.schedulesUpdateOneWithoutReturn_ticketsNestedInput
   outbound_schedules?: Prisma.schedulesUpdateOneWithoutOutbound_ticketsNestedInput
   return_hold?: Prisma.seat_holdsUpdateOneWithoutReturn_ticketNestedInput
@@ -1719,8 +1719,8 @@ export type ticketsUpdateWithoutOutbound_holdInput = {
 
 export type ticketsUncheckedUpdateWithoutOutbound_holdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contacts_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1774,7 +1774,7 @@ export type ticketsUpdateWithoutReturn_holdInput = {
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutTicketsNestedInput
+  contacts?: Prisma.contactsUpdateOneWithoutTicketsNestedInput
   return_schedules?: Prisma.schedulesUpdateOneWithoutReturn_ticketsNestedInput
   outbound_schedules?: Prisma.schedulesUpdateOneWithoutOutbound_ticketsNestedInput
   outbound_hold?: Prisma.seat_holdsUpdateOneWithoutOutbound_ticketNestedInput
@@ -1784,8 +1784,8 @@ export type ticketsUpdateWithoutReturn_holdInput = {
 
 export type ticketsUncheckedUpdateWithoutReturn_holdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contacts_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1811,7 +1811,7 @@ export type ticketsUncheckedUpdateWithoutReturn_holdInput = {
 
 export type ticketsCreateManyReturn_schedulesInput = {
   id?: string
-  user_id?: string | null
+  contacts_id?: string | null
   outbound_schedule_id?: string | null
   return_hold_id?: string | null
   outbound_hold_id?: string | null
@@ -1836,8 +1836,8 @@ export type ticketsCreateManyReturn_schedulesInput = {
 
 export type ticketsCreateManyOutbound_schedulesInput = {
   id?: string
+  contacts_id?: string | null
   return_schedule_id?: string | null
-  user_id?: string | null
   return_hold_id?: string | null
   outbound_hold_id?: string | null
   ticket_code: string
@@ -1878,7 +1878,7 @@ export type ticketsUpdateWithoutReturn_schedulesInput = {
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutTicketsNestedInput
+  contacts?: Prisma.contactsUpdateOneWithoutTicketsNestedInput
   outbound_schedules?: Prisma.schedulesUpdateOneWithoutOutbound_ticketsNestedInput
   outbound_hold?: Prisma.seat_holdsUpdateOneWithoutOutbound_ticketNestedInput
   return_hold?: Prisma.seat_holdsUpdateOneWithoutReturn_ticketNestedInput
@@ -1888,7 +1888,7 @@ export type ticketsUpdateWithoutReturn_schedulesInput = {
 
 export type ticketsUncheckedUpdateWithoutReturn_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contacts_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1915,7 +1915,7 @@ export type ticketsUncheckedUpdateWithoutReturn_schedulesInput = {
 
 export type ticketsUncheckedUpdateManyWithoutReturn_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contacts_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1957,7 +1957,7 @@ export type ticketsUpdateWithoutOutbound_schedulesInput = {
   cancelled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.usersUpdateOneWithoutTicketsNestedInput
+  contacts?: Prisma.contactsUpdateOneWithoutTicketsNestedInput
   return_schedules?: Prisma.schedulesUpdateOneWithoutReturn_ticketsNestedInput
   outbound_hold?: Prisma.seat_holdsUpdateOneWithoutOutbound_ticketNestedInput
   return_hold?: Prisma.seat_holdsUpdateOneWithoutReturn_ticketNestedInput
@@ -1967,8 +1967,8 @@ export type ticketsUpdateWithoutOutbound_schedulesInput = {
 
 export type ticketsUncheckedUpdateWithoutOutbound_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contacts_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1994,8 +1994,8 @@ export type ticketsUncheckedUpdateWithoutOutbound_schedulesInput = {
 
 export type ticketsUncheckedUpdateManyWithoutOutbound_schedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contacts_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   return_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_hold_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2017,7 +2017,7 @@ export type ticketsUncheckedUpdateManyWithoutOutbound_schedulesInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ticketsCreateManyUsersInput = {
+export type ticketsCreateManyContactsInput = {
   id?: string
   return_schedule_id?: string | null
   outbound_schedule_id?: string | null
@@ -2042,7 +2042,7 @@ export type ticketsCreateManyUsersInput = {
   updated_at?: Date | string
 }
 
-export type ticketsUpdateWithoutUsersInput = {
+export type ticketsUpdateWithoutContactsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ticket_code?: Prisma.StringFieldUpdateOperationsInput | string
   total_passengers?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2069,7 +2069,7 @@ export type ticketsUpdateWithoutUsersInput = {
   payments?: Prisma.paymentsUpdateManyWithoutTicketsNestedInput
 }
 
-export type ticketsUncheckedUpdateWithoutUsersInput = {
+export type ticketsUncheckedUpdateWithoutContactsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2096,7 +2096,7 @@ export type ticketsUncheckedUpdateWithoutUsersInput = {
   payments?: Prisma.paymentsUncheckedUpdateManyWithoutTicketsNestedInput
 }
 
-export type ticketsUncheckedUpdateManyWithoutUsersInput = {
+export type ticketsUncheckedUpdateManyWithoutContactsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   return_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outbound_schedule_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2163,8 +2163,8 @@ export type TicketsCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Type
 
 export type ticketsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  contacts_id?: boolean
   return_schedule_id?: boolean
-  user_id?: boolean
   outbound_schedule_id?: boolean
   return_hold_id?: boolean
   outbound_hold_id?: boolean
@@ -2185,7 +2185,7 @@ export type ticketsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   cancelled_at?: boolean
   created_at?: boolean
   updated_at?: boolean
-  users?: boolean | Prisma.tickets$usersArgs<ExtArgs>
+  contacts?: boolean | Prisma.tickets$contactsArgs<ExtArgs>
   return_schedules?: boolean | Prisma.tickets$return_schedulesArgs<ExtArgs>
   outbound_schedules?: boolean | Prisma.tickets$outbound_schedulesArgs<ExtArgs>
   outbound_hold?: boolean | Prisma.tickets$outbound_holdArgs<ExtArgs>
@@ -2197,8 +2197,8 @@ export type ticketsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 
 export type ticketsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  contacts_id?: boolean
   return_schedule_id?: boolean
-  user_id?: boolean
   outbound_schedule_id?: boolean
   return_hold_id?: boolean
   outbound_hold_id?: boolean
@@ -2219,7 +2219,7 @@ export type ticketsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   cancelled_at?: boolean
   created_at?: boolean
   updated_at?: boolean
-  users?: boolean | Prisma.tickets$usersArgs<ExtArgs>
+  contacts?: boolean | Prisma.tickets$contactsArgs<ExtArgs>
   return_schedules?: boolean | Prisma.tickets$return_schedulesArgs<ExtArgs>
   outbound_schedules?: boolean | Prisma.tickets$outbound_schedulesArgs<ExtArgs>
   outbound_hold?: boolean | Prisma.tickets$outbound_holdArgs<ExtArgs>
@@ -2228,8 +2228,8 @@ export type ticketsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type ticketsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  contacts_id?: boolean
   return_schedule_id?: boolean
-  user_id?: boolean
   outbound_schedule_id?: boolean
   return_hold_id?: boolean
   outbound_hold_id?: boolean
@@ -2250,7 +2250,7 @@ export type ticketsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   cancelled_at?: boolean
   created_at?: boolean
   updated_at?: boolean
-  users?: boolean | Prisma.tickets$usersArgs<ExtArgs>
+  contacts?: boolean | Prisma.tickets$contactsArgs<ExtArgs>
   return_schedules?: boolean | Prisma.tickets$return_schedulesArgs<ExtArgs>
   outbound_schedules?: boolean | Prisma.tickets$outbound_schedulesArgs<ExtArgs>
   outbound_hold?: boolean | Prisma.tickets$outbound_holdArgs<ExtArgs>
@@ -2259,8 +2259,8 @@ export type ticketsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type ticketsSelectScalar = {
   id?: boolean
+  contacts_id?: boolean
   return_schedule_id?: boolean
-  user_id?: boolean
   outbound_schedule_id?: boolean
   return_hold_id?: boolean
   outbound_hold_id?: boolean
@@ -2283,9 +2283,9 @@ export type ticketsSelectScalar = {
   updated_at?: boolean
 }
 
-export type ticketsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "return_schedule_id" | "user_id" | "outbound_schedule_id" | "return_hold_id" | "outbound_hold_id" | "ticket_code" | "total_passengers" | "subtotal" | "taxes" | "service_fee" | "discount" | "total" | "currency" | "qr_code" | "cancellation_reason" | "trip_type" | "status" | "booking_expires_at" | "confirmed_at" | "cancelled_at" | "created_at" | "updated_at", ExtArgs["result"]["tickets"]>
+export type ticketsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contacts_id" | "return_schedule_id" | "outbound_schedule_id" | "return_hold_id" | "outbound_hold_id" | "ticket_code" | "total_passengers" | "subtotal" | "taxes" | "service_fee" | "discount" | "total" | "currency" | "qr_code" | "cancellation_reason" | "trip_type" | "status" | "booking_expires_at" | "confirmed_at" | "cancelled_at" | "created_at" | "updated_at", ExtArgs["result"]["tickets"]>
 export type ticketsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  users?: boolean | Prisma.tickets$usersArgs<ExtArgs>
+  contacts?: boolean | Prisma.tickets$contactsArgs<ExtArgs>
   return_schedules?: boolean | Prisma.tickets$return_schedulesArgs<ExtArgs>
   outbound_schedules?: boolean | Prisma.tickets$outbound_schedulesArgs<ExtArgs>
   outbound_hold?: boolean | Prisma.tickets$outbound_holdArgs<ExtArgs>
@@ -2295,14 +2295,14 @@ export type ticketsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   _count?: boolean | Prisma.TicketsCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ticketsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  users?: boolean | Prisma.tickets$usersArgs<ExtArgs>
+  contacts?: boolean | Prisma.tickets$contactsArgs<ExtArgs>
   return_schedules?: boolean | Prisma.tickets$return_schedulesArgs<ExtArgs>
   outbound_schedules?: boolean | Prisma.tickets$outbound_schedulesArgs<ExtArgs>
   outbound_hold?: boolean | Prisma.tickets$outbound_holdArgs<ExtArgs>
   return_hold?: boolean | Prisma.tickets$return_holdArgs<ExtArgs>
 }
 export type ticketsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  users?: boolean | Prisma.tickets$usersArgs<ExtArgs>
+  contacts?: boolean | Prisma.tickets$contactsArgs<ExtArgs>
   return_schedules?: boolean | Prisma.tickets$return_schedulesArgs<ExtArgs>
   outbound_schedules?: boolean | Prisma.tickets$outbound_schedulesArgs<ExtArgs>
   outbound_hold?: boolean | Prisma.tickets$outbound_holdArgs<ExtArgs>
@@ -2312,7 +2312,7 @@ export type ticketsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $ticketsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "tickets"
   objects: {
-    users: Prisma.$usersPayload<ExtArgs> | null
+    contacts: Prisma.$contactsPayload<ExtArgs> | null
     return_schedules: Prisma.$schedulesPayload<ExtArgs> | null
     outbound_schedules: Prisma.$schedulesPayload<ExtArgs> | null
     outbound_hold: Prisma.$seat_holdsPayload<ExtArgs> | null
@@ -2322,8 +2322,8 @@ export type $ticketsPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    contacts_id: string | null
     return_schedule_id: string | null
-    user_id: string | null
     outbound_schedule_id: string | null
     return_hold_id: string | null
     outbound_hold_id: string | null
@@ -2738,7 +2738,7 @@ readonly fields: ticketsFieldRefs;
  */
 export interface Prisma__ticketsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  users<T extends Prisma.tickets$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tickets$usersArgs<ExtArgs>>): Prisma.Prisma__usersClient<runtime.Types.Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  contacts<T extends Prisma.tickets$contactsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tickets$contactsArgs<ExtArgs>>): Prisma.Prisma__contactsClient<runtime.Types.Result.GetResult<Prisma.$contactsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   return_schedules<T extends Prisma.tickets$return_schedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tickets$return_schedulesArgs<ExtArgs>>): Prisma.Prisma__schedulesClient<runtime.Types.Result.GetResult<Prisma.$schedulesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   outbound_schedules<T extends Prisma.tickets$outbound_schedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tickets$outbound_schedulesArgs<ExtArgs>>): Prisma.Prisma__schedulesClient<runtime.Types.Result.GetResult<Prisma.$schedulesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   outbound_hold<T extends Prisma.tickets$outbound_holdArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tickets$outbound_holdArgs<ExtArgs>>): Prisma.Prisma__seat_holdsClient<runtime.Types.Result.GetResult<Prisma.$seat_holdsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2775,8 +2775,8 @@ export interface Prisma__ticketsClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface ticketsFieldRefs {
   readonly id: Prisma.FieldRef<"tickets", 'String'>
+  readonly contacts_id: Prisma.FieldRef<"tickets", 'String'>
   readonly return_schedule_id: Prisma.FieldRef<"tickets", 'String'>
-  readonly user_id: Prisma.FieldRef<"tickets", 'String'>
   readonly outbound_schedule_id: Prisma.FieldRef<"tickets", 'String'>
   readonly return_hold_id: Prisma.FieldRef<"tickets", 'String'>
   readonly outbound_hold_id: Prisma.FieldRef<"tickets", 'String'>
@@ -3193,22 +3193,22 @@ export type ticketsDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * tickets.users
+ * tickets.contacts
  */
-export type tickets$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type tickets$contactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the users
+   * Select specific fields to fetch from the contacts
    */
-  select?: Prisma.usersSelect<ExtArgs> | null
+  select?: Prisma.contactsSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the users
+   * Omit specific fields from the contacts
    */
-  omit?: Prisma.usersOmit<ExtArgs> | null
+  omit?: Prisma.contactsOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.usersInclude<ExtArgs> | null
-  where?: Prisma.usersWhereInput
+  include?: Prisma.contactsInclude<ExtArgs> | null
+  where?: Prisma.contactsWhereInput
 }
 
 /**

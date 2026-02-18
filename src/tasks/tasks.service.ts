@@ -1,7 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { DatabasesService } from 'src/databases/databases.service';
-import { Prisma, PrismaClient } from 'src/databases/generated/prisma/client';
+import { DatabasesService } from './../databases/databases.service';
+import {
+  Prisma,
+  SeatHoldsStatus,
+  TicketsStatus,
+} from './../databases/generated/prisma/client';
+import { PrismaTransaction } from './../databases/prisma.types';
 
 @Injectable()
 export class TasksService {
@@ -9,27 +14,23 @@ export class TasksService {
 
   constructor(private databasesService: DatabasesService) {}
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CRON JOB: Ejecutar cada minuto
-  // ═══════════════════════════════════════════════════════════════════════════
-
   @Cron(CronExpression.EVERY_MINUTE)
   async releaseExpiredHolds() {
-    this.logger.log('🔄 Iniciando liberación de holds expirados...');
+    this.logger.log('Starting expired holds release...');
 
     try {
       const result = await this.processExpiredHolds();
 
       if (result.releasedCount > 0) {
         this.logger.log(
-          `✅ Liberados ${result.releasedCount} holds, ` +
-            `${result.seatsRestored} asientos restaurados`,
+          `Released ${result.releasedCount} holds, ` +
+            `${result.seatsRestored} seats restored`,
         );
       } else {
-        this.logger.debug('No hay holds expirados para liberar');
+        this.logger.debug('No expired holds to release');
       }
     } catch (error) {
-      this.logger.error('❌ Error liberando holds expirados:', error);
+      this.logger.error('Error releasing expired holds:', error);
     }
   }
 
@@ -37,33 +38,36 @@ export class TasksService {
     let releasedCount = 0;
     let seatsRestored = 0;
 
-    // 1. Buscar todos los holds expirados
+    // 1. Find all expired holds
+    const expiredDate = new Date();
+    const holdsWithRelations: Prisma.seat_holdsInclude = {
+      schedules: true,
+    };
+    const queryHolds: Prisma.seat_holdsWhereInput = {
+      status: SeatHoldsStatus.held,
+      expires_at: {
+        lt: expiredDate,
+      },
+    };
     const expiredHolds = await this.databasesService.seat_holds.findMany({
-      where: {
-        status: 'held',
-        expires_at: {
-          lt: new Date(), // menor que ahora = expirado
-        },
-      },
-      include: {
-        schedules: true,
-      },
+      where: queryHolds,
+      include: holdsWithRelations,
     });
 
     if (expiredHolds.length === 0) {
       return { releasedCount: 0, seatsRestored: 0 };
     }
 
-    this.logger.log(`📋 Encontrados ${expiredHolds.length} holds expirados`);
+    this.logger.log(`Found ${expiredHolds.length} expired holds`);
 
-    // 2. Procesar cada hold en una transacción
+    // 2. Process each hold in a transaction
     for (const hold of expiredHolds) {
       try {
         await this.releaseHold(hold);
         releasedCount++;
         seatsRestored += hold.quantity;
       } catch (error) {
-        this.logger.error(`Error liberando hold ${hold.id}: ${error}`);
+        this.logger.error(`Error releasing hold ${hold.id}:`, error);
       }
     }
 
@@ -71,41 +75,61 @@ export class TasksService {
   }
 
   private async releaseHold(hold: Prisma.seat_holdsModel) {
-    await this.databasesService.$transaction(
-      async (
-        tx: Omit<
-          PrismaClient,
-          | '$connect'
-          | '$disconnect'
-          | '$on'
-          | '$transaction'
-          | '$use'
-          | '$extends'
-        >,
-      ) => {
-        // 1. Marcar hold como expirado
-        await tx.seat_holds.update({
-          where: { id: hold.id },
-          data: {
-            status: 'expired',
-            released_at: new Date(),
-          },
-        });
+    await this.databasesService.$transaction(async (tx: PrismaTransaction) => {
+      // 1. Mark hold as expired
+      const releasedDate = new Date();
+      const holdsWithRelations: Prisma.seat_holdsInclude = {
+        outbound_ticket: true,
+        return_ticket: true,
+      };
+      const queryHold: Prisma.seat_holdsWhereUniqueInput = {
+        id: hold.id,
+      };
+      const holdData: Prisma.seat_holdsUpdateInput = {
+        status: SeatHoldsStatus.expired,
+        released_at: releasedDate,
+      };
 
-        // 2. Restaurar asientos en el schedule
-        await tx.schedules.update({
-          where: { id: hold.schedule_id! },
-          data: {
-            available_seats: {
-              increment: hold.quantity,
-            },
-          },
-        });
+      const updatedHold = await tx.seat_holds.update({
+        where: queryHold,
+        include: holdsWithRelations,
+        data: holdData,
+      });
 
-        this.logger.debug(
-          `Hold ${hold.id} liberado: +${hold.quantity} asientos para schedule ${hold.schedule_id}`,
-        );
-      },
-    );
+      // 2. Restore seats to schedule
+      const querySchedule: Prisma.schedulesWhereUniqueInput = {
+        id: hold.schedule_id!,
+      };
+      const scheduleData: Prisma.schedulesUpdateInput = {
+        available_seats: {
+          increment: hold.quantity,
+        },
+      };
+      await tx.schedules.update({
+        where: querySchedule,
+        data: scheduleData,
+      });
+
+      // Update ticket status to expired
+      const ticketIds = [
+        updatedHold.outbound_ticket?.id,
+        updatedHold.return_ticket?.id,
+      ].filter(Boolean) as string[];
+
+      const hasExpiresTickets =
+        updatedHold.outbound_ticket?.status === TicketsStatus.pending &&
+        ticketIds.length > 0;
+
+      if (hasExpiresTickets) {
+        await tx.tickets.updateMany({
+          where: { id: { in: ticketIds } },
+          data: { status: TicketsStatus.expired },
+        });
+      }
+
+      this.logger.debug(
+        `Hold ${hold.id} released: +${hold.quantity} seats for schedule ${hold.schedule_id}`,
+      );
+    });
   }
 }

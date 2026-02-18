@@ -1,157 +1,143 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { DatabasesService } from './../databases/databases.service';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
+import { Prisma, ScheduleStatus } from './../databases/generated/prisma/client';
+import { envs } from './../common/config/envs';
+import { ApiResponse } from './../common/interfaces/api-response.interface';
+import { PrismaTransaction } from './../databases/prisma.types';
 import { CreateBookingDto } from './dto/create-booking.dto';
-import { DatabasesService } from 'src/databases/databases.service';
-import { Prisma, PrismaClient } from 'src/databases/generated/prisma/client';
+import { BookingResponse } from './interfaces/booking-response.interface';
+import { CreateSeatHold } from './interfaces/create-seat-hold.interface';
+import { SeatHoldResult } from './interfaces/seat-hold-result.interface';
 
 @Injectable()
 export class BookingService {
-  // Tiempo de expiración del hold (15 minutos)
-  private readonly HOLD_EXPIRATION_MINUTES = 15;
+  private readonly logger = new Logger(BookingService.name);
 
   constructor(private databasesService: DatabasesService) {}
 
-  async create(createBookingDto: CreateBookingDto) {
-    const { outboundScheduleId, returnScheduleId, totalPassengers } =
-      createBookingDto;
+  async create(
+    createBookingDto: CreateBookingDto,
+  ): Promise<ApiResponse<BookingResponse>> {
+    try {
+      const { outboundScheduleId, returnScheduleId, totalPassengers } =
+        createBookingDto;
 
-    // if (!userId && !sessionId) {
-    //   throw new BadRequestException('Se requiere userId o sessionId');
-    // }
+      const expiresAt = new Date();
+      const minutes = expiresAt.getMinutes() + envs.holdExpirationMinutes;
+      expiresAt.setMinutes(minutes);
 
-    const expiresAt = new Date();
-    expiresAt.setMinutes(expiresAt.getMinutes() + this.HOLD_EXPIRATION_MINUTES);
+      const newBooking = await this.databasesService.$transaction(
+        async (tx) => {
+          const holdParams = {
+            seatsToReserve: totalPassengers,
+            holdExpiresAt: expiresAt,
+          };
 
-    return await this.databasesService.$transaction(async (tx) => {
-      const outboundHold = await this.createHoldForSchedule(
-        tx,
-        outboundScheduleId,
-        totalPassengers,
-        expiresAt,
+          const outboundParams = {
+            scheduleId: outboundScheduleId,
+            ...holdParams,
+          };
+
+          const outboundHold = await this.createHoldForSchedule(
+            tx,
+            outboundParams,
+          );
+
+          let returnHold: SeatHoldResult | null = null;
+          if (returnScheduleId) {
+            const returnParams = {
+              scheduleId: returnScheduleId,
+              ...holdParams,
+            };
+            returnHold = await this.createHoldForSchedule(tx, returnParams);
+          }
+
+          const { id } = await tx.seat_holds_history.create({
+            data: {
+              outbound_seat_hold_id: outboundHold.id,
+              ...(returnHold && { return_seat_hold_id: returnHold.id }),
+            },
+          });
+
+          return {
+            id,
+          };
+        },
       );
 
-      const returnHold = returnScheduleId
-        ? await this.createHoldForSchedule(
-            tx,
-            returnScheduleId,
-            totalPassengers,
-            expiresAt,
-          )
-        : null;
-
-      const { id } = await tx.seat_holds_history.create({
-        data: {
-          outbound_seat_hold_id: outboundHold.id,
-          return_seat_hold_id: returnHold?.id,
-        },
-      });
-
       return {
-        seatHoldsHistory: id,
+        data: newBooking,
       };
-    });
-
-    // return 'This action adds a new booking';
+    } catch (error) {
+      this.logger.error('Error creating booking', error);
+      throw new InternalServerErrorException('Failed to create booking');
+    }
   }
 
   private async createHoldForSchedule(
-    tx: Omit<
-      PrismaClient,
-      '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
-    >,
-    scheduleId: string,
-    quantity: number,
-    expiresAt: Date,
+    transaction: PrismaTransaction,
+    params: CreateSeatHold,
   ) {
-    // 1. Obtener schedule CON LOCK para evitar race conditions
-    //    Usamos "FOR UPDATE" mediante una raw query
-    const schedules: Prisma.schedulesModel[] = await tx.$queryRaw`
+    const { scheduleId, seatsToReserve, holdExpiresAt } = params;
+
+    const schedules: Prisma.schedulesModel[] = await transaction.$queryRaw`
       SELECT id, available_seats, total_capacity, status
       FROM schedules
       WHERE id = ${scheduleId}
       FOR UPDATE
     `;
+
     const schedule = schedules[0];
 
     if (!schedule) {
-      throw new BadRequestException(`Viaje ${scheduleId} no encontrado`);
+      throw new BadRequestException(`Schedule ${scheduleId} not found`);
     }
 
-    if (schedule.status !== 'scheduled') {
+    if (schedule.status !== ScheduleStatus.scheduled) {
       throw new BadRequestException(
-        `Viaje no disponible (estado: ${schedule.status})`,
+        `Schedule not available (status: ${schedule.status})`,
       );
     }
 
-    if (schedule.available_seats < quantity) {
+    if (schedule.available_seats < seatsToReserve) {
       throw new BadRequestException(
-        `No hay suficientes asientos. Disponibles: ${schedule.available_seats}, Solicitados: ${quantity}`,
+        `Not enough seats available. Available: ${schedule.available_seats}, Requested: ${seatsToReserve}`,
       );
     }
 
-    const seatHold = await tx.seat_holds.create({
+    const seatHoldToCreate = {
+      schedule_id: scheduleId,
+      quantity: seatsToReserve,
+      expires_at: holdExpiresAt,
+    };
+
+    const seatHold = await transaction.seat_holds.create({
       select: {
         id: true,
       },
-      data: {
-        schedule_id: scheduleId,
-        quantity,
-        expires_at: expiresAt,
-      },
+      data: seatHoldToCreate,
     });
 
+    console.log('Created seat hold:', seatHold);
+
     // 3. Decrementar asientos disponibles
-    await tx.schedules.update({
-      where: { id: scheduleId },
-      data: {
-        available_seats: {
-          decrement: quantity,
-        },
+    const querySchedules: Prisma.schedulesWhereUniqueInput = { id: scheduleId };
+    const scheduleToUpdate: Prisma.schedulesUpdateInput = {
+      available_seats: {
+        decrement: seatsToReserve,
       },
+    };
+
+    await transaction.schedules.update({
+      where: querySchedules,
+      data: scheduleToUpdate,
     });
 
     return seatHold;
-
-    // if (!schedule) {
-    //   throw new BadRequestException(`Viaje ${scheduleId} no encontrado`);
-    // }
-    // if (schedule.status !== 'scheduled') {
-    //   throw new BadRequestException(
-    //     `Viaje no disponible (estado: ${schedule.status})`,
-    //   );
-    // }
-    // if (schedule.available_seats < quantity) {
-    //   throw new BadRequestException(
-    //     `No hay suficientes asientos. Disponibles: ${schedule.available_seats}, Solicitados: ${quantity}`,
-    //   );
-    // }
-    // // 2. Crear el seat_hold
-    // const seatHold = await tx.seatHold.create({
-    //   data: {
-    //     scheduleId,
-    //     userId: userId || null,
-    //     sessionId: sessionId || null,
-    //     quantity,
-    //     status: 'held',
-    //     heldAt: new Date(),
-    //     expiresAt,
-    //   },
-    // });
-    // // 3. Decrementar asientos disponibles
-    // await tx.schedule.update({
-    //   where: { id: scheduleId },
-    //   data: {
-    //     availableSeats: {
-    //       decrement: quantity,
-    //     },
-    //   },
-    // });
-    // // 4. Retornar el hold con info del schedule
-    // return {
-    //   ...seatHold,
-    //   schedule: {
-    //     id: schedule.id,
-    //     remainingSeats: schedule.available_seats - quantity,
-    //   },
-    // };
   }
 }

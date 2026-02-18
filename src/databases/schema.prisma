@@ -150,11 +150,11 @@ model schedules {
   outbound_tickets tickets[]    @relation("outbound_tickets")
 }
 
-// TABLE users
-model users {
+// TABLE contacts
+model contacts {
   id              String  @id @default(uuid())
-  firstName       String  @db.VarChar(100)
-  lastName        String  @db.VarChar(100)
+  first_name      String  @db.VarChar(100)
+  last_name       String  @db.VarChar(100)
   email           String  @unique @db.VarChar(255)
   phone           String? @db.VarChar(20)
   document_number String  @db.VarChar(50)
@@ -178,9 +178,9 @@ model passengers {
   //
   first_name          String  @db.VarChar(100)
   last_name           String  @db.VarChar(100)
-  email               String? @db.VarChar(255)
+  email               String? @unique @db.VarChar(255)
   phone               String? @db.VarChar(20)
-  document_number     String  @db.VarChar(50)
+  document_number     String  @unique @db.VarChar(50)
   unit_price          Decimal @db.Decimal(10, 2)
   is_primary          Boolean @default(false)
   checked_in_outbound Boolean @default(false)
@@ -252,10 +252,10 @@ enum SeatHoldsStatus {
 model seat_holds {
   id        String     @id @default(uuid())
   // Relations many-to-one
-  users     users?     @relation(fields: [user_id], references: [id])
+  contacts  contacts?  @relation(fields: [contact_id], references: [id])
   schedules schedules? @relation(fields: [schedule_id], references: [id])
 
-  user_id     String?
+  contact_id  String?
   schedule_id String?
   //
   quantity    Int
@@ -311,12 +311,12 @@ enum TicketsStatus {
 model tickets {
   id                 String     @id @default(uuid())
   // Relations many-to-one
-  users              users?     @relation(fields: [user_id], references: [id])
+  contacts           contacts?  @relation(fields: [contacts_id], references: [id])
   return_schedules   schedules? @relation("return_tickets", fields: [return_schedule_id], references: [id])
   outbound_schedules schedules? @relation("outbound_tickets", fields: [outbound_schedule_id], references: [id])
 
+  contacts_id          String?
   return_schedule_id   String?
-  user_id              String?
   outbound_schedule_id String?
   // Relations one-to-one
   outbound_hold        seat_holds? @relation("outbound_hold", fields: [outbound_hold_id], references: [id])

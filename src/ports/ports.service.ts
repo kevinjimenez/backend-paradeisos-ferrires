@@ -1,53 +1,41 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
+import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { DatabasesService } from './../databases/databases.service';
-import { CreatePortDto } from './dto/create-port.dto';
-import { UpdatePortDto } from './dto/update-port.dto';
-import { console } from 'inspector';
+import { PortResponse } from './interfaces/port-response.interface';
 
 @Injectable()
 export class PortsService {
+  private readonly logger = new Logger(PortsService.name);
+
   constructor(private databasesService: DatabasesService) {}
 
-  create(createPortDto: CreatePortDto) {
-    return 'This action adds a new port';
-  }
-
-  async findAll() {
+  async findAll(): Promise<ApiResponse<PortResponse[]>> {
     try {
-      const data = await this.databasesService.ports.findMany({
-        include: {
-          islands: {
-            select: {
-              id: true,
-              name: true,
-            },
+      const portsWithRelation = {
+        id: true,
+        name: true,
+        islands: {
+          select: {
+            id: true,
+            name: true,
           },
         },
+      };
+
+      const data = await this.databasesService.ports.findMany({
+        select: portsWithRelation,
       });
+
       return {
         data,
-        meta: {
-          page: 0,
-          limit: 0,
-          total: 0,
-          totalPages: 0,
-        },
       };
     } catch (error) {
-      console.log({ error });
-      throw new NotFoundException('not found');
+      this.logger.error('Error fetching ports', error);
+      throw new InternalServerErrorException('Failed to fetch ports');
     }
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} port`;
-  }
-
-  update(id: number, updatePortDto: UpdatePortDto) {
-    return `This action updates a #${id} port`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} port`;
   }
 }

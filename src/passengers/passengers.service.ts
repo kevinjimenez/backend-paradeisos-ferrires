@@ -1,29 +1,43 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
+import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { DatabasesService } from './../databases/databases.service';
+import { Prisma } from './../databases/generated/prisma/client';
 import { CreatePassengerDto } from './dto/create-passenger.dto';
-import { UpdatePassengerDto } from './dto/update-passenger.dto';
+import { PassengerMapper } from './mappers/passenger.mapper';
 
 @Injectable()
 export class PassengersService {
+  private readonly logger = new Logger(PassengersService.name);
+
   constructor(private databasesService: DatabasesService) {}
 
-  create(createPassengerDto: CreatePassengerDto) {
-    return 'This action adds a new passenger';
-  }
+  async create(
+    createPassengerDto: CreatePassengerDto,
+  ): Promise<ApiResponse<Prisma.passengersCreateInput>> {
+    try {
+      const passengerToCreate =
+        PassengerMapper.toPrismaCreate(createPassengerDto);
 
-  findAll() {
-    return this.databasesService.passengers.findMany();
-  }
+      const query: Prisma.passengersWhereUniqueInput = {
+        document_number: passengerToCreate.document_number,
+        email: passengerToCreate.email,
+      };
 
-  findOne(id: number) {
-    return `This action returns a #${id} passenger`;
-  }
-
-  update(id: number, updatePassengerDto: UpdatePassengerDto) {
-    return `This action updates a #${id} passenger`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} passenger`;
+      const newPassenger = await this.databasesService.passengers.upsert({
+        where: query,
+        create: passengerToCreate,
+        update: passengerToCreate,
+      });
+      return {
+        data: newPassenger,
+      };
+    } catch (error) {
+      this.logger.error('Error creating passenger', error);
+      throw new InternalServerErrorException('Failed to create passenger');
+    }
   }
 }

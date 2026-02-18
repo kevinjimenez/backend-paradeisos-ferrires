@@ -1,26 +1,57 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { DatabasesService } from '../databases/databases.service';
+import { ApiResponseDto } from './../common/dtos/api-response.dto';
+import { Prisma } from './../databases/generated/prisma/client';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
+import { PaymentMapper } from './mappers/payment.mapper';
 
 @Injectable()
 export class PaymentsService {
-  create(createPaymentDto: CreatePaymentDto) {
-    return 'This action adds a new payment';
+  constructor(private readonly databasesService: DatabasesService) {}
+
+  async create(
+    createPaymentDto: CreatePaymentDto,
+  ): Promise<ApiResponseDto<Prisma.paymentsModel>> {
+    const paymentToCreate = PaymentMapper.toPrismaCreate(createPaymentDto);
+    const newPayment = await this.databasesService.payments.create({
+      data: paymentToCreate,
+    });
+
+    return {
+      data: newPayment,
+    };
   }
 
-  findAll() {
-    return `This action returns all payments`;
+  async findOne(id: string): Promise<ApiResponseDto<Prisma.paymentsModel>> {
+    const paymentFound = await this.databasesService.payments.findUnique({
+      where: { id },
+    });
+
+    if (!paymentFound) {
+      throw new NotFoundException(`Payment not found id: [${id}]`);
+    }
+
+    return {
+      data: paymentFound,
+    };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} payment`;
-  }
+  async update(
+    id: string,
+    updatePaymentDto: UpdatePaymentDto,
+  ): Promise<ApiResponseDto<Prisma.paymentsModel>> {
+    const { data } = await this.findOne(id);
 
-  update(id: number, updatePaymentDto: UpdatePaymentDto) {
-    return `This action updates a #${id} payment`;
-  }
+    const paymentToUpdate = PaymentMapper.toPrismaUpdate(updatePaymentDto);
 
-  remove(id: number) {
-    return `This action removes a #${id} payment`;
+    const paymentUpdated = await this.databasesService.payments.update({
+      where: { id: data.id },
+      data: paymentToUpdate,
+    });
+
+    return {
+      data: paymentUpdated,
+    };
   }
 }
