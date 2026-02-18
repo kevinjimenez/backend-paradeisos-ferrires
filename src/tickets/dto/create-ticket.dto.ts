@@ -1,3 +1,4 @@
+import { TicketsTripType } from './../../databases/generated/prisma/enums';
 import { Type } from 'class-transformer';
 import {
   IsArray,
@@ -12,8 +13,8 @@ import { CreatePassengerDto } from './../../passengers/dto/create-passenger.dto'
 
 export class CreateTicketDto {
   @IsNotEmpty()
-  @IsEnum(['round_trip', 'one_way'])
-  tripType: 'round_trip' | 'one_way';
+  @IsEnum(TicketsTripType)
+  tripType: TicketsTripType;
 
   @IsNotEmpty()
   @ValidateNested()

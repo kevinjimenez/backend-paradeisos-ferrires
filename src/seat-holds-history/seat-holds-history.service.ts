@@ -6,10 +6,7 @@ import {
 } from '@nestjs/common';
 import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { DatabasesService } from './../databases/databases.service';
-import {
-  Prisma,
-  SeatHoldsStatus,
-} from './../databases/generated/prisma/client';
+import { Prisma } from './../databases/generated/prisma/client';
 import { SeatHoldsHistoryResponse } from './interfaces/seat-holds-history-response';
 
 @Injectable()
@@ -20,9 +17,6 @@ export class SeatHoldsHistoryService {
 
   async findOne(id: string): Promise<ApiResponse<SeatHoldsHistoryResponse>> {
     try {
-      const query: Prisma.seat_holdsWhereInput = {
-        status: SeatHoldsStatus.held,
-      };
       const seatHoldWithRelation = {
         status: true,
         schedules: {
@@ -52,11 +46,11 @@ export class SeatHoldsHistoryService {
         return_seat_hold_id: true,
         created_at: true,
         outbound_seat_holds: {
-          where: query,
+          // where: query,
           select: seatHoldWithRelation,
         },
         return_seat_holds: {
-          where: query,
+          // where: query,
           select: seatHoldWithRelation,
         },
       };
