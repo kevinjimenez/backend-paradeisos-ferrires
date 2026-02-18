@@ -13,7 +13,7 @@ export class PassengerMapper {
       is_primary: dto.isPrimary,
       checked_in_outbound: dto.checkedInOutbound,
       checked_in_return: dto.checkedInReturn,
-      ticket: dto.ticket,
+      ticket_id: dto.ticket,
     };
   }
 }

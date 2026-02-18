@@ -43,7 +43,6 @@ export class TicketsService {
         throw new Error('Contact not created');
       }
 
-      //2: create ticket
       const ticketToCreate = TicketMapper.toPrismaCreate(
         createTicketDto,
         newContact.id,
