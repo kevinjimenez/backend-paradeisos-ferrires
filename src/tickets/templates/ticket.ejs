@@ -199,6 +199,82 @@
         align-items: center;
         justify-content: center;
       }
+
+      /* ================= WATERMARK ================= */
+      .watermark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        border-radius: 18px;
+        z-index: 10;
+        opacity: 0.06;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        padding: 20px 0;
+        gap: 0;
+      }
+
+      .watermark-row {
+        display: flex;
+        width: 200%;
+        transform: rotate(-30deg) translateX(-25%);
+        margin-bottom: 18px;
+      }
+
+      .watermark-text {
+        font-size: 9px;
+        font-weight: bold;
+        color: #0b132b;
+        white-space: nowrap;
+        letter-spacing: 3px;
+        user-select: none;
+        margin-right: 20px;
+      }
+
+      .microfont {
+        font-size: 3px;
+        color: #bbb;
+        text-align: center;
+        letter-spacing: 0.2px;
+        user-select: none;
+        margin-top: 4px;
+        padding-bottom: 2px;
+      }
+
+      /* ================= STATUS BANNER ================= */
+      .status-banner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-radius: 18px;
+        overflow: hidden;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .status-banner-label {
+        transform: rotate(-30deg);
+        font-size: 3rem;
+        font-weight: 900;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        opacity: 0.18;
+        white-space: nowrap;
+        color: #d11f2f;
+        border: 6px solid #d11f2f;
+        padding: 6px 18px;
+        border-radius: 6px;
+      }
     </style>
   </head>
 
@@ -226,7 +302,7 @@
       <div class="passengers">
         <h3>PASSANGERS</h3>
             <% passengers.forEach(passenger => { %>
-          <p><%= passenger.name %>, <%= passenger.code %>, <%= passenger.country %></p>
+          <p><%= passenger.name %>, <%= passenger.code %>.</p>
         <% }); %>
       </div>
 
@@ -235,7 +311,7 @@
         <div>
           <h3 style="padding: 0; margin: 0">CHECK IN</h3>
           <div style="font-size: 10px">Passenger Dock</div>
-          <div class="time-box">05:10</div>
+          <div class="time-box"><%= checkInTime %></div>
           <div style="padding-top: 0.5rem">
               <small>
             Check 50 min. before of the departure time.<br /><br />
@@ -261,31 +337,52 @@
       <div class="footer">
         <div class="footer-left">
           <div class="ship">
-            <strong><%= ferryName %></strong><br />
+            <strong><%= ferry %></strong><br />
             <span>Ferry</span><br />
-            <p>Sun, Mar 03, 2025</p>
+            <p><%= date %></p>
           </div>
 
           <div class="routes">
             <div class="route">
               <span style="font-size: 0.6rem">FROM</span><br />
-              <span class="code">ISA</span>
-              <strong style="font-size: 2rem">6:00</strong>
-              Isabela<br />
+              <span class="code"><%= from %></span>
+              <strong style="font-size: 2rem"><%= departureTime %></strong>
+              <%= origin %><br />
               Galapagos
             </div>
 
             <div class="route">
               <span style="font-size: 0.6rem">TO</span><br />
-              <span class="code">SCX</span>
-              <strong style="font-size: 2rem">8:15</strong>
-              Santa Cruz<br />
+              <span class="code"><%= to %></span>
+              <strong style="font-size: 2rem"><%= arriveTime %></strong>
+              <%= destination %><br />
               Galapagos
             </div>
           </div>
         </div>
 
         <div class="footer-logo">LOGO</div>
+      </div>
+
+      <!-- Fingerprint layer -->
+      <div class="microfont"><%= ticketCode %> · <%= generatedAt %></div>
+
+      <!-- Status banner -->
+      <% if (status && status !== 'confirmed' && status !== 'checked_in' && status !== 'completed') { %>
+        <div class="status-banner" aria-hidden="true">
+          <span class="status-banner-label"><%= status %></span>
+        </div>
+      <% } %>
+
+      <!-- Watermark layer (capa 1) -->
+      <div class="watermark" aria-hidden="true">
+        <% for(let i = 0; i < 8; i++) { %>
+          <div class="watermark-row">
+            <% for(let j = 0; j < 6; j++) { %>
+              <span class="watermark-text"><%= ticketCode %></span>
+            <% } %>
+          </div>
+        <% } %>
       </div>
     </div>
   </body>

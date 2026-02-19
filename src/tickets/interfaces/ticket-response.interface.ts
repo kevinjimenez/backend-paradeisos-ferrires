@@ -27,6 +27,7 @@ export interface Routes {
 
 export interface Ports {
   name: string;
+  code: string;
   islands: Ferries;
 }
 

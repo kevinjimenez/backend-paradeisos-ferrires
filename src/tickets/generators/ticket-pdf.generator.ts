@@ -15,7 +15,9 @@ export class TicketPdfGenerator implements PdfGenerator<TicketPdf> {
   }
 
   prepareData(data: TicketPdf) {
-    return data;
+    return {
+      ...data,
+    };
   }
 
   getPdfOptions(): PdfGeneratorOptions {
