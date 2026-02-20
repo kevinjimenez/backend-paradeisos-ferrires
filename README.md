@@ -96,3 +96,14 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+
+local
+create migration
+npx prisma migrate dev --name add_seat_holds_history_table
+npx prisma generate
+
+prod
+se despliega la migracion creada nateriromente
+npx prisma generate
+npx prisma migrate deploy
