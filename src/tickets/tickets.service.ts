@@ -53,7 +53,7 @@ export class TicketsService {
       });
 
       //3: create passenger
-      await Promise.all(
+      const passengerCreated = await Promise.allSettled(
         createTicketDto.passenger.map((passengerDto) =>
           this.passengersService.create({
             ...passengerDto,
@@ -62,9 +62,21 @@ export class TicketsService {
         ),
       );
 
+      const ids = passengerCreated
+        .filter((result) => result.status === 'fulfilled')
+        .map((result) => {
+          console.log('Passenger creation result:', result);
+          return result.value.data.id;
+        })
+        .filter((id) => id !== undefined);
+
+      //4._ Crear el pago pon estado pendiente
+
       return {
         data: {
           id: newTicket.id,
+          contact: newContact.id,
+          passengers: ids,
         },
       };
     } catch (error) {

@@ -24,7 +24,7 @@ export class PassengersService {
 
       const query: Prisma.passengersWhereUniqueInput = {
         document_number: passengerToCreate.document_number,
-        email: passengerToCreate.email,
+        // email: passengerToCreate.email,
       };
 
       const newPassenger = await this.databasesService.passengers.upsert({
