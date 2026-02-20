@@ -1,13 +1,21 @@
 export interface TicketPdf {
   ticketCode: string;
   passengers: PassengerPdf[];
-  checkinTime: string;
+  checkInTime: string;
   date: string;
-  ferryName: string;
+  departureTime: string;
+  arriveTime: string;
+  ferry: string;
+  from: string;
+  origin: string;
+  to: string;
+  destination: string;
+  status?: string;
+  generatedAt?: string;
 }
 
 export interface PassengerPdf {
   name: string;
   code: string;
-  country: string;
+  // country: string;
 }

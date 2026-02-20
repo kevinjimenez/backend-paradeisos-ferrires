@@ -235,19 +235,19 @@ export type contactsOrderByWithRelationInput = {
 export type contactsWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  document_number?: string
   AND?: Prisma.contactsWhereInput | Prisma.contactsWhereInput[]
   OR?: Prisma.contactsWhereInput[]
   NOT?: Prisma.contactsWhereInput | Prisma.contactsWhereInput[]
   first_name?: Prisma.StringFilter<"contacts"> | string
   last_name?: Prisma.StringFilter<"contacts"> | string
   phone?: Prisma.StringNullableFilter<"contacts"> | string | null
-  document_number?: Prisma.StringFilter<"contacts"> | string
   document_type?: Prisma.EnumDocumentTypeFilter<"contacts"> | $Enums.DocumentType
   created_at?: Prisma.DateTimeFilter<"contacts"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"contacts"> | Date | string
   tickets?: Prisma.TicketsListRelationFilter
   seat_holds?: Prisma.Seat_holdsListRelationFilter
-}, "id" | "email">
+}, "id" | "email" | "document_number">
 
 export type contactsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

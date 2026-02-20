@@ -1,10 +1,10 @@
-import { ApiResponseDto } from './../common/dtos/api-response.dto';
 import {
   Injectable,
   InternalServerErrorException,
   Logger,
   NotFoundException,
 } from '@nestjs/common';
+import { ApiResponseDto } from './../common/dtos/api-response.dto';
 import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { PdfService } from './../common/services/pdf/pdf.service';
 import { ContactsService } from './../contacts/contacts.service';
@@ -12,11 +12,11 @@ import { DatabasesService } from './../databases/databases.service';
 import { Prisma } from './../databases/generated/prisma/client';
 import { PassengersService } from './../passengers/passengers.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
+import { UpdateTicketDto } from './dto/update-ticket.dto';
 import { TicketPdfGenerator } from './generators/ticket-pdf.generator';
 import { CreateTicketResponse } from './interfaces/create-ticket-response.interface';
 import { TicketResponse } from './interfaces/ticket-response.interface';
 import { TicketMapper } from './mappers/ticket.mapper';
-import { UpdateTicketDto } from './dto/update-ticket.dto';
 
 @Injectable()
 export class TicketsService {
@@ -53,7 +53,7 @@ export class TicketsService {
       });
 
       //3: create passenger
-      await Promise.all(
+      const passengerCreated = await Promise.allSettled(
         createTicketDto.passenger.map((passengerDto) =>
           this.passengersService.create({
             ...passengerDto,
@@ -62,9 +62,21 @@ export class TicketsService {
         ),
       );
 
+      const ids = passengerCreated
+        .filter((result) => result.status === 'fulfilled')
+        .map((result) => {
+          console.log('Passenger creation result:', result);
+          return result.value.data.id;
+        })
+        .filter((id) => id !== undefined);
+
+      //4._ Crear el pago pon estado pendiente
+
       return {
         data: {
           id: newTicket.id,
+          contact: newContact.id,
+          passengers: ids,
         },
       };
     } catch (error) {
@@ -96,6 +108,7 @@ export class TicketsService {
               origin_ports: {
                 select: {
                   name: true,
+                  code: true,
                   islands: {
                     select: {
                       name: true,
@@ -106,6 +119,7 @@ export class TicketsService {
               destination_ports: {
                 select: {
                   name: true,
+                  code: true,
                   islands: {
                     select: {
                       name: true,
@@ -132,6 +146,7 @@ export class TicketsService {
               origin_ports: {
                 select: {
                   name: true,
+                  code: true,
                   islands: {
                     select: {
                       name: true,
@@ -142,6 +157,7 @@ export class TicketsService {
               destination_ports: {
                 select: {
                   name: true,
+                  code: true,
                   islands: {
                     select: {
                       name: true,
@@ -193,9 +209,7 @@ export class TicketsService {
   }
 
   async generateTicketPdf(id: string) {
-    const data = await this.findOne(id);
-
-    const { data: ticket } = data;
+    const { data: ticket } = await this.findOne(id);
 
     const ticketData = TicketMapper.toTicketResponse(ticket);
 

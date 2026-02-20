@@ -22,6 +22,8 @@ interface EnvVars {
 
   HOLD_EXPIRATION_MINUTES: number;
 
+  CHECK_IN_TIME: number;
+
   TICKET_CODE_PREFIX: string;
 }
 
@@ -45,6 +47,8 @@ const envsSchema = joi
     DISCOUNT_VALUE: joi.number().default(0),
 
     HOLD_EXPIRATION_MINUTES: joi.number().default(15),
+
+    CHECK_IN_TIME: joi.number().required(),
 
     TICKET_CODE_PREFIX: joi.string().default('TKT'),
   })
@@ -82,6 +86,8 @@ export const envs = {
   discountValue: envVars.DISCOUNT_VALUE,
 
   holdExpirationMinutes: envVars.HOLD_EXPIRATION_MINUTES,
+
+  checkInTime: envVars.CHECK_IN_TIME,
 
   ticketCodePrefix: envVars.TICKET_CODE_PREFIX,
 };
