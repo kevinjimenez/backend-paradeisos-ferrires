@@ -1,3 +1,4 @@
+import { PrismaTransaction } from './../common/types/prisma-transaction.type';
 import { DatabasesService } from './../databases/databases.service';
 import {
   BadRequestException,
@@ -8,7 +9,6 @@ import {
 import { Prisma, ScheduleStatus } from './../databases/generated/prisma/client';
 import { envs } from './../common/config/envs';
 import { ApiResponse } from './../common/interfaces/api-response.interface';
-import { PrismaTransaction } from './../databases/prisma.types';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { BookingResponse } from './interfaces/booking-response.interface';
 import { CreateSeatHold } from './interfaces/create-seat-hold.interface';

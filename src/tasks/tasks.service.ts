@@ -1,3 +1,4 @@
+import { PrismaTransaction } from './../common/types/prisma-transaction.type';
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { DatabasesService } from './../databases/databases.service';
@@ -6,7 +7,6 @@ import {
   SeatHoldsStatus,
   TicketsStatus,
 } from './../databases/generated/prisma/client';
-import { PrismaTransaction } from './../databases/prisma.types';
 
 @Injectable()
 export class TasksService {

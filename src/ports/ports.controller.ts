@@ -9,6 +9,6 @@ export class PortsController {
 
   @Get()
   findAll(): Promise<ApiResponse<PortResponse[]>> {
-    return this.portsService.findAll();
+    return this.portsService.findAllWithIslands();
   }
 }
