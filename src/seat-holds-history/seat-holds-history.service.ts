@@ -5,61 +5,21 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { ApiResponse } from './../common/interfaces/api-response.interface';
-import { DatabasesService } from './../databases/databases.service';
-import { Prisma } from './../databases/generated/prisma/client';
 import { SeatHoldsHistoryResponse } from './interfaces/seat-holds-history-response';
+import { SeatHoldsHistoryRepository } from './seat-holds-history.repository';
 
 @Injectable()
 export class SeatHoldsHistoryService {
   private readonly logger = new Logger(SeatHoldsHistoryService.name);
 
-  constructor(private databasesService: DatabasesService) {}
+  constructor(
+    private readonly seatHoldsHistoryRepository: SeatHoldsHistoryRepository,
+  ) {}
 
   async findOne(id: string): Promise<ApiResponse<SeatHoldsHistoryResponse>> {
     try {
-      const seatHoldWithRelation = {
-        status: true,
-        schedules: {
-          select: {
-            arrival_time: true,
-            departure_time: true,
-            ferries: {
-              select: {
-                name: true,
-                register_code: true,
-                type: true,
-                amenities: true,
-              },
-            },
-            routes: {
-              select: {
-                base_price_national: true,
-              },
-            },
-          },
-        },
-      };
-
-      const seatHoldHistoryWithRelation: Prisma.seat_holds_historySelect = {
-        id: true,
-        outbound_seat_hold_id: true,
-        return_seat_hold_id: true,
-        created_at: true,
-        outbound_seat_holds: {
-          // where: query,
-          select: seatHoldWithRelation,
-        },
-        return_seat_holds: {
-          // where: query,
-          select: seatHoldWithRelation,
-        },
-      };
-
       const seatHoldsHistory =
-        await this.databasesService.seat_holds_history.findUnique({
-          where: { id },
-          select: seatHoldHistoryWithRelation,
-        });
+        await this.seatHoldsHistoryRepository.findOneWithRelations(id);
 
       if (!seatHoldsHistory) {
         throw new NotFoundException(`Seat holds with ID ${id} not found`);

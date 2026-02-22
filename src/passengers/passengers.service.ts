@@ -4,34 +4,27 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ApiResponse } from './../common/interfaces/api-response.interface';
-import { DatabasesService } from './../databases/databases.service';
 import { Prisma } from './../databases/generated/prisma/client';
 import { CreatePassengerDto } from './dto/create-passenger.dto';
 import { PassengerMapper } from './mappers/passenger.mapper';
+import { PassengersRepository } from './passengers.repository';
 
 @Injectable()
 export class PassengersService {
   private readonly logger = new Logger(PassengersService.name);
 
-  constructor(private databasesService: DatabasesService) {}
+  constructor(private passengersRepository: PassengersRepository) {}
 
   async create(
     createPassengerDto: CreatePassengerDto,
-  ): Promise<ApiResponse<Prisma.passengersCreateInput>> {
+  ): Promise<ApiResponse<Prisma.passengersModel>> {
     try {
       const passengerToCreate =
         PassengerMapper.toPrismaCreate(createPassengerDto);
 
-      const query: Prisma.passengersWhereUniqueInput = {
-        document_number: passengerToCreate.document_number,
-        // email: passengerToCreate.email,
-      };
+      const newPassenger =
+        await this.passengersRepository.upsertByDocument(passengerToCreate);
 
-      const newPassenger = await this.databasesService.passengers.upsert({
-        where: query,
-        create: passengerToCreate,
-        update: passengerToCreate,
-      });
       return {
         data: newPassenger,
       };
