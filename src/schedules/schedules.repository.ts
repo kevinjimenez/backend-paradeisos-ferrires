@@ -63,4 +63,35 @@ export class SchedulesRepository extends BaseRepository<Prisma.schedulesModel> {
       },
     });
   }
+
+  async findByIdWithLock(
+    id: string,
+    tx: PrismaTransaction,
+  ): Promise<Prisma.schedulesModel | null> {
+    const schedules: Prisma.schedulesModel[] = await tx.$queryRaw`
+      SELECT id, available_seats, total_capacity, status
+      FROM schedules
+      WHERE id = ${id}
+      FOR UPDATE
+    `;
+
+    return schedules[0] || null;
+  }
+
+  async decrementSeats(
+    scheduleId: string,
+    quantity: number,
+    tx?: PrismaTransaction,
+  ): Promise<void> {
+    const database = tx ?? this.db;
+
+    await database.schedules.update({
+      where: { id: scheduleId },
+      data: {
+        available_seats: {
+          decrement: quantity,
+        },
+      },
+    });
+  }
 }

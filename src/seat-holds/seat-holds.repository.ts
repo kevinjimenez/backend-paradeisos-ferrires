@@ -52,4 +52,20 @@ export class SeatHoldsRepository extends BaseRepository<Prisma.seat_holdsModel> 
       },
     });
   }
+
+  async createHold(
+    data: {
+      schedule_id: string;
+      quantity: number;
+      expires_at: Date;
+    },
+    tx?: PrismaTransaction,
+  ) {
+    const database = tx ?? this.db;
+
+    return database.seat_holds.create({
+      select: { id: true },
+      data,
+    });
+  }
 }

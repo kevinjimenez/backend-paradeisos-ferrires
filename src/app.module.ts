@@ -1,5 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { BookingModule } from './booking/booking.module';
@@ -20,6 +21,7 @@ import { TicketsModule } from './tickets/tickets.module';
   imports: [
     ConfigModule.forRoot(),
     ScheduleModule.forRoot(),
+    EventEmitterModule.forRoot(),
     CommonModule,
     HealthModule,
     DatabasesModule,

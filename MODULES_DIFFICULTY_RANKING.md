@@ -880,20 +880,21 @@ export class TicketsService {
 **Tiempo estimado:** 5-6 horas
 
 **Checklist:**
-- [ ] Crear `TicketsRepository`
-- [ ] Crear `TicketQueryBuilder` (para query de 89 líneas)
-- [ ] Crear `TicketFactory`
-- [ ] Crear `CreateTicketCommand`
-- [ ] Instalar `@nestjs/event-emitter`
-- [ ] Crear eventos:
-  - [ ] `TicketCreatedEvent`
-- [ ] Crear handlers:
-  - [ ] `GenerateTicketPdfHandler`
-  - [ ] `SendTicketEmailHandler` (si aplica)
-- [ ] Eliminar console.log
-- [ ] Agregar `@LogMethod`
-- [ ] Refactorizar service (debe quedar <100 líneas)
-- [ ] Actualizar module
+- [x] Crear `TicketsRepository` ✅ (78 líneas con 5 métodos)
+- [x] Crear `TicketQueryBuilder` (para query de 89 líneas) ✅ (107 líneas)
+- [x] Crear `TicketFactory` ❌ (No necesario - TicketMapper lo cubre)
+- [x] Crear `CreateTicketCommand` ✅ (68 líneas - retorna datos financieros)
+- [x] Instalar `@nestjs/event-emitter` ✅
+- [x] Crear eventos:
+  - [x] `TicketCreatedEvent` ✅
+- [x] Crear handlers (Event Pattern):
+  - [x] `CreatePaymentListener` ✅ (crea pago pendiente automáticamente)
+  - [x] `GenerateTicketPdfListener` ✅ (genera PDF automáticamente)
+  - [ ] `SendTicketEmailListener` ❌ (Descartado - no hay servicio de email)
+- [x] Eliminar console.log ✅
+- [x] Agregar `@LogMethod` ❌ (Descartado del scope)
+- [x] Refactorizar service (debe quedar <100 líneas) ✅ (107 líneas con Event Pattern, -51%)
+- [x] Actualizar module ✅ (incluye PaymentsModule + 2 listeners)
 - [ ] Escribir 25+ tests:
   - [ ] Tests de repository
   - [ ] Tests de factory

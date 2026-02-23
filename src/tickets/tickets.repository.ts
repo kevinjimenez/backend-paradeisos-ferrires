@@ -32,4 +32,47 @@ export class TicketsRepository extends BaseRepository<Prisma.ticketsModel> {
       data: { status: TicketsStatus.expired },
     });
   }
+
+  async createTicket(
+    data: Prisma.ticketsCreateInput,
+    tx?: PrismaTransaction,
+  ): Promise<Prisma.ticketsModel> {
+    const database = tx ?? this.db;
+
+    return database.tickets.create({
+      data,
+    });
+  }
+
+  async findOneWithRelations(
+    id: string,
+    selectConfig: Prisma.ticketsSelect,
+    tx?: PrismaTransaction,
+  ) {
+    const database = tx ?? this.db;
+
+    return database.tickets.findUnique({
+      where: { id },
+      select: selectConfig,
+    });
+  }
+
+  async findAll(tx?: PrismaTransaction): Promise<Prisma.ticketsModel[]> {
+    const database = tx ?? this.db;
+
+    return database.tickets.findMany();
+  }
+
+  async updateTicket(
+    id: string,
+    data: Prisma.ticketsUpdateInput,
+    tx?: PrismaTransaction,
+  ): Promise<Prisma.ticketsModel> {
+    const database = tx ?? this.db;
+
+    return database.tickets.update({
+      where: { id },
+      data,
+    });
+  }
 }

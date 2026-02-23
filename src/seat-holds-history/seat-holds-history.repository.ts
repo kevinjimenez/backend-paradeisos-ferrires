@@ -31,4 +31,20 @@ export class SeatHoldsHistoryRepository extends BaseRepository<Prisma.seat_holds
       select: selectConfig,
     });
   }
+
+  async createHistory(
+    outboundSeatHoldId: string,
+    returnSeatHoldId: string | null,
+    tx?: PrismaTransaction,
+  ) {
+    const database = tx ?? this.db;
+
+    return database.seat_holds_history.create({
+      data: {
+        outbound_seat_hold_id: outboundSeatHoldId,
+        ...(returnSeatHoldId && { return_seat_hold_id: returnSeatHoldId }),
+      },
+      select: { id: true },
+    });
+  }
 }
