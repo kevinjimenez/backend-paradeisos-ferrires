@@ -104,9 +104,7 @@ export class TicketQueryBuilder {
   }
 
   withAllRelations(): this {
-    return this.withPassengers()
-      .withOutboundSchedule()
-      .withReturnSchedule();
+    return this.withPassengers().withOutboundSchedule().withReturnSchedule();
   }
 
   build(): Prisma.ticketsSelect {

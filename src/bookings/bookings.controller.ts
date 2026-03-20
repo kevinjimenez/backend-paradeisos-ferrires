@@ -1,12 +1,12 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ApiResponse } from './../common/interfaces/api-response.interface';
-import { BookingService } from './booking.service';
+import { ApiResponse } from '../common/interfaces/api-response.interface';
+import { BookingsService } from './bookings.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { BookingResponse } from './interfaces/booking-response.interface';
 
 @Controller('booking')
 export class BookingController {
-  constructor(private readonly bookingService: BookingService) {}
+  constructor(private readonly bookingService: BookingsService) {}
 
   @Post()
   create(

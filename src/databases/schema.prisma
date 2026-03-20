@@ -157,7 +157,7 @@ model contacts {
   last_name       String  @db.VarChar(100)
   email           String  @unique @db.VarChar(255)
   phone           String? @db.VarChar(20)
-  document_number String  @db.VarChar(50) @unique
+  document_number String  @unique @db.VarChar(50)
 
   document_type DocumentType
 
@@ -347,4 +347,16 @@ model tickets {
   // Relations one-to-many
   passengers         passengers[]
   payments           payments[]
+}
+
+// TABLE catalogs
+model catalogs {
+  id          String  @id @default(uuid())
+  category    String  @db.VarChar(50)
+  code        String  @unique @db.VarChar(20)
+  description String  @db.VarChar(100)
+  is_active   Boolean @default(true)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }

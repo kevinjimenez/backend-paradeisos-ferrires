@@ -23,6 +23,147 @@ async function main() {
   await prisma.ports.deleteMany();
   await prisma.islands.deleteMany();
   await prisma.contacts.deleteMany();
+  await prisma.catalogs.deleteMany();
+
+  // CATALOGS
+  console.log('📋 Creating catalogs...');
+  await prisma.catalogs.createMany({
+    data: [
+      {
+        category: 'GENDER',
+        code: 'M',
+        description: 'Masculino',
+        is_active: true,
+      },
+      {
+        category: 'GENDER',
+        code: 'F',
+        description: 'Femenino',
+        is_active: true,
+      },
+      {
+        category: 'DOC_TYPE',
+        code: 'DNI',
+        description: 'DNI',
+        is_active: true,
+      },
+      {
+        category: 'DOC_TYPE',
+        code: 'PASS',
+        description: 'Pasaporte',
+        is_active: true,
+      },
+      // Países
+      {
+        category: 'COUNTRY',
+        code: 'EC',
+        description: 'Ecuador',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'US',
+        description: 'Estados Unidos',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'CA',
+        description: 'Canadá',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'MX',
+        description: 'México',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'ES',
+        description: 'España',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'FR',
+        description: 'Francia',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'DE',
+        description: 'Alemania',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'IT',
+        description: 'Italia',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'GB',
+        description: 'Reino Unido',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'BR',
+        description: 'Brasil',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'AR',
+        description: 'Argentina',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'CO',
+        description: 'Colombia',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'PE',
+        description: 'Perú',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'CL',
+        description: 'Chile',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'AU',
+        description: 'Australia',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'CN',
+        description: 'China',
+        is_active: true,
+      },
+      {
+        category: 'COUNTRY',
+        code: 'JP',
+        description: 'Japón',
+        is_active: true,
+      },
+      {
+        category: 'PASSENGER_COUNT',
+        code: '1',
+        description: '10',
+        is_active: true,
+      },
+    ],
+  });
 
   // CONTACTS
   console.log('👥 Creating contacts...');

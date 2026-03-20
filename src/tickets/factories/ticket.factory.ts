@@ -31,7 +31,10 @@ export class TicketFactory {
   }
 
   private calculatePricing(passengers: CreatePassengerDto[]): TicketPricing {
-    const subtotalAmount = passengers.reduce((sum, p) => sum + (p.unitPrice || 0), 0);
+    const subtotalAmount = passengers.reduce(
+      (sum, p) => sum + (p.unitPrice || 0),
+      0,
+    );
 
     return TicketPricing.calculateFromSubtotal(
       Money.create(subtotalAmount),

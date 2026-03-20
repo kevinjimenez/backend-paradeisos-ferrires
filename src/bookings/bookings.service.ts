@@ -3,16 +3,16 @@ import {
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
-import { envs } from './../common/config/envs';
-import { ApiResponse } from './../common/interfaces/api-response.interface';
-import { DatabasesService } from './../databases/databases.service';
+import { envs } from '../common/config/envs';
+import { ApiResponse } from '../common/interfaces/api-response.interface';
+import { DatabasesService } from '../databases/databases.service';
 import { CreateBookingCommand } from './commands/create-booking.command';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { BookingResponse } from './interfaces/booking-response.interface';
 
 @Injectable()
-export class BookingService {
-  private readonly logger = new Logger(BookingService.name);
+export class BookingsService {
+  private readonly logger = new Logger(BookingsService.name);
 
   constructor(
     private readonly databasesService: DatabasesService,

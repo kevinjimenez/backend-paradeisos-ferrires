@@ -30,7 +30,10 @@ export class CreateTicketCommand {
     }
 
     // 2. Crear ticket
-    const ticketToCreate = this.ticketFactory.createTicketData(dto, newContact.id);
+    const ticketToCreate = this.ticketFactory.createTicketData(
+      dto,
+      newContact.id,
+    );
     const newTicket = await this.ticketsRepository.createTicket(
       ticketToCreate,
       tx,
