@@ -44,10 +44,13 @@ export class CreateTicketCommand {
     // 3. Crear passengers
     const passengerCreated = await Promise.allSettled(
       dto.passenger.map((passengerDto) =>
-        this.passengersService.create({
-          ...passengerDto,
-          ticket: newTicket.id,
-        }),
+        this.passengersService.create(
+          {
+            ...passengerDto,
+            ticket: newTicket.id,
+          },
+          tx,
+        ),
       ),
     );
 

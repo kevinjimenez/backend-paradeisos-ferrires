@@ -3,6 +3,7 @@ import {
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
+import { PrismaTransaction } from './../common/types/prisma-transaction.type';
 import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { Prisma } from './../databases/generated/prisma/client';
 import { CreatePassengerDto } from './dto/create-passenger.dto';
@@ -17,13 +18,16 @@ export class PassengersService {
 
   async create(
     createPassengerDto: CreatePassengerDto,
+    tx?: PrismaTransaction,
   ): Promise<ApiResponse<Prisma.passengersModel>> {
     try {
       const passengerToCreate =
         PassengerMapper.toPrismaCreate(createPassengerDto);
 
-      const newPassenger =
-        await this.passengersRepository.upsertByDocument(passengerToCreate);
+      const newPassenger = await this.passengersRepository.upsertByDocument(
+        passengerToCreate,
+        tx,
+      );
 
       return {
         data: newPassenger,
