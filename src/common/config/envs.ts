@@ -5,8 +5,8 @@ import * as joi from 'joi';
 enum LogLevel {
   TRACE = 'trace',
   DEBUG = 'debug',
-  INFO  = 'info',
-  WARN  = 'warn',
+  INFO = 'info',
+  WARN = 'warn',
   ERROR = 'error',
   FATAL = 'fatal',
 }
@@ -54,7 +54,7 @@ const envsSchema = joi
     LOG_LEVEL: joi
       .string()
       .valid(...Object.values(LogLevel))
-      .default(LogLevel.INFO),
+      .default(LogLevel.DEBUG),
     CORS_ORIGIN: joi.string(),
 
     // Database

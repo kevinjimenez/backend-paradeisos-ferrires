@@ -11,6 +11,7 @@ async function bootstrap() {
     bufferLogs: true,
   });
   app.useLogger(app.get(PinoLogger));
+  app.flushLogs();
   const logger = app.get(PinoLogger);
   // Desactivar etag (y por tanto evitar 304)
   app.set('etag', false);
