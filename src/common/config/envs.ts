@@ -2,8 +2,6 @@
 import 'dotenv/config';
 import * as joi from 'joi';
 
-// type LogLevel = 'verbose' | 'debug' | 'log' | 'warn' | 'error' | 'fatal';
-
 enum LogLevel {
   VERBOSE = 'verbose',
   DEBUG = 'debug',

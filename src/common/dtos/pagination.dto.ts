@@ -6,15 +6,15 @@ export class PaginationDto {
   @IsOptional()
   @IsNumber()
   @IsInt()
-  @Min(envs.paginationLimit)
+  @Min(envs.paginationPage)
   @Type(() => Number)
   page?: number;
 
   @IsOptional()
   @IsNumber()
   @IsInt()
-  @Min(1)
-  @Max(100)
+  @Min(envs.paginationLimit)
+  @Max(envs.paginationMax)
   @Type(() => Number)
   limit?: number;
 }

@@ -27,13 +27,48 @@ Con el handler, el mismo error llega así:
 
 ## Implementación
 
+### Patrón: Message Catalog
+
+Mensajes al cliente y descripciones internas se agrupan por código en un único catálogo (`PRISMA_CATALOG`). Ventajas:
+
+- Todo lo relacionado a un código Prisma está en un solo lugar
+- El mapa de errores queda limpio — solo lógica, sin strings hardcodeadas
+- Agregar un nuevo código requiere tocar un único objeto
+
+```ts
+// Un entry por código — message (cliente) + description (interno)
+const PRISMA_CATALOG = {
+  P2002: {
+    message:     (target: string) => `Field '${target}' already exists`,
+    description: 'Unique constraint failed — registro duplicado',
+  },
+  P2025: {
+    message:     () => `Record not found`,
+    description: 'Record not found — registro no encontrado en la BD',
+  },
+  // ...
+} as const;
+```
+
+#### Uso del catálogo
+
+```ts
+PRISMA_CATALOG.P2002.message('email')   // → "Field 'email' already exists"
+PRISMA_CATALOG.P2002.description        // → "Unique constraint failed — registro duplicado"
+
+PRISMA_CATALOG.P2003.message('scheduleId') // → "Related record 'scheduleId' not found"
+PRISMA_CATALOG.P2003.description           // → "Foreign key constraint — referencia a un registro que no existe"
+```
+
+---
+
 ### `src/common/utils/prisma-error.handler.ts`
 
 ```ts
 import { HttpStatus } from '@nestjs/common';
 import { Prisma } from 'src/databases/generated/prisma/client';
 import { DomainException } from '../exceptions/domian.exception';
-import { ResourceConflictException } from '../exceptions/conflict.exception';
+import { ConflictException } from '../exceptions/conflict.exception';
 import { ResourceNotFoundException } from '../exceptions/not-found.exception';
 
 interface PrismaMeta {
@@ -41,52 +76,78 @@ interface PrismaMeta {
   field_name?: string;
 }
 
+// ── Catalog ───────────────────────────────────────────────────────────────────
+const PRISMA_CATALOG = {
+  P2002: {
+    message:     (target: string) => `Field '${target}' already exists`,
+    description: 'Unique constraint failed — registro duplicado',
+  },
+  P2025: {
+    message:     () => `Record not found`,
+    description: 'Record not found — registro no encontrado en la BD',
+  },
+  P2003: {
+    message:     (field: string) => `Related record '${field}' not found`,
+    description: 'Foreign key constraint — referencia a un registro que no existe',
+  },
+  P2014: {
+    message:     () => `Operation violates a required relation`,
+    description: 'Relation violation — viola una relación requerida',
+  },
+  P2000: {
+    message:     (target: string) => `Value too long for field '${target}'`,
+    description: 'Value too long — el valor supera el tamaño del campo',
+  },
+} as const;
+
+// ── Error Map ────────────────────────────────────────────────────────────────
 type PrismaErrorHandler = (meta: PrismaMeta) => never;
 
 const PRISMA_ERROR_MAP: Record<string, { description: string; exception: PrismaErrorHandler }> = {
   P2002: {
-    description: 'Unique constraint failed — registro duplicado',
+    description: PRISMA_CATALOG.P2002.description,
     exception: (meta) => {
-      throw new ResourceConflictException(
-        `Field '${meta.target ?? 'unknown'}' already exists`,
+      throw new ConflictException(
+        PRISMA_CATALOG.P2002.message(meta.target ?? 'unknown'),
       );
     },
   },
   P2025: {
-    description: 'Record not found — registro no encontrado en la BD',
+    description: PRISMA_CATALOG.P2025.description,
     exception: () => {
       throw new ResourceNotFoundException('Record', 'unknown');
     },
   },
   P2003: {
-    description: 'Foreign key constraint — referencia a un registro que no existe',
+    description: PRISMA_CATALOG.P2003.description,
     exception: (meta) => {
       throw new DomainException(
-        `Related record '${meta.field_name ?? 'unknown'}' not found`,
+        PRISMA_CATALOG.P2003.message(meta.field_name ?? 'unknown'),
         HttpStatus.UNPROCESSABLE_ENTITY,
       );
     },
   },
   P2014: {
-    description: 'Relation violation — viola una relación requerida',
+    description: PRISMA_CATALOG.P2014.description,
     exception: () => {
       throw new DomainException(
-        'Operation violates a required relation',
+        PRISMA_CATALOG.P2014.message(),
         HttpStatus.CONFLICT,
       );
     },
   },
   P2000: {
-    description: 'Value too long — el valor supera el tamaño del campo',
+    description: PRISMA_CATALOG.P2000.description,
     exception: (meta) => {
       throw new DomainException(
-        `Value too long for field '${meta.target ?? 'unknown'}'`,
+        PRISMA_CATALOG.P2000.message(meta.target ?? 'unknown'),
         HttpStatus.BAD_REQUEST,
       );
     },
   },
 };
 
+// ── Public handler ───────────────────────────────────────────────────────────
 export function handlePrismaError(error: unknown): never {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
     const handler = PRISMA_ERROR_MAP[error.code];
@@ -99,20 +160,32 @@ export function handlePrismaError(error: unknown): never {
 }
 ```
 
+#### Ejemplos de mensajes generados
+
+```ts
+PRISMA_MESSAGES.P2002('code')        // → "Field 'code' already exists"
+PRISMA_MESSAGES.P2002('email')       // → "Field 'email' already exists"
+PRISMA_MESSAGES.P2003('scheduleId')  // → "Related record 'scheduleId' not found"
+PRISMA_MESSAGES.P2000('name')        // → "Value too long for field 'name'"
+PRISMA_MESSAGES.P2025()              // → "Record not found"
+PRISMA_MESSAGES.P2014()              // → "Operation violates a required relation"
+```
+
 ---
 
-## Uso — Opción A: `$use` en `PrismaService` (recomendado)
+## Uso — Opción A: `$use` en `DatabasesService` (recomendado)
 
 Intercepta **todos** los queries en un solo punto. El `BaseRepository` queda sin ningún try/catch.
 
 ```ts
-// src/databases/prisma.service.ts
+// src/databases/databases.service.ts
 import { handlePrismaError } from '../common/utils/prisma-error.handler';
 
 @Injectable()
-export class PrismaService extends PrismaClient implements OnModuleInit {
+export class DatabasesService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   constructor() {
-    super();
+    const adapter = new PrismaPg({ ... });
+    super({ adapter });
 
     this.$use(async (params, next) => {
       try {
@@ -121,10 +194,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
         handlePrismaError(e); // ← traduce el error de Prisma a excepción de dominio
       }
     });
-  }
-
-  async onModuleInit() {
-    await this.$connect();
   }
 }
 ```
@@ -149,7 +218,7 @@ async delete(id: string, tx?: PrismaTransaction): Promise<TModel> {
 
 ## Uso — Opción B: `handlePrismaError` en `BaseRepository`
 
-Si no quieres tocar el `PrismaService`, envuelves solo los métodos que pueden lanzar constraints:
+Si no quieres tocar el `DatabasesService`, envuelves solo los métodos que pueden lanzar constraints:
 
 ```ts
 // src/common/base/base.repository.ts
@@ -190,7 +259,7 @@ async delete(id: string, tx?: PrismaTransaction): Promise<TModel> {
 |---|---|---|
 | **try/catch** | ninguno | en cada método write |
 | **Cobertura** | todos los queries automáticamente | solo los métodos que envuelves |
-| **Centralización** | un solo punto (PrismaService) | distribuido en el repository |
+| **Centralización** | un solo punto (DatabasesService) | distribuido en el repository |
 | **Complejidad** | baja | baja |
 
 ---
@@ -199,7 +268,7 @@ async delete(id: string, tx?: PrismaTransaction): Promise<TModel> {
 
 | Código | Descripción | Excepción lanzada | HTTP |
 |--------|-------------|-------------------|------|
-| `P2002` | Unique constraint — campo duplicado | `ResourceConflictException` | 409 |
+| `P2002` | Unique constraint — campo duplicado | `ConflictException` | 409 |
 | `P2025` | Record not found | `ResourceNotFoundException` | 404 |
 | `P2003` | Foreign key — referencia no existe | `DomainException` | 422 |
 | `P2014` | Relation violation | `DomainException` | 409 |
@@ -281,9 +350,9 @@ await this.db.ticketsModel.create({ data: { scheduleId: 'id-inexistente', ... } 
 
 Flujo real usando `tickets` como ejemplo.
 
-### 1. `PrismaService` — registra el middleware una vez
+### 1. `DatabasesService` — registra el middleware una vez
 ```ts
-// src/databases/prisma.service.ts
+// src/databases/databases.service.ts
 this.$use(async (params, next) => {
   try {
     return await next(params);
@@ -315,7 +384,7 @@ async findByCode(code: string): Promise<ticketsModel | null> {
 async create(dto: CreateTicketDto) {
   // regla de negocio → service
   const existing = await this.ticketsRepository.findByCode(dto.code);
-  if (existing) throw new ResourceConflictException(`Ticket with code '${dto.code}' already exists`);
+  if (existing) throw new ConflictException(`Ticket with code '${dto.code}' already exists`);
 
   // error de BD (P2002, P2003...) → $use lo intercepta automáticamente
   return this.ticketsRepository.create(dto);

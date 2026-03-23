@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/require-await */
 import { PrismaTransaction } from '../types/prisma-transaction.type';
+import { handlePrismaError } from '../utils/prisma-error.handler';
 
 export abstract class BaseRepository<TModel> {
   protected abstract get modelName(): string;
@@ -7,7 +11,7 @@ export abstract class BaseRepository<TModel> {
 
   async findById(id: string, tx?: PrismaTransaction): Promise<TModel | null> {
     const database = tx ?? this.db;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+
     return database[this.modelName].findUnique({
       where: { id },
     });
@@ -15,14 +19,16 @@ export abstract class BaseRepository<TModel> {
 
   async findAll(tx?: PrismaTransaction): Promise<TModel[]> {
     const database = tx ?? this.db;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     return database[this.modelName].findMany();
   }
 
   async create(data: unknown, tx?: PrismaTransaction): Promise<TModel> {
     const database = tx ?? this.db;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-    return database[this.modelName].create({ data });
+    try {
+      return await database[this.modelName].create({ data });
+    } catch (error) {
+      return handlePrismaError(error);
+    }
   }
 
   async update(
@@ -31,24 +37,30 @@ export abstract class BaseRepository<TModel> {
     tx?: PrismaTransaction,
   ): Promise<TModel> {
     const database = tx ?? this.db;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-    return database[this.modelName].update({
-      where: { id },
-      data,
-    });
+    try {
+      return await database[this.modelName].update({
+        where: { id },
+        data,
+      });
+    } catch (error) {
+      return handlePrismaError(error);
+    }
   }
 
   async delete(id: string, tx?: PrismaTransaction): Promise<TModel> {
     const database = tx ?? this.db;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-    return database[this.modelName].delete({
-      where: { id },
-    });
+    try {
+      return await database[this.modelName].delete({
+        where: { id },
+      });
+    } catch (error) {
+      return handlePrismaError(error);
+    }
   }
 
   async count(where?: unknown, tx?: PrismaTransaction): Promise<number> {
     const database = tx ?? this.db;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+
     return database[this.modelName].count({ where });
   }
 
