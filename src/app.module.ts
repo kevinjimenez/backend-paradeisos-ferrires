@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
 import { LoggerModule } from 'nestjs-pino';
+import { pinoConfig } from './common/config/pino.config';
+import { throttlerConfig } from './common/config/throttler.config';
 import { AppController } from './app.controller';
 import { BookingsModule } from './bookings/bookings.module';
 import { CommonModule } from './common/common.module';
@@ -18,25 +20,14 @@ import { TasksModule } from './tasks/tasks.module';
 import { TicketsModule } from './tickets/tickets.module';
 import { CatalogsModule } from './catalogs/catalogs.module';
 import { ThrottlerModule } from '@nestjs/throttler';
-import { envs } from './common/config/envs';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     ScheduleModule.forRoot(),
     EventEmitterModule.forRoot(),
-    LoggerModule.forRoot({
-      pinoHttp: {
-        transport:
-          envs.nodeEnv !== 'production' ? { target: 'pino-pretty' } : undefined,
-      },
-    }),
-    ThrottlerModule.forRoot([
-      {
-        ttl: envs.rateLimitTtl,
-        limit: envs.rateLimitMax,
-      },
-    ]),
+    LoggerModule.forRoot(pinoConfig),
+    ThrottlerModule.forRoot(throttlerConfig),
     CommonModule,
     HealthModule,
     DatabasesModule,

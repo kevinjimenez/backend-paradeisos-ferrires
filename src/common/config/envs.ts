@@ -3,10 +3,10 @@ import 'dotenv/config';
 import * as joi from 'joi';
 
 enum LogLevel {
-  VERBOSE = 'verbose',
+  TRACE = 'trace',
   DEBUG = 'debug',
-  LOG = 'log',
-  WARN = 'warn',
+  INFO  = 'info',
+  WARN  = 'warn',
   ERROR = 'error',
   FATAL = 'fatal',
 }
@@ -54,7 +54,7 @@ const envsSchema = joi
     LOG_LEVEL: joi
       .string()
       .valid(...Object.values(LogLevel))
-      .default(LogLevel.LOG),
+      .default(LogLevel.INFO),
     CORS_ORIGIN: joi.string(),
 
     // Database

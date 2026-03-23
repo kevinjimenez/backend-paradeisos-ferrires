@@ -1,16 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Logger, RequestMethod, ValidationPipe } from '@nestjs/common';
+import { Logger as PinoLogger } from 'nestjs-pino';
+import { RequestMethod, ValidationPipe } from '@nestjs/common';
 import { envs } from './common/config/envs';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import compression from 'compression';
 
 async function bootstrap() {
-  const logger = new Logger('MAIN');
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    logger: [envs.logLevel],
+    bufferLogs: true,
   });
+  app.useLogger(app.get(PinoLogger));
+  const logger = app.get(PinoLogger);
   // Desactivar etag (y por tanto evitar 304)
   app.set('etag', false);
+  app.use(compression());
 
   // // filter
   // app.useGlobalFilters(new CustomHttpExceptionFilter());
