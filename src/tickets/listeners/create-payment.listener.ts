@@ -3,6 +3,7 @@ import { OnEvent } from '@nestjs/event-emitter';
 import { PaymentMethod } from 'src/databases/generated/prisma/enums';
 import { PaymentsService } from 'src/payments/payments.service';
 import { TicketCreatedEvent } from '../events/ticket-created.event';
+import { handleServiceError } from 'src/common/utils/service-error.handler';
 
 @Injectable()
 export class CreatePaymentListener {
@@ -24,9 +25,10 @@ export class CreatePaymentListener {
 
       this.logger.log(`Payment created for ticket: ${event.ticketId}`);
     } catch (error) {
-      this.logger.error(
-        `Failed to create payment for ticket: ${event.ticketId}`,
+      return handleServiceError(
         error,
+        this.logger,
+        'Failed to create payment for ticket',
       );
     }
   }

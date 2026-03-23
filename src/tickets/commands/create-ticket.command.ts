@@ -1,4 +1,5 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { DomainException } from 'src/common/exceptions/domain.exception';
 import { PrismaTransaction } from 'src/common/types/prisma-transaction.type';
 import { ContactsService } from 'src/contacts/contacts.service';
 import { PassengersService } from 'src/passengers/passengers.service';
@@ -26,7 +27,10 @@ export class CreateTicketCommand {
     const newContact = await this.contactsService.create(dto.contact);
 
     if (!newContact.id) {
-      throw new Error('Contact not created');
+      throw new DomainException(
+        'Contact not created',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
     }
 
     // 2. Crear ticket

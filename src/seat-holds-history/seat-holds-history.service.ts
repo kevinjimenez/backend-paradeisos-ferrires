@@ -1,9 +1,7 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
+import { HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { DomainException } from 'src/common/exceptions/domain.exception';
+import { ResourceNotFoundException } from 'src/common/exceptions/not-found.exception';
+import { handleServiceError } from 'src/common/utils/service-error.handler';
 import { SeatHoldsHistoryResponse } from './interfaces/seat-holds-history-response';
 import { SeatHoldsHistoryRepository } from './seat-holds-history.repository';
 
@@ -21,17 +19,18 @@ export class SeatHoldsHistoryService {
         await this.seatHoldsHistoryRepository.findOneWithRelations(id);
 
       if (!seatHoldsHistory) {
-        throw new NotFoundException(`Seat holds with ID ${id} not found`);
+        throw new ResourceNotFoundException('Seat holds', id);
       }
 
       if (!seatHoldsHistory.outbound_seat_holds) {
-        throw new NotFoundException(`Seat holds expired`);
+        throw new DomainException('Seat hold expired', HttpStatus.NOT_FOUND);
       }
 
       return seatHoldsHistory as SeatHoldsHistoryResponse;
     } catch (error) {
-      this.logger.error('Error fetching seat holds history', error);
-      throw new InternalServerErrorException(
+      return handleServiceError(
+        error,
+        this.logger,
         'Failed to fetch seat holds history',
       );
     }

@@ -1,10 +1,7 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { ResourceNotFoundException } from 'src/common/exceptions/not-found.exception';
+import { handleServiceError } from 'src/common/utils/service-error.handler';
 import { PdfService } from './../common/services/pdf/pdf.service';
 import { DatabasesService } from './../databases/databases.service';
 import { Prisma } from './../databases/generated/prisma/client';
@@ -56,8 +53,7 @@ export class TicketsService {
 
       return newTicket;
     } catch (error) {
-      this.logger.error('Error creating ticket', error);
-      throw new InternalServerErrorException('Failed to create ticket');
+      return handleServiceError(error, this.logger, 'Error creating ticket');
     }
   }
 
@@ -70,7 +66,7 @@ export class TicketsService {
     );
 
     if (!ticket) {
-      throw new NotFoundException('Ticket not found');
+      throw new ResourceNotFoundException('Ticket', id);
     }
 
     return ticket as unknown as TicketResponse;

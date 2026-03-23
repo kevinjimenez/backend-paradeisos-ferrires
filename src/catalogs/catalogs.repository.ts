@@ -17,17 +17,17 @@ export class CatalogsRepository extends BaseRepository<Prisma.catalogsModel> {
     return this.databasesService;
   }
 
-  public findByCategory(category: string) {
-    return this.db.catalogs.findMany({
-      where: {
-        category,
-        is_active: true,
-      },
-      select: {
-        id: true,
-        code: true,
-        description: true,
-      },
-    });
-  }
+  // public findByCategory(category: string) {
+  //   return this.db.catalogs.findMany({
+  //     where: {
+  //       category,
+  //       is_active: true,
+  //     },
+  //     select: {
+  //       id: true,
+  //       code: true,
+  //       description: true,
+  //     },
+  //   });
+  // }
 }

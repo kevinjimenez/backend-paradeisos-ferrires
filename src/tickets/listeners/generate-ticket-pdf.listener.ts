@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 import { TicketCreatedEvent } from '../events/ticket-created.event';
 import { TicketsService } from '../tickets.service';
+import { handleServiceError } from 'src/common/utils/service-error.handler';
 
 @Injectable()
 export class GenerateTicketPdfListener {
@@ -18,9 +19,10 @@ export class GenerateTicketPdfListener {
 
       this.logger.log(`PDF generated for ticket: ${event.ticketId}`);
     } catch (error) {
-      this.logger.error(
-        `Failed to generate PDF for ticket: ${event.ticketId}`,
+      return handleServiceError(
         error,
+        this.logger,
+        'Failed to generate PDF for ticket',
       );
     }
   }

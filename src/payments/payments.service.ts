@@ -1,4 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { ResourceNotFoundException } from 'src/common/exceptions/not-found.exception';
 import { Prisma } from 'src/databases/generated/prisma/client';
 import { PaymentStatus } from './../databases/generated/prisma/enums';
 import { CreatePaymentDto } from './dto/create-payment.dto';
@@ -29,7 +30,7 @@ export class PaymentsService {
     const payment = await this.paymentsRepository.findByIdWithTicket(id);
 
     if (!payment) {
-      throw new NotFoundException(`Payment with ID ${id} not found`);
+      throw new ResourceNotFoundException('Payment', id);
     }
 
     return payment;

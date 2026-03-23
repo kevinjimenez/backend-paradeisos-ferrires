@@ -1,8 +1,5 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { handleServiceError } from 'src/common/utils/service-error.handler';
 import { Prisma } from './../databases/generated/prisma/client';
 import { SchedulesFilterDto } from './dto/schedules-filter.dto';
 import { ScheduleResponse } from './interfaces/schedule-response.interface';
@@ -22,8 +19,11 @@ export class SchedulesService {
 
       return data;
     } catch (error) {
-      this.logger.error('Error fetching schedules', error);
-      throw new InternalServerErrorException('Failed to fetch schedules');
+      return handleServiceError(
+        error,
+        this.logger,
+        'Failed to fetch schedules',
+      );
     }
   }
 

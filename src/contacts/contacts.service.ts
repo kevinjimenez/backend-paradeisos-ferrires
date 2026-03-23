@@ -1,8 +1,5 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { handleServiceError } from 'src/common/utils/service-error.handler';
 import { Prisma } from './../databases/generated/prisma/client';
 import { ContactsRepository } from './contacts.repository';
 import { CreateContactDto } from './dto/create-contact.dto';
@@ -24,8 +21,7 @@ export class ContactsService {
 
       return newContact;
     } catch (error) {
-      this.logger.error('Error creating contact', error);
-      throw new InternalServerErrorException('Failed to create contact');
+      return handleServiceError(error, this.logger, 'Failed to create contact');
     }
   }
 }

@@ -1,8 +1,5 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { handleServiceError } from 'src/common/utils/service-error.handler';
 import { PrismaTransaction } from './../common/types/prisma-transaction.type';
 import { Prisma } from './../databases/generated/prisma/client';
 import { CreatePassengerDto } from './dto/create-passenger.dto';
@@ -30,8 +27,11 @@ export class PassengersService {
 
       return newPassenger;
     } catch (error) {
-      this.logger.error('Error creating passenger', error);
-      throw new InternalServerErrorException('Failed to create passenger');
+      return handleServiceError(
+        error,
+        this.logger,
+        'Failed to create passenger',
+      );
     }
   }
 }

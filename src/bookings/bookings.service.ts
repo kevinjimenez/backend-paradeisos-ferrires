@@ -1,8 +1,5 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { handleServiceError } from 'src/common/utils/service-error.handler';
 import { envs } from '../common/config/envs';
 import { DatabasesService } from '../databases/databases.service';
 import { CreateBookingCommand } from './commands/create-booking.command';
@@ -36,8 +33,7 @@ export class BookingsService {
 
       return newBooking;
     } catch (error) {
-      this.logger.error('Error creating booking', error);
-      throw new InternalServerErrorException('Failed to create booking');
+      return handleServiceError(error, this.logger, 'Failed to create booking');
     }
   }
 }
