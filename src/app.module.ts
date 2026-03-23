@@ -17,12 +17,20 @@ import { SeatHoldsHistoryModule } from './seat-holds-history/seat-holds-history.
 import { TasksModule } from './tasks/tasks.module';
 import { TicketsModule } from './tickets/tickets.module';
 import { CatalogsModule } from './catalogs/catalogs.module';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { envs } from './common/config/envs';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     ScheduleModule.forRoot(),
     EventEmitterModule.forRoot(),
+    ThrottlerModule.forRoot([
+      {
+        ttl: envs.rateLimitTtl,
+        limit: envs.rateLimitMax,
+      },
+    ]),
     CommonModule,
     HealthModule,
     DatabasesModule,

@@ -66,10 +66,21 @@ export class PdfService implements OnModuleInit, OnModuleDestroy {
     }
   }
 
+  private async ensureBrowser(): Promise<void> {
+    if (!this.browser || !this.browser.isConnected()) {
+      this.logger.warn('Browser not connected, relaunching...');
+      this.browser = await chromium.launch({
+        headless: true,
+        args: CHROMIUM_LAUNCH_ARGS,
+      });
+    }
+  }
+
   private async htmlToPdf(
     html: string,
     options: PdfGeneratorOptions,
   ): Promise<Buffer> {
+    await this.ensureBrowser();
     const context = await this.browser.newContext();
     const page = await context.newPage();
 

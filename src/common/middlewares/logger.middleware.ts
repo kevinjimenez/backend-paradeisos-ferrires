@@ -6,7 +6,7 @@ export class LoggerMiddleware implements NestMiddleware {
   private logger = new Logger('HTTP');
 
   use(req: Request, res: Response, next: NextFunction) {
-    const { method, originalUrl, body, headers } = req;
+    const { method, originalUrl, headers } = req;
     const userAgent = headers['user-agent'] || '';
     const start = Date.now();
 
@@ -26,12 +26,28 @@ export class LoggerMiddleware implements NestMiddleware {
         logMessage = `\x1b[32m${logMessage}\x1b[0m`; // Verde para respuestas exitosas
       }
 
-      // Solo registrar el body para métodos que lo envían (POST, PUT, PATCH)
-      if (['POST', 'PUT', 'PATCH'].includes(method)) {
-        this.logger.log(`${logMessage}\nRequest Body: ${JSON.stringify(body)}`);
-      } else {
-        this.logger.log(logMessage);
-      }
+      // // Solo registrar el body para métodos que lo envían (POST, PUT, PATCH)
+      // if (['POST', 'PUT', 'PATCH'].includes(method)) {
+      //   const safeBody: Record<string, unknown> = Object.assign(
+      //     {},
+      //     body as Record<string, unknown>,
+      //   );
+      //   [
+      //     'password',
+      //     'confirmPassword',
+      //     'cardNumber',
+      //     'cvv',
+      //     'token',
+      //     'secret',
+      //   ].forEach((key) => {
+      //     if (safeBody[key]) safeBody[key] = '***';
+      //   });
+      //   this.logger.log(
+      //     `${logMessage}\nRequest Body: ${JSON.stringify(safeBody)}`,
+      //   );
+      // } else {
+      //   this.logger.log(logMessage);
+      // }
     });
 
     next();

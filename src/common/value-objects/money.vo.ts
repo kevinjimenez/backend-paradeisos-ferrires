@@ -48,7 +48,9 @@ export class Money {
 
   multiply(factor: number): Money {
     if (!this.isValidNumber(factor)) {
-      throw new BadRequestException('Multiplication factor must be a valid number');
+      throw new BadRequestException(
+        'Multiplication factor must be a valid number',
+      );
     }
     return new Money(this._amount * factor, this._currency);
   }
@@ -114,8 +116,14 @@ export class Money {
   }
 
   private validateCurrency(currency: string): void {
-    if (!currency || typeof currency !== 'string' || currency.trim().length !== 3) {
-      throw new BadRequestException('Currency must be a valid 3-letter code (e.g., USD, EUR)');
+    if (
+      !currency ||
+      typeof currency !== 'string' ||
+      currency.trim().length !== 3
+    ) {
+      throw new BadRequestException(
+        'Currency must be a valid 3-letter code (e.g., USD, EUR)',
+      );
     }
   }
 

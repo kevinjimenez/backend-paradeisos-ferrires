@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { CatalogsRepository } from './catalogs.repository';
-import { ApiResponse } from 'src/common/interfaces/api-response.interface';
 import { Prisma } from 'src/databases/generated/prisma/client';
+import { CatalogsRepository } from './catalogs.repository';
 import { CatalogResponse } from './interfaces/catalog-response.interface';
 
 @Injectable()
@@ -10,15 +9,13 @@ export class CatalogsService {
 
   constructor(private readonly catalogsRepository: CatalogsRepository) {}
 
-  async findAll(): Promise<ApiResponse<Prisma.catalogsModel[]>> {
+  async findAll(): Promise<Prisma.catalogsModel[]> {
     const catalogs = await this.catalogsRepository.findAll();
-    return { data: catalogs };
+    return catalogs;
   }
 
-  async findByCategory(
-    category: string,
-  ): Promise<ApiResponse<CatalogResponse[]>> {
+  async findByCategory(category: string): Promise<CatalogResponse[]> {
     const catalogs = await this.catalogsRepository.findByCategory(category);
-    return { data: catalogs };
+    return catalogs;
   }
 }
