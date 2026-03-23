@@ -10,10 +10,11 @@ import {
 } from '@nestjs/common';
 import express from 'express';
 import {
-  CONTENT_DISPOSITION,
-  CONTENT_TYPE,
-} from './constants/response.constants';
+  HTTP_CONTENT_TYPES,
+  HTTP_HEADERS,
+} from 'src/common/constants/http.constants';
 import { CreateTicketDto } from './dto/create-ticket.dto';
+import { TICKET_PDF_FILENAME } from './constants/ticket.constants';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
 import { TicketsService } from './tickets.service';
 
@@ -44,8 +45,9 @@ export class TicketsController {
     const pdf = await this.ticketsService.generateTicketPdf(id);
 
     res.set({
-      'Content-Type': CONTENT_TYPE,
-      'Content-Disposition': CONTENT_DISPOSITION,
+      'Content-Type': HTTP_CONTENT_TYPES.PDF,
+      'Content-Disposition':
+        HTTP_HEADERS.contentDisposition(TICKET_PDF_FILENAME),
     });
     res.send(pdf);
   }
