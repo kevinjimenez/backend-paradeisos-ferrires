@@ -1,11 +1,11 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
+import { LoggerModule } from 'nestjs-pino';
 import { AppController } from './app.controller';
 import { BookingsModule } from './bookings/bookings.module';
 import { CommonModule } from './common/common.module';
-import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { ContactsModule } from './contacts/contacts.module';
 import { DatabasesModule } from './databases/databases.module';
 import { HealthModule } from './health/health.module';
@@ -25,6 +25,12 @@ import { envs } from './common/config/envs';
     ConfigModule.forRoot(),
     ScheduleModule.forRoot(),
     EventEmitterModule.forRoot(),
+    LoggerModule.forRoot({
+      pinoHttp: {
+        transport:
+          envs.nodeEnv !== 'production' ? { target: 'pino-pretty' } : undefined,
+      },
+    }),
     ThrottlerModule.forRoot([
       {
         ttl: envs.rateLimitTtl,
@@ -47,8 +53,4 @@ import { envs } from './common/config/envs';
   ],
   controllers: [AppController],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('*');
-  }
-}
+export class AppModule {}
