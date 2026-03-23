@@ -4,6 +4,7 @@ import { SeatHoldsHistoryRepository } from 'src/seat-holds-history/seat-holds-hi
 import { CreateBookingDto } from '../dto/create-booking.dto';
 import { BookingResponse } from '../interfaces/booking-response.interface';
 import { CreateSeatHoldCommand } from './create-seat-hold.command';
+import { BookingMapper } from '../mappers/booking.mapper';
 
 @Injectable()
 export class CreateBookingCommand {
@@ -48,6 +49,6 @@ export class CreateBookingCommand {
       tx,
     );
 
-    return { id: history.id };
+    return BookingMapper.toResponse(history.id);
   }
 }

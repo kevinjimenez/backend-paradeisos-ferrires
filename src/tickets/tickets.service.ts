@@ -5,8 +5,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { ApiResponseDto } from './../common/dtos/api-response.dto';
-import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { PdfService } from './../common/services/pdf/pdf.service';
 import { DatabasesService } from './../databases/databases.service';
 import { Prisma } from './../databases/generated/prisma/client';
@@ -36,7 +34,7 @@ export class TicketsService {
 
   async create(
     createTicketDto: CreateTicketDto,
-  ): Promise<ApiResponse<CreateTicketResponse>> {
+  ): Promise<CreateTicketResponse> {
     try {
       const newTicket = await this.databasesService.$transaction(async (tx) => {
         return this.createTicketCommand.execute(createTicketDto, tx);
@@ -56,14 +54,14 @@ export class TicketsService {
         ),
       );
 
-      return { data: newTicket };
+      return newTicket;
     } catch (error) {
       this.logger.error('Error creating ticket', error);
       throw new InternalServerErrorException('Failed to create ticket');
     }
   }
 
-  async findOne(id: string): Promise<ApiResponse<TicketResponse>> {
+  async findOne(id: string): Promise<TicketResponse> {
     const selectConfig = new TicketQueryBuilder().withAllRelations().build();
 
     const ticket = await this.ticketsRepository.findOneWithRelations(
@@ -75,32 +73,30 @@ export class TicketsService {
       throw new NotFoundException('Ticket not found');
     }
 
-    return { data: ticket as unknown as TicketResponse };
+    return ticket as unknown as TicketResponse;
   }
 
-  async findAll(): Promise<ApiResponse<Prisma.ticketsModel[]>> {
+  async findAll(): Promise<Prisma.ticketsModel[]> {
     const tickets = await this.ticketsRepository.findAll();
-    return { data: tickets };
+    return tickets;
   }
 
   async update(
     id: string,
     updateTicketDto: UpdateTicketDto,
-  ): Promise<ApiResponseDto<Prisma.ticketsModel>> {
-    const { data: ticketToUpdate } = await this.findOne(id);
+  ): Promise<Prisma.ticketsModel> {
+    const ticketToUpdate = await this.findOne(id);
 
     const ticketUpdated = await this.ticketsRepository.updateTicket(
       ticketToUpdate.id,
       updateTicketDto,
     );
 
-    return {
-      data: ticketUpdated,
-    };
+    return ticketUpdated;
   }
 
   async generateTicketPdf(id: string) {
-    const { data: ticket } = await this.findOne(id);
+    const ticket = await this.findOne(id);
 
     const ticketData = TicketMapper.toTicketResponse(ticket);
 

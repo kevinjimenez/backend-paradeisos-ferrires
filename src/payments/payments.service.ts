@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from 'src/databases/generated/prisma/client';
-import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { PaymentStatus } from './../databases/generated/prisma/enums';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
@@ -13,65 +12,63 @@ export class PaymentsService {
 
   async create(
     createPaymentDto: CreatePaymentDto,
-  ): Promise<ApiResponse<Prisma.paymentsModel>> {
+  ): Promise<Prisma.paymentsModel> {
     const data = PaymentMapper.toPrismaCreate(createPaymentDto);
     const payment = await this.paymentsRepository.create(data);
 
-    return { data: payment };
+    return payment;
   }
 
-  async findAll(): Promise<ApiResponse<Prisma.paymentsModel[]>> {
+  async findAll(): Promise<Prisma.paymentsModel[]> {
     const payments = await this.paymentsRepository.findAllWithTickets();
 
-    return { data: payments };
+    return payments;
   }
 
-  async findOne(id: string): Promise<ApiResponse<Prisma.paymentsModel>> {
+  async findOne(id: string): Promise<Prisma.paymentsModel> {
     const payment = await this.paymentsRepository.findByIdWithTicket(id);
 
     if (!payment) {
       throw new NotFoundException(`Payment with ID ${id} not found`);
     }
 
-    return { data: payment };
+    return payment;
   }
 
   async update(
     id: string,
     updatePaymentDto: UpdatePaymentDto,
-  ): Promise<ApiResponse<Prisma.paymentsModel>> {
+  ): Promise<Prisma.paymentsModel> {
     await this.findOne(id);
 
     const data = PaymentMapper.toPrismaUpdate(updatePaymentDto);
     const payment = await this.paymentsRepository.update(id, data);
 
-    return { data: payment };
+    return payment;
   }
 
-  async remove(id: string): Promise<ApiResponse<Prisma.paymentsModel>> {
+  async remove(id: string): Promise<Prisma.paymentsModel> {
     await this.findOne(id);
 
     const payment = await this.paymentsRepository.delete(id);
 
-    return { data: payment };
+    return payment;
   }
 
-  async findByTicketId(
-    ticketId: string,
-  ): Promise<ApiResponse<Prisma.paymentsModel[]>> {
+  async findByTicketId(ticketId: string): Promise<Prisma.paymentsModel[]> {
     const payments = await this.paymentsRepository.findByTicketId(ticketId);
 
-    return { data: payments };
+    return payments;
   }
 
   async updateStatus(
     id: string,
     status: PaymentStatus,
-  ): Promise<ApiResponse<Prisma.paymentsModel>> {
+  ): Promise<Prisma.paymentsModel> {
     await this.findOne(id);
 
     const payment = await this.paymentsRepository.updateStatus(id, status);
 
-    return { data: payment };
+    return payment;
   }
 }

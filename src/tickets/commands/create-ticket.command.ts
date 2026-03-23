@@ -23,7 +23,7 @@ export class CreateTicketCommand {
     tx: PrismaTransaction,
   ): Promise<CreateTicketResponse> {
     // 1. Crear contact
-    const { data: newContact } = await this.contactsService.create(dto.contact);
+    const newContact = await this.contactsService.create(dto.contact);
 
     if (!newContact.id) {
       throw new Error('Contact not created');
@@ -56,7 +56,7 @@ export class CreateTicketCommand {
 
     const passengerIds = passengerCreated
       .filter((result) => result.status === 'fulfilled')
-      .map((result) => result.value.data.id)
+      .map((result) => result.value.id)
       .filter((id) => id !== undefined);
 
     return {

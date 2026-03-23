@@ -4,7 +4,6 @@ import {
   Logger,
 } from '@nestjs/common';
 import { envs } from '../common/config/envs';
-import { ApiResponse } from '../common/interfaces/api-response.interface';
 import { DatabasesService } from '../databases/databases.service';
 import { CreateBookingCommand } from './commands/create-booking.command';
 import { CreateBookingDto } from './dto/create-booking.dto';
@@ -19,9 +18,7 @@ export class BookingsService {
     private readonly createBookingCommand: CreateBookingCommand,
   ) {}
 
-  async create(
-    createBookingDto: CreateBookingDto,
-  ): Promise<ApiResponse<BookingResponse>> {
+  async create(createBookingDto: CreateBookingDto): Promise<BookingResponse> {
     try {
       const expiresAt = new Date();
       const minutes = expiresAt.getMinutes() + envs.holdExpirationMinutes;
@@ -37,7 +34,7 @@ export class BookingsService {
         },
       );
 
-      return { data: newBooking };
+      return newBooking;
     } catch (error) {
       this.logger.error('Error creating booking', error);
       throw new InternalServerErrorException('Failed to create booking');

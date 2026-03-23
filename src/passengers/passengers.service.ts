@@ -4,7 +4,6 @@ import {
   Logger,
 } from '@nestjs/common';
 import { PrismaTransaction } from './../common/types/prisma-transaction.type';
-import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { Prisma } from './../databases/generated/prisma/client';
 import { CreatePassengerDto } from './dto/create-passenger.dto';
 import { PassengerMapper } from './mappers/passenger.mapper';
@@ -19,7 +18,7 @@ export class PassengersService {
   async create(
     createPassengerDto: CreatePassengerDto,
     tx?: PrismaTransaction,
-  ): Promise<ApiResponse<Prisma.passengersModel>> {
+  ): Promise<Prisma.passengersModel> {
     try {
       const passengerToCreate =
         PassengerMapper.toPrismaCreate(createPassengerDto);
@@ -29,9 +28,7 @@ export class PassengersService {
         tx,
       );
 
-      return {
-        data: newPassenger,
-      };
+      return newPassenger;
     } catch (error) {
       this.logger.error('Error creating passenger', error);
       throw new InternalServerErrorException('Failed to create passenger');

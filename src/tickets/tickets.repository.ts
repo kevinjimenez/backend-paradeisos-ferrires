@@ -2,10 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { BaseRepository } from 'src/common/base/base.repository';
 import { PrismaTransaction } from 'src/common/types/prisma-transaction.type';
 import { DatabasesService } from './../databases/databases.service';
-import {
-  Prisma,
-  TicketsStatus,
-} from './../databases/generated/prisma/client';
+import { Prisma, TicketsStatus } from './../databases/generated/prisma/client';
 
 @Injectable()
 export class TicketsRepository extends BaseRepository<Prisma.ticketsModel> {

@@ -4,7 +4,6 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
-import { ApiResponse } from './../common/interfaces/api-response.interface';
 import { SeatHoldsHistoryResponse } from './interfaces/seat-holds-history-response';
 import { SeatHoldsHistoryRepository } from './seat-holds-history.repository';
 
@@ -16,7 +15,7 @@ export class SeatHoldsHistoryService {
     private readonly seatHoldsHistoryRepository: SeatHoldsHistoryRepository,
   ) {}
 
-  async findOne(id: string): Promise<ApiResponse<SeatHoldsHistoryResponse>> {
+  async findOne(id: string): Promise<SeatHoldsHistoryResponse> {
     try {
       const seatHoldsHistory =
         await this.seatHoldsHistoryRepository.findOneWithRelations(id);
@@ -29,7 +28,7 @@ export class SeatHoldsHistoryService {
         throw new NotFoundException(`Seat holds expired`);
       }
 
-      return { data: seatHoldsHistory as SeatHoldsHistoryResponse };
+      return seatHoldsHistory as SeatHoldsHistoryResponse;
     } catch (error) {
       this.logger.error('Error fetching seat holds history', error);
       throw new InternalServerErrorException(
