@@ -1,47 +1,33 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger as PinoLogger } from 'nestjs-pino';
-import { RequestMethod, ValidationPipe } from '@nestjs/common';
-import { envs } from './common/config/envs';
+import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import compression from 'compression';
+import { appConfig } from './common/config/app.config';
+import { envs } from './common/config/envs';
 
 async function bootstrap() {
+  // Buffer logs during bootstrap so nothing is lost before pino takes over
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     bufferLogs: true,
   });
+
+  // Replace NestJS default logger with pino and flush buffered bootstrap logs
   app.useLogger(app.get(PinoLogger));
   app.flushLogs();
+
   const logger = app.get(PinoLogger);
-  // Desactivar etag (y por tanto evitar 304)
+
+  // Disable ETag headers to prevent 304 Not Modified responses
   app.set('etag', false);
+
+  // Compress HTTP responses (gzip/deflate)
   app.use(compression());
 
-  // // filter
-  // app.useGlobalFilters(new CustomHttpExceptionFilter());
-  // // interceptor
-  // app.useGlobalInterceptors(new ResponseTransformInterceptor(new Reflector()));
-
-  app.setGlobalPrefix(envs.apiPrefix, {
-    exclude: [
-      { path: 'health', method: RequestMethod.ALL },
-      { path: '/', method: RequestMethod.ALL },
-    ],
-  });
-
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    }),
-  );
-
-  // app.enableCors();
-  app.enableCors({
-    origin: envs.corsOrigin, // 'http://localhost:3001'
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    credentials: true,
-  });
+  app.setGlobalPrefix(appConfig.prefix, appConfig.prefixOptions);
+  app.useGlobalPipes(new ValidationPipe(appConfig.validation));
+  app.enableCors(appConfig.cors);
 
   await app.listen(envs.port);
   logger.log(`Environment: ${envs.nodeEnv}`);
