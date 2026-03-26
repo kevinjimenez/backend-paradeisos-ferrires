@@ -17,6 +17,7 @@ import { CreateTicketDto } from './dto/create-ticket.dto';
 import { TICKET_PDF_FILENAME } from './constants/ticket.constants';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
 import { TicketsService } from './tickets.service';
+import { SkipTransform } from 'src/common/decorators/skip-transform.decorator';
 
 @Controller('tickets')
 export class TicketsController {
@@ -37,6 +38,7 @@ export class TicketsController {
     return this.ticketsService.findOne(id);
   }
 
+  @SkipTransform()
   @Get(':id/pdf')
   async generateTicket(
     @Param('id', ParseUUIDPipe) id: string,
