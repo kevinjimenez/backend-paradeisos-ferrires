@@ -1,7 +1,7 @@
 import { Prisma } from 'src/databases/generated/prisma/client';
 
 export class ScheduleSpecifications {
-  static byDepartureDate(date: string): Prisma.schedulesWhereInput {
+  static byDate(date: string): Prisma.schedulesWhereInput {
     const startOfDay = new Date(date);
     startOfDay.setHours(0, 0, 0, 0);
     const endOfDay = new Date(startOfDay);

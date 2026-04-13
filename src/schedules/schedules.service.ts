@@ -30,19 +30,19 @@ export class SchedulesService {
   private buildWhereFromFilters(
     filters: SchedulesFilterDto,
   ): Prisma.schedulesWhereInput {
-    const { departureDate, from, to } = filters;
+    const { date, origin, destination } = filters;
     const specs: Prisma.schedulesWhereInput[] = [];
 
-    if (departureDate) {
-      specs.push(ScheduleSpecifications.byDepartureDate(departureDate));
+    if (date) {
+      specs.push(ScheduleSpecifications.byDate(date));
     }
 
-    if (from) {
-      specs.push(ScheduleSpecifications.byOriginPort(from));
+    if (origin) {
+      specs.push(ScheduleSpecifications.byOriginPort(origin));
     }
 
-    if (to) {
-      specs.push(ScheduleSpecifications.byDestinationPort(to));
+    if (destination) {
+      specs.push(ScheduleSpecifications.byDestinationPort(destination));
     }
 
     return ScheduleSpecifications.combine(...specs);
