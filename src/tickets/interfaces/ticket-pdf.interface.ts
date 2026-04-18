@@ -12,6 +12,7 @@ export interface TicketPdf {
   destination: string;
   status?: string;
   generatedAt?: string;
+  returnTrip?: TicketPdf;
 }
 
 export interface PassengerPdf {

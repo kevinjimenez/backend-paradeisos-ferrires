@@ -44,14 +44,14 @@ export class TicketsController {
     @Param('id', ParseUUIDPipe) id: string,
     @Res() res: express.Response,
   ) {
-    const pdf = await this.ticketsService.generateTicketPdf(id);
+    const ticket = await this.ticketsService.generateTicketPdf(id);
 
     res.set({
       'Content-Type': HTTP_CONTENT_TYPES.PDF,
       'Content-Disposition':
         HTTP_HEADERS.contentDisposition(TICKET_PDF_FILENAME),
     });
-    res.send(pdf);
+    res.send(ticket);
   }
 
   @Patch(':id')

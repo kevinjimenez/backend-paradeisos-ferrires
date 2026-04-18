@@ -93,9 +93,7 @@ export class TicketsService {
 
   async generateTicketPdf(id: string) {
     const ticket = await this.findOne(id);
-
     const ticketData = TicketMapper.toTicketResponse(ticket);
-
-    return await this.pdfService.generate(this.ticketGenerator, ticketData);
+    return this.pdfService.generate(this.ticketGenerator, ticketData);
   }
 }

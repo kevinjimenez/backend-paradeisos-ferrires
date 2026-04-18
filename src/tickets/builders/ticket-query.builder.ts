@@ -6,6 +6,12 @@ export class TicketQueryBuilder {
     status: true,
     ticket_code: true,
     qr_code: true,
+    subtotal: true,
+    taxes: true,
+    service_fee: true,
+    discount: true,
+    total: true,
+    currency: true,
   };
 
   withPassengers(): this {
