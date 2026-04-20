@@ -14,6 +14,11 @@ export class PaymentMapper {
   static toPrismaUpdate(dto: UpdatePaymentDto) {
     const update: Record<string, any> = {};
 
+    if (dto.clientTransactionId !== undefined)
+      update.provider_client_transaction_id = dto.clientTransactionId;
+    if (dto.transactionId !== undefined)
+      update.provider_transaction_id = dto.transactionId;
+    if (dto.amount !== undefined) update.amount = dto.amount;
     if (dto.amount !== undefined) update.amount = dto.amount;
     if (dto.ticketId !== undefined) update.ticket_id = dto.ticketId;
     if (dto.paymentMethod !== undefined)

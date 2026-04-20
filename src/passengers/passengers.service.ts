@@ -27,6 +27,7 @@ export class PassengersService {
 
       return newPassenger;
     } catch (error) {
+      console.log('error', error);
       return handleServiceError(
         error,
         this.logger,

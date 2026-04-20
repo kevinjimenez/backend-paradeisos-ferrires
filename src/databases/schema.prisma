@@ -178,7 +178,7 @@ model passengers {
   //
   first_name          String  @db.VarChar(100)
   last_name           String  @db.VarChar(100)
-  email               String? @unique @db.VarChar(255)
+  email               String? @db.VarChar(255)
   phone               String? @db.VarChar(20)
   document_number     String  @unique @db.VarChar(50)
   unit_price          Decimal @db.Decimal(10, 2)
