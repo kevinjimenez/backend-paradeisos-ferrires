@@ -3,6 +3,7 @@ import { DomainException } from 'src/common/exceptions/domain.exception';
 import { PrismaTransaction } from 'src/common/types/prisma-transaction.type';
 import { ContactsService } from 'src/contacts/contacts.service';
 import { PassengersService } from 'src/passengers/passengers.service';
+import { PaymentsRepository } from 'src/payments/payments.repository';
 import { CreateTicketDto } from '../dto/create-ticket.dto';
 import { TicketFactory } from '../factories/ticket.factory';
 import { CreateTicketResponse } from '../interfaces/create-ticket-response.interface';
@@ -17,6 +18,7 @@ export class CreateTicketCommand {
     private readonly contactsService: ContactsService,
     private readonly passengersService: PassengersService,
     private readonly ticketFactory: TicketFactory,
+    private readonly paymentsRepository: PaymentsRepository,
   ) {}
 
   async execute(
@@ -63,8 +65,20 @@ export class CreateTicketCommand {
       .map((result) => result.value.id)
       .filter((id) => id !== undefined);
 
+    // 4. Crear payment dentro de la transacción (atómico con el ticket)
+    const newPayment = await this.paymentsRepository.createPending(
+      newTicket.id,
+      newTicket.total.toNumber(),
+      tx,
+    );
+
+    this.logger.debug(
+      `Created payment: ${newPayment.id} for ticket: ${newTicket.id}`,
+    );
+
     return {
       id: newTicket.id,
+      paymentId: newPayment.id,
       contact: newContact.id,
       passengers: passengerIds,
       total: newTicket.total.toNumber(),

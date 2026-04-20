@@ -80,8 +80,8 @@ export class PaymentsRepository extends BaseRepository<Prisma.paymentsModel> {
   async createPending(
     ticketId: string,
     amount: number,
-    paymentMethod: PaymentMethod = PaymentMethod.credit_card,
     tx?: PrismaTransaction,
+    paymentMethod: PaymentMethod = PaymentMethod.credit_card,
   ) {
     const database = tx || this.db;
     return database.payments.create({

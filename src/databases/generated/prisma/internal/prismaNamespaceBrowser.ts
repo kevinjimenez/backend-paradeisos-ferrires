@@ -209,6 +209,7 @@ export const PaymentsScalarFieldEnum = {
   ticket_id: 'ticket_id',
   payment_provider: 'payment_provider',
   provider_transaction_id: 'provider_transaction_id',
+  provider_client_transaction_id: 'provider_client_transaction_id',
   provider_payment_intent: 'provider_payment_intent',
   amount: 'amount',
   currency: 'currency',
