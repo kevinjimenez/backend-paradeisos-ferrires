@@ -1,82 +1,50 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
-import { ApiResponse } from './../common/interfaces/api-response.interface';
-import { DatabasesService } from './../databases/databases.service';
+import { Injectable, Logger } from '@nestjs/common';
+import { handleServiceError } from 'src/common/utils/service-error.handler';
 import { Prisma } from './../databases/generated/prisma/client';
 import { SchedulesFilterDto } from './dto/schedules-filter.dto';
 import { ScheduleResponse } from './interfaces/schedule-response.interface';
+import { SchedulesRepository } from './schedules.repository';
+import { ScheduleSpecifications } from './specifications/schedule.specifications';
 
 @Injectable()
 export class SchedulesService {
   private readonly logger = new Logger(SchedulesService.name);
 
-  constructor(private databasesService: DatabasesService) {}
+  constructor(private readonly schedulesRepository: SchedulesRepository) {}
 
-  async findAll(
-    filters: SchedulesFilterDto,
-  ): Promise<ApiResponse<ScheduleResponse[]>> {
+  async findAll(filters: SchedulesFilterDto): Promise<ScheduleResponse[]> {
     try {
-      const scheduleWithRelations = {
-        id: true,
-        departure_time: true,
-        arrival_time: true,
-        available_seats: true,
-        ferries: {
-          select: {
-            name: true,
-            amenities: true,
-            type: true,
-          },
-        },
-        routes: {
-          select: {
-            base_price_national: true,
-          },
-        },
-      };
       const where = this.buildWhereFromFilters(filters);
-      const data = await this.databasesService.schedules.findMany({
-        select: scheduleWithRelations,
-        where,
-      });
+      const data = await this.schedulesRepository.findWithFilters(where);
 
-      return { data };
+      return data;
     } catch (error) {
-      this.logger.error('Error fetching schedules', error);
-      throw new InternalServerErrorException('Failed to fetch schedules');
+      return handleServiceError(
+        error,
+        this.logger,
+        'Failed to fetch schedules',
+      );
     }
   }
 
   private buildWhereFromFilters(
     filters: SchedulesFilterDto,
   ): Prisma.schedulesWhereInput {
-    const { departureDate, from, to } = filters;
-    const query: Prisma.schedulesWhereInput = {};
+    const { date, origin, destination } = filters;
+    const specs: Prisma.schedulesWhereInput[] = [];
 
-    // Date filter
-    if (departureDate) {
-      const startOfDay = new Date(departureDate);
-      startOfDay.setHours(0, 0, 0, 0);
-      const endOfDay = new Date(startOfDay);
-      endOfDay.setDate(endOfDay.getDate() + 1);
-
-      query.departure_date = {
-        gte: startOfDay,
-        lt: endOfDay,
-      };
+    if (date) {
+      specs.push(ScheduleSpecifications.byDate(date));
     }
 
-    // Routes filter
-    if (from || to) {
-      query.routes = {
-        ...(from && { origin_port_id: from }),
-        ...(to && { destination_port_id: to }),
-      };
+    if (origin) {
+      specs.push(ScheduleSpecifications.byOriginPort(origin));
     }
 
-    return query;
+    if (destination) {
+      specs.push(ScheduleSpecifications.byDestinationPort(destination));
+    }
+
+    return ScheduleSpecifications.combine(...specs);
   }
 }

@@ -157,7 +157,7 @@ model contacts {
   last_name       String  @db.VarChar(100)
   email           String  @unique @db.VarChar(255)
   phone           String? @db.VarChar(20)
-  document_number String  @db.VarChar(50) @unique
+  document_number String  @unique @db.VarChar(50)
 
   document_type DocumentType
 
@@ -178,7 +178,7 @@ model passengers {
   //
   first_name          String  @db.VarChar(100)
   last_name           String  @db.VarChar(100)
-  email               String? @unique @db.VarChar(255)
+  email               String? @db.VarChar(255)
   phone               String? @db.VarChar(20)
   document_number     String  @unique @db.VarChar(50)
   unit_price          Decimal @db.Decimal(10, 2)
@@ -216,21 +216,22 @@ model payments {
   // Relations many-to-one
   tickets tickets? @relation(fields: [ticket_id], references: [id])
 
-  ticket_id               String?
+  ticket_id                      String?
   //
-  payment_provider        String   @db.VarChar(50)
-  provider_transaction_id String?  @db.VarChar(255)
-  provider_payment_intent String?  @db.VarChar(255)
-  amount                  Decimal  @db.Decimal(10, 2)
-  currency                String   @default("USD") @db.VarChar(3)
-  error_code              String?  @db.VarChar(50)
-  error_message           String?  @db.Text
-  attempts                Int      @default(1)
-  refund_amount           Decimal? @db.Decimal(10, 2)
-  refund_text             String?  @db.Text
-  metadata                Json?    @default("{}") @db.JsonB
-  ip_address              String?  @db.VarChar(45)
-  user_agent              String?  @db.Text
+  payment_provider               String   @db.VarChar(50)
+  provider_transaction_id        String?  @db.VarChar(255)
+  provider_client_transaction_id String?  @db.VarChar(255)
+  provider_payment_intent        String?  @db.VarChar(255)
+  amount                         Decimal  @db.Decimal(10, 2)
+  currency                       String   @default("USD") @db.VarChar(3)
+  error_code                     String?  @db.VarChar(50)
+  error_message                  String?  @db.Text
+  attempts                       Int      @default(1)
+  refund_amount                  Decimal? @db.Decimal(10, 2)
+  refund_text                    String?  @db.Text
+  metadata                       Json?    @default("{}") @db.JsonB
+  ip_address                     String?  @db.VarChar(45)
+  user_agent                     String?  @db.Text
 
   payment_method PaymentMethod
   status         PaymentStatus @default(pending)
@@ -347,4 +348,16 @@ model tickets {
   // Relations one-to-many
   passengers         passengers[]
   payments           payments[]
+}
+
+// TABLE catalogs
+model catalogs {
+  id          String  @id @default(uuid())
+  category    String  @db.VarChar(50)
+  code        String  @unique @db.VarChar(20)
+  description String  @db.VarChar(100)
+  is_active   Boolean @default(true)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }

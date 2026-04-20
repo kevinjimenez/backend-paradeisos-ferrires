@@ -320,7 +320,6 @@ export type passengersOrderByWithRelationInput = {
 
 export type passengersWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  email?: string
   document_number?: string
   AND?: Prisma.passengersWhereInput | Prisma.passengersWhereInput[]
   OR?: Prisma.passengersWhereInput[]
@@ -328,6 +327,7 @@ export type passengersWhereUniqueInput = Prisma.AtLeast<{
   ticket_id?: Prisma.StringNullableFilter<"passengers"> | string | null
   first_name?: Prisma.StringFilter<"passengers"> | string
   last_name?: Prisma.StringFilter<"passengers"> | string
+  email?: Prisma.StringNullableFilter<"passengers"> | string | null
   phone?: Prisma.StringNullableFilter<"passengers"> | string | null
   unit_price?: Prisma.DecimalFilter<"passengers"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFilter<"passengers"> | boolean
@@ -338,7 +338,7 @@ export type passengersWhereUniqueInput = Prisma.AtLeast<{
   checked_in_return_at?: Prisma.DateTimeNullableFilter<"passengers"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"passengers"> | Date | string
   tickets?: Prisma.XOR<Prisma.TicketsNullableScalarRelationFilter, Prisma.ticketsWhereInput> | null
-}, "id" | "email" | "document_number">
+}, "id" | "document_number">
 
 export type passengersOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

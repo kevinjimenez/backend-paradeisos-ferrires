@@ -1,43 +1,38 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
-import { ApiResponse } from './../common/interfaces/api-response.interface';
-import { DatabasesService } from './../databases/databases.service';
+import { Injectable, Logger } from '@nestjs/common';
+import { handleServiceError } from 'src/common/utils/service-error.handler';
+import { PrismaTransaction } from './../common/types/prisma-transaction.type';
 import { Prisma } from './../databases/generated/prisma/client';
 import { CreatePassengerDto } from './dto/create-passenger.dto';
 import { PassengerMapper } from './mappers/passenger.mapper';
+import { PassengersRepository } from './passengers.repository';
 
 @Injectable()
 export class PassengersService {
   private readonly logger = new Logger(PassengersService.name);
 
-  constructor(private databasesService: DatabasesService) {}
+  constructor(private passengersRepository: PassengersRepository) {}
 
   async create(
     createPassengerDto: CreatePassengerDto,
-  ): Promise<ApiResponse<Prisma.passengersCreateInput>> {
+    tx?: PrismaTransaction,
+  ): Promise<Prisma.passengersModel> {
     try {
       const passengerToCreate =
         PassengerMapper.toPrismaCreate(createPassengerDto);
 
-      const query: Prisma.passengersWhereUniqueInput = {
-        document_number: passengerToCreate.document_number,
-        // email: passengerToCreate.email,
-      };
+      const newPassenger = await this.passengersRepository.upsertByDocument(
+        passengerToCreate,
+        tx,
+      );
 
-      const newPassenger = await this.databasesService.passengers.upsert({
-        where: query,
-        create: passengerToCreate,
-        update: passengerToCreate,
-      });
-      return {
-        data: newPassenger,
-      };
+      return newPassenger;
     } catch (error) {
-      this.logger.error('Error creating passenger', error);
-      throw new InternalServerErrorException('Failed to create passenger');
+      console.log('error', error);
+      return handleServiceError(
+        error,
+        this.logger,
+        'Failed to create passenger',
+      );
     }
   }
 }

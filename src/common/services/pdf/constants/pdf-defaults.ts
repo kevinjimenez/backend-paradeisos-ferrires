@@ -13,8 +13,8 @@ export const DEFAULT_PDF_OPTIONS: PdfGeneratorOptions = {
 };
 
 export const DEFAULT_VIEWPORT_SIZE = {
-  width: 450,
-  height: 800,
+  width: 400,
+  height: 700,
 };
 
 export const DEFAULT_PAGE_LOAD_OPTIONS = {

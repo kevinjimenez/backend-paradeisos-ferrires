@@ -1,32 +1,36 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Logger, RequestMethod, ValidationPipe } from '@nestjs/common';
-import { envs } from './common/config/envs';
+import { Logger as PinoLogger } from 'nestjs-pino';
+import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import compression from 'compression';
+import { appConfig } from './common/config/app.config';
+import { envs } from './common/config/envs';
 
 async function bootstrap() {
-  const logger = new Logger('MAIN');
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  // Desactivar etag (y por tanto evitar 304)
-  app.set('etag', false);
-
-  app.setGlobalPrefix('api', {
-    exclude: [
-      { path: 'health', method: RequestMethod.ALL },
-      { path: '/', method: RequestMethod.ALL },
-    ],
+  // Buffer logs during bootstrap so nothing is lost before pino takes over
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    bufferLogs: true,
   });
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    }),
-  );
+  // Replace NestJS default logger with pino and flush buffered bootstrap logs
+  app.useLogger(app.get(PinoLogger));
+  app.flushLogs();
 
-  app.enableCors();
+  const logger = app.get(PinoLogger);
+
+  // Disable ETag headers to prevent 304 Not Modified responses
+  app.set('etag', false);
+
+  // Compress HTTP responses (gzip/deflate)
+  app.use(compression());
+
+  app.setGlobalPrefix(appConfig.prefix, appConfig.prefixOptions);
+  app.useGlobalPipes(new ValidationPipe(appConfig.validation));
+  app.enableCors(appConfig.cors);
 
   await app.listen(envs.port);
-  logger.log(`Server running on port: [${envs.port}]`);
+  logger.log(`Environment: ${envs.nodeEnv}`);
+  logger.log(`Server running on: ${await app.getUrl()}`);
 }
 void bootstrap();

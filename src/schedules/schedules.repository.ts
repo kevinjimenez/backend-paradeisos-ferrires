@@ -1,0 +1,125 @@
+import { Injectable } from '@nestjs/common';
+import { BaseRepository } from 'src/common/base/base.repository';
+import { PrismaTransaction } from 'src/common/types/prisma-transaction.type';
+import { DatabasesService } from './../databases/databases.service';
+import { Prisma } from './../databases/generated/prisma/client';
+
+@Injectable()
+export class SchedulesRepository extends BaseRepository<Prisma.schedulesModel> {
+  constructor(private readonly databasesService: DatabasesService) {
+    super();
+  }
+
+  protected get modelName(): string {
+    return 'schedules';
+  }
+
+  protected get db(): PrismaTransaction {
+    return this.databasesService;
+  }
+
+  async findWithFilters(
+    where: Prisma.schedulesWhereInput,
+    tx?: PrismaTransaction,
+  ) {
+    const database = tx ?? this.db;
+
+    return database.schedules.findMany({
+      select: {
+        id: true,
+        departure_time: true,
+        arrival_time: true,
+        available_seats: true,
+        ferries: {
+          select: {
+            name: true,
+            amenities: true,
+            type: true,
+          },
+        },
+        routes: {
+          select: {
+            base_price_national: true,
+            origin_ports: {
+              select: {
+                name: true,
+                code: true,
+                address: true,
+                islands: {
+                  select: {
+                    name: true,
+                    description: true,
+                    code: true,
+                  },
+                },
+              },
+            },
+            destination_ports: {
+              select: {
+                name: true,
+                code: true,
+                address: true,
+                islands: {
+                  select: {
+                    name: true,
+                    description: true,
+                    code: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      where,
+    });
+  }
+
+  async restoreSeats(
+    scheduleId: string,
+    quantity: number,
+    tx?: PrismaTransaction,
+  ): Promise<void> {
+    const database = tx ?? this.db;
+
+    await database.schedules.update({
+      where: { id: scheduleId },
+      data: {
+        available_seats: {
+          increment: quantity,
+        },
+      },
+    });
+  }
+
+  async findByIdWithLock(
+    id: string,
+    tx: PrismaTransaction,
+  ): Promise<Prisma.schedulesModel | null> {
+    const schedules: Prisma.schedulesModel[] = await tx.$queryRaw`
+      SELECT id, available_seats, total_capacity, status
+      FROM schedules
+      WHERE id = ${id}
+      FOR UPDATE
+    `;
+
+    return schedules[0] || null;
+  }
+
+  async decrementSeats(
+    scheduleId: string,
+    quantity: number,
+    tx?: PrismaTransaction,
+  ): Promise<void> {
+    const database = tx ?? this.db;
+
+    await database.schedules.update({
+      where: { id: scheduleId },
+      data: {
+        available_seats: {
+          decrement: quantity,
+        },
+      },
+    });
+  }
+}

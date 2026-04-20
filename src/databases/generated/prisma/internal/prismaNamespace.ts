@@ -394,7 +394,8 @@ export const ModelName = {
   payments: 'payments',
   seat_holds: 'seat_holds',
   seat_holds_history: 'seat_holds_history',
-  tickets: 'tickets'
+  tickets: 'tickets',
+  catalogs: 'catalogs'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -410,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "islands" | "ports" | "routes" | "ferries" | "schedules" | "contacts" | "passengers" | "payments" | "seat_holds" | "seat_holds_history" | "tickets"
+    modelProps: "islands" | "ports" | "routes" | "ferries" | "schedules" | "contacts" | "passengers" | "payments" | "seat_holds" | "seat_holds_history" | "tickets" | "catalogs"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1228,6 +1229,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    catalogs: {
+      payload: Prisma.$catalogsPayload<ExtArgs>
+      fields: Prisma.catalogsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.catalogsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$catalogsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.catalogsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$catalogsPayload>
+        }
+        findFirst: {
+          args: Prisma.catalogsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$catalogsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.catalogsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$catalogsPayload>
+        }
+        findMany: {
+          args: Prisma.catalogsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$catalogsPayload>[]
+        }
+        create: {
+          args: Prisma.catalogsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$catalogsPayload>
+        }
+        createMany: {
+          args: Prisma.catalogsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.catalogsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$catalogsPayload>[]
+        }
+        delete: {
+          args: Prisma.catalogsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$catalogsPayload>
+        }
+        update: {
+          args: Prisma.catalogsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$catalogsPayload>
+        }
+        deleteMany: {
+          args: Prisma.catalogsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.catalogsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.catalogsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$catalogsPayload>[]
+        }
+        upsert: {
+          args: Prisma.catalogsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$catalogsPayload>
+        }
+        aggregate: {
+          args: Prisma.CatalogsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCatalogs>
+        }
+        groupBy: {
+          args: Prisma.catalogsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CatalogsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.catalogsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CatalogsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1395,6 +1470,7 @@ export const PaymentsScalarFieldEnum = {
   ticket_id: 'ticket_id',
   payment_provider: 'payment_provider',
   provider_transaction_id: 'provider_transaction_id',
+  provider_client_transaction_id: 'provider_client_transaction_id',
   provider_payment_intent: 'provider_payment_intent',
   amount: 'amount',
   currency: 'currency',
@@ -1470,6 +1546,19 @@ export const TicketsScalarFieldEnum = {
 } as const
 
 export type TicketsScalarFieldEnum = (typeof TicketsScalarFieldEnum)[keyof typeof TicketsScalarFieldEnum]
+
+
+export const CatalogsScalarFieldEnum = {
+  id: 'id',
+  category: 'category',
+  code: 'code',
+  description: 'description',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CatalogsScalarFieldEnum = (typeof CatalogsScalarFieldEnum)[keyof typeof CatalogsScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1848,6 +1937,7 @@ export type GlobalOmitConfig = {
   seat_holds?: Prisma.seat_holdsOmit
   seat_holds_history?: Prisma.seat_holds_historyOmit
   tickets?: Prisma.ticketsOmit
+  catalogs?: Prisma.catalogsOmit
 }
 
 /* Types for Logging */

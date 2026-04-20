@@ -1,78 +1,36 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
-import { ApiResponse } from './../common/interfaces/api-response.interface';
-import { DatabasesService } from './../databases/databases.service';
-import { Prisma } from './../databases/generated/prisma/client';
+import { HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { DomainException } from 'src/common/exceptions/domain.exception';
+import { ResourceNotFoundException } from 'src/common/exceptions/not-found.exception';
+import { handleServiceError } from 'src/common/utils/service-error.handler';
 import { SeatHoldsHistoryResponse } from './interfaces/seat-holds-history-response';
+import { SeatHoldsHistoryRepository } from './seat-holds-history.repository';
 
 @Injectable()
 export class SeatHoldsHistoryService {
   private readonly logger = new Logger(SeatHoldsHistoryService.name);
 
-  constructor(private databasesService: DatabasesService) {}
+  constructor(
+    private readonly seatHoldsHistoryRepository: SeatHoldsHistoryRepository,
+  ) {}
 
-  async findOne(id: string): Promise<ApiResponse<SeatHoldsHistoryResponse>> {
+  async findOne(id: string): Promise<SeatHoldsHistoryResponse> {
     try {
-      const seatHoldWithRelation = {
-        status: true,
-        schedules: {
-          select: {
-            arrival_time: true,
-            departure_time: true,
-            ferries: {
-              select: {
-                name: true,
-                register_code: true,
-                type: true,
-                amenities: true,
-              },
-            },
-            routes: {
-              select: {
-                base_price_national: true,
-              },
-            },
-          },
-        },
-      };
-
-      const seatHoldHistoryWithRelation: Prisma.seat_holds_historySelect = {
-        id: true,
-        outbound_seat_hold_id: true,
-        return_seat_hold_id: true,
-        created_at: true,
-        outbound_seat_holds: {
-          // where: query,
-          select: seatHoldWithRelation,
-        },
-        return_seat_holds: {
-          // where: query,
-          select: seatHoldWithRelation,
-        },
-      };
-
       const seatHoldsHistory =
-        await this.databasesService.seat_holds_history.findUnique({
-          where: { id },
-          select: seatHoldHistoryWithRelation,
-        });
+        await this.seatHoldsHistoryRepository.findOneWithRelations(id);
 
       if (!seatHoldsHistory) {
-        throw new NotFoundException(`Seat holds with ID ${id} not found`);
+        throw new ResourceNotFoundException('Seat holds', id);
       }
 
       if (!seatHoldsHistory.outbound_seat_holds) {
-        throw new NotFoundException(`Seat holds expired`);
+        throw new DomainException('Seat hold expired', HttpStatus.NOT_FOUND);
       }
 
-      return { data: seatHoldsHistory as SeatHoldsHistoryResponse };
+      return seatHoldsHistory as SeatHoldsHistoryResponse;
     } catch (error) {
-      this.logger.error('Error fetching seat holds history', error);
-      throw new InternalServerErrorException(
+      return handleServiceError(
+        error,
+        this.logger,
         'Failed to fetch seat holds history',
       );
     }

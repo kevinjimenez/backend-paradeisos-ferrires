@@ -72,3 +72,8 @@ export type seat_holds_history = Prisma.seat_holds_historyModel
  * 
  */
 export type tickets = Prisma.ticketsModel
+/**
+ * Model catalogs
+ * 
+ */
+export type catalogs = Prisma.catalogsModel
