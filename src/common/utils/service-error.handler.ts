@@ -10,9 +10,6 @@ export const handleServiceError = (
   message: string,
 ): never => {
   if (error instanceof HttpException) throw error;
-  console.log('==========================');
-  console.error(message);
-  console.log('==========================');
   logger.error(
     message,
     error instanceof Error ? error.stack : JSON.stringify(error),
