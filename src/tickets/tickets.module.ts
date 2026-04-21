@@ -5,10 +5,10 @@ import { PaymentsModule } from './../payments/payments.module';
 import { CreateTicketCommand } from './commands/create-ticket.command';
 import { TicketFactory } from './factories/ticket.factory';
 import { TicketPdfGenerator } from './generators/ticket-pdf.generator';
-import { GenerateTicketPdfListener } from './listeners/generate-ticket-pdf.listener';
 import { TicketsController } from './tickets.controller';
 import { TicketsRepository } from './tickets.repository';
 import { TicketsService } from './tickets.service';
+import { GenerateTicketPdfListener } from './listeners/generate-ticket-pdf.listener';
 
 @Module({
   imports: [ContactsModule, PassengersModule, PaymentsModule],

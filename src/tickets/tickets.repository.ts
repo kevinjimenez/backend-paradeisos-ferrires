@@ -64,12 +64,19 @@ export class TicketsRepository extends BaseRepository<Prisma.ticketsModel> {
     id: string,
     data: Prisma.ticketsUpdateInput,
     tx?: PrismaTransaction,
-  ): Promise<Prisma.ticketsModel> {
+  ) {
     const database = tx ?? this.db;
 
     return database.tickets.update({
       where: { id },
       data,
+      select: {
+        contacts: {
+          select: {
+            email: true,
+          },
+        },
+      },
     });
   }
 }

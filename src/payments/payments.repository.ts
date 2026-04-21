@@ -7,6 +7,7 @@ import { Injectable } from '@nestjs/common';
 import { BaseRepository } from 'src/common/base/base.repository';
 import { Prisma } from 'src/databases/generated/prisma/client';
 import { DatabasesService } from './../databases/databases.service';
+import { PaymentQueryBuilder } from './builders/payment-query.builder';
 
 @Injectable()
 export class PaymentsRepository extends BaseRepository<Prisma.paymentsModel> {
@@ -26,18 +27,14 @@ export class PaymentsRepository extends BaseRepository<Prisma.paymentsModel> {
     const database = tx || this.db;
     return database.payments.findUnique({
       where: { id },
-      include: {
-        tickets: true,
-      },
+      include: new PaymentQueryBuilder().withTicketDetails().build(),
     });
   }
 
   async findAllWithTickets(tx?: PrismaTransaction) {
     const database = tx || this.db;
     return database.payments.findMany({
-      include: {
-        tickets: true,
-      },
+      include: new PaymentQueryBuilder().withTickets().build(),
     });
   }
 
@@ -53,12 +50,8 @@ export class PaymentsRepository extends BaseRepository<Prisma.paymentsModel> {
   async findByStatus(status: PaymentStatus, tx?: PrismaTransaction) {
     const database = tx || this.db;
     return database.payments.findMany({
-      where: {
-        status,
-      },
-      include: {
-        tickets: true,
-      },
+      where: { status },
+      include: new PaymentQueryBuilder().withTickets().build(),
     });
   }
 
@@ -104,14 +97,9 @@ export class PaymentsRepository extends BaseRepository<Prisma.paymentsModel> {
     const database = tx || this.db;
     return database.payments.findMany({
       where: {
-        created_at: {
-          gte: startDate,
-          lte: endDate,
-        },
+        created_at: { gte: startDate, lte: endDate },
       },
-      include: {
-        tickets: true,
-      },
+      include: new PaymentQueryBuilder().withTickets().build(),
     });
   }
 }

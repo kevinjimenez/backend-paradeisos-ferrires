@@ -9,7 +9,6 @@ import { TicketQueryBuilder } from './builders/ticket-query.builder';
 import { CreateTicketCommand } from './commands/create-ticket.command';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
-import { TicketCreatedEvent } from './events/ticket-created.event';
 import { TicketPdfGenerator } from './generators/ticket-pdf.generator';
 import { CreateTicketResponse } from './interfaces/create-ticket-response.interface';
 import { TicketResponse } from './interfaces/ticket-response.interface';
@@ -37,20 +36,6 @@ export class TicketsService {
         return this.createTicketCommand.execute(createTicketDto, tx);
       });
 
-      // Emitir evento DESPUÉS de que la transacción se complete exitosamente
-      this.eventEmitter.emit(
-        'ticket.created',
-        new TicketCreatedEvent(
-          newTicket.id,
-          newTicket.contact,
-          newTicket.total!,
-          newTicket.subtotal!,
-          newTicket.taxes!,
-          newTicket.serviceFee!,
-          newTicket.discount!,
-        ),
-      );
-
       return newTicket;
     } catch (error) {
       return handleServiceError(error, this.logger, 'Error creating ticket');
@@ -77,10 +62,7 @@ export class TicketsService {
     return tickets;
   }
 
-  async update(
-    id: string,
-    updateTicketDto: UpdateTicketDto,
-  ): Promise<Prisma.ticketsModel> {
+  async update(id: string, updateTicketDto: UpdateTicketDto) {
     const ticketToUpdate = await this.findOne(id);
 
     const ticketUpdated = await this.ticketsRepository.updateTicket(

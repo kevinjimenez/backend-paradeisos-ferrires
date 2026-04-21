@@ -22,7 +22,7 @@
 |----------|-------------|
 | `PdfService` | Genera PDFs con Playwright + EJS. Acepta cualquier `PdfGenerator<T>`, completamente genérico |
 | `QrService` | Generación de códigos QR |
-| `EmailService` | Envío de emails |
+| `MailService` | Envío de emails |
 
 ### Cómo extender `PdfService`
 

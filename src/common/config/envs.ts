@@ -43,6 +43,13 @@ interface EnvVars {
   HOLD_EXPIRATION_MINUTES: number;
   CHECK_IN_TIME: number;
   TICKET_CODE_PREFIX: string;
+
+  // Gmail
+  MAIL_HOST: string;
+  MAIL_PORT: number;
+  MAIL_USER: string;
+  MAIL_PASS: string;
+  MAIL_FROM: string;
 }
 
 const envsSchema = joi
@@ -81,6 +88,13 @@ const envsSchema = joi
     HOLD_EXPIRATION_MINUTES: joi.number().default(15),
     CHECK_IN_TIME: joi.number().required(),
     TICKET_CODE_PREFIX: joi.string().default('TKT'),
+
+    // Gmail
+    MAIL_HOST: joi.string().required(),
+    MAIL_PORT: joi.number().required(),
+    MAIL_USER: joi.string().required(),
+    MAIL_PASS: joi.string().required(),
+    MAIL_FROM: joi.string().required(),
   })
   .unknown(true);
 
@@ -129,4 +143,11 @@ export const envs = {
   holdExpirationMinutes: envVars.HOLD_EXPIRATION_MINUTES,
   checkInTime: envVars.CHECK_IN_TIME,
   ticketCodePrefix: envVars.TICKET_CODE_PREFIX,
+
+  // Gmail
+  mailHost: envVars.MAIL_HOST,
+  mailPort: envVars.MAIL_PORT,
+  mailUser: envVars.MAIL_USER,
+  mailPass: envVars.MAIL_PASS,
+  mailFrom: envVars.MAIL_FROM,
 };

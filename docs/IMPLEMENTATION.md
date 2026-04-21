@@ -168,7 +168,7 @@ Agregar `APP_FILTER`:
 import { Global, Module } from '@nestjs/common';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { PdfService } from './services/pdf/pdf.service';
-import { EmailService } from './services/email/email.service';
+import { MailService } from './services/mail/mail.service';
 import { QrService } from './services/qr/qr.service';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { ResponseTransformInterceptor } from './interceptors/response-transform.interceptor';
@@ -177,12 +177,12 @@ import { ResponseTransformInterceptor } from './interceptors/response-transform.
 @Module({
   providers: [
     PdfService,
-    EmailService,
+    MailService,
     QrService,
     { provide: APP_FILTER, useClass: HttpExceptionFilter },
     { provide: APP_INTERCEPTOR, useClass: ResponseTransformInterceptor },
   ],
-  exports: [PdfService, EmailService, QrService],
+  exports: [PdfService, MailService, QrService],
 })
 export class CommonModule {}
 ```

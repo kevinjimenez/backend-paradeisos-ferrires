@@ -28,11 +28,6 @@ export class TicketsController {
     return this.ticketsService.create(createTicketDto);
   }
 
-  @Get()
-  findAll() {
-    return this.ticketsService.findAll();
-  }
-
   @Get(':id')
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.ticketsService.findOne(id);

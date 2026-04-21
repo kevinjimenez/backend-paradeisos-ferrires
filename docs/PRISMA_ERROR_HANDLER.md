@@ -53,7 +53,7 @@ const PRISMA_CATALOG = {
 #### Uso del catálogo
 
 ```ts
-PRISMA_CATALOG.P2002.message('email')   // → "Field 'email' already exists"
+PRISMA_CATALOG.P2002.message('email')   // → "Field 'mail' already exists"
 PRISMA_CATALOG.P2002.description        // → "Unique constraint failed — registro duplicado"
 
 PRISMA_CATALOG.P2003.message('scheduleId') // → "Related record 'scheduleId' not found"
@@ -164,7 +164,7 @@ export function handlePrismaError(error: unknown): never {
 
 ```ts
 PRISMA_MESSAGES.P2002('code')        // → "Field 'code' already exists"
-PRISMA_MESSAGES.P2002('email')       // → "Field 'email' already exists"
+PRISMA_MESSAGES.P2002('email')       // → "Field 'mail' already exists"
 PRISMA_MESSAGES.P2003('scheduleId')  // → "Related record 'scheduleId' not found"
 PRISMA_MESSAGES.P2000('name')        // → "Value too long for field 'name'"
 PRISMA_MESSAGES.P2025()              // → "Record not found"
