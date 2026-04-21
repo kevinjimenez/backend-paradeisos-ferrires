@@ -2,6 +2,7 @@ export class TicketCreatedEvent {
   constructor(
     public readonly ticketId: string,
     public readonly contactId: string,
+    public readonly email: string,
     public readonly total: number,
     public readonly subtotal: number,
     public readonly taxes: number,

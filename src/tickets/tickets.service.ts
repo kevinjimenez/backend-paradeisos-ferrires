@@ -43,6 +43,7 @@ export class TicketsService {
         new TicketCreatedEvent(
           newTicket.id,
           newTicket.contact,
+          createTicketDto.contact.email,
           newTicket.total!,
           newTicket.subtotal!,
           newTicket.taxes!,

@@ -288,7 +288,7 @@ export class ContactsService {
 
       const newContact = await this.databasesService.contacts.upsert({
         where: {
-          // email: contactToCreate.email,
+          // mail: contactToCreate.mail,
           document_number: contactToCreate.document_number,
         },
         create: contactToCreate,

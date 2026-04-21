@@ -21,6 +21,7 @@ export class ContactsService {
 
       return newContact;
     } catch (error) {
+      console.error({ error });
       return handleServiceError(error, this.logger, 'Failed to create contact');
     }
   }
