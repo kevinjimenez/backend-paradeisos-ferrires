@@ -34,15 +34,29 @@ export class CreateTicketCommand {
     const fareMap = new Map<string, number>();
     for (const fareId of fareIds) {
       const fare = await this.faresService.findById(fareId);
+      if (!fare) {
+        throw new DomainException(
+          `Fare ${fareId} not found`,
+          HttpStatus.NOT_FOUND,
+        );
+      }
       fareMap.set(fareId, fare.price.toNumber());
     }
 
     const extraIds = [
-      ...new Set(dto.passenger.flatMap((p) => (p.extras ?? []).map((e) => e.extraId))),
+      ...new Set(
+        dto.passenger.flatMap((p) => (p.extras ?? []).map((e) => e.extraId)),
+      ),
     ];
     const extrasMap = new Map<string, number>();
     for (const extraId of extraIds) {
       const extra = await this.fareExtrasService.findById(extraId);
+      if (!extra) {
+        throw new DomainException(
+          `Fare extra ${extraId} not found`,
+          HttpStatus.NOT_FOUND,
+        );
+      }
       extrasMap.set(extraId, extra.price.toNumber());
     }
 
