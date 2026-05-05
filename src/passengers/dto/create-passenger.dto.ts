@@ -1,12 +1,17 @@
 import { DocumentType } from './../../databases/generated/prisma/enums';
+import { Type } from 'class-transformer';
 import {
+  IsArray,
   IsBoolean,
   IsEnum,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
+  IsUUID,
+  ValidateNested,
 } from 'class-validator';
+import { PassengerExtraDto } from './passenger-extra.dto';
 
 export class CreatePassengerDto {
   @IsNotEmpty()
@@ -35,19 +40,33 @@ export class CreatePassengerDto {
 
   @IsNotEmpty()
   @IsNumber()
-  unitPrice: number; // Decimal @db.Decimal(10, 2)
+  basePrice: number;
+
+  @IsNotEmpty()
+  @IsUUID()
+  fareId: string;
+
+  unitPrice?: number;
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => PassengerExtraDto)
+  extras?: PassengerExtraDto[];
+
+  resolvedExtras?: Array<{ extraId: string; quantity: number; unitPrice: number }>;
 
   @IsOptional()
   @IsBoolean()
-  isPrimary?: boolean; // Boolean @default(false)
+  isPrimary?: boolean;
 
   @IsOptional()
   @IsBoolean()
-  checkedInOutbound?: boolean; // Boolean @default(false)
+  checkedInOutbound?: boolean;
 
   @IsOptional()
   @IsBoolean()
-  checkedInReturn?: boolean; // Boolean @default(false)
+  checkedInReturn?: boolean;
 
   @IsOptional()
   ticket?: string;

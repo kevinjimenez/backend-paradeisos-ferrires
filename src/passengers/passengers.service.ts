@@ -25,6 +25,14 @@ export class PassengersService {
         tx,
       );
 
+      if (createPassengerDto.resolvedExtras?.length) {
+        await this.passengersRepository.createExtras(
+          newPassenger.id,
+          createPassengerDto.resolvedExtras,
+          tx,
+        );
+      }
+
       return newPassenger;
     } catch (error) {
       console.log('error', error);

@@ -27,8 +27,8 @@ export * from "./enums.js"
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Islands
- * const islands = await prisma.islands.findMany()
+ * // Fetch zero or more Fares
+ * const fares = await prisma.fares.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -37,6 +37,21 @@ export const PrismaClient = $Class.getPrismaClientClass()
 export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>
 export { Prisma }
 
+/**
+ * Model fares
+ * 
+ */
+export type fares = Prisma.faresModel
+/**
+ * Model fare_extras
+ * 
+ */
+export type fare_extras = Prisma.fare_extrasModel
+/**
+ * Model passenger_extras
+ * 
+ */
+export type passenger_extras = Prisma.passenger_extrasModel
 /**
  * Model islands
  * 

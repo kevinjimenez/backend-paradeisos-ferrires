@@ -19,6 +19,8 @@ import { SeatHoldsHistoryModule } from './seat-holds-history/seat-holds-history.
 import { TasksModule } from './tasks/tasks.module';
 import { TicketsModule } from './tickets/tickets.module';
 import { CatalogsModule } from './catalogs/catalogs.module';
+import { FareExtrasModule } from './fare-extras/fare-extras.module';
+import { FaresModule } from './fares/fares.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
@@ -41,6 +43,8 @@ import { ThrottlerModule } from '@nestjs/throttler';
     SeatHoldsHistoryModule,
     ContactsModule,
     CatalogsModule,
+    FareExtrasModule,
+    FaresModule,
   ],
   controllers: [AppController],
 })

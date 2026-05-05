@@ -8,6 +8,9 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/fares.js'
+export type * from './models/fare_extras.js'
+export type * from './models/passenger_extras.js'
 export type * from './models/islands.js'
 export type * from './models/ports.js'
 export type * from './models/routes.js'

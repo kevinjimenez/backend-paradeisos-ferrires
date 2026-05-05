@@ -18,6 +18,21 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
+ * Model fares
+ * 
+ */
+export type fares = Prisma.faresModel
+/**
+ * Model fare_extras
+ * 
+ */
+export type fare_extras = Prisma.fare_extrasModel
+/**
+ * Model passenger_extras
+ * 
+ */
+export type passenger_extras = Prisma.passenger_extrasModel
+/**
  * Model islands
  * 
  */

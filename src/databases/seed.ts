@@ -1,5 +1,5 @@
 import { PrismaPg } from '@prisma/adapter-pg';
-import { envs } from './../common/config/envs';
+import { envs } from '../common/config/envs';
 import { PrismaClient } from './generated/prisma/client';
 
 const adapter = new PrismaPg({
@@ -13,6 +13,7 @@ async function main() {
   // Clean database (in reverse order of dependencies)
   console.log('🧹 Cleaning database...');
 
+  await prisma.passenger_extras.deleteMany();
   await prisma.passengers.deleteMany();
   await prisma.payments.deleteMany();
   await prisma.tickets.deleteMany();
@@ -24,6 +25,75 @@ async function main() {
   await prisma.islands.deleteMany();
   await prisma.contacts.deleteMany();
   await prisma.catalogs.deleteMany();
+  await prisma.fare_extras.deleteMany();
+  await prisma.fares.deleteMany();
+
+  // FARES
+  console.log('🎫 Creating fares...');
+  const fareLight = await prisma.fares.create({
+    data: {
+      name: 'light',
+      price: 0,
+      description: 'Tarifa Light - equipaje de mano incluido',
+    },
+  });
+  const fareBasic = await prisma.fares.create({
+    data: {
+      name: 'basic',
+      price: 50,
+      description: 'Tarifa Basic - equipaje de mano + 1 maleta',
+    },
+  });
+  const farePremium = await prisma.fares.create({
+    data: {
+      name: 'premium',
+      price: 80,
+      description: 'Tarifa Premium - equipaje completo + prioridad',
+    },
+  });
+
+  // FARE EXTRAS
+  console.log('➕ Creating fare extras...');
+  await prisma.fare_extras.createMany({
+    data: [
+      {
+        name: 'Equipaje extra (23kg)',
+        code: 'BAGGAGE_23',
+        price: 15,
+        description: 'Maleta adicional de hasta 23kg',
+      },
+      {
+        name: 'Equipaje extra (32kg)',
+        code: 'BAGGAGE_32',
+        price: 25,
+        description: 'Maleta adicional de hasta 32kg',
+      },
+      {
+        name: 'Bicicleta',
+        code: 'BICYCLE',
+        price: 20,
+        description: 'Transporte de bicicleta',
+      },
+      {
+        name: 'Mascota pequeña',
+        code: 'PET_SMALL',
+        price: 10,
+        description: 'Mascota hasta 5kg en cabina',
+      },
+      {
+        name: 'Mascota grande',
+        code: 'PET_LARGE',
+        price: 20,
+        description: 'Mascota mayor a 5kg en bodega',
+      },
+      {
+        name: 'Asiento preferencial',
+        code: 'SEAT_PREF',
+        price: 8,
+        description: 'Asiento con más espacio o vista al mar',
+      },
+    ],
+  });
 
   // CATALOGS
   console.log('📋 Creating catalogs...');
@@ -793,7 +863,8 @@ async function main() {
         email: 'juan@example.com',
         phone: '+123456789',
         document_number: '12345678A',
-        unit_price: 55,
+        unit_price: 85, // base 50 + fare basic 35
+        fare_id: fareBasic.id,
         is_primary: true,
         checked_in_outbound: false,
         checked_in_return: false,
@@ -806,7 +877,8 @@ async function main() {
         email: 'ana@example.com',
         phone: '+123456780',
         document_number: 'X1234567',
-        unit_price: 55,
+        unit_price: 125, // base 90 + fare basic 35
+        fare_id: fareLight.id,
         is_primary: false,
         checked_in_outbound: false,
         checked_in_return: false,
@@ -845,6 +917,8 @@ async function main() {
   console.log(`   - Tickets: ${await prisma.tickets.count()}`);
   console.log(`   - Passengers: ${await prisma.passengers.count()}`);
   console.log(`   - Payments: ${await prisma.payments.count()}`);
+  console.log(`   - Fares: ${await prisma.fares.count()}`);
+  console.log(`   - Fare extras: ${await prisma.fare_extras.count()}`);
 }
 
 main()

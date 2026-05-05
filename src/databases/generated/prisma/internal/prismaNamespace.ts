@@ -384,6 +384,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
+  fares: 'fares',
+  fare_extras: 'fare_extras',
+  passenger_extras: 'passenger_extras',
   islands: 'islands',
   ports: 'ports',
   routes: 'routes',
@@ -411,10 +414,232 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "islands" | "ports" | "routes" | "ferries" | "schedules" | "contacts" | "passengers" | "payments" | "seat_holds" | "seat_holds_history" | "tickets" | "catalogs"
+    modelProps: "fares" | "fare_extras" | "passenger_extras" | "islands" | "ports" | "routes" | "ferries" | "schedules" | "contacts" | "passengers" | "payments" | "seat_holds" | "seat_holds_history" | "tickets" | "catalogs"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
+    fares: {
+      payload: Prisma.$faresPayload<ExtArgs>
+      fields: Prisma.faresFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.faresFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$faresPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.faresFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$faresPayload>
+        }
+        findFirst: {
+          args: Prisma.faresFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$faresPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.faresFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$faresPayload>
+        }
+        findMany: {
+          args: Prisma.faresFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$faresPayload>[]
+        }
+        create: {
+          args: Prisma.faresCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$faresPayload>
+        }
+        createMany: {
+          args: Prisma.faresCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.faresCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$faresPayload>[]
+        }
+        delete: {
+          args: Prisma.faresDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$faresPayload>
+        }
+        update: {
+          args: Prisma.faresUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$faresPayload>
+        }
+        deleteMany: {
+          args: Prisma.faresDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.faresUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.faresUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$faresPayload>[]
+        }
+        upsert: {
+          args: Prisma.faresUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$faresPayload>
+        }
+        aggregate: {
+          args: Prisma.FaresAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFares>
+        }
+        groupBy: {
+          args: Prisma.faresGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FaresGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.faresCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FaresCountAggregateOutputType> | number
+        }
+      }
+    }
+    fare_extras: {
+      payload: Prisma.$fare_extrasPayload<ExtArgs>
+      fields: Prisma.fare_extrasFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.fare_extrasFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fare_extrasPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.fare_extrasFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fare_extrasPayload>
+        }
+        findFirst: {
+          args: Prisma.fare_extrasFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fare_extrasPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.fare_extrasFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fare_extrasPayload>
+        }
+        findMany: {
+          args: Prisma.fare_extrasFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fare_extrasPayload>[]
+        }
+        create: {
+          args: Prisma.fare_extrasCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fare_extrasPayload>
+        }
+        createMany: {
+          args: Prisma.fare_extrasCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.fare_extrasCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fare_extrasPayload>[]
+        }
+        delete: {
+          args: Prisma.fare_extrasDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fare_extrasPayload>
+        }
+        update: {
+          args: Prisma.fare_extrasUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fare_extrasPayload>
+        }
+        deleteMany: {
+          args: Prisma.fare_extrasDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.fare_extrasUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.fare_extrasUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fare_extrasPayload>[]
+        }
+        upsert: {
+          args: Prisma.fare_extrasUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$fare_extrasPayload>
+        }
+        aggregate: {
+          args: Prisma.Fare_extrasAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFare_extras>
+        }
+        groupBy: {
+          args: Prisma.fare_extrasGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Fare_extrasGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.fare_extrasCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Fare_extrasCountAggregateOutputType> | number
+        }
+      }
+    }
+    passenger_extras: {
+      payload: Prisma.$passenger_extrasPayload<ExtArgs>
+      fields: Prisma.passenger_extrasFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.passenger_extrasFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$passenger_extrasPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.passenger_extrasFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$passenger_extrasPayload>
+        }
+        findFirst: {
+          args: Prisma.passenger_extrasFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$passenger_extrasPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.passenger_extrasFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$passenger_extrasPayload>
+        }
+        findMany: {
+          args: Prisma.passenger_extrasFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$passenger_extrasPayload>[]
+        }
+        create: {
+          args: Prisma.passenger_extrasCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$passenger_extrasPayload>
+        }
+        createMany: {
+          args: Prisma.passenger_extrasCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.passenger_extrasCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$passenger_extrasPayload>[]
+        }
+        delete: {
+          args: Prisma.passenger_extrasDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$passenger_extrasPayload>
+        }
+        update: {
+          args: Prisma.passenger_extrasUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$passenger_extrasPayload>
+        }
+        deleteMany: {
+          args: Prisma.passenger_extrasDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.passenger_extrasUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.passenger_extrasUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$passenger_extrasPayload>[]
+        }
+        upsert: {
+          args: Prisma.passenger_extrasUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$passenger_extrasPayload>
+        }
+        aggregate: {
+          args: Prisma.Passenger_extrasAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePassenger_extras>
+        }
+        groupBy: {
+          args: Prisma.passenger_extrasGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Passenger_extrasGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.passenger_extrasCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Passenger_extrasCountAggregateOutputType> | number
+        }
+      }
+    }
     islands: {
       payload: Prisma.$islandsPayload<ExtArgs>
       fields: Prisma.islandsFieldRefs
@@ -1342,6 +1567,45 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const FaresScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  description: 'description',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type FaresScalarFieldEnum = (typeof FaresScalarFieldEnum)[keyof typeof FaresScalarFieldEnum]
+
+
+export const Fare_extrasScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  price: 'price',
+  description: 'description',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Fare_extrasScalarFieldEnum = (typeof Fare_extrasScalarFieldEnum)[keyof typeof Fare_extrasScalarFieldEnum]
+
+
+export const Passenger_extrasScalarFieldEnum = {
+  id: 'id',
+  passenger_id: 'passenger_id',
+  extra_id: 'extra_id',
+  quantity: 'quantity',
+  unit_price: 'unit_price',
+  created_at: 'created_at'
+} as const
+
+export type Passenger_extrasScalarFieldEnum = (typeof Passenger_extrasScalarFieldEnum)[keyof typeof Passenger_extrasScalarFieldEnum]
+
+
 export const IslandsScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1447,6 +1711,7 @@ export type ContactsScalarFieldEnum = (typeof ContactsScalarFieldEnum)[keyof typ
 export const PassengersScalarFieldEnum = {
   id: 'id',
   ticket_id: 'ticket_id',
+  fare_id: 'fare_id',
   first_name: 'first_name',
   last_name: 'last_name',
   email: 'email',
@@ -1630,6 +1895,34 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'FareType'
+ */
+export type EnumFareTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FareType'>
+    
+
+
+/**
+ * Reference to a field of type 'FareType[]'
+ */
+export type ListEnumFareTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FareType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal[]'
+ */
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -1647,20 +1940,6 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-/**
- * Reference to a field of type 'Decimal'
- */
-export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
-    
-
-
-/**
- * Reference to a field of type 'Decimal[]'
- */
-export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
@@ -1926,6 +2205,9 @@ export type PrismaClientOptions = ({
   comments?: runtime.SqlCommenterPlugin[]
 }
 export type GlobalOmitConfig = {
+  fares?: Prisma.faresOmit
+  fare_extras?: Prisma.fare_extrasOmit
+  passenger_extras?: Prisma.passenger_extrasOmit
   islands?: Prisma.islandsOmit
   ports?: Prisma.portsOmit
   routes?: Prisma.routesOmit

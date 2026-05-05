@@ -19,6 +19,53 @@ enum DocumentType {
   passport
 }
 
+enum FareType {
+  light
+  basic
+  premium
+}
+
+// TABLE fares
+model fares {
+  id          String     @id @default(uuid())
+  name        FareType   @unique
+  price       Decimal    @db.Decimal(10, 2)
+  description String?    @db.VarChar(255)
+  is_active   Boolean    @default(true)
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+  passengers  passengers[]
+}
+
+// TABLE fare_extras
+model fare_extras {
+  id          String   @id @default(uuid())
+  name        String   @db.VarChar(100)
+  code        String   @unique @db.VarChar(20)
+  price       Decimal  @db.Decimal(10, 2)
+  description String?  @db.VarChar(255)
+  is_active   Boolean  @default(true)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  passenger_extras passenger_extras[]
+}
+
+// TABLE passenger_extras
+model passenger_extras {
+  id           String   @id @default(uuid())
+  passenger_id String
+  extra_id     String
+  quantity     Int      @default(1)
+  unit_price   Decimal  @db.Decimal(10, 2)
+  created_at   DateTime @default(now())
+
+  passengers  passengers  @relation(fields: [passenger_id], references: [id])
+  fare_extras fare_extras @relation(fields: [extra_id], references: [id])
+
+  @@index([passenger_id])
+}
+
 // TABLE islands
 model islands {
   id          String  @id @default(uuid())
@@ -175,6 +222,8 @@ model passengers {
   tickets tickets? @relation(fields: [ticket_id], references: [id])
 
   ticket_id           String?
+  fare_id             String?
+  fares               fares?  @relation(fields: [fare_id], references: [id])
   //
   first_name          String  @db.VarChar(100)
   last_name           String  @db.VarChar(100)
@@ -190,7 +239,9 @@ model passengers {
 
   checked_in_outbound_at DateTime?
   checked_in_return_at   DateTime?
-  created_at             DateTime  @default(now())
+  created_at             DateTime         @default(now())
+  // Relations one-to-many
+  passenger_extras       passenger_extras[]
 }
 
 // TABLE payments

@@ -604,10 +604,6 @@ export type portsUncheckedUpdateManyWithoutIslandsNestedInput = {
   deleteMany?: Prisma.portsScalarWhereInput | Prisma.portsScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type NullableDecimalFieldUpdateOperationsInput = {
   set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string

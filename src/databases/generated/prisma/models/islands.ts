@@ -361,18 +361,6 @@ export type IslandsNullableScalarRelationFilter = {
   isNot?: Prisma.islandsWhereInput | null
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
 export type islandsCreateNestedOneWithoutPortsInput = {
   create?: Prisma.XOR<Prisma.islandsCreateWithoutPortsInput, Prisma.islandsUncheckedCreateWithoutPortsInput>
   connectOrCreate?: Prisma.islandsCreateOrConnectWithoutPortsInput
