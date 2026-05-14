@@ -17,8 +17,8 @@ export class FaresRepository extends BaseRepository<Prisma.faresModel> {
     return this.databasesService;
   }
 
-  findAll() {
-    return this.db.fares.findMany({ where: { is_active: true } });
+  findAllWithFilters(is_active: boolean = true) {
+    return this.db.fares.findMany({ where: { is_active } });
   }
 
   findById(id: string) {

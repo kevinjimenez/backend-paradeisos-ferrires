@@ -62,6 +62,7 @@ export type Fare_extrasCountAggregateOutputType = {
   code: number
   price: number
   description: number
+  features: number
   is_active: number
   created_at: number
   updated_at: number
@@ -105,6 +106,7 @@ export type Fare_extrasCountAggregateInputType = {
   code?: true
   price?: true
   description?: true
+  features?: true
   is_active?: true
   created_at?: true
   updated_at?: true
@@ -203,6 +205,7 @@ export type Fare_extrasGroupByOutputType = {
   code: string
   price: runtime.Decimal
   description: string | null
+  features: runtime.JsonValue
   is_active: boolean
   created_at: Date
   updated_at: Date
@@ -237,6 +240,7 @@ export type fare_extrasWhereInput = {
   code?: Prisma.StringFilter<"fare_extras"> | string
   price?: Prisma.DecimalFilter<"fare_extras"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.StringNullableFilter<"fare_extras"> | string | null
+  features?: Prisma.JsonFilter<"fare_extras">
   is_active?: Prisma.BoolFilter<"fare_extras"> | boolean
   created_at?: Prisma.DateTimeFilter<"fare_extras"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"fare_extras"> | Date | string
@@ -249,6 +253,7 @@ export type fare_extrasOrderByWithRelationInput = {
   code?: Prisma.SortOrder
   price?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  features?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -264,6 +269,7 @@ export type fare_extrasWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"fare_extras"> | string
   price?: Prisma.DecimalFilter<"fare_extras"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.StringNullableFilter<"fare_extras"> | string | null
+  features?: Prisma.JsonFilter<"fare_extras">
   is_active?: Prisma.BoolFilter<"fare_extras"> | boolean
   created_at?: Prisma.DateTimeFilter<"fare_extras"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"fare_extras"> | Date | string
@@ -276,6 +282,7 @@ export type fare_extrasOrderByWithAggregationInput = {
   code?: Prisma.SortOrder
   price?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  features?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -295,6 +302,7 @@ export type fare_extrasScalarWhereWithAggregatesInput = {
   code?: Prisma.StringWithAggregatesFilter<"fare_extras"> | string
   price?: Prisma.DecimalWithAggregatesFilter<"fare_extras"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.StringNullableWithAggregatesFilter<"fare_extras"> | string | null
+  features?: Prisma.JsonWithAggregatesFilter<"fare_extras">
   is_active?: Prisma.BoolWithAggregatesFilter<"fare_extras"> | boolean
   created_at?: Prisma.DateTimeWithAggregatesFilter<"fare_extras"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"fare_extras"> | Date | string
@@ -306,6 +314,7 @@ export type fare_extrasCreateInput = {
   code: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: string | null
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
@@ -318,6 +327,7 @@ export type fare_extrasUncheckedCreateInput = {
   code: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: string | null
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
@@ -330,6 +340,7 @@ export type fare_extrasUpdateInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -342,6 +353,7 @@ export type fare_extrasUncheckedUpdateInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -354,6 +366,7 @@ export type fare_extrasCreateManyInput = {
   code: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: string | null
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
@@ -365,6 +378,7 @@ export type fare_extrasUpdateManyMutationInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -376,6 +390,7 @@ export type fare_extrasUncheckedUpdateManyInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -387,6 +402,7 @@ export type fare_extrasCountOrderByAggregateInput = {
   code?: Prisma.SortOrder
   price?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  features?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -447,6 +463,7 @@ export type fare_extrasCreateWithoutPassenger_extrasInput = {
   code: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: string | null
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
@@ -458,6 +475,7 @@ export type fare_extrasUncheckedCreateWithoutPassenger_extrasInput = {
   code: string
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: string | null
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
@@ -485,6 +503,7 @@ export type fare_extrasUpdateWithoutPassenger_extrasInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -496,6 +515,7 @@ export type fare_extrasUncheckedUpdateWithoutPassenger_extrasInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -538,6 +558,7 @@ export type fare_extrasSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   code?: boolean
   price?: boolean
   description?: boolean
+  features?: boolean
   is_active?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -551,6 +572,7 @@ export type fare_extrasSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   code?: boolean
   price?: boolean
   description?: boolean
+  features?: boolean
   is_active?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -562,6 +584,7 @@ export type fare_extrasSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   code?: boolean
   price?: boolean
   description?: boolean
+  features?: boolean
   is_active?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -573,12 +596,13 @@ export type fare_extrasSelectScalar = {
   code?: boolean
   price?: boolean
   description?: boolean
+  features?: boolean
   is_active?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type fare_extrasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "price" | "description" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["fare_extras"]>
+export type fare_extrasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "price" | "description" | "features" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["fare_extras"]>
 export type fare_extrasInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   passenger_extras?: boolean | Prisma.fare_extras$passenger_extrasArgs<ExtArgs>
   _count?: boolean | Prisma.Fare_extrasCountOutputTypeDefaultArgs<ExtArgs>
@@ -597,6 +621,7 @@ export type $fare_extrasPayload<ExtArgs extends runtime.Types.Extensions.Interna
     code: string
     price: runtime.Decimal
     description: string | null
+    features: runtime.JsonValue
     is_active: boolean
     created_at: Date
     updated_at: Date
@@ -1029,6 +1054,7 @@ export interface fare_extrasFieldRefs {
   readonly code: Prisma.FieldRef<"fare_extras", 'String'>
   readonly price: Prisma.FieldRef<"fare_extras", 'Decimal'>
   readonly description: Prisma.FieldRef<"fare_extras", 'String'>
+  readonly features: Prisma.FieldRef<"fare_extras", 'Json'>
   readonly is_active: Prisma.FieldRef<"fare_extras", 'Boolean'>
   readonly created_at: Prisma.FieldRef<"fare_extras", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"fare_extras", 'DateTime'>

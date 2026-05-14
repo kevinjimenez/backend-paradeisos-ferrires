@@ -1,15 +1,16 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { FaresRepository } from './fares.repository';
 import { handleServiceError } from '../common/utils/service-error.handler';
+import { QueryParamsDto } from '../common/dtos/query-params.dto';
 
 @Injectable()
 export class FaresService {
   private readonly logger = new Logger(FaresService.name);
   constructor(private readonly faresRepository: FaresRepository) {}
 
-  async findAll() {
+  async findAll({ is_active = true }: QueryParamsDto = {}) {
     try {
-      return await this.faresRepository.findAll();
+      return await this.faresRepository.findAllWithFilters(is_active);
     } catch (error) {
       return handleServiceError(error, this.logger, 'Failed to fetch fares');
     }

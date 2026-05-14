@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { FareExtrasRepository } from './fare-extras.repository';
 import { handleServiceError } from '../common/utils/service-error.handler';
+import { QueryParamsDto } from '../common/dtos/query-params.dto';
 
 @Injectable()
 export class FareExtrasService {
@@ -8,9 +9,9 @@ export class FareExtrasService {
 
   constructor(private readonly fareExtrasRepository: FareExtrasRepository) {}
 
-  async findAll() {
+  async findAll({ is_active = true }: QueryParamsDto = {}) {
     try {
-      return await this.fareExtrasRepository.findAll();
+      return await this.fareExtrasRepository.findAllWithFilters(is_active);
     } catch (error) {
       return handleServiceError(
         error,

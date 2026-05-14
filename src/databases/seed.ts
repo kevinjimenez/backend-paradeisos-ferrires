@@ -35,6 +35,13 @@ async function main() {
       name: 'light',
       price: 0,
       description: 'Tarifa Light - equipaje de mano incluido',
+      features: [
+        { text: 'Maleta de mano (5kg)', included: true },
+        { text: 'Chaleco salvavidas', included: true },
+        { text: 'Traslado muelle a muelle', included: false },
+        { text: 'Snack a bordo', included: false },
+        { text: 'Seguro de viaje', included: false },
+      ],
     },
   });
   const fareBasic = await prisma.fares.create({
@@ -42,6 +49,13 @@ async function main() {
       name: 'basic',
       price: 50,
       description: 'Tarifa Basic - equipaje de mano + 1 maleta',
+      features: [
+        { text: 'Maleta de mano (5kg)', included: true },
+        { text: 'Chaleco salvavidas', included: true },
+        { text: 'Traslado muelle a muelle', included: true },
+        { text: 'Snack a bordo', included: true },
+        { text: 'Seguro de viaje', included: false },
+      ],
     },
   });
   const farePremium = await prisma.fares.create({
@@ -49,6 +63,13 @@ async function main() {
       name: 'premium',
       price: 80,
       description: 'Tarifa Premium - equipaje completo + prioridad',
+      features: [
+        { text: 'Maleta de mano (5kg)', included: true },
+        { text: 'Chaleco salvavidas', included: true },
+        { text: 'Traslado muelle a muelle', included: true },
+        { text: 'Snack a bordo', included: true },
+        { text: 'Seguro de viaje', included: true },
+      ],
     },
   });
 
@@ -61,36 +82,66 @@ async function main() {
         code: 'BAGGAGE_23',
         price: 15,
         description: 'Maleta adicional de hasta 23kg',
+        features: [
+          { text: 'Maleta de hasta 23kg', included: true },
+          { text: 'Seguro de equipaje', included: false },
+          { text: 'Etiqueta de identificación', included: true },
+        ],
       },
       {
         name: 'Equipaje extra (32kg)',
         code: 'BAGGAGE_32',
         price: 25,
         description: 'Maleta adicional de hasta 32kg',
+        features: [
+          { text: 'Maleta de hasta 32kg', included: true },
+          { text: 'Seguro de equipaje', included: true },
+          { text: 'Etiqueta de identificación', included: true },
+        ],
       },
       {
         name: 'Bicicleta',
         code: 'BICYCLE',
         price: 20,
         description: 'Transporte de bicicleta',
+        features: [
+          { text: 'Bicicleta hasta 15kg', included: true },
+          { text: 'Embalaje protector', included: false },
+          { text: 'Seguro de transporte', included: false },
+        ],
       },
       {
         name: 'Mascota pequeña',
         code: 'PET_SMALL',
         price: 10,
         description: 'Mascota hasta 5kg en cabina',
+        features: [
+          { text: 'Mascota hasta 5kg en cabina', included: true },
+          { text: 'Transportín incluido', included: false },
+          { text: 'Certificado veterinario requerido', included: true },
+        ],
       },
       {
         name: 'Mascota grande',
         code: 'PET_LARGE',
         price: 20,
         description: 'Mascota mayor a 5kg en bodega',
+        features: [
+          { text: 'Mascota mayor a 5kg en bodega', included: true },
+          { text: 'Transportín incluido', included: false },
+          { text: 'Certificado veterinario requerido', included: true },
+        ],
       },
       {
         name: 'Asiento preferencial',
         code: 'SEAT_PREF',
         price: 8,
         description: 'Asiento con más espacio o vista al mar',
+        features: [
+          { text: 'Vista al mar garantizada', included: true },
+          { text: 'Mayor espacio para las piernas', included: true },
+          { text: 'Embarque prioritario', included: false },
+        ],
       },
     ],
   });

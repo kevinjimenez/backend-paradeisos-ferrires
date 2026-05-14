@@ -31,6 +31,7 @@ model fares {
   name        FareType   @unique
   price       Decimal    @db.Decimal(10, 2)
   description String?    @db.VarChar(255)
+  features    Json       @default("[]") @db.JsonB
   is_active   Boolean    @default(true)
   created_at  DateTime   @default(now())
   updated_at  DateTime   @updatedAt
@@ -44,6 +45,7 @@ model fare_extras {
   code        String   @unique @db.VarChar(20)
   price       Decimal  @db.Decimal(10, 2)
   description String?  @db.VarChar(255)
+  features    Json     @default("[]") @db.JsonB
   is_active   Boolean  @default(true)
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt

@@ -89,6 +89,7 @@ export const FaresScalarFieldEnum = {
   name: 'name',
   price: 'price',
   description: 'description',
+  features: 'features',
   is_active: 'is_active',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -103,6 +104,7 @@ export const Fare_extrasScalarFieldEnum = {
   code: 'code',
   price: 'price',
   description: 'description',
+  features: 'features',
   is_active: 'is_active',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -374,14 +376,6 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
 export const JsonNullValueFilter = {
   DbNull: DbNull,
   JsonNull: JsonNull,
@@ -389,4 +383,12 @@ export const JsonNullValueFilter = {
 } as const
 
 export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
