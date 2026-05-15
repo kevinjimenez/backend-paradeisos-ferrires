@@ -20,6 +20,22 @@ export class TicketQueryBuilder {
         first_name: true,
         last_name: true,
         document_number: true,
+        unit_price: true,
+        outbound_fare: {
+          select: { name: true, price: true },
+        },
+        return_fare: {
+          select: { name: true, price: true },
+        },
+        passenger_extras: {
+          select: {
+            quantity: true,
+            unit_price: true,
+            fare_extras: {
+              select: { name: true, code: true },
+            },
+          },
+        },
       },
     };
     return this;

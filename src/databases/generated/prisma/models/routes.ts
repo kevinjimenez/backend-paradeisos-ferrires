@@ -615,22 +615,6 @@ export type routesUncheckedUpdateManyWithoutDestination_portsNestedInput = {
   deleteMany?: Prisma.routesScalarWhereInput | Prisma.routesScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
 export type routesCreateNestedOneWithoutSchedulesInput = {
   create?: Prisma.XOR<Prisma.routesCreateWithoutSchedulesInput, Prisma.routesUncheckedCreateWithoutSchedulesInput>
   connectOrCreate?: Prisma.routesCreateOrConnectWithoutSchedulesInput

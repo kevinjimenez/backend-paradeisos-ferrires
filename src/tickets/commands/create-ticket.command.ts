@@ -2,8 +2,11 @@ import { HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { DomainException } from 'src/common/exceptions/domain.exception';
 import { PrismaTransaction } from 'src/common/types/prisma-transaction.type';
 import { ContactsService } from 'src/contacts/contacts.service';
+import { FareExtrasService } from 'src/fare-extras/fare-extras.service';
+import { FaresService } from 'src/fares/fares.service';
 import { PassengersService } from 'src/passengers/passengers.service';
 import { PaymentsRepository } from 'src/payments/payments.repository';
+import { PassengerInputDto } from 'src/passengers/dto/create-passenger.dto';
 import { CreateTicketDto } from '../dto/create-ticket.dto';
 import { TicketFactory } from '../factories/ticket.factory';
 import { CreateTicketResponse } from '../interfaces/create-ticket-response.interface';
@@ -17,6 +20,8 @@ export class CreateTicketCommand {
     private readonly ticketsRepository: TicketsRepository,
     private readonly contactsService: ContactsService,
     private readonly passengersService: PassengersService,
+    private readonly faresService: FaresService,
+    private readonly fareExtrasService: FareExtrasService,
     private readonly ticketFactory: TicketFactory,
     private readonly paymentsRepository: PaymentsRepository,
   ) {}
@@ -25,8 +30,65 @@ export class CreateTicketCommand {
     dto: CreateTicketDto,
     tx: PrismaTransaction,
   ): Promise<CreateTicketResponse> {
-    // 1. Crear contact
-    const newContact = await this.contactsService.create(dto.contact);
+    // 1. Resolver tarifas y extras, calcular unit_price por pasajero
+    const fareIds = [
+      ...new Set([
+        ...dto.passenger.map((p) => p.outboundFareId),
+        ...dto.passenger.flatMap((p) => (p.returnFareId ? [p.returnFareId] : [])),
+      ]),
+    ];
+    const fareMap = new Map<string, number>();
+    for (const fareId of fareIds) {
+      const fare = await this.faresService.findById(fareId);
+      if (!fare) {
+        throw new DomainException(
+          `Fare ${fareId} not found`,
+          HttpStatus.NOT_FOUND,
+        );
+      }
+      fareMap.set(fareId, fare.price.toNumber());
+    }
+
+    const extraIds = [
+      ...new Set(
+        dto.passenger.flatMap((p) => (p.extras ?? []).map((e) => e.extraId)),
+      ),
+    ];
+    const extrasMap = new Map<string, number>();
+    for (const extraId of extraIds) {
+      const extra = await this.fareExtrasService.findById(extraId);
+      if (!extra) {
+        throw new DomainException(
+          `Fare extra ${extraId} not found`,
+          HttpStatus.NOT_FOUND,
+        );
+      }
+      extrasMap.set(extraId, extra.price.toNumber());
+    }
+
+    const enrichedPassengers: PassengerInputDto[] = dto.passenger.map((p) => {
+      const extrasTotal = (p.extras ?? []).reduce(
+        (sum, e) => sum + (extrasMap.get(e.extraId) ?? 0) * e.quantity,
+        0,
+      );
+      return {
+        ...p,
+        unitPrice:
+          p.basePrice +
+          (fareMap.get(p.outboundFareId) ?? 0) +
+          (p.returnFareId ? (fareMap.get(p.returnFareId) ?? 0) : 0) +
+          extrasTotal,
+        resolvedExtras: (p.extras ?? []).map((e) => ({
+          extraId: e.extraId,
+          quantity: e.quantity,
+          unitPrice: extrasMap.get(e.extraId) ?? 0,
+        })),
+      };
+    });
+    const enrichedDto = { ...dto, passenger: enrichedPassengers };
+
+    // 2. Crear contact
+    const newContact = await this.contactsService.create(enrichedDto.contact);
 
     if (!newContact.id) {
       throw new DomainException(
@@ -35,9 +97,9 @@ export class CreateTicketCommand {
       );
     }
 
-    // 2. Crear ticket
+    // 3. Crear ticket
     const ticketToCreate = this.ticketFactory.createTicketData(
-      dto,
+      enrichedDto,
       newContact.id,
     );
     const newTicket = await this.ticketsRepository.createTicket(
@@ -47,9 +109,9 @@ export class CreateTicketCommand {
 
     this.logger.debug(`Created ticket: ${newTicket.id}`);
 
-    // 3. Crear passengers
+    // 4. Crear passengers
     const passengerCreated = await Promise.allSettled(
-      dto.passenger.map((passengerDto) =>
+      enrichedDto.passenger.map((passengerDto) =>
         this.passengersService.create(
           {
             ...passengerDto,
@@ -65,7 +127,7 @@ export class CreateTicketCommand {
       .map((result) => result.value.id)
       .filter((id) => id !== undefined);
 
-    // 4. Crear payment dentro de la transacción (atómico con el ticket)
+    // 5. Crear payment dentro de la transacción (atómico con el ticket)
     const newPayment = await this.paymentsRepository.createPending(
       newTicket.id,
       newTicket.total.toNumber(),

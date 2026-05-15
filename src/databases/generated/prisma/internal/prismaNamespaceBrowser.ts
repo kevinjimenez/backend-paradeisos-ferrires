@@ -51,6 +51,9 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  fares: 'fares',
+  fare_extras: 'fare_extras',
+  passenger_extras: 'passenger_extras',
   islands: 'islands',
   ports: 'ports',
   routes: 'routes',
@@ -79,6 +82,48 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const FaresScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  description: 'description',
+  features: 'features',
+  variant: 'variant',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type FaresScalarFieldEnum = (typeof FaresScalarFieldEnum)[keyof typeof FaresScalarFieldEnum]
+
+
+export const Fare_extrasScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  price: 'price',
+  description: 'description',
+  features: 'features',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Fare_extrasScalarFieldEnum = (typeof Fare_extrasScalarFieldEnum)[keyof typeof Fare_extrasScalarFieldEnum]
+
+
+export const Passenger_extrasScalarFieldEnum = {
+  id: 'id',
+  passenger_id: 'passenger_id',
+  extra_id: 'extra_id',
+  quantity: 'quantity',
+  unit_price: 'unit_price',
+  created_at: 'created_at'
+} as const
+
+export type Passenger_extrasScalarFieldEnum = (typeof Passenger_extrasScalarFieldEnum)[keyof typeof Passenger_extrasScalarFieldEnum]
 
 
 export const IslandsScalarFieldEnum = {
@@ -186,6 +231,8 @@ export type ContactsScalarFieldEnum = (typeof ContactsScalarFieldEnum)[keyof typ
 export const PassengersScalarFieldEnum = {
   id: 'id',
   ticket_id: 'ticket_id',
+  outbound_fare_id: 'outbound_fare_id',
+  return_fare_id: 'return_fare_id',
   first_name: 'first_name',
   last_name: 'last_name',
   email: 'email',
@@ -331,14 +378,6 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
 export const JsonNullValueFilter = {
   DbNull: DbNull,
   JsonNull: JsonNull,
@@ -346,4 +385,12 @@ export const JsonNullValueFilter = {
 } as const
 
 export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

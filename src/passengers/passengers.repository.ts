@@ -1,4 +1,4 @@
-import { DatabasesService } from './../databases/databases.service';
+import { DatabasesService } from '../databases/databases.service';
 import { BaseRepository } from 'src/common/base/base.repository';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from 'src/databases/generated/prisma/client';
@@ -29,6 +29,22 @@ export class PassengersRepository extends BaseRepository<Prisma.passengersModel>
       },
       create: data,
       update: data,
+    });
+  }
+
+  async createExtras(
+    passengerId: string,
+    extras: Array<{ extraId: string; quantity: number; unitPrice: number }>,
+    tx?: PrismaTransaction,
+  ): Promise<void> {
+    const database = tx ?? this.db;
+    await database.passenger_extras.createMany({
+      data: extras.map((e) => ({
+        passenger_id: passengerId,
+        extra_id: e.extraId,
+        quantity: e.quantity,
+        unit_price: e.unitPrice,
+      })),
     });
   }
 }

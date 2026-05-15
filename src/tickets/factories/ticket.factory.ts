@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { envs } from 'src/common/config/envs';
 import { generateUniqueCode } from 'src/common/utils/code-generator.util';
 import { Money, TicketPricing } from 'src/common/value-objects';
-import { CreatePassengerDto } from 'src/passengers/dto/create-passenger.dto';
+import { PassengerInputDto } from 'src/passengers/dto/create-passenger.dto';
 import { CreateTicketDto } from '../dto/create-ticket.dto';
+
+type EnrichedTicketDto = Omit<CreateTicketDto, 'passenger'> & { passenger: PassengerInputDto[] };
 
 @Injectable()
 export class TicketFactory {
-  createTicketData(dto: CreateTicketDto, contactId: string) {
+  createTicketData(dto: EnrichedTicketDto, contactId: string) {
     const code = generateUniqueCode();
     const pricing = this.calculatePricing(dto.passenger);
     const amounts = pricing.toNumbers();
@@ -30,7 +32,7 @@ export class TicketFactory {
     };
   }
 
-  private calculatePricing(passengers: CreatePassengerDto[]): TicketPricing {
+  private calculatePricing(passengers: PassengerInputDto[]): TicketPricing {
     const subtotalAmount = passengers.reduce(
       (sum, p) => sum + (p.unitPrice || 0),
       0,
