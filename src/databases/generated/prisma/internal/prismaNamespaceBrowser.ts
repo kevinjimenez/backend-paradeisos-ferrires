@@ -90,6 +90,7 @@ export const FaresScalarFieldEnum = {
   price: 'price',
   description: 'description',
   features: 'features',
+  variant: 'variant',
   is_active: 'is_active',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -230,7 +231,8 @@ export type ContactsScalarFieldEnum = (typeof ContactsScalarFieldEnum)[keyof typ
 export const PassengersScalarFieldEnum = {
   id: 'id',
   ticket_id: 'ticket_id',
-  fare_id: 'fare_id',
+  outbound_fare_id: 'outbound_fare_id',
+  return_fare_id: 'return_fare_id',
   first_name: 'first_name',
   last_name: 'last_name',
   email: 'email',

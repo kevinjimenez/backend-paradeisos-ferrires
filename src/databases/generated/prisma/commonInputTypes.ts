@@ -29,13 +29,6 @@ export type StringFilter<$PrismaModel = never> = {
   not?: Prisma.NestedStringFilter<$PrismaModel> | string
 }
 
-export type EnumFareTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.FareType | Prisma.EnumFareTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.FareType[] | Prisma.ListEnumFareTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.FareType[] | Prisma.ListEnumFareTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumFareTypeFilter<$PrismaModel> | $Enums.FareType
-}
-
 export type DecimalFilter<$PrismaModel = never> = {
   equals?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   in?: runtime.Decimal[] | runtime.DecimalJsLike[] | number[] | string[] | Prisma.ListDecimalFieldRefInput<$PrismaModel>
@@ -123,16 +116,6 @@ export type StringWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedStringFilter<$PrismaModel>
   _max?: Prisma.NestedStringFilter<$PrismaModel>
-}
-
-export type EnumFareTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.FareType | Prisma.EnumFareTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.FareType[] | Prisma.ListEnumFareTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.FareType[] | Prisma.ListEnumFareTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumFareTypeWithAggregatesFilter<$PrismaModel> | $Enums.FareType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumFareTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumFareTypeFilter<$PrismaModel>
 }
 
 export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -542,13 +525,6 @@ export type NestedStringFilter<$PrismaModel = never> = {
   not?: Prisma.NestedStringFilter<$PrismaModel> | string
 }
 
-export type NestedEnumFareTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.FareType | Prisma.EnumFareTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.FareType[] | Prisma.ListEnumFareTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.FareType[] | Prisma.ListEnumFareTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumFareTypeFilter<$PrismaModel> | $Enums.FareType
-}
-
 export type NestedDecimalFilter<$PrismaModel = never> = {
   equals?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   in?: runtime.Decimal[] | runtime.DecimalJsLike[] | number[] | string[] | Prisma.ListDecimalFieldRefInput<$PrismaModel>
@@ -616,16 +592,6 @@ export type NestedIntFilter<$PrismaModel = never> = {
   gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
   gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
   not?: Prisma.NestedIntFilter<$PrismaModel> | number
-}
-
-export type NestedEnumFareTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.FareType | Prisma.EnumFareTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.FareType[] | Prisma.ListEnumFareTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.FareType[] | Prisma.ListEnumFareTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumFareTypeWithAggregatesFilter<$PrismaModel> | $Enums.FareType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumFareTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumFareTypeFilter<$PrismaModel>
 }
 
 export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {

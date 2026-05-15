@@ -44,17 +44,17 @@ export class CreatePassengerDto {
 
   @IsNotEmpty()
   @IsUUID()
-  fareId: string;
+  outboundFareId: string;
 
-  unitPrice?: number;
+  @IsOptional()
+  @IsUUID()
+  returnFareId?: string;
 
   @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => PassengerExtraDto)
   extras?: PassengerExtraDto[];
-
-  resolvedExtras?: Array<{ extraId: string; quantity: number; unitPrice: number }>;
 
   @IsOptional()
   @IsBoolean()
@@ -67,7 +67,10 @@ export class CreatePassengerDto {
   @IsOptional()
   @IsBoolean()
   checkedInReturn?: boolean;
-
-  @IsOptional()
-  ticket?: string;
 }
+
+export type PassengerInputDto = CreatePassengerDto & {
+  unitPrice: number;
+  resolvedExtras: Array<{ extraId: string; quantity: number; unitPrice: number }>;
+  ticket?: string;
+};

@@ -6,6 +6,7 @@ import { FareExtrasService } from 'src/fare-extras/fare-extras.service';
 import { FaresService } from 'src/fares/fares.service';
 import { PassengersService } from 'src/passengers/passengers.service';
 import { PaymentsRepository } from 'src/payments/payments.repository';
+import { PassengerInputDto } from 'src/passengers/dto/create-passenger.dto';
 import { CreateTicketDto } from '../dto/create-ticket.dto';
 import { TicketFactory } from '../factories/ticket.factory';
 import { CreateTicketResponse } from '../interfaces/create-ticket-response.interface';
@@ -30,7 +31,12 @@ export class CreateTicketCommand {
     tx: PrismaTransaction,
   ): Promise<CreateTicketResponse> {
     // 1. Resolver tarifas y extras, calcular unit_price por pasajero
-    const fareIds = [...new Set(dto.passenger.map((p) => p.fareId))];
+    const fareIds = [
+      ...new Set([
+        ...dto.passenger.map((p) => p.outboundFareId),
+        ...dto.passenger.flatMap((p) => (p.returnFareId ? [p.returnFareId] : [])),
+      ]),
+    ];
     const fareMap = new Map<string, number>();
     for (const fareId of fareIds) {
       const fare = await this.faresService.findById(fareId);
@@ -60,14 +66,18 @@ export class CreateTicketCommand {
       extrasMap.set(extraId, extra.price.toNumber());
     }
 
-    const enrichedPassengers = dto.passenger.map((p) => {
+    const enrichedPassengers: PassengerInputDto[] = dto.passenger.map((p) => {
       const extrasTotal = (p.extras ?? []).reduce(
         (sum, e) => sum + (extrasMap.get(e.extraId) ?? 0) * e.quantity,
         0,
       );
       return {
         ...p,
-        unitPrice: p.basePrice + (fareMap.get(p.fareId) ?? 0) + extrasTotal,
+        unitPrice:
+          p.basePrice +
+          (fareMap.get(p.outboundFareId) ?? 0) +
+          (p.returnFareId ? (fareMap.get(p.returnFareId) ?? 0) : 0) +
+          extrasTotal,
         resolvedExtras: (p.extras ?? []).map((e) => ({
           extraId: e.extraId,
           quantity: e.quantity,

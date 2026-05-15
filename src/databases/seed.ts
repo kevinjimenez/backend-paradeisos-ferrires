@@ -32,9 +32,10 @@ async function main() {
   console.log('🎫 Creating fares...');
   const fareLight = await prisma.fares.create({
     data: {
-      name: 'light',
+      name: 'Light',
       price: 0,
       description: 'Tarifa Light - equipaje de mano incluido',
+      variant: 'primary',
       features: [
         { text: 'Maleta de mano (5kg)', included: true },
         { text: 'Chaleco salvavidas', included: true },
@@ -46,9 +47,10 @@ async function main() {
   });
   const fareBasic = await prisma.fares.create({
     data: {
-      name: 'basic',
+      name: 'Basico',
       price: 50,
       description: 'Tarifa Basic - equipaje de mano + 1 maleta',
+      variant: 'secondary',
       features: [
         { text: 'Maleta de mano (5kg)', included: true },
         { text: 'Chaleco salvavidas', included: true },
@@ -58,11 +60,12 @@ async function main() {
       ],
     },
   });
-  const farePremium = await prisma.fares.create({
+  const farePlus = await prisma.fares.create({
     data: {
-      name: 'premium',
+      name: 'Plus',
       price: 80,
-      description: 'Tarifa Premium - equipaje completo + prioridad',
+      description: 'Tarifa Plus - equipaje completo + prioridad',
+      variant: 'primary',
       features: [
         { text: 'Maleta de mano (5kg)', included: true },
         { text: 'Chaleco salvavidas', included: true },
@@ -915,7 +918,7 @@ async function main() {
         phone: '+123456789',
         document_number: '12345678A',
         unit_price: 85, // base 50 + fare basic 35
-        fare_id: fareBasic.id,
+        outbound_fare_id: fareBasic.id,
         is_primary: true,
         checked_in_outbound: false,
         checked_in_return: false,
@@ -929,7 +932,7 @@ async function main() {
         phone: '+123456780',
         document_number: 'X1234567',
         unit_price: 125, // base 90 + fare basic 35
-        fare_id: fareLight.id,
+        outbound_fare_id: fareLight.id,
         is_primary: false,
         checked_in_outbound: false,
         checked_in_return: false,

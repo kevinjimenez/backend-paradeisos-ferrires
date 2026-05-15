@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { handleServiceError } from 'src/common/utils/service-error.handler';
 import { PrismaTransaction } from './../common/types/prisma-transaction.type';
 import { Prisma } from './../databases/generated/prisma/client';
-import { CreatePassengerDto } from './dto/create-passenger.dto';
+import { PassengerInputDto } from './dto/create-passenger.dto';
 import { PassengerMapper } from './mappers/passenger.mapper';
 import { PassengersRepository } from './passengers.repository';
 
@@ -13,7 +13,7 @@ export class PassengersService {
   constructor(private passengersRepository: PassengersRepository) {}
 
   async create(
-    createPassengerDto: CreatePassengerDto,
+    createPassengerDto: PassengerInputDto,
     tx?: PrismaTransaction,
   ): Promise<Prisma.passengersModel> {
     try {

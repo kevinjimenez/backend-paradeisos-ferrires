@@ -19,23 +19,19 @@ enum DocumentType {
   passport
 }
 
-enum FareType {
-  light
-  basic
-  premium
-}
-
 // TABLE fares
 model fares {
-  id          String     @id @default(uuid())
-  name        FareType   @unique
-  price       Decimal    @db.Decimal(10, 2)
-  description String?    @db.VarChar(255)
-  features    Json       @default("[]") @db.JsonB
-  is_active   Boolean    @default(true)
-  created_at  DateTime   @default(now())
-  updated_at  DateTime   @updatedAt
-  passengers  passengers[]
+  id          String       @id @default(uuid())
+  name        String       @unique @db.VarChar(50)
+  price       Decimal      @db.Decimal(10, 2)
+  description String?      @db.VarChar(255)
+  features    Json         @default("[]") @db.JsonB
+  variant     String       @default("primary")
+  is_active   Boolean      @default(true)
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @updatedAt
+  outbound_passengers passengers[] @relation("outbound_fare")
+  return_passengers   passengers[] @relation("return_fare")
 }
 
 // TABLE fare_extras
@@ -223,9 +219,11 @@ model passengers {
   // Relations many-to-one
   tickets tickets? @relation(fields: [ticket_id], references: [id])
 
-  ticket_id           String?
-  fare_id             String?
-  fares               fares?  @relation(fields: [fare_id], references: [id])
+  ticket_id            String?
+  outbound_fare_id     String?
+  return_fare_id       String?
+  outbound_fare        fares?  @relation("outbound_fare", fields: [outbound_fare_id], references: [id])
+  return_fare          fares?  @relation("return_fare", fields: [return_fare_id], references: [id])
   //
   first_name          String  @db.VarChar(100)
   last_name           String  @db.VarChar(100)
@@ -241,7 +239,7 @@ model passengers {
 
   checked_in_outbound_at DateTime?
   checked_in_return_at   DateTime?
-  created_at             DateTime         @default(now())
+  created_at             DateTime           @default(now())
   // Relations one-to-many
   passenger_extras       passenger_extras[]
 }
