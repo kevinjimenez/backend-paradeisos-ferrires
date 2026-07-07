@@ -276,7 +276,7 @@ export type PassengersGroupByOutputType = {
   _max: PassengersMaxAggregateOutputType | null
 }
 
-type GetPassengersGroupByPayload<T extends passengersGroupByArgs> = Prisma.PrismaPromise<
+export type GetPassengersGroupByPayload<T extends passengersGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<PassengersGroupByOutputType, T['by']> &
       {
@@ -2143,6 +2143,11 @@ export type passengersFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Skip the first `n` passengers.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of passengers.
+   */
   distinct?: Prisma.PassengersScalarFieldEnum | Prisma.PassengersScalarFieldEnum[]
 }
 

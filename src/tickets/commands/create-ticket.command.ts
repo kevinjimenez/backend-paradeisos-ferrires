@@ -34,7 +34,9 @@ export class CreateTicketCommand {
     const fareIds = [
       ...new Set([
         ...dto.passenger.map((p) => p.outboundFareId),
-        ...dto.passenger.flatMap((p) => (p.returnFareId ? [p.returnFareId] : [])),
+        ...dto.passenger.flatMap((p) =>
+          p.returnFareId ? [p.returnFareId] : [],
+        ),
       ]),
     ];
     const fareMap = new Map<string, number>();

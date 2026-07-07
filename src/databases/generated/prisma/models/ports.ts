@@ -252,7 +252,7 @@ export type PortsGroupByOutputType = {
   _max: PortsMaxAggregateOutputType | null
 }
 
-type GetPortsGroupByPayload<T extends portsGroupByArgs> = Prisma.PrismaPromise<
+export type GetPortsGroupByPayload<T extends portsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<PortsGroupByOutputType, T['by']> &
       {
@@ -1731,6 +1731,11 @@ export type portsFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Skip the first `n` ports.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of ports.
+   */
   distinct?: Prisma.PortsScalarFieldEnum | Prisma.PortsScalarFieldEnum[]
 }
 

@@ -5,7 +5,9 @@ import { Money, TicketPricing } from 'src/common/value-objects';
 import { PassengerInputDto } from 'src/passengers/dto/create-passenger.dto';
 import { CreateTicketDto } from '../dto/create-ticket.dto';
 
-type EnrichedTicketDto = Omit<CreateTicketDto, 'passenger'> & { passenger: PassengerInputDto[] };
+type EnrichedTicketDto = Omit<CreateTicketDto, 'passenger'> & {
+  passenger: PassengerInputDto[];
+};
 
 @Injectable()
 export class TicketFactory {

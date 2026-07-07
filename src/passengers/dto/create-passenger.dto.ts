@@ -71,6 +71,10 @@ export class CreatePassengerDto {
 
 export type PassengerInputDto = CreatePassengerDto & {
   unitPrice: number;
-  resolvedExtras: Array<{ extraId: string; quantity: number; unitPrice: number }>;
+  resolvedExtras: Array<{
+    extraId: string;
+    quantity: number;
+    unitPrice: number;
+  }>;
   ticket?: string;
 };
