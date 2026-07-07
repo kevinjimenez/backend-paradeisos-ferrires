@@ -51,6 +51,8 @@ cp .env.template .env
 
 ## Comandos
 
+> ⚠️ Antes de levantar el servidor o correr el seed, aplicá las migraciones pendientes (ver [Base de datos](#base-de-datos)): `npx prisma migrate deploy --config prisma.config.ts`
+
 ```bash
 # Desarrollo con hot-reload
 npm run start:dev
@@ -69,6 +71,23 @@ npm run test:e2e
 # Lint y formato
 npm run lint
 npm run format
+```
+
+## Troubleshooting
+
+### Puerto ocupado (`EADDRINUSE`)
+
+Si al levantar el servidor ves `Error: listen EADDRINUSE: address already in use :::3000`, significa que otro proceso (probablemente una instancia anterior) sigue escuchando en ese puerto:
+
+```bash
+# Ver qué proceso ocupa el puerto 3000
+lsof -nP -iTCP:3000 -sTCP:LISTEN
+
+# Matarlo por PID
+kill -9 <PID>
+
+# O directamente por nombre/patrón
+pkill -9 -f "nest start"
 ```
 
 ## Módulos
