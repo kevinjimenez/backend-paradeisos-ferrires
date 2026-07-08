@@ -11,10 +11,10 @@ export class SchedulesFilterDto extends QueryParamsDto {
   @IsOptional()
   @IsUUID()
   @Transform(({ value }) => value as string)
-  origin?: string; // origin_port_id
+  origin?: string; // origin_island_id
 
   @IsOptional()
   @IsUUID()
   @Transform(({ value }) => value as string)
-  destination?: string; // destination_port_id
+  destination?: string; // destination_island_id
 }

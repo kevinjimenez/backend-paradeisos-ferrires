@@ -38,11 +38,6 @@ export type passenger_extras = Prisma.passenger_extrasModel
  */
 export type islands = Prisma.islandsModel
 /**
- * Model ports
- * 
- */
-export type ports = Prisma.portsModel
-/**
  * Model routes
  * 
  */

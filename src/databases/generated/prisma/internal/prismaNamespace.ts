@@ -388,7 +388,6 @@ export const ModelName = {
   fare_extras: 'fare_extras',
   passenger_extras: 'passenger_extras',
   islands: 'islands',
-  ports: 'ports',
   routes: 'routes',
   ferries: 'ferries',
   schedules: 'schedules',
@@ -414,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "fares" | "fare_extras" | "passenger_extras" | "islands" | "ports" | "routes" | "ferries" | "schedules" | "contacts" | "passengers" | "payments" | "seat_holds" | "seat_holds_history" | "tickets" | "catalogs"
+    modelProps: "fares" | "fare_extras" | "passenger_extras" | "islands" | "routes" | "ferries" | "schedules" | "contacts" | "passengers" | "payments" | "seat_holds" | "seat_holds_history" | "tickets" | "catalogs"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -711,80 +710,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.islandsCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.IslandsCountAggregateOutputType> | number
-        }
-      }
-    }
-    ports: {
-      payload: Prisma.$portsPayload<ExtArgs>
-      fields: Prisma.portsFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.portsFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$portsPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.portsFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$portsPayload>
-        }
-        findFirst: {
-          args: Prisma.portsFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$portsPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.portsFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$portsPayload>
-        }
-        findMany: {
-          args: Prisma.portsFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$portsPayload>[]
-        }
-        create: {
-          args: Prisma.portsCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$portsPayload>
-        }
-        createMany: {
-          args: Prisma.portsCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.portsCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$portsPayload>[]
-        }
-        delete: {
-          args: Prisma.portsDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$portsPayload>
-        }
-        update: {
-          args: Prisma.portsUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$portsPayload>
-        }
-        deleteMany: {
-          args: Prisma.portsDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.portsUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.portsUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$portsPayload>[]
-        }
-        upsert: {
-          args: Prisma.portsUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$portsPayload>
-        }
-        aggregate: {
-          args: Prisma.PortsAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregatePorts>
-        }
-        groupBy: {
-          args: Prisma.portsGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PortsGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.portsCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PortsCountAggregateOutputType> | number
         }
       }
     }
@@ -1622,34 +1547,13 @@ export const IslandsScalarFieldEnum = {
 export type IslandsScalarFieldEnum = (typeof IslandsScalarFieldEnum)[keyof typeof IslandsScalarFieldEnum]
 
 
-export const PortsScalarFieldEnum = {
-  id: 'id',
-  island_id: 'island_id',
-  name: 'name',
-  code: 'code',
-  address: 'address',
-  contact_phone: 'contact_phone',
-  latitude: 'latitude',
-  longitude: 'longitude',
-  is_active: 'is_active',
-  opening_time: 'opening_time',
-  closing_time: 'closing_time',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type PortsScalarFieldEnum = (typeof PortsScalarFieldEnum)[keyof typeof PortsScalarFieldEnum]
-
-
 export const RoutesScalarFieldEnum = {
   id: 'id',
-  origin_port_id: 'origin_port_id',
-  destination_port_id: 'destination_port_id',
+  origin_island_id: 'origin_island_id',
+  destination_island_id: 'destination_island_id',
   distance_km: 'distance_km',
   duration_minutes: 'duration_minutes',
-  base_price_resident: 'base_price_resident',
-  base_price_national: 'base_price_national',
-  base_price_foreign: 'base_price_foreign',
+  base_price: 'base_price',
   is_active: 'is_active',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -2214,7 +2118,6 @@ export type GlobalOmitConfig = {
   fare_extras?: Prisma.fare_extrasOmit
   passenger_extras?: Prisma.passenger_extrasOmit
   islands?: Prisma.islandsOmit
-  ports?: Prisma.portsOmit
   routes?: Prisma.routesOmit
   ferries?: Prisma.ferriesOmit
   schedules?: Prisma.schedulesOmit

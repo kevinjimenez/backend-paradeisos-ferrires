@@ -38,11 +38,11 @@ export class SchedulesService {
     }
 
     if (origin) {
-      specs.push(ScheduleSpecifications.byOriginPort(origin));
+      specs.push(ScheduleSpecifications.byOriginIsland(origin));
     }
 
     if (destination) {
-      specs.push(ScheduleSpecifications.byDestinationPort(destination));
+      specs.push(ScheduleSpecifications.byDestinationIsland(destination));
     }
 
     return ScheduleSpecifications.combine(...specs);

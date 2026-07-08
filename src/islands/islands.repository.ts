@@ -1,36 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from 'src/databases/generated/prisma/client';
 import { BaseRepository } from 'src/common/base/base.repository';
-import { PrismaTransaction } from 'src/common/types/prisma-transaction.type';
+import { Prisma } from 'src/databases/generated/prisma/client';
 import { DatabasesService } from '../databases/databases.service';
+import { PrismaTransaction } from 'src/common/types/prisma-transaction.type';
 
 @Injectable()
-export class PortsRepository extends BaseRepository<Prisma.portsModel> {
+export class IslandsRepository extends BaseRepository<Prisma.islandsModel> {
   constructor(private readonly databasesService: DatabasesService) {
     super();
   }
 
   protected get modelName(): string {
-    return 'ports';
+    return 'islands';
   }
 
   protected get db() {
     return this.databasesService;
   }
 
-  async findAllWithIslands(tx?: PrismaTransaction) {
+  async findAllBasic(tx?: PrismaTransaction) {
     const database = tx ?? this.db;
 
-    return database.ports.findMany({
+    return database.islands.findMany({
       select: {
         id: true,
         name: true,
-        islands: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
+        code: true,
+        description: true,
       },
     });
   }

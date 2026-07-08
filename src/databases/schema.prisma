@@ -21,15 +21,15 @@ enum DocumentType {
 
 // TABLE fares
 model fares {
-  id          String       @id @default(uuid())
-  name        String       @unique @db.VarChar(50)
-  price       Decimal      @db.Decimal(10, 2)
-  description String?      @db.VarChar(255)
-  features    Json         @default("[]") @db.JsonB
-  variant     String       @default("primary")
-  is_active   Boolean      @default(true)
-  created_at  DateTime     @default(now())
-  updated_at  DateTime     @updatedAt
+  id                  String       @id @default(uuid())
+  name                String       @unique @db.VarChar(50)
+  price               Decimal      @db.Decimal(10, 2)
+  description         String?      @db.VarChar(255)
+  features            Json         @default("[]") @db.JsonB
+  variant             String       @default("primary")
+  is_active           Boolean      @default(true)
+  created_at          DateTime     @default(now())
+  updated_at          DateTime     @updatedAt
   outbound_passengers passengers[] @relation("outbound_fare")
   return_passengers   passengers[] @relation("return_fare")
 }
@@ -72,30 +72,6 @@ model islands {
   description String  @db.Text
   is_active   Boolean @default(true)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  // Relations one-to-many
-  ports      ports[]
-}
-
-// TABLE ports
-model ports {
-  id      String   @id @default(uuid())
-  // Relations many-to-one
-  islands islands? @relation(fields: [island_id], references: [id])
-
-  island_id     String?
-  //
-  name          String   @db.VarChar(100)
-  code          String   @unique @db.VarChar(10)
-  address       String?  @db.VarChar(255)
-  contact_phone String?  @db.VarChar(20)
-  latitude      Decimal? @db.Decimal(10, 8)
-  longitude     Decimal? @db.Decimal(11, 8)
-  is_active     Boolean  @default(true)
-
-  opening_time       DateTime @default(now())
-  closing_time       DateTime @default(now())
   created_at         DateTime @default(now())
   updated_at         DateTime @updatedAt
   // Relations one-to-many
@@ -105,20 +81,18 @@ model ports {
 
 // TABLE routes
 model routes {
-  id                String @id @default(uuid())
+  id                  String  @id @default(uuid())
   // Relations many-to-one
-  origin_ports      ports  @relation("origin_routes", fields: [origin_port_id], references: [id])
-  destination_ports ports  @relation("destination_routes", fields: [destination_port_id], references: [id])
+  origin_islands      islands @relation("origin_routes", fields: [origin_island_id], references: [id])
+  destination_islands islands @relation("destination_routes", fields: [destination_island_id], references: [id])
 
-  origin_port_id      String
-  destination_port_id String
+  origin_island_id      String
+  destination_island_id String
   //
-  distance_km         Decimal? @db.Decimal(6, 2)
-  duration_minutes    Int
-  base_price_resident Decimal  @db.Decimal(10, 2)
-  base_price_national Decimal  @db.Decimal(10, 2)
-  base_price_foreign  Decimal  @db.Decimal(10, 2)
-  is_active           Boolean  @default(true)
+  distance_km           Decimal? @db.Decimal(6, 2)
+  duration_minutes      Int
+  base_price            Decimal  @db.Decimal(10, 2)
+  is_active             Boolean  @default(true)
 
   created_at DateTime    @default(now())
   updated_at DateTime    @updatedAt
@@ -219,11 +193,11 @@ model passengers {
   // Relations many-to-one
   tickets tickets? @relation(fields: [ticket_id], references: [id])
 
-  ticket_id            String?
-  outbound_fare_id     String?
-  return_fare_id       String?
-  outbound_fare        fares?  @relation("outbound_fare", fields: [outbound_fare_id], references: [id])
-  return_fare          fares?  @relation("return_fare", fields: [return_fare_id], references: [id])
+  ticket_id           String?
+  outbound_fare_id    String?
+  return_fare_id      String?
+  outbound_fare       fares?  @relation("outbound_fare", fields: [outbound_fare_id], references: [id])
+  return_fare         fares?  @relation("return_fare", fields: [return_fare_id], references: [id])
   //
   first_name          String  @db.VarChar(100)
   last_name           String  @db.VarChar(100)

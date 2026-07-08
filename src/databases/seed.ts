@@ -21,7 +21,6 @@ async function main() {
   await prisma.schedules.deleteMany();
   await prisma.routes.deleteMany();
   await prisma.ferries.deleteMany();
-  await prisma.ports.deleteMany();
   await prisma.islands.deleteMany();
   await prisma.contacts.deleteMany();
   await prisma.catalogs.deleteMany();
@@ -313,8 +312,8 @@ async function main() {
     },
   });
 
-  // ISLANDS & PORTS
-  console.log('🏝 Creating islands & ports...');
+  // ISLANDS
+  console.log('🏝 Creating islands...');
   const santaCruz = await prisma.islands.create({
     data: {
       name: 'Santa Cruz',
@@ -344,46 +343,6 @@ async function main() {
       name: 'Baltra',
       code: 'BLT',
       description: 'Galápagos - Baltra',
-    },
-  });
-
-  const portAyora = await prisma.ports.create({
-    data: {
-      island_id: santaCruz.id,
-      name: 'Puerto Ayora',
-      code: 'AYO',
-      address: 'Santa Cruz, Galápagos, Ecuador',
-      contact_phone: '+593 000000001',
-    },
-  });
-
-  const portBaquerizo = await prisma.ports.create({
-    data: {
-      island_id: sanCristobal.id,
-      name: 'Puerto Baquerizo Moreno',
-      code: 'BQM',
-      address: 'San Cristóbal, Galápagos, Ecuador',
-      contact_phone: '+593 000000002',
-    },
-  });
-
-  const portVillamil = await prisma.ports.create({
-    data: {
-      island_id: isabela.id,
-      name: 'Puerto Villamil',
-      code: 'VIL',
-      address: 'Isabela, Galápagos, Ecuador',
-      contact_phone: '+593 000000003',
-    },
-  });
-
-  const portBaltra = await prisma.ports.create({
-    data: {
-      island_id: baltraIsland.id,
-      name: 'Baltra',
-      code: 'BTR',
-      address: 'Baltra, Galápagos, Ecuador',
-      contact_phone: '+593 000000004',
     },
   });
 
@@ -437,52 +396,44 @@ async function main() {
   console.log('🗺 Creating routes...');
   const route1 = await prisma.routes.create({
     data: {
-      origin_port_id: portAyora.id,
-      destination_port_id: portBaquerizo.id,
+      origin_island_id: santaCruz.id,
+      destination_island_id: sanCristobal.id,
       distance_km: 95,
       duration_minutes: 150,
-      base_price_resident: 50,
-      base_price_national: 70,
-      base_price_foreign: 90,
+      base_price: 70,
       is_active: true,
     },
   });
 
   const route2 = await prisma.routes.create({
     data: {
-      origin_port_id: portBaltra.id,
-      destination_port_id: portAyora.id,
+      origin_island_id: baltraIsland.id,
+      destination_island_id: santaCruz.id,
       distance_km: 30,
       duration_minutes: 60,
-      base_price_resident: 45,
-      base_price_national: 65,
-      base_price_foreign: 85,
+      base_price: 65,
       is_active: true,
     },
   });
 
   const route3 = await prisma.routes.create({
     data: {
-      origin_port_id: portAyora.id,
-      destination_port_id: portVillamil.id,
+      origin_island_id: santaCruz.id,
+      destination_island_id: isabela.id,
       distance_km: 110,
       duration_minutes: 180,
-      base_price_resident: 40,
-      base_price_national: 60,
-      base_price_foreign: 80,
+      base_price: 60,
       is_active: true,
     },
   });
 
   const route4 = await prisma.routes.create({
     data: {
-      origin_port_id: portBaquerizo.id,
-      destination_port_id: portBaltra.id,
+      origin_island_id: sanCristobal.id,
+      destination_island_id: baltraIsland.id,
       distance_km: 60,
       duration_minutes: 120,
-      base_price_resident: 50,
-      base_price_national: 70,
-      base_price_foreign: 90,
+      base_price: 70,
       is_active: true,
     },
   });
@@ -490,52 +441,44 @@ async function main() {
   // Rutas de vuelta (inversas)
   const route5 = await prisma.routes.create({
     data: {
-      origin_port_id: portBaquerizo.id,
-      destination_port_id: portAyora.id,
+      origin_island_id: sanCristobal.id,
+      destination_island_id: santaCruz.id,
       distance_km: 95,
       duration_minutes: 150,
-      base_price_resident: 50,
-      base_price_national: 70,
-      base_price_foreign: 90,
+      base_price: 70,
       is_active: true,
     },
   });
 
   const route6 = await prisma.routes.create({
     data: {
-      origin_port_id: portAyora.id,
-      destination_port_id: portBaltra.id,
+      origin_island_id: santaCruz.id,
+      destination_island_id: baltraIsland.id,
       distance_km: 30,
       duration_minutes: 60,
-      base_price_resident: 45,
-      base_price_national: 65,
-      base_price_foreign: 85,
+      base_price: 65,
       is_active: true,
     },
   });
 
   const route7 = await prisma.routes.create({
     data: {
-      origin_port_id: portVillamil.id,
-      destination_port_id: portAyora.id,
+      origin_island_id: isabela.id,
+      destination_island_id: santaCruz.id,
       distance_km: 110,
       duration_minutes: 180,
-      base_price_resident: 40,
-      base_price_national: 60,
-      base_price_foreign: 80,
+      base_price: 60,
       is_active: true,
     },
   });
 
   const route8 = await prisma.routes.create({
     data: {
-      origin_port_id: portBaltra.id,
-      destination_port_id: portBaquerizo.id,
+      origin_island_id: baltraIsland.id,
+      destination_island_id: sanCristobal.id,
       distance_km: 60,
       duration_minutes: 120,
-      base_price_resident: 50,
-      base_price_national: 70,
-      base_price_foreign: 90,
+      base_price: 70,
       is_active: true,
     },
   });
@@ -580,7 +523,7 @@ async function main() {
       total_capacity: ferry2.capacity,
       available_seats: ferry2.capacity - 50,
       status: 'scheduled',
-      notes: 'Puerto Ayora → Puerto Baquerizo Moreno (premium) nocturno',
+      notes: 'Santa Cruz → San Cristóbal (premium) nocturno',
     },
   });
 
@@ -598,7 +541,7 @@ async function main() {
       total_capacity: ferry3.capacity,
       available_seats: ferry3.capacity - 80,
       status: 'scheduled',
-      notes: 'Baltra → Puerto Ayora (fast) diurno',
+      notes: 'Baltra → Santa Cruz (fast) diurno',
     },
   });
 
@@ -616,7 +559,7 @@ async function main() {
       total_capacity: ferry1.capacity,
       available_seats: ferry1.capacity - 120,
       status: 'scheduled',
-      notes: 'Baltra → Puerto Ayora (normal) fin de semana',
+      notes: 'Baltra → Santa Cruz (normal) fin de semana',
     },
   });
 
@@ -634,7 +577,7 @@ async function main() {
       total_capacity: ferry2.capacity,
       available_seats: ferry2.capacity - 150,
       status: 'scheduled',
-      notes: 'Puerto Ayora → Puerto Villamil (premium) tarde',
+      notes: 'Santa Cruz → Isabela (premium) tarde',
     },
   });
 
@@ -652,7 +595,7 @@ async function main() {
       total_capacity: ferry3.capacity,
       available_seats: ferry3.capacity - 90,
       status: 'scheduled',
-      notes: 'Puerto Ayora → Puerto Villamil (fast) mañana',
+      notes: 'Santa Cruz → Isabela (fast) mañana',
     },
   });
 
@@ -670,7 +613,7 @@ async function main() {
       total_capacity: ferry1.capacity,
       available_seats: ferry1.capacity - 200,
       status: 'scheduled',
-      notes: 'Puerto Baquerizo Moreno → Baltra (normal) diurno',
+      notes: 'San Cristóbal → Baltra (normal) diurno',
     },
   });
 
@@ -688,7 +631,7 @@ async function main() {
       total_capacity: ferry2.capacity,
       available_seats: ferry2.capacity - 80,
       status: 'scheduled',
-      notes: 'Puerto Baquerizo Moreno → Baltra (premium) noche',
+      notes: 'San Cristóbal → Baltra (premium) noche',
     },
   });
 
@@ -706,7 +649,7 @@ async function main() {
       total_capacity: ferry3.capacity,
       available_seats: ferry3.capacity - 50,
       status: 'scheduled',
-      notes: 'Baltra → Puerto Ayora (fast) especial',
+      notes: 'Baltra → Santa Cruz (fast) especial',
     },
   });
 
@@ -724,7 +667,7 @@ async function main() {
       total_capacity: ferry1.capacity,
       available_seats: ferry1.capacity - 30,
       status: 'scheduled',
-      notes: 'Puerto Ayora → Puerto Baquerizo Moreno (normal) fin de mes',
+      notes: 'Santa Cruz → San Cristóbal (normal) fin de mes',
     },
   });
 
@@ -743,7 +686,7 @@ async function main() {
       total_capacity: ferry2.capacity,
       available_seats: ferry2.capacity - 40,
       status: 'scheduled',
-      notes: 'Puerto Baquerizo Moreno → Puerto Ayora (vuelta tarde)',
+      notes: 'San Cristóbal → Santa Cruz (vuelta tarde)',
     },
   });
 
@@ -761,7 +704,7 @@ async function main() {
       total_capacity: ferry3.capacity,
       available_seats: ferry3.capacity - 60,
       status: 'scheduled',
-      notes: 'Puerto Ayora → Baltra (vuelta mañana)',
+      notes: 'Santa Cruz → Baltra (vuelta mañana)',
     },
   });
 
@@ -779,7 +722,7 @@ async function main() {
       total_capacity: ferry1.capacity,
       available_seats: ferry1.capacity - 100,
       status: 'scheduled',
-      notes: 'Puerto Villamil → Puerto Ayora (vuelta mediodía)',
+      notes: 'Isabela → Santa Cruz (vuelta mediodía)',
     },
   });
 
@@ -797,7 +740,7 @@ async function main() {
       total_capacity: ferry2.capacity,
       available_seats: ferry2.capacity - 70,
       status: 'scheduled',
-      notes: 'Baltra → Puerto Baquerizo Moreno (vuelta tarde)',
+      notes: 'Baltra → San Cristóbal (vuelta tarde)',
     },
   });
 
@@ -815,7 +758,7 @@ async function main() {
       total_capacity: ferry1.capacity,
       available_seats: ferry1.capacity - 55,
       status: 'scheduled',
-      notes: 'Puerto Baquerizo Moreno → Puerto Ayora (vuelta temprano)',
+      notes: 'San Cristóbal → Santa Cruz (vuelta temprano)',
     },
   });
 
@@ -833,7 +776,7 @@ async function main() {
       total_capacity: ferry3.capacity,
       available_seats: ferry3.capacity - 45,
       status: 'scheduled',
-      notes: 'Puerto Ayora → Baltra (vuelta tarde)',
+      notes: 'Santa Cruz → Baltra (vuelta tarde)',
     },
   });
 
@@ -851,7 +794,7 @@ async function main() {
       total_capacity: ferry2.capacity,
       available_seats: ferry2.capacity - 85,
       status: 'scheduled',
-      notes: 'Puerto Villamil → Puerto Ayora (vuelta mañana)',
+      notes: 'Isabela → Santa Cruz (vuelta mañana)',
     },
   });
 
@@ -869,7 +812,7 @@ async function main() {
       total_capacity: ferry1.capacity,
       available_seats: ferry1.capacity - 110,
       status: 'scheduled',
-      notes: 'Baltra → Puerto Baquerizo Moreno (vuelta noche)',
+      notes: 'Baltra → San Cristóbal (vuelta noche)',
     },
   });
 
@@ -963,7 +906,6 @@ async function main() {
   console.log('\n📊 Summary:');
   console.log(`   - Contacts: ${await prisma.contacts.count()}`);
   console.log(`   - Islands: ${await prisma.islands.count()}`);
-  console.log(`   - Ports: ${await prisma.ports.count()}`);
   console.log(`   - Ferries: ${await prisma.ferries.count()}`);
   console.log(`   - Routes: ${await prisma.routes.count()}`);
   console.log(`   - Schedules: ${await prisma.schedules.count()}`);

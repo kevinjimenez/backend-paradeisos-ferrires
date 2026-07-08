@@ -47,7 +47,7 @@ export class SeatHoldsHistoryQueryBuilder {
           },
           routes: {
             select: {
-              base_price_national: true,
+              base_price: true,
             },
           },
         },

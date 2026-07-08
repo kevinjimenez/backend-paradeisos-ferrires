@@ -198,7 +198,8 @@ export type islandsWhereInput = {
   is_active?: Prisma.BoolFilter<"islands"> | boolean
   created_at?: Prisma.DateTimeFilter<"islands"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"islands"> | Date | string
-  ports?: Prisma.PortsListRelationFilter
+  origin_routes?: Prisma.RoutesListRelationFilter
+  destination_routes?: Prisma.RoutesListRelationFilter
 }
 
 export type islandsOrderByWithRelationInput = {
@@ -209,7 +210,8 @@ export type islandsOrderByWithRelationInput = {
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  ports?: Prisma.portsOrderByRelationAggregateInput
+  origin_routes?: Prisma.routesOrderByRelationAggregateInput
+  destination_routes?: Prisma.routesOrderByRelationAggregateInput
 }
 
 export type islandsWhereUniqueInput = Prisma.AtLeast<{
@@ -223,7 +225,8 @@ export type islandsWhereUniqueInput = Prisma.AtLeast<{
   is_active?: Prisma.BoolFilter<"islands"> | boolean
   created_at?: Prisma.DateTimeFilter<"islands"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"islands"> | Date | string
-  ports?: Prisma.PortsListRelationFilter
+  origin_routes?: Prisma.RoutesListRelationFilter
+  destination_routes?: Prisma.RoutesListRelationFilter
 }, "id" | "code">
 
 export type islandsOrderByWithAggregationInput = {
@@ -260,7 +263,8 @@ export type islandsCreateInput = {
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  ports?: Prisma.portsCreateNestedManyWithoutIslandsInput
+  origin_routes?: Prisma.routesCreateNestedManyWithoutOrigin_islandsInput
+  destination_routes?: Prisma.routesCreateNestedManyWithoutDestination_islandsInput
 }
 
 export type islandsUncheckedCreateInput = {
@@ -271,7 +275,8 @@ export type islandsUncheckedCreateInput = {
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  ports?: Prisma.portsUncheckedCreateNestedManyWithoutIslandsInput
+  origin_routes?: Prisma.routesUncheckedCreateNestedManyWithoutOrigin_islandsInput
+  destination_routes?: Prisma.routesUncheckedCreateNestedManyWithoutDestination_islandsInput
 }
 
 export type islandsUpdateInput = {
@@ -282,7 +287,8 @@ export type islandsUpdateInput = {
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ports?: Prisma.portsUpdateManyWithoutIslandsNestedInput
+  origin_routes?: Prisma.routesUpdateManyWithoutOrigin_islandsNestedInput
+  destination_routes?: Prisma.routesUpdateManyWithoutDestination_islandsNestedInput
 }
 
 export type islandsUncheckedUpdateInput = {
@@ -293,7 +299,8 @@ export type islandsUncheckedUpdateInput = {
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ports?: Prisma.portsUncheckedUpdateManyWithoutIslandsNestedInput
+  origin_routes?: Prisma.routesUncheckedUpdateManyWithoutOrigin_islandsNestedInput
+  destination_routes?: Prisma.routesUncheckedUpdateManyWithoutDestination_islandsNestedInput
 }
 
 export type islandsCreateManyInput = {
@@ -356,28 +363,40 @@ export type islandsMinOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
 }
 
-export type IslandsNullableScalarRelationFilter = {
-  is?: Prisma.islandsWhereInput | null
-  isNot?: Prisma.islandsWhereInput | null
+export type IslandsScalarRelationFilter = {
+  is?: Prisma.islandsWhereInput
+  isNot?: Prisma.islandsWhereInput
 }
 
-export type islandsCreateNestedOneWithoutPortsInput = {
-  create?: Prisma.XOR<Prisma.islandsCreateWithoutPortsInput, Prisma.islandsUncheckedCreateWithoutPortsInput>
-  connectOrCreate?: Prisma.islandsCreateOrConnectWithoutPortsInput
+export type islandsCreateNestedOneWithoutOrigin_routesInput = {
+  create?: Prisma.XOR<Prisma.islandsCreateWithoutOrigin_routesInput, Prisma.islandsUncheckedCreateWithoutOrigin_routesInput>
+  connectOrCreate?: Prisma.islandsCreateOrConnectWithoutOrigin_routesInput
   connect?: Prisma.islandsWhereUniqueInput
 }
 
-export type islandsUpdateOneWithoutPortsNestedInput = {
-  create?: Prisma.XOR<Prisma.islandsCreateWithoutPortsInput, Prisma.islandsUncheckedCreateWithoutPortsInput>
-  connectOrCreate?: Prisma.islandsCreateOrConnectWithoutPortsInput
-  upsert?: Prisma.islandsUpsertWithoutPortsInput
-  disconnect?: Prisma.islandsWhereInput | boolean
-  delete?: Prisma.islandsWhereInput | boolean
+export type islandsCreateNestedOneWithoutDestination_routesInput = {
+  create?: Prisma.XOR<Prisma.islandsCreateWithoutDestination_routesInput, Prisma.islandsUncheckedCreateWithoutDestination_routesInput>
+  connectOrCreate?: Prisma.islandsCreateOrConnectWithoutDestination_routesInput
   connect?: Prisma.islandsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.islandsUpdateToOneWithWhereWithoutPortsInput, Prisma.islandsUpdateWithoutPortsInput>, Prisma.islandsUncheckedUpdateWithoutPortsInput>
 }
 
-export type islandsCreateWithoutPortsInput = {
+export type islandsUpdateOneRequiredWithoutOrigin_routesNestedInput = {
+  create?: Prisma.XOR<Prisma.islandsCreateWithoutOrigin_routesInput, Prisma.islandsUncheckedCreateWithoutOrigin_routesInput>
+  connectOrCreate?: Prisma.islandsCreateOrConnectWithoutOrigin_routesInput
+  upsert?: Prisma.islandsUpsertWithoutOrigin_routesInput
+  connect?: Prisma.islandsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.islandsUpdateToOneWithWhereWithoutOrigin_routesInput, Prisma.islandsUpdateWithoutOrigin_routesInput>, Prisma.islandsUncheckedUpdateWithoutOrigin_routesInput>
+}
+
+export type islandsUpdateOneRequiredWithoutDestination_routesNestedInput = {
+  create?: Prisma.XOR<Prisma.islandsCreateWithoutDestination_routesInput, Prisma.islandsUncheckedCreateWithoutDestination_routesInput>
+  connectOrCreate?: Prisma.islandsCreateOrConnectWithoutDestination_routesInput
+  upsert?: Prisma.islandsUpsertWithoutDestination_routesInput
+  connect?: Prisma.islandsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.islandsUpdateToOneWithWhereWithoutDestination_routesInput, Prisma.islandsUpdateWithoutDestination_routesInput>, Prisma.islandsUncheckedUpdateWithoutDestination_routesInput>
+}
+
+export type islandsCreateWithoutOrigin_routesInput = {
   id?: string
   name: string
   code: string
@@ -385,9 +404,10 @@ export type islandsCreateWithoutPortsInput = {
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  destination_routes?: Prisma.routesCreateNestedManyWithoutDestination_islandsInput
 }
 
-export type islandsUncheckedCreateWithoutPortsInput = {
+export type islandsUncheckedCreateWithoutOrigin_routesInput = {
   id?: string
   name: string
   code: string
@@ -395,25 +415,53 @@ export type islandsUncheckedCreateWithoutPortsInput = {
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  destination_routes?: Prisma.routesUncheckedCreateNestedManyWithoutDestination_islandsInput
 }
 
-export type islandsCreateOrConnectWithoutPortsInput = {
+export type islandsCreateOrConnectWithoutOrigin_routesInput = {
   where: Prisma.islandsWhereUniqueInput
-  create: Prisma.XOR<Prisma.islandsCreateWithoutPortsInput, Prisma.islandsUncheckedCreateWithoutPortsInput>
+  create: Prisma.XOR<Prisma.islandsCreateWithoutOrigin_routesInput, Prisma.islandsUncheckedCreateWithoutOrigin_routesInput>
 }
 
-export type islandsUpsertWithoutPortsInput = {
-  update: Prisma.XOR<Prisma.islandsUpdateWithoutPortsInput, Prisma.islandsUncheckedUpdateWithoutPortsInput>
-  create: Prisma.XOR<Prisma.islandsCreateWithoutPortsInput, Prisma.islandsUncheckedCreateWithoutPortsInput>
+export type islandsCreateWithoutDestination_routesInput = {
+  id?: string
+  name: string
+  code: string
+  description: string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  origin_routes?: Prisma.routesCreateNestedManyWithoutOrigin_islandsInput
+}
+
+export type islandsUncheckedCreateWithoutDestination_routesInput = {
+  id?: string
+  name: string
+  code: string
+  description: string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  origin_routes?: Prisma.routesUncheckedCreateNestedManyWithoutOrigin_islandsInput
+}
+
+export type islandsCreateOrConnectWithoutDestination_routesInput = {
+  where: Prisma.islandsWhereUniqueInput
+  create: Prisma.XOR<Prisma.islandsCreateWithoutDestination_routesInput, Prisma.islandsUncheckedCreateWithoutDestination_routesInput>
+}
+
+export type islandsUpsertWithoutOrigin_routesInput = {
+  update: Prisma.XOR<Prisma.islandsUpdateWithoutOrigin_routesInput, Prisma.islandsUncheckedUpdateWithoutOrigin_routesInput>
+  create: Prisma.XOR<Prisma.islandsCreateWithoutOrigin_routesInput, Prisma.islandsUncheckedCreateWithoutOrigin_routesInput>
   where?: Prisma.islandsWhereInput
 }
 
-export type islandsUpdateToOneWithWhereWithoutPortsInput = {
+export type islandsUpdateToOneWithWhereWithoutOrigin_routesInput = {
   where?: Prisma.islandsWhereInput
-  data: Prisma.XOR<Prisma.islandsUpdateWithoutPortsInput, Prisma.islandsUncheckedUpdateWithoutPortsInput>
+  data: Prisma.XOR<Prisma.islandsUpdateWithoutOrigin_routesInput, Prisma.islandsUncheckedUpdateWithoutOrigin_routesInput>
 }
 
-export type islandsUpdateWithoutPortsInput = {
+export type islandsUpdateWithoutOrigin_routesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -421,9 +469,10 @@ export type islandsUpdateWithoutPortsInput = {
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  destination_routes?: Prisma.routesUpdateManyWithoutDestination_islandsNestedInput
 }
 
-export type islandsUncheckedUpdateWithoutPortsInput = {
+export type islandsUncheckedUpdateWithoutOrigin_routesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -431,6 +480,40 @@ export type islandsUncheckedUpdateWithoutPortsInput = {
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  destination_routes?: Prisma.routesUncheckedUpdateManyWithoutDestination_islandsNestedInput
+}
+
+export type islandsUpsertWithoutDestination_routesInput = {
+  update: Prisma.XOR<Prisma.islandsUpdateWithoutDestination_routesInput, Prisma.islandsUncheckedUpdateWithoutDestination_routesInput>
+  create: Prisma.XOR<Prisma.islandsCreateWithoutDestination_routesInput, Prisma.islandsUncheckedCreateWithoutDestination_routesInput>
+  where?: Prisma.islandsWhereInput
+}
+
+export type islandsUpdateToOneWithWhereWithoutDestination_routesInput = {
+  where?: Prisma.islandsWhereInput
+  data: Prisma.XOR<Prisma.islandsUpdateWithoutDestination_routesInput, Prisma.islandsUncheckedUpdateWithoutDestination_routesInput>
+}
+
+export type islandsUpdateWithoutDestination_routesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin_routes?: Prisma.routesUpdateManyWithoutOrigin_islandsNestedInput
+}
+
+export type islandsUncheckedUpdateWithoutDestination_routesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin_routes?: Prisma.routesUncheckedUpdateManyWithoutOrigin_islandsNestedInput
 }
 
 
@@ -439,11 +522,13 @@ export type islandsUncheckedUpdateWithoutPortsInput = {
  */
 
 export type IslandsCountOutputType = {
-  ports: number
+  origin_routes: number
+  destination_routes: number
 }
 
 export type IslandsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  ports?: boolean | IslandsCountOutputTypeCountPortsArgs
+  origin_routes?: boolean | IslandsCountOutputTypeCountOrigin_routesArgs
+  destination_routes?: boolean | IslandsCountOutputTypeCountDestination_routesArgs
 }
 
 /**
@@ -459,8 +544,15 @@ export type IslandsCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * IslandsCountOutputType without action
  */
-export type IslandsCountOutputTypeCountPortsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.portsWhereInput
+export type IslandsCountOutputTypeCountOrigin_routesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.routesWhereInput
+}
+
+/**
+ * IslandsCountOutputType without action
+ */
+export type IslandsCountOutputTypeCountDestination_routesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.routesWhereInput
 }
 
 
@@ -472,7 +564,8 @@ export type islandsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   is_active?: boolean
   created_at?: boolean
   updated_at?: boolean
-  ports?: boolean | Prisma.islands$portsArgs<ExtArgs>
+  origin_routes?: boolean | Prisma.islands$origin_routesArgs<ExtArgs>
+  destination_routes?: boolean | Prisma.islands$destination_routesArgs<ExtArgs>
   _count?: boolean | Prisma.IslandsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["islands"]>
 
@@ -508,7 +601,8 @@ export type islandsSelectScalar = {
 
 export type islandsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "description" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["islands"]>
 export type islandsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  ports?: boolean | Prisma.islands$portsArgs<ExtArgs>
+  origin_routes?: boolean | Prisma.islands$origin_routesArgs<ExtArgs>
+  destination_routes?: boolean | Prisma.islands$destination_routesArgs<ExtArgs>
   _count?: boolean | Prisma.IslandsCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type islandsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -517,7 +611,8 @@ export type islandsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $islandsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "islands"
   objects: {
-    ports: Prisma.$portsPayload<ExtArgs>[]
+    origin_routes: Prisma.$routesPayload<ExtArgs>[]
+    destination_routes: Prisma.$routesPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -921,7 +1016,8 @@ readonly fields: islandsFieldRefs;
  */
 export interface Prisma__islandsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  ports<T extends Prisma.islands$portsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.islands$portsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$portsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  origin_routes<T extends Prisma.islands$origin_routesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.islands$origin_routesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$routesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  destination_routes<T extends Prisma.islands$destination_routesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.islands$destination_routesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$routesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1351,27 +1447,51 @@ export type islandsDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * islands.ports
+ * islands.origin_routes
  */
-export type islands$portsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type islands$origin_routesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ports
+   * Select specific fields to fetch from the routes
    */
-  select?: Prisma.portsSelect<ExtArgs> | null
+  select?: Prisma.routesSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ports
+   * Omit specific fields from the routes
    */
-  omit?: Prisma.portsOmit<ExtArgs> | null
+  omit?: Prisma.routesOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.portsInclude<ExtArgs> | null
-  where?: Prisma.portsWhereInput
-  orderBy?: Prisma.portsOrderByWithRelationInput | Prisma.portsOrderByWithRelationInput[]
-  cursor?: Prisma.portsWhereUniqueInput
+  include?: Prisma.routesInclude<ExtArgs> | null
+  where?: Prisma.routesWhereInput
+  orderBy?: Prisma.routesOrderByWithRelationInput | Prisma.routesOrderByWithRelationInput[]
+  cursor?: Prisma.routesWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.PortsScalarFieldEnum | Prisma.PortsScalarFieldEnum[]
+  distinct?: Prisma.RoutesScalarFieldEnum | Prisma.RoutesScalarFieldEnum[]
+}
+
+/**
+ * islands.destination_routes
+ */
+export type islands$destination_routesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the routes
+   */
+  select?: Prisma.routesSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the routes
+   */
+  omit?: Prisma.routesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.routesInclude<ExtArgs> | null
+  where?: Prisma.routesWhereInput
+  orderBy?: Prisma.routesOrderByWithRelationInput | Prisma.routesOrderByWithRelationInput[]
+  cursor?: Prisma.routesWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoutesScalarFieldEnum | Prisma.RoutesScalarFieldEnum[]
 }
 
 /**

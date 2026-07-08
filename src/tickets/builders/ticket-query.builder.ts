@@ -49,27 +49,11 @@ export class TicketQueryBuilder {
         arrival_time: true,
         routes: {
           select: {
-            origin_ports: {
-              select: {
-                name: true,
-                code: true,
-                islands: {
-                  select: {
-                    name: true,
-                  },
-                },
-              },
+            origin_islands: {
+              select: { name: true, description: true, code: true },
             },
-            destination_ports: {
-              select: {
-                name: true,
-                code: true,
-                islands: {
-                  select: {
-                    name: true,
-                  },
-                },
-              },
+            destination_islands: {
+              select: { name: true, description: true, code: true },
             },
           },
         },
@@ -91,27 +75,11 @@ export class TicketQueryBuilder {
         arrival_time: true,
         routes: {
           select: {
-            origin_ports: {
-              select: {
-                name: true,
-                code: true,
-                islands: {
-                  select: {
-                    name: true,
-                  },
-                },
-              },
+            origin_islands: {
+              select: { name: true, description: true, code: true },
             },
-            destination_ports: {
-              select: {
-                name: true,
-                code: true,
-                islands: {
-                  select: {
-                    name: true,
-                  },
-                },
-              },
+            destination_islands: {
+              select: { name: true, description: true, code: true },
             },
           },
         },

@@ -16,5 +16,5 @@ export interface FerriesSchedule {
 }
 
 export interface RoutesSchedule {
-  base_price_national: Prisma.Decimal;
+  base_price: Prisma.Decimal;
 }

@@ -55,7 +55,6 @@ export const ModelName = {
   fare_extras: 'fare_extras',
   passenger_extras: 'passenger_extras',
   islands: 'islands',
-  ports: 'ports',
   routes: 'routes',
   ferries: 'ferries',
   schedules: 'schedules',
@@ -139,34 +138,13 @@ export const IslandsScalarFieldEnum = {
 export type IslandsScalarFieldEnum = (typeof IslandsScalarFieldEnum)[keyof typeof IslandsScalarFieldEnum]
 
 
-export const PortsScalarFieldEnum = {
-  id: 'id',
-  island_id: 'island_id',
-  name: 'name',
-  code: 'code',
-  address: 'address',
-  contact_phone: 'contact_phone',
-  latitude: 'latitude',
-  longitude: 'longitude',
-  is_active: 'is_active',
-  opening_time: 'opening_time',
-  closing_time: 'closing_time',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type PortsScalarFieldEnum = (typeof PortsScalarFieldEnum)[keyof typeof PortsScalarFieldEnum]
-
-
 export const RoutesScalarFieldEnum = {
   id: 'id',
-  origin_port_id: 'origin_port_id',
-  destination_port_id: 'destination_port_id',
+  origin_island_id: 'origin_island_id',
+  destination_island_id: 'destination_island_id',
   distance_km: 'distance_km',
   duration_minutes: 'duration_minutes',
-  base_price_resident: 'base_price_resident',
-  base_price_national: 'base_price_national',
-  base_price_foreign: 'base_price_foreign',
+  base_price: 'base_price',
   is_active: 'is_active',
   created_at: 'created_at',
   updated_at: 'updated_at'

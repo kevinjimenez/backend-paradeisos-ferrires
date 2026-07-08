@@ -21,14 +21,13 @@ export interface Ferries {
 }
 
 export interface Routes {
-  origin_ports: Ports;
-  destination_ports: Ports;
+  origin_islands: Islands;
+  destination_islands: Islands;
 }
 
-export interface Ports {
+export interface Islands {
   name: string;
   code: string;
-  islands: Ferries;
 }
 
 export interface Passenger {
