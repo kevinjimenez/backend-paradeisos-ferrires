@@ -317,24 +317,24 @@ async function main() {
   const santaCruz = await prisma.islands.create({
     data: {
       name: 'Santa Cruz',
-      code: 'SCZ',
-      description: 'Galápagos - Santa Cruz',
+      code: 'SCX',
+      description: 'Galápagos - Isla Santa Cruz',
     },
   });
 
   const sanCristobal = await prisma.islands.create({
     data: {
       name: 'San Cristóbal',
-      code: 'SCB',
-      description: 'Galápagos - San Cristóbal',
+      code: 'SCY',
+      description: 'Galápagos - Isla San Cristóbal',
     },
   });
 
   const isabela = await prisma.islands.create({
     data: {
       name: 'Isabela',
-      code: 'ISB',
-      description: 'Galápagos - Isabela',
+      code: 'ISA',
+      description: 'Galápagos - Isla Isabela',
     },
   });
 
@@ -343,6 +343,14 @@ async function main() {
       name: 'Baltra',
       code: 'BLT',
       description: 'Galápagos - Baltra',
+    },
+  });
+
+  const floreanaIsland = await prisma.islands.create({
+    data: {
+      name: 'Floreana',
+      code: 'FLO',
+      description: 'Galápagos - Isla Floreana',
     },
   });
 
