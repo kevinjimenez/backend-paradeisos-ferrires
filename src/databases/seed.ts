@@ -31,10 +31,10 @@ async function main() {
   console.log('🎫 Creating fares...');
   const fareLight = await prisma.fares.create({
     data: {
-      name: 'Light',
+      name: 'Básico',
       price: 0,
-      description: 'Tarifa Light - equipaje de mano incluido',
-      variant: 'primary',
+      description: 'Tarifa Básico - equipaje de mano incluido',
+      variant: 'secondary',
       features: [
         { text: 'Maleta de mano (5kg)', included: true },
         { text: 'Chaleco salvavidas', included: true },
@@ -46,10 +46,10 @@ async function main() {
   });
   const fareBasic = await prisma.fares.create({
     data: {
-      name: 'Basico',
+      name: 'Light',
       price: 50,
-      description: 'Tarifa Basic - equipaje de mano + 1 maleta',
-      variant: 'secondary',
+      description: 'Tarifa Light - equipaje de mano + 1 maleta',
+      variant: 'primary',
       features: [
         { text: 'Maleta de mano (5kg)', included: true },
         { text: 'Chaleco salvavidas', included: true },
@@ -80,69 +80,35 @@ async function main() {
   await prisma.fare_extras.createMany({
     data: [
       {
-        name: 'Equipaje extra (23kg)',
+        name: 'Asistencia Muelle / Hotel',
         code: 'BAGGAGE_23',
-        price: 15,
-        description: 'Maleta adicional de hasta 23kg',
+        price: 20,
+        description: 'Servicio compartido en el trayecto',
         features: [
-          { text: 'Maleta de hasta 23kg', included: true },
-          { text: 'Seguro de equipaje', included: false },
-          { text: 'Etiqueta de identificación', included: true },
+          {
+            text: 'Asistencia y transporte desde el hotel al muelle principal.',
+            included: true,
+          },
+          {
+            text: 'O del muelle principal al hotel (zona urbana).',
+            included: true,
+          },
         ],
       },
       {
-        name: 'Equipaje extra (32kg)',
+        name: 'Custodio de equipaje',
         code: 'BAGGAGE_32',
-        price: 25,
-        description: 'Maleta adicional de hasta 32kg',
+        price: 12,
+        description: 'Hasta 12 horas en oficina de Paradeisos.',
         features: [
-          { text: 'Maleta de hasta 32kg', included: true },
-          { text: 'Seguro de equipaje', included: true },
-          { text: 'Etiqueta de identificación', included: true },
-        ],
-      },
-      {
-        name: 'Bicicleta',
-        code: 'BICYCLE',
-        price: 20,
-        description: 'Transporte de bicicleta',
-        features: [
-          { text: 'Bicicleta hasta 15kg', included: true },
-          { text: 'Embalaje protector', included: false },
-          { text: 'Seguro de transporte', included: false },
-        ],
-      },
-      {
-        name: 'Mascota pequeña',
-        code: 'PET_SMALL',
-        price: 10,
-        description: 'Mascota hasta 5kg en cabina',
-        features: [
-          { text: 'Mascota hasta 5kg en cabina', included: true },
-          { text: 'Transportín incluido', included: false },
-          { text: 'Certificado veterinario requerido', included: true },
-        ],
-      },
-      {
-        name: 'Mascota grande',
-        code: 'PET_LARGE',
-        price: 20,
-        description: 'Mascota mayor a 5kg en bodega',
-        features: [
-          { text: 'Mascota mayor a 5kg en bodega', included: true },
-          { text: 'Transportín incluido', included: false },
-          { text: 'Certificado veterinario requerido', included: true },
-        ],
-      },
-      {
-        name: 'Asiento preferencial',
-        code: 'SEAT_PREF',
-        price: 8,
-        description: 'Asiento con más espacio o vista al mar',
-        features: [
-          { text: 'Vista al mar garantizada', included: true },
-          { text: 'Mayor espacio para las piernas', included: true },
-          { text: 'Embarque prioritario', included: false },
+          {
+            text: '1 equipaje de 5kg · 1 de 10kg · 1 de 23kg.',
+            included: true,
+          },
+          {
+            text: 'Registra tu equipaje en la oficina de Paradeisos Ferries.',
+            included: true,
+          },
         ],
       },
     ],
@@ -316,7 +282,7 @@ async function main() {
   console.log('🏝 Creating islands...');
   const santaCruz = await prisma.islands.create({
     data: {
-      name: 'Santa Cruz',
+      name: 'Isla Santa Cruz',
       code: 'SCX',
       description: 'Galápagos - Isla Santa Cruz',
     },
@@ -324,7 +290,7 @@ async function main() {
 
   const sanCristobal = await prisma.islands.create({
     data: {
-      name: 'San Cristóbal',
+      name: 'Isla San Cristóbal',
       code: 'SCY',
       description: 'Galápagos - Isla San Cristóbal',
     },
@@ -332,7 +298,7 @@ async function main() {
 
   const isabela = await prisma.islands.create({
     data: {
-      name: 'Isabela',
+      name: 'Isla Isabela',
       code: 'ISA',
       description: 'Galápagos - Isla Isabela',
     },
@@ -340,15 +306,15 @@ async function main() {
 
   const baltraIsland = await prisma.islands.create({
     data: {
-      name: 'Baltra',
+      name: 'Isla Baltra',
       code: 'BLT',
-      description: 'Galápagos - Baltra',
+      description: 'Galápagos - Isla Baltra',
     },
   });
 
   const floreanaIsland = await prisma.islands.create({
     data: {
-      name: 'Floreana',
+      name: 'Isla Floreana',
       code: 'FLO',
       description: 'Galápagos - Isla Floreana',
     },
