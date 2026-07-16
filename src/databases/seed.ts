@@ -119,21 +119,15 @@ async function main() {
   await prisma.catalogs.createMany({
     data: [
       {
-        category: 'GENDER',
-        code: 'M',
-        description: 'Masculino',
-        is_active: true,
-      },
-      {
-        category: 'GENDER',
-        code: 'F',
-        description: 'Femenino',
+        category: 'DOC_TYPE',
+        code: 'DNI',
+        description: 'DNI',
         is_active: true,
       },
       {
         category: 'DOC_TYPE',
-        code: 'DNI',
-        description: 'DNI',
+        code: 'RUC',
+        description: 'RUC',
         is_active: true,
       },
       {

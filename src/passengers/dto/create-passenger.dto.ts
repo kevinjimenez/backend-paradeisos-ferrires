@@ -22,6 +22,14 @@ export class CreatePassengerDto {
   @IsString()
   lastName: string;
 
+  @IsOptional()
+  @IsString()
+  country?: string;
+
+  @IsOptional()
+  @IsString()
+  city?: string;
+
   @IsNotEmpty()
   @IsString()
   email: string;

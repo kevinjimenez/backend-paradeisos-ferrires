@@ -28,10 +28,14 @@ export type ContactsMinAggregateOutputType = {
   id: string | null
   first_name: string | null
   last_name: string | null
+  legal_name: string | null
+  country: string | null
+  city: string | null
   email: string | null
   phone: string | null
   document_number: string | null
   document_type: $Enums.DocumentType | null
+  contact_type: $Enums.ContactType | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -40,10 +44,14 @@ export type ContactsMaxAggregateOutputType = {
   id: string | null
   first_name: string | null
   last_name: string | null
+  legal_name: string | null
+  country: string | null
+  city: string | null
   email: string | null
   phone: string | null
   document_number: string | null
   document_type: $Enums.DocumentType | null
+  contact_type: $Enums.ContactType | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -52,10 +60,14 @@ export type ContactsCountAggregateOutputType = {
   id: number
   first_name: number
   last_name: number
+  legal_name: number
+  country: number
+  city: number
   email: number
   phone: number
   document_number: number
   document_type: number
+  contact_type: number
   created_at: number
   updated_at: number
   _all: number
@@ -66,10 +78,14 @@ export type ContactsMinAggregateInputType = {
   id?: true
   first_name?: true
   last_name?: true
+  legal_name?: true
+  country?: true
+  city?: true
   email?: true
   phone?: true
   document_number?: true
   document_type?: true
+  contact_type?: true
   created_at?: true
   updated_at?: true
 }
@@ -78,10 +94,14 @@ export type ContactsMaxAggregateInputType = {
   id?: true
   first_name?: true
   last_name?: true
+  legal_name?: true
+  country?: true
+  city?: true
   email?: true
   phone?: true
   document_number?: true
   document_type?: true
+  contact_type?: true
   created_at?: true
   updated_at?: true
 }
@@ -90,10 +110,14 @@ export type ContactsCountAggregateInputType = {
   id?: true
   first_name?: true
   last_name?: true
+  legal_name?: true
+  country?: true
+  city?: true
   email?: true
   phone?: true
   document_number?: true
   document_type?: true
+  contact_type?: true
   created_at?: true
   updated_at?: true
   _all?: true
@@ -173,12 +197,16 @@ export type contactsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type ContactsGroupByOutputType = {
   id: string
-  first_name: string
-  last_name: string
+  first_name: string | null
+  last_name: string | null
+  legal_name: string | null
+  country: string
+  city: string | null
   email: string
   phone: string | null
   document_number: string
   document_type: $Enums.DocumentType
+  contact_type: $Enums.ContactType
   created_at: Date
   updated_at: Date
   _count: ContactsCountAggregateOutputType | null
@@ -206,12 +234,16 @@ export type contactsWhereInput = {
   OR?: Prisma.contactsWhereInput[]
   NOT?: Prisma.contactsWhereInput | Prisma.contactsWhereInput[]
   id?: Prisma.StringFilter<"contacts"> | string
-  first_name?: Prisma.StringFilter<"contacts"> | string
-  last_name?: Prisma.StringFilter<"contacts"> | string
+  first_name?: Prisma.StringNullableFilter<"contacts"> | string | null
+  last_name?: Prisma.StringNullableFilter<"contacts"> | string | null
+  legal_name?: Prisma.StringNullableFilter<"contacts"> | string | null
+  country?: Prisma.StringFilter<"contacts"> | string
+  city?: Prisma.StringNullableFilter<"contacts"> | string | null
   email?: Prisma.StringFilter<"contacts"> | string
   phone?: Prisma.StringNullableFilter<"contacts"> | string | null
   document_number?: Prisma.StringFilter<"contacts"> | string
   document_type?: Prisma.EnumDocumentTypeFilter<"contacts"> | $Enums.DocumentType
+  contact_type?: Prisma.EnumContactTypeFilter<"contacts"> | $Enums.ContactType
   created_at?: Prisma.DateTimeFilter<"contacts"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"contacts"> | Date | string
   tickets?: Prisma.TicketsListRelationFilter
@@ -220,12 +252,16 @@ export type contactsWhereInput = {
 
 export type contactsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  first_name?: Prisma.SortOrder
-  last_name?: Prisma.SortOrder
+  first_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  last_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  legal_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  country?: Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   document_number?: Prisma.SortOrder
   document_type?: Prisma.SortOrder
+  contact_type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   tickets?: Prisma.ticketsOrderByRelationAggregateInput
@@ -239,10 +275,14 @@ export type contactsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.contactsWhereInput | Prisma.contactsWhereInput[]
   OR?: Prisma.contactsWhereInput[]
   NOT?: Prisma.contactsWhereInput | Prisma.contactsWhereInput[]
-  first_name?: Prisma.StringFilter<"contacts"> | string
-  last_name?: Prisma.StringFilter<"contacts"> | string
+  first_name?: Prisma.StringNullableFilter<"contacts"> | string | null
+  last_name?: Prisma.StringNullableFilter<"contacts"> | string | null
+  legal_name?: Prisma.StringNullableFilter<"contacts"> | string | null
+  country?: Prisma.StringFilter<"contacts"> | string
+  city?: Prisma.StringNullableFilter<"contacts"> | string | null
   phone?: Prisma.StringNullableFilter<"contacts"> | string | null
   document_type?: Prisma.EnumDocumentTypeFilter<"contacts"> | $Enums.DocumentType
+  contact_type?: Prisma.EnumContactTypeFilter<"contacts"> | $Enums.ContactType
   created_at?: Prisma.DateTimeFilter<"contacts"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"contacts"> | Date | string
   tickets?: Prisma.TicketsListRelationFilter
@@ -251,12 +291,16 @@ export type contactsWhereUniqueInput = Prisma.AtLeast<{
 
 export type contactsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  first_name?: Prisma.SortOrder
-  last_name?: Prisma.SortOrder
+  first_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  last_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  legal_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  country?: Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   document_number?: Prisma.SortOrder
   document_type?: Prisma.SortOrder
+  contact_type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   _count?: Prisma.contactsCountOrderByAggregateInput
@@ -269,24 +313,32 @@ export type contactsScalarWhereWithAggregatesInput = {
   OR?: Prisma.contactsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.contactsScalarWhereWithAggregatesInput | Prisma.contactsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"contacts"> | string
-  first_name?: Prisma.StringWithAggregatesFilter<"contacts"> | string
-  last_name?: Prisma.StringWithAggregatesFilter<"contacts"> | string
+  first_name?: Prisma.StringNullableWithAggregatesFilter<"contacts"> | string | null
+  last_name?: Prisma.StringNullableWithAggregatesFilter<"contacts"> | string | null
+  legal_name?: Prisma.StringNullableWithAggregatesFilter<"contacts"> | string | null
+  country?: Prisma.StringWithAggregatesFilter<"contacts"> | string
+  city?: Prisma.StringNullableWithAggregatesFilter<"contacts"> | string | null
   email?: Prisma.StringWithAggregatesFilter<"contacts"> | string
   phone?: Prisma.StringNullableWithAggregatesFilter<"contacts"> | string | null
   document_number?: Prisma.StringWithAggregatesFilter<"contacts"> | string
   document_type?: Prisma.EnumDocumentTypeWithAggregatesFilter<"contacts"> | $Enums.DocumentType
+  contact_type?: Prisma.EnumContactTypeWithAggregatesFilter<"contacts"> | $Enums.ContactType
   created_at?: Prisma.DateTimeWithAggregatesFilter<"contacts"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"contacts"> | Date | string
 }
 
 export type contactsCreateInput = {
   id?: string
-  first_name: string
-  last_name: string
+  first_name?: string | null
+  last_name?: string | null
+  legal_name?: string | null
+  country?: string
+  city?: string | null
   email: string
   phone?: string | null
   document_number: string
   document_type: $Enums.DocumentType
+  contact_type?: $Enums.ContactType
   created_at?: Date | string
   updated_at?: Date | string
   tickets?: Prisma.ticketsCreateNestedManyWithoutContactsInput
@@ -295,12 +347,16 @@ export type contactsCreateInput = {
 
 export type contactsUncheckedCreateInput = {
   id?: string
-  first_name: string
-  last_name: string
+  first_name?: string | null
+  last_name?: string | null
+  legal_name?: string | null
+  country?: string
+  city?: string | null
   email: string
   phone?: string | null
   document_number: string
   document_type: $Enums.DocumentType
+  contact_type?: $Enums.ContactType
   created_at?: Date | string
   updated_at?: Date | string
   tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutContactsInput
@@ -309,12 +365,16 @@ export type contactsUncheckedCreateInput = {
 
 export type contactsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legal_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
   document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
+  contact_type?: Prisma.EnumContactTypeFieldUpdateOperationsInput | $Enums.ContactType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.ticketsUpdateManyWithoutContactsNestedInput
@@ -323,12 +383,16 @@ export type contactsUpdateInput = {
 
 export type contactsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legal_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
   document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
+  contact_type?: Prisma.EnumContactTypeFieldUpdateOperationsInput | $Enums.ContactType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.ticketsUncheckedUpdateManyWithoutContactsNestedInput
@@ -337,36 +401,48 @@ export type contactsUncheckedUpdateInput = {
 
 export type contactsCreateManyInput = {
   id?: string
-  first_name: string
-  last_name: string
+  first_name?: string | null
+  last_name?: string | null
+  legal_name?: string | null
+  country?: string
+  city?: string | null
   email: string
   phone?: string | null
   document_number: string
   document_type: $Enums.DocumentType
+  contact_type?: $Enums.ContactType
   created_at?: Date | string
   updated_at?: Date | string
 }
 
 export type contactsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legal_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
   document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
+  contact_type?: Prisma.EnumContactTypeFieldUpdateOperationsInput | $Enums.ContactType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type contactsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legal_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
   document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
+  contact_type?: Prisma.EnumContactTypeFieldUpdateOperationsInput | $Enums.ContactType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -375,10 +451,14 @@ export type contactsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
+  legal_name?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  city?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   document_number?: Prisma.SortOrder
   document_type?: Prisma.SortOrder
+  contact_type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -387,10 +467,14 @@ export type contactsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
+  legal_name?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  city?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   document_number?: Prisma.SortOrder
   document_type?: Prisma.SortOrder
+  contact_type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -399,10 +483,14 @@ export type contactsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
+  legal_name?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  city?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   document_number?: Prisma.SortOrder
   document_type?: Prisma.SortOrder
+  contact_type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -414,6 +502,10 @@ export type ContactsNullableScalarRelationFilter = {
 
 export type EnumDocumentTypeFieldUpdateOperationsInput = {
   set?: $Enums.DocumentType
+}
+
+export type EnumContactTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ContactType
 }
 
 export type contactsCreateNestedOneWithoutSeat_holdsInput = {
@@ -450,12 +542,16 @@ export type contactsUpdateOneWithoutTicketsNestedInput = {
 
 export type contactsCreateWithoutSeat_holdsInput = {
   id?: string
-  first_name: string
-  last_name: string
+  first_name?: string | null
+  last_name?: string | null
+  legal_name?: string | null
+  country?: string
+  city?: string | null
   email: string
   phone?: string | null
   document_number: string
   document_type: $Enums.DocumentType
+  contact_type?: $Enums.ContactType
   created_at?: Date | string
   updated_at?: Date | string
   tickets?: Prisma.ticketsCreateNestedManyWithoutContactsInput
@@ -463,12 +559,16 @@ export type contactsCreateWithoutSeat_holdsInput = {
 
 export type contactsUncheckedCreateWithoutSeat_holdsInput = {
   id?: string
-  first_name: string
-  last_name: string
+  first_name?: string | null
+  last_name?: string | null
+  legal_name?: string | null
+  country?: string
+  city?: string | null
   email: string
   phone?: string | null
   document_number: string
   document_type: $Enums.DocumentType
+  contact_type?: $Enums.ContactType
   created_at?: Date | string
   updated_at?: Date | string
   tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutContactsInput
@@ -492,12 +592,16 @@ export type contactsUpdateToOneWithWhereWithoutSeat_holdsInput = {
 
 export type contactsUpdateWithoutSeat_holdsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legal_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
   document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
+  contact_type?: Prisma.EnumContactTypeFieldUpdateOperationsInput | $Enums.ContactType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.ticketsUpdateManyWithoutContactsNestedInput
@@ -505,12 +609,16 @@ export type contactsUpdateWithoutSeat_holdsInput = {
 
 export type contactsUncheckedUpdateWithoutSeat_holdsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legal_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
   document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
+  contact_type?: Prisma.EnumContactTypeFieldUpdateOperationsInput | $Enums.ContactType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.ticketsUncheckedUpdateManyWithoutContactsNestedInput
@@ -518,12 +626,16 @@ export type contactsUncheckedUpdateWithoutSeat_holdsInput = {
 
 export type contactsCreateWithoutTicketsInput = {
   id?: string
-  first_name: string
-  last_name: string
+  first_name?: string | null
+  last_name?: string | null
+  legal_name?: string | null
+  country?: string
+  city?: string | null
   email: string
   phone?: string | null
   document_number: string
   document_type: $Enums.DocumentType
+  contact_type?: $Enums.ContactType
   created_at?: Date | string
   updated_at?: Date | string
   seat_holds?: Prisma.seat_holdsCreateNestedManyWithoutContactsInput
@@ -531,12 +643,16 @@ export type contactsCreateWithoutTicketsInput = {
 
 export type contactsUncheckedCreateWithoutTicketsInput = {
   id?: string
-  first_name: string
-  last_name: string
+  first_name?: string | null
+  last_name?: string | null
+  legal_name?: string | null
+  country?: string
+  city?: string | null
   email: string
   phone?: string | null
   document_number: string
   document_type: $Enums.DocumentType
+  contact_type?: $Enums.ContactType
   created_at?: Date | string
   updated_at?: Date | string
   seat_holds?: Prisma.seat_holdsUncheckedCreateNestedManyWithoutContactsInput
@@ -560,12 +676,16 @@ export type contactsUpdateToOneWithWhereWithoutTicketsInput = {
 
 export type contactsUpdateWithoutTicketsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legal_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
   document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
+  contact_type?: Prisma.EnumContactTypeFieldUpdateOperationsInput | $Enums.ContactType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   seat_holds?: Prisma.seat_holdsUpdateManyWithoutContactsNestedInput
@@ -573,12 +693,16 @@ export type contactsUpdateWithoutTicketsInput = {
 
 export type contactsUncheckedUpdateWithoutTicketsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legal_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
   document_type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
+  contact_type?: Prisma.EnumContactTypeFieldUpdateOperationsInput | $Enums.ContactType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   seat_holds?: Prisma.seat_holdsUncheckedUpdateManyWithoutContactsNestedInput
@@ -628,10 +752,14 @@ export type contactsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   first_name?: boolean
   last_name?: boolean
+  legal_name?: boolean
+  country?: boolean
+  city?: boolean
   email?: boolean
   phone?: boolean
   document_number?: boolean
   document_type?: boolean
+  contact_type?: boolean
   created_at?: boolean
   updated_at?: boolean
   tickets?: boolean | Prisma.contacts$ticketsArgs<ExtArgs>
@@ -643,10 +771,14 @@ export type contactsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   first_name?: boolean
   last_name?: boolean
+  legal_name?: boolean
+  country?: boolean
+  city?: boolean
   email?: boolean
   phone?: boolean
   document_number?: boolean
   document_type?: boolean
+  contact_type?: boolean
   created_at?: boolean
   updated_at?: boolean
 }, ExtArgs["result"]["contacts"]>
@@ -655,10 +787,14 @@ export type contactsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   first_name?: boolean
   last_name?: boolean
+  legal_name?: boolean
+  country?: boolean
+  city?: boolean
   email?: boolean
   phone?: boolean
   document_number?: boolean
   document_type?: boolean
+  contact_type?: boolean
   created_at?: boolean
   updated_at?: boolean
 }, ExtArgs["result"]["contacts"]>
@@ -667,15 +803,19 @@ export type contactsSelectScalar = {
   id?: boolean
   first_name?: boolean
   last_name?: boolean
+  legal_name?: boolean
+  country?: boolean
+  city?: boolean
   email?: boolean
   phone?: boolean
   document_number?: boolean
   document_type?: boolean
+  contact_type?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type contactsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "first_name" | "last_name" | "email" | "phone" | "document_number" | "document_type" | "created_at" | "updated_at", ExtArgs["result"]["contacts"]>
+export type contactsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "first_name" | "last_name" | "legal_name" | "country" | "city" | "email" | "phone" | "document_number" | "document_type" | "contact_type" | "created_at" | "updated_at", ExtArgs["result"]["contacts"]>
 export type contactsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tickets?: boolean | Prisma.contacts$ticketsArgs<ExtArgs>
   seat_holds?: boolean | Prisma.contacts$seat_holdsArgs<ExtArgs>
@@ -692,12 +832,16 @@ export type $contactsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    first_name: string
-    last_name: string
+    first_name: string | null
+    last_name: string | null
+    legal_name: string | null
+    country: string
+    city: string | null
     email: string
     phone: string | null
     document_number: string
     document_type: $Enums.DocumentType
+    contact_type: $Enums.ContactType
     created_at: Date
     updated_at: Date
   }, ExtArgs["result"]["contacts"]>
@@ -1128,10 +1272,14 @@ export interface contactsFieldRefs {
   readonly id: Prisma.FieldRef<"contacts", 'String'>
   readonly first_name: Prisma.FieldRef<"contacts", 'String'>
   readonly last_name: Prisma.FieldRef<"contacts", 'String'>
+  readonly legal_name: Prisma.FieldRef<"contacts", 'String'>
+  readonly country: Prisma.FieldRef<"contacts", 'String'>
+  readonly city: Prisma.FieldRef<"contacts", 'String'>
   readonly email: Prisma.FieldRef<"contacts", 'String'>
   readonly phone: Prisma.FieldRef<"contacts", 'String'>
   readonly document_number: Prisma.FieldRef<"contacts", 'String'>
   readonly document_type: Prisma.FieldRef<"contacts", 'DocumentType'>
+  readonly contact_type: Prisma.FieldRef<"contacts", 'ContactType'>
   readonly created_at: Prisma.FieldRef<"contacts", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"contacts", 'DateTime'>
 }

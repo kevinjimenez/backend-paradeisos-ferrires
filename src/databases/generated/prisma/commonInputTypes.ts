@@ -340,6 +340,13 @@ export type EnumDocumentTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumDocumentTypeFilter<$PrismaModel> | $Enums.DocumentType
 }
 
+export type EnumContactTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ContactType | Prisma.EnumContactTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ContactType[] | Prisma.ListEnumContactTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ContactType[] | Prisma.ListEnumContactTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumContactTypeFilter<$PrismaModel> | $Enums.ContactType
+}
+
 export type EnumDocumentTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.DocumentType | Prisma.EnumDocumentTypeFieldRefInput<$PrismaModel>
   in?: $Enums.DocumentType[] | Prisma.ListEnumDocumentTypeFieldRefInput<$PrismaModel>
@@ -348,6 +355,16 @@ export type EnumDocumentTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumDocumentTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumDocumentTypeFilter<$PrismaModel>
+}
+
+export type EnumContactTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ContactType | Prisma.EnumContactTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ContactType[] | Prisma.ListEnumContactTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ContactType[] | Prisma.ListEnumContactTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumContactTypeWithAggregatesFilter<$PrismaModel> | $Enums.ContactType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumContactTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumContactTypeFilter<$PrismaModel>
 }
 
 export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -823,6 +840,13 @@ export type NestedEnumDocumentTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumDocumentTypeFilter<$PrismaModel> | $Enums.DocumentType
 }
 
+export type NestedEnumContactTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ContactType | Prisma.EnumContactTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ContactType[] | Prisma.ListEnumContactTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ContactType[] | Prisma.ListEnumContactTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumContactTypeFilter<$PrismaModel> | $Enums.ContactType
+}
+
 export type NestedEnumDocumentTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.DocumentType | Prisma.EnumDocumentTypeFieldRefInput<$PrismaModel>
   in?: $Enums.DocumentType[] | Prisma.ListEnumDocumentTypeFieldRefInput<$PrismaModel>
@@ -831,6 +855,16 @@ export type NestedEnumDocumentTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumDocumentTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumDocumentTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumContactTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ContactType | Prisma.EnumContactTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ContactType[] | Prisma.ListEnumContactTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ContactType[] | Prisma.ListEnumContactTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumContactTypeWithAggregatesFilter<$PrismaModel> | $Enums.ContactType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumContactTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumContactTypeFilter<$PrismaModel>
 }
 
 export type NestedDateTimeNullableFilter<$PrismaModel = never> = {

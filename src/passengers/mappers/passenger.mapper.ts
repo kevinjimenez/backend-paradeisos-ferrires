@@ -5,6 +5,8 @@ export class PassengerMapper {
     return {
       first_name: dto.firstName,
       last_name: dto.lastName,
+      country: dto.country ?? null,
+      city: dto.city ?? null,
       document_number: dto.documentNumber,
       document_type: dto.documentType,
       email: dto.email,

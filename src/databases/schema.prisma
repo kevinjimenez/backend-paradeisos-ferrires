@@ -16,7 +16,13 @@ datasource db {
 
 enum DocumentType {
   dni // cedula
+  ruc
   passport
+}
+
+enum ContactType {
+  natural_person
+  juridical_person
 }
 
 // TABLE fares
@@ -172,13 +178,17 @@ model schedules {
 // TABLE contacts
 model contacts {
   id              String  @id @default(uuid())
-  first_name      String  @db.VarChar(100)
-  last_name       String  @db.VarChar(100)
+  first_name      String? @db.VarChar(100)
+  last_name       String? @db.VarChar(100)
+  legal_name      String? @db.VarChar(100)
+  country         String  @default("EC") @db.VarChar(100)
+  city            String? @db.VarChar(100)
   email           String  @unique @db.VarChar(255)
   phone           String? @db.VarChar(20)
   document_number String  @unique @db.VarChar(50)
 
   document_type DocumentType
+  contact_type  ContactType @default(natural_person)
 
   created_at DateTime     @default(now())
   updated_at DateTime     @updatedAt
@@ -201,6 +211,8 @@ model passengers {
   //
   first_name          String  @db.VarChar(100)
   last_name           String  @db.VarChar(100)
+  country             String? @db.VarChar(100)
+  city                String? @db.VarChar(100)
   email               String? @db.VarChar(255)
   phone               String? @db.VarChar(20)
   document_number     String  @unique @db.VarChar(50)

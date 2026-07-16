@@ -1604,10 +1604,14 @@ export const ContactsScalarFieldEnum = {
   id: 'id',
   first_name: 'first_name',
   last_name: 'last_name',
+  legal_name: 'legal_name',
+  country: 'country',
+  city: 'city',
   email: 'email',
   phone: 'phone',
   document_number: 'document_number',
   document_type: 'document_type',
+  contact_type: 'contact_type',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -1622,6 +1626,8 @@ export const PassengersScalarFieldEnum = {
   return_fare_id: 'return_fare_id',
   first_name: 'first_name',
   last_name: 'last_name',
+  country: 'country',
+  city: 'city',
   email: 'email',
   phone: 'phone',
   document_number: 'document_number',
@@ -1918,6 +1924,20 @@ export type EnumDocumentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'DocumentType[]'
  */
 export type ListEnumDocumentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocumentType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ContactType'
+ */
+export type EnumContactTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactType'>
+    
+
+
+/**
+ * Reference to a field of type 'ContactType[]'
+ */
+export type ListEnumContactTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactType[]'>
     
 
 
