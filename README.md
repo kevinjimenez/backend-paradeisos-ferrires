@@ -73,6 +73,99 @@ npm run lint
 npm run format
 ```
 
+## Despliegue (Railway)
+
+El proyecto se despliega en [Railway](https://railway.com) usando su builder **Railpack** (sin Docker ni Kubernetes). Pasos:
+
+### 1. Servicios del proyecto
+
+- **API**: deploy desde GitHub, branch `staging` (o `main` para producción).
+- **PostgreSQL**: plugin nativo de Railway (`+ New → Database → Add PostgreSQL`).
+- **Redis** (pendiente, cuando se migre `EventEmitter2` → BullMQ, ver `docs/BULLMQ_REDIS_PLAN.md`).
+
+### 2. Variables de entorno del servicio API
+
+Referenciadas desde el plugin de Postgres (botón "Add Reference"), **no** copiadas a mano, para que se actualicen solas si Railway rota credenciales:
+
+```
+DB_HOST=${{Postgres.PGHOST}}
+DB_PORT=${{Postgres.PGPORT}}
+DB_USERNAME=${{Postgres.PGUSER}}
+DB_PASSWORD=${{Postgres.PGPASSWORD}}
+DB_NAME=${{Postgres.PGDATABASE}}
+DATABASE_URL=${{Postgres.DATABASE_URL}}
+```
+
+Manuales (obligatorias según `envs.ts`, sin default):
+
+```
+PAGINATION_LIMIT=10
+PAGINATION_MAX=10
+PAGINATION_PAGE=1
+CHECK_IN_TIME=30
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USER=...
+MAIL_PASS=...
+MAIL_FROM=...
+```
+
+Recomendadas:
+
+```
+NODE_ENV=production
+CORS_ORIGIN=<url del frontend>
+```
+
+Necesaria para que Chromium/Playwright funcione (ver punto 4):
+
+```
+PLAYWRIGHT_BROWSERS_PATH=/app/.cache/ms-playwright
+```
+
+`PORT` no se setea — Railway lo inyecta solo.
+
+### 3. Settings → Build
+
+**Custom Build Command:**
+
+```
+npm install && npx prisma generate && npx playwright install chromium --with-deps && npm run build
+```
+
+Se instala Chromium explícitamente acá (en vez de depender de la detección automática de Playwright de Railpack) porque esa detección automática guarda el navegador en una ruta que no siempre persiste hacia la imagen final de deploy.
+
+### 4. `railpack.json` — librerías de sistema para Chromium en runtime
+
+`--with-deps` instala las libs de sistema durante el **build**, pero Railpack no las lleva a la imagen de **deploy** (son etapas separadas). Por eso se declaran explícitamente como dependencias de runtime en `railpack.json` (raíz del repo):
+
+```json
+{
+  "$schema": "https://schema.railpack.com",
+  "deploy": {
+    "aptPackages": ["libglib2.0-0", "libnss3", "libnspr4", "..."]
+  }
+}
+```
+
+Sin esto, el arranque falla con `error while loading shared libraries: libglib-2.0.so.0: cannot open shared object file`.
+
+### 5. Settings → Deploy
+
+- **Pre-Deploy Command**: `npx prisma migrate deploy --config prisma.config.ts` — aplica migraciones antes de cada arranque. No reemplaza ni se solapa con el Build Command (ese no toca la DB, `prisma generate` solo lee el schema).
+- **Custom Start Command**: `node dist/src/main`
+- **Healthcheck Path**: `/health`
+
+### 6. Seed — manual, nunca automático
+
+`npm run db:seed` **borra todas las tablas** antes de recrear catálogos (fares, islands, ferries). Nunca ponerlo en el Pre-Deploy Command — correría en cada deploy y destruiría datos reales. Se corre a mano, una sola vez (o cuando se quiera resetear catálogo), con la Railway CLI:
+
+```bash
+railway login
+railway link
+railway run npm run db:seed
+```
+
 ## Troubleshooting
 
 ### Puerto ocupado (`EADDRINUSE`)
