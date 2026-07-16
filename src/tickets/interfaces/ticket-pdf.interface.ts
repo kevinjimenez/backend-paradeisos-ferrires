@@ -1,5 +1,6 @@
 export interface TicketPdf {
   ticketCode: string;
+  qrCode: string;
   passengers: PassengerPdf[];
   checkInTime: string;
   date: string;
@@ -18,5 +19,5 @@ export interface TicketPdf {
 export interface PassengerPdf {
   name: string;
   code: string;
-  // country: string;
+  country: string;
 }

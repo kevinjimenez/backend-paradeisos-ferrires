@@ -9,6 +9,11 @@
         "include": "**/*.ejs",
         "outDir": "dist/src",
         "watchAssets": true
+      },
+      {
+        "include": "**/*.svg",
+        "outDir": "dist/src",
+        "watchAssets": true
       }
     ]
   }

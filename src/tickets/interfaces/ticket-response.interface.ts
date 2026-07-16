@@ -33,5 +33,6 @@ export interface Islands {
 export interface Passenger {
   first_name: string;
   last_name: string;
+  country: string | null;
   document_number: string;
 }

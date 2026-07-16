@@ -19,6 +19,7 @@ export class TicketQueryBuilder {
       select: {
         first_name: true,
         last_name: true,
+        country: true,
         document_number: true,
         unit_price: true,
         outbound_fare: {

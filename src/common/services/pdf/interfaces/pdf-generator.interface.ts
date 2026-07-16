@@ -1,6 +1,6 @@
 export interface PdfGenerator<T> {
   getTemplatePath(): string;
-  prepareData(data: T): Record<string, any>;
+  prepareData(data: T): Record<string, any> | Promise<Record<string, any>>;
   getPdfOptions(): PdfGeneratorOptions;
 }
 

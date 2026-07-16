@@ -17,10 +17,11 @@ export class TicketMapper {
   static toTicketOutboundResponse(ticket: TicketResponse): TicketPdf {
     return {
       ticketCode: ticket.ticket_code,
+      qrCode: ticket.qr_code ?? ticket.ticket_code,
       passengers: ticket.passengers.map((p) => ({
         name: `${p.first_name} ${p.last_name}`,
         code: p.document_number,
-        // country: 'USA',
+        country: p.country ?? '',
       })),
       checkInTime: DateUtil.formatTime(
         DateUtil.subtractMinutes(
@@ -46,10 +47,11 @@ export class TicketMapper {
   static toTicketInboundResponse(ticket: TicketResponse): TicketPdf {
     return {
       ticketCode: ticket.ticket_code,
+      qrCode: ticket.qr_code ?? ticket.ticket_code,
       passengers: ticket.passengers.map((p) => ({
         name: `${p.first_name} ${p.last_name}`,
         code: p.document_number,
-        // country: 'USA',
+        country: p.country ?? '',
       })),
       checkInTime: DateUtil.formatTime(
         DateUtil.subtractMinutes(
