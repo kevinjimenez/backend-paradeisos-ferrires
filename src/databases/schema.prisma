@@ -72,11 +72,13 @@ model passenger_extras {
 
 // TABLE islands
 model islands {
-  id          String  @id @default(uuid())
-  name        String  @db.VarChar(100)
-  code        String  @unique @db.VarChar(10)
-  description String  @db.Text
-  is_active   Boolean @default(true)
+  id           String  @id @default(uuid())
+  name         String  @db.VarChar(100)
+  code         String  @unique @db.VarChar(10)
+  description  String  @db.Text
+  pier_name    String  @db.VarChar(150)
+  port_address String  @db.VarChar(200)
+  is_active    Boolean @default(true)
 
   created_at         DateTime @default(now())
   updated_at         DateTime @updatedAt

@@ -1539,6 +1539,8 @@ export const IslandsScalarFieldEnum = {
   name: 'name',
   code: 'code',
   description: 'description',
+  pier_name: 'pier_name',
+  port_address: 'port_address',
   is_active: 'is_active',
   created_at: 'created_at',
   updated_at: 'updated_at'
