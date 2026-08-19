@@ -37,25 +37,53 @@ async function main() {
       variant: 'secondary',
       features: [
         { text: 'Maleta de mano (5kg)', included: true },
-        { text: 'Chaleco salvavidas', included: true },
-        { text: 'Traslado muelle a muelle', included: false },
-        { text: 'Snack a bordo', included: false },
-        { text: 'Seguro de viaje', included: false },
+        { text: 'Maleta de 23kg', included: true },
+        { text: 'Maleta de 10kg', included: false },
+        {
+          text: 'Cambio de fecha o ruta u hora',
+          included: false,
+          description: '48 horas antes de fecha de salida',
+        },
+        {
+          text: 'Equipaje extra',
+          included: false,
+          description:
+            'Tabla de surf, caja de herramientas, equipos de buceo, otros.',
+        },
+        {
+          text: 'Reembolso 0%',
+          included: false,
+          description: 'Solo precio ticket ferry',
+        },
       ],
     },
   });
   const fareBasic = await prisma.fares.create({
     data: {
       name: 'Light',
-      price: 50,
+      price: 40,
       description: 'Tarifa Light - equipaje de mano + 1 maleta',
       variant: 'primary',
       features: [
         { text: 'Maleta de mano (5kg)', included: true },
-        { text: 'Chaleco salvavidas', included: true },
-        { text: 'Traslado muelle a muelle', included: true },
-        { text: 'Snack a bordo', included: true },
-        { text: 'Seguro de viaje', included: false },
+        { text: 'Maleta de 23kg', included: true },
+        { text: 'Maleta de 10kg', included: true },
+        {
+          text: 'Cambio de fecha o ruta u hora',
+          included: true,
+          description: '48 horas antes de fecha de salida',
+        },
+        {
+          text: 'Equipaje extra',
+          included: false,
+          description:
+            'Tabla de surf, caja de herramientas, equipos de buceo, otros.',
+        },
+        {
+          text: 'Reembolso 50%',
+          included: false,
+          description: 'Solo precio ticket ferry',
+        },
       ],
     },
   });
@@ -67,10 +95,24 @@ async function main() {
       variant: 'primary',
       features: [
         { text: 'Maleta de mano (5kg)', included: true },
-        { text: 'Chaleco salvavidas', included: true },
-        { text: 'Traslado muelle a muelle', included: true },
-        { text: 'Snack a bordo', included: true },
-        { text: 'Seguro de viaje', included: true },
+        { text: 'Maleta de 23kg', included: true },
+        { text: 'Maleta de 10kg', included: true },
+        {
+          text: 'Cambio de fecha o ruta u hora',
+          included: true,
+          description: '48 horas antes de fecha de salida',
+        },
+        {
+          text: 'Equipaje extra',
+          included: true,
+          description:
+            'Tabla de surf, caja de herramientas, equipos de buceo, otros.',
+        },
+        {
+          text: 'Reembolso 100%',
+          included: true,
+          description: 'Solo precio ticket ferry',
+        },
       ],
     },
   });
