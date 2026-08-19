@@ -128,11 +128,11 @@ async function main() {
         description: 'Servicio compartido en el trayecto',
         features: [
           {
-            text: 'Asistencia y transporte desde el hotel al muelle principal.',
+            text: 'Asistencia y transporte desde el Hotel hacia el muelle principal',
             included: true,
           },
           {
-            text: 'O del muelle principal al hotel (zona urbana).',
+            text: 'O asistencia y transporte desde el muelle principal hacia el hotel',
             included: true,
           },
         ],
