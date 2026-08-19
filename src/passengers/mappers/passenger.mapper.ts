@@ -8,6 +8,7 @@ export class PassengerMapper {
       country: dto.country ?? null,
       city: dto.city ?? null,
       document_number: dto.documentNumber,
+      date_of_birth: new Date(dto.dateOfBirth),
       document_type: dto.documentType,
       email: dto.email,
       phone: dto.phone,

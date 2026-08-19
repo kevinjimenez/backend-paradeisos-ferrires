@@ -216,6 +216,7 @@ model passengers {
   email               String? @db.VarChar(255)
   phone               String? @db.VarChar(20)
   document_number     String  @unique @db.VarChar(50)
+  date_of_birth       DateTime @db.Date
   unit_price          Decimal @db.Decimal(10, 2)
   is_primary          Boolean @default(false)
   checked_in_outbound Boolean @default(false)

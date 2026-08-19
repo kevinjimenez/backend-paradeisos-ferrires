@@ -252,7 +252,7 @@ export type SchedulesGroupByOutputType = {
   _max: SchedulesMaxAggregateOutputType | null
 }
 
-export type GetSchedulesGroupByPayload<T extends schedulesGroupByArgs> = Prisma.PrismaPromise<
+type GetSchedulesGroupByPayload<T extends schedulesGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<SchedulesGroupByOutputType, T['by']> &
       {
@@ -2047,11 +2047,6 @@ export type schedulesFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Skip the first `n` schedules.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of schedules.
-   */
   distinct?: Prisma.SchedulesScalarFieldEnum | Prisma.SchedulesScalarFieldEnum[]
 }
 

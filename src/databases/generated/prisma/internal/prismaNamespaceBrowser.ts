@@ -222,6 +222,7 @@ export const PassengersScalarFieldEnum = {
   email: 'email',
   phone: 'phone',
   document_number: 'document_number',
+  date_of_birth: 'date_of_birth',
   unit_price: 'unit_price',
   is_primary: 'is_primary',
   checked_in_outbound: 'checked_in_outbound',

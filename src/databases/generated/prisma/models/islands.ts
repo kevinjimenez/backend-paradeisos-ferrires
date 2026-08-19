@@ -172,7 +172,7 @@ export type IslandsGroupByOutputType = {
   _max: IslandsMaxAggregateOutputType | null
 }
 
-export type GetIslandsGroupByPayload<T extends islandsGroupByArgs> = Prisma.PrismaPromise<
+type GetIslandsGroupByPayload<T extends islandsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<IslandsGroupByOutputType, T['by']> &
       {
@@ -1250,11 +1250,6 @@ export type islandsFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` islands.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of islands.
-   */
   distinct?: Prisma.IslandsScalarFieldEnum | Prisma.IslandsScalarFieldEnum[]
 }
 

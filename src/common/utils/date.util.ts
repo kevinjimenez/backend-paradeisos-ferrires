@@ -19,4 +19,27 @@ export class DateUtil {
       year: 'numeric',
     });
   }
+
+  static getAge(
+    dateOfBirth: Date | string,
+    referenceDate: Date = new Date(),
+  ): number {
+    const birthDate = new Date(dateOfBirth);
+    let age = referenceDate.getFullYear() - birthDate.getFullYear();
+    const hasHadBirthdayThisYear =
+      referenceDate.getMonth() > birthDate.getMonth() ||
+      (referenceDate.getMonth() === birthDate.getMonth() &&
+        referenceDate.getDate() >= birthDate.getDate());
+
+    if (!hasHadBirthdayThisYear) age -= 1;
+
+    return age;
+  }
+
+  static isChildUnderFive(
+    dateOfBirth: Date | string,
+    referenceDate: Date = new Date(),
+  ): boolean {
+    return DateUtil.getAge(dateOfBirth, referenceDate) < 5;
+  }
 }
