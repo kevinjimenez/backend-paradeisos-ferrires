@@ -57,6 +57,7 @@ export const ModelName = {
   islands: 'islands',
   routes: 'routes',
   ferries: 'ferries',
+  schedule_templates: 'schedule_templates',
   schedules: 'schedules',
   contacts: 'contacts',
   passengers: 'passengers',
@@ -174,10 +175,26 @@ export const FerriesScalarFieldEnum = {
 export type FerriesScalarFieldEnum = (typeof FerriesScalarFieldEnum)[keyof typeof FerriesScalarFieldEnum]
 
 
+export const Schedule_templatesScalarFieldEnum = {
+  id: 'id',
+  route_id: 'route_id',
+  ferry_id: 'ferry_id',
+  departure_hour: 'departure_hour',
+  departure_minute: 'departure_minute',
+  is_active: 'is_active',
+  notes: 'notes',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Schedule_templatesScalarFieldEnum = (typeof Schedule_templatesScalarFieldEnum)[keyof typeof Schedule_templatesScalarFieldEnum]
+
+
 export const SchedulesScalarFieldEnum = {
   id: 'id',
   route_id: 'route_id',
   ferry_id: 'ferry_id',
+  schedule_template_id: 'schedule_template_id',
   total_capacity: 'total_capacity',
   available_seats: 'available_seats',
   cancellation_reason: 'cancellation_reason',

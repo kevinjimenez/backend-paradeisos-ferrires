@@ -102,10 +102,11 @@ model routes {
   base_price            Decimal  @db.Decimal(10, 2)
   is_active             Boolean  @default(true)
 
-  created_at DateTime    @default(now())
-  updated_at DateTime    @updatedAt
+  created_at         DateTime             @default(now())
+  updated_at         DateTime             @updatedAt
   // Relations one-to-many
-  schedules  schedules[]
+  schedules          schedules[]
+  schedule_templates schedule_templates[]
 }
 
 // TABLE ferries
@@ -135,6 +136,30 @@ model ferries {
   type   FerryType   @default(normal)
   status FerryStatus @default(active)
 
+  created_at         DateTime             @default(now())
+  updated_at         DateTime             @updatedAt
+  // Relations one-to-many
+  schedules          schedules[]
+  schedule_templates schedule_templates[]
+}
+
+// TABLE schedule_templates
+// Patrón recurrente (ruta + hora) del que el generador crea filas concretas
+// en `schedules` por adelantado. Desactivar un template "bloquea" ese
+// horario sin borrar el histórico ya generado.
+model schedule_templates {
+  id      String  @id @default(uuid())
+  routes  routes  @relation(fields: [route_id], references: [id])
+  ferries ferries @relation(fields: [ferry_id], references: [id])
+
+  route_id String
+  ferry_id String
+
+  departure_hour   Int
+  departure_minute Int
+  is_active        Boolean @default(true)
+  notes            String? @db.Text
+
   created_at DateTime    @default(now())
   updated_at DateTime    @updatedAt
   // Relations one-to-many
@@ -151,18 +176,20 @@ enum ScheduleStatus {
 }
 
 model schedules {
-  id      String   @id @default(uuid())
+  id                 String              @id @default(uuid())
   // Relations many-to-one
-  routes  routes?  @relation(fields: [route_id], references: [id])
-  ferries ferries? @relation(fields: [ferry_id], references: [id])
+  routes             routes?             @relation(fields: [route_id], references: [id])
+  ferries            ferries?            @relation(fields: [ferry_id], references: [id])
+  schedule_templates schedule_templates? @relation(fields: [schedule_template_id], references: [id])
 
-  route_id            String?
-  ferry_id            String?
+  route_id             String?
+  ferry_id             String?
+  schedule_template_id String?
   //
-  total_capacity      Int
-  available_seats     Int
-  cancellation_reason String? @db.Text
-  notes               String? @db.Text
+  total_capacity       Int
+  available_seats      Int
+  cancellation_reason  String? @db.Text
+  notes                String? @db.Text
 
   status ScheduleStatus @default(scheduled)
 
@@ -190,7 +217,7 @@ model contacts {
   document_number String  @unique @db.VarChar(50)
 
   document_type DocumentType
-  contact_type  ContactType @default(natural_person)
+  contact_type  ContactType  @default(natural_person)
 
   created_at DateTime     @default(now())
   updated_at DateTime     @updatedAt
@@ -208,21 +235,21 @@ model passengers {
   ticket_id           String?
   outbound_fare_id    String?
   return_fare_id      String?
-  outbound_fare       fares?  @relation("outbound_fare", fields: [outbound_fare_id], references: [id])
-  return_fare         fares?  @relation("return_fare", fields: [return_fare_id], references: [id])
+  outbound_fare       fares?   @relation("outbound_fare", fields: [outbound_fare_id], references: [id])
+  return_fare         fares?   @relation("return_fare", fields: [return_fare_id], references: [id])
   //
-  first_name          String  @db.VarChar(100)
-  last_name           String  @db.VarChar(100)
-  country             String? @db.VarChar(100)
-  city                String? @db.VarChar(100)
-  email               String? @db.VarChar(255)
-  phone               String? @db.VarChar(20)
-  document_number     String  @unique @db.VarChar(50)
+  first_name          String   @db.VarChar(100)
+  last_name           String   @db.VarChar(100)
+  country             String?  @db.VarChar(100)
+  city                String?  @db.VarChar(100)
+  email               String?  @db.VarChar(255)
+  phone               String?  @db.VarChar(20)
+  document_number     String   @unique @db.VarChar(50)
   date_of_birth       DateTime @db.Date
-  unit_price          Decimal @db.Decimal(10, 2)
-  is_primary          Boolean @default(false)
-  checked_in_outbound Boolean @default(false)
-  checked_in_return   Boolean @default(false)
+  unit_price          Decimal  @db.Decimal(10, 2)
+  is_primary          Boolean  @default(false)
+  checked_in_outbound Boolean  @default(false)
+  checked_in_return   Boolean  @default(false)
 
   document_type DocumentType
 
