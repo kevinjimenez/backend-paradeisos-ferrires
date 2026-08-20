@@ -154,22 +154,6 @@ async function main() {
           },
         ],
       },
-      // Cargos obligatorios (no seleccionables por el usuario, se inyectan
-      // por pasajero en create-ticket.command.ts). No tienen `features`.
-      {
-        name: 'Taxi acuático',
-        code: 'WATER_TAXI',
-        price: 1,
-        description:
-          '$1 por persona por tramo, en Santa Cruz, San Cristóbal, Isabela y Floreana',
-      },
-      {
-        name: 'Tasa de muelle - Isabela',
-        code: 'ISABELA_PIER_FEE',
-        price: 5,
-        description:
-          '$5 turistas nacionales / $10 turistas extranjeros, por tramo que incluya Isabela',
-      },
     ],
   });
 

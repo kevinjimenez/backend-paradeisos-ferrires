@@ -27,18 +27,6 @@ export class SchedulesService {
     }
   }
 
-  async findRouteIslandCodes(scheduleId: string) {
-    try {
-      return await this.schedulesRepository.findRouteIslandCodes(scheduleId);
-    } catch (error) {
-      return handleServiceError(
-        error,
-        this.logger,
-        `Failed to resolve route islands for schedule ${scheduleId}`,
-      );
-    }
-  }
-
   private buildWhereFromFilters(
     filters: SchedulesFilterDto,
   ): Prisma.schedulesWhereInput {

@@ -32,16 +32,4 @@ export class FareExtrasService {
       );
     }
   }
-
-  async findByCode(code: string) {
-    try {
-      return await this.fareExtrasRepository.findByCode(code);
-    } catch (error) {
-      return handleServiceError(
-        error,
-        this.logger,
-        `Failed to fetch fare extra ${code}`,
-      );
-    }
-  }
 }
