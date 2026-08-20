@@ -65,6 +65,32 @@ export class SchedulesRepository extends BaseRepository<Prisma.schedulesModel> {
     });
   }
 
+  async findRouteIslandCodes(
+    scheduleId: string,
+    tx?: PrismaTransaction,
+  ): Promise<{ originCode: string; destinationCode: string } | null> {
+    const database = tx ?? this.db;
+
+    const schedule = await database.schedules.findUnique({
+      where: { id: scheduleId },
+      select: {
+        routes: {
+          select: {
+            origin_islands: { select: { code: true } },
+            destination_islands: { select: { code: true } },
+          },
+        },
+      },
+    });
+
+    if (!schedule?.routes) return null;
+
+    return {
+      originCode: schedule.routes.origin_islands.code,
+      destinationCode: schedule.routes.destination_islands.code,
+    };
+  }
+
   async restoreSeats(
     scheduleId: string,
     quantity: number,

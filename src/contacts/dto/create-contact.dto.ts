@@ -1,5 +1,6 @@
 import { DocumentType, ContactType } from './../../databases/generated/prisma/enums';
 import {
+  IsDateString,
   IsEnum,
   IsNotEmpty,
   IsOptional,
@@ -50,4 +51,11 @@ export class CreateContactDto {
   @IsNotEmpty()
   @IsEnum(DocumentType)
   documentType: DocumentType;
+
+  // El contacto no necesariamente viaja — no requerido, y no se persiste
+  // (no existe columna date_of_birth en `contacts`). Se acepta solo porque
+  // el front comparte el mismo tipo de datos entre contacto y pasajero.
+  @IsOptional()
+  @IsDateString()
+  dateOfBirth?: string;
 }

@@ -4,6 +4,7 @@ import { FareExtrasModule } from './../fare-extras/fare-extras.module';
 import { FaresModule } from './../fares/fares.module';
 import { PassengersModule } from './../passengers/passengers.module';
 import { PaymentsModule } from './../payments/payments.module';
+import { SchedulesModule } from './../schedules/schedules.module';
 import { CreateTicketCommand } from './commands/create-ticket.command';
 import { TicketFactory } from './factories/ticket.factory';
 import { TicketPdfGenerator } from './generators/ticket-pdf.generator';
@@ -19,6 +20,7 @@ import { GenerateTicketPdfListener } from './listeners/generate-ticket-pdf.liste
     FaresModule,
     PassengersModule,
     PaymentsModule,
+    SchedulesModule,
   ],
   controllers: [TicketsController],
   providers: [

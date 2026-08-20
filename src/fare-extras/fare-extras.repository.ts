@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DatabasesService } from 'src/databases/databases.service';
 import { BaseRepository } from '../common/base/base.repository';
 import { Prisma } from '../databases/generated/prisma/client';
+import { PrismaTransaction } from '../common/types/prisma-transaction.type';
 
 @Injectable()
 export class FareExtrasRepository extends BaseRepository<Prisma.fare_extrasModel> {
@@ -23,5 +24,10 @@ export class FareExtrasRepository extends BaseRepository<Prisma.fare_extrasModel
 
   findById(id: string) {
     return this.db.fare_extras.findUnique({ where: { id } });
+  }
+
+  findByCode(code: string, tx?: PrismaTransaction) {
+    const database = tx ?? this.db;
+    return database.fare_extras.findUnique({ where: { code } });
   }
 }
