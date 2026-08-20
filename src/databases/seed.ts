@@ -366,7 +366,7 @@ async function main() {
     data: {
       name: 'Paradeisos Ferry',
       register_code: 'PDS-001',
-      capacity: 300,
+      capacity: 50,
       operator_name: 'Paradeisos Ferries',
       operator_phone: '+593 999999999',
       operator_email: 'ops@paradeisos.com',
