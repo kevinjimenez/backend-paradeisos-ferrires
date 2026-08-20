@@ -36,10 +36,10 @@ export class DateUtil {
     return age;
   }
 
-  static isChildUnderFive(
+  static isEligibleForChildDiscount(
     dateOfBirth: Date | string,
     referenceDate: Date = new Date(),
   ): boolean {
-    return DateUtil.getAge(dateOfBirth, referenceDate) < 5;
+    return DateUtil.getAge(dateOfBirth, referenceDate) <= 5;
   }
 }
