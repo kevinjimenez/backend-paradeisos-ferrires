@@ -531,10 +531,17 @@ async function main() {
   });
 
   // SCHEDULES
-  // Un solo schedule manual (no ligado a ningún template) solo para poder
-  // crear el ticket/hold/pago de ejemplo sin depender de que la app ya haya
-  // arrancado y generado los horarios reales.
+  // Un solo schedule manual solo para poder crear el ticket/hold/pago de
+  // ejemplo sin depender de que la app ya haya arrancado y generado los
+  // horarios reales. Se liga al template Santa Cruz → San Cristóbal 07:00
+  // para que el generador lo detecte como ya generado en esa fecha y no
+  // cree una fila duplicada para la misma ruta/hora.
   console.log('📅 Creating schedules...');
+  const route1MorningTemplate =
+    await prisma.schedule_templates.findFirstOrThrow({
+      where: { route_id: route1.id, departure_hour: 7, departure_minute: 0 },
+    });
+
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   tomorrow.setHours(7, 0, 0, 0);
@@ -544,6 +551,7 @@ async function main() {
     data: {
       route_id: route1.id,
       ferry_id: ferry1.id,
+      schedule_template_id: route1MorningTemplate.id,
       departure_date: tomorrow,
       departure_time: tomorrow,
       arrival_time: arrival,
