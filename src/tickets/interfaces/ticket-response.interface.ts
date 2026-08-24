@@ -35,4 +35,5 @@ export interface Passenger {
   last_name: string;
   country: string | null;
   document_number: string;
+  date_of_birth: Date;
 }

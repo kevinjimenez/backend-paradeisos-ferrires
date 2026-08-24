@@ -19,7 +19,8 @@ export class TicketMapper {
       ticketCode: ticket.ticket_code,
       qrCode: ticket.qr_code ?? ticket.ticket_code,
       passengers: ticket.passengers.map((p) => ({
-        name: `${p.first_name} ${p.last_name}`,
+        name: `${p.last_name} ${p.first_name}`.toUpperCase(),
+        age: DateUtil.getAge(p.date_of_birth),
         code: p.document_number,
         country: p.country ?? '',
       })),
@@ -49,7 +50,8 @@ export class TicketMapper {
       ticketCode: ticket.ticket_code,
       qrCode: ticket.qr_code ?? ticket.ticket_code,
       passengers: ticket.passengers.map((p) => ({
-        name: `${p.first_name} ${p.last_name}`,
+        name: `${p.last_name} ${p.first_name}`.toUpperCase(),
+        age: DateUtil.getAge(p.date_of_birth),
         code: p.document_number,
         country: p.country ?? '',
       })),
