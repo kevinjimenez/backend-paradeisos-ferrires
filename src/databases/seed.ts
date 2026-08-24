@@ -19,6 +19,7 @@ async function main() {
   await prisma.tickets.deleteMany();
   await prisma.seat_holds.deleteMany();
   await prisma.schedules.deleteMany();
+  await prisma.schedule_templates.deleteMany();
   await prisma.routes.deleteMany();
   await prisma.ferries.deleteMany();
   await prisma.islands.deleteMany();
@@ -365,7 +366,7 @@ async function main() {
     data: {
       name: 'Paradeisos Ferry',
       register_code: 'PDS-001',
-      capacity: 300,
+      capacity: 50,
       operator_name: 'Paradeisos Ferries',
       operator_phone: '+593 999999999',
       operator_email: 'ops@paradeisos.com',
@@ -447,84 +448,119 @@ async function main() {
     },
   });
 
-  // SCHEDULES
+  // SCHEDULE TEMPLATES
   // Horario fijo diario por isla, según las rutas asignadas. Los horarios sin
   // servicio real (Floreana 15:00→17:00 salida y 08:00→10:00 regreso) se dejan
-  // bloqueados: simplemente no se crea el schedule para esa franja.
-  console.log('📅 Creating schedules...');
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  tomorrow.setHours(0, 0, 0, 0);
-
-  const DAYS_TO_SEED = 3;
-  const SCHEDULE_DURATION_MINUTES = 120;
-
-  const createSchedule = (
-    dayOffset: number,
-    route: Awaited<ReturnType<typeof prisma.routes.create>>,
-    hour: number,
-    minute: number,
-    seatsSold: number,
-    notes: string,
-  ) => {
-    const day = new Date(tomorrow);
-    day.setDate(tomorrow.getDate() + dayOffset);
-    const departureAt = new Date(day);
-    departureAt.setHours(hour, minute, 0, 0);
-    const arrivalAt = new Date(
-      departureAt.getTime() + SCHEDULE_DURATION_MINUTES * 60 * 1000,
-    );
-
-    return prisma.schedules.create({
-      data: {
-        route_id: route.id,
+  // bloqueados: simplemente no se crea el template para esa franja. Las filas
+  // concretas de `schedules` las genera la app al arrancar/cada noche
+  // (ver ScheduleGeneratorService en src/tasks), no el seed.
+  console.log('🗓 Creating schedule templates...');
+  await prisma.schedule_templates.createMany({
+    data: [
+      {
+        route_id: route1.id,
         ferry_id: ferry1.id,
-        departure_date: departureAt,
-        departure_time: departureAt,
-        arrival_time: arrivalAt,
-        total_capacity: ferry1.capacity,
-        available_seats: ferry1.capacity - seatsSold,
-        status: 'scheduled',
-        notes,
+        departure_hour: 7,
+        departure_minute: 0,
+        notes: 'Santa Cruz → San Cristóbal',
       },
+      {
+        route_id: route1.id,
+        ferry_id: ferry1.id,
+        departure_hour: 15,
+        departure_minute: 0,
+        notes: 'Santa Cruz → San Cristóbal',
+      },
+      {
+        route_id: route5.id,
+        ferry_id: ferry1.id,
+        departure_hour: 7,
+        departure_minute: 0,
+        notes: 'San Cristóbal → Santa Cruz',
+      },
+      {
+        route_id: route5.id,
+        ferry_id: ferry1.id,
+        departure_hour: 15,
+        departure_minute: 0,
+        notes: 'San Cristóbal → Santa Cruz',
+      },
+      {
+        route_id: route3.id,
+        ferry_id: ferry1.id,
+        departure_hour: 7,
+        departure_minute: 0,
+        notes: 'Santa Cruz → Isabela',
+      },
+      {
+        route_id: route3.id,
+        ferry_id: ferry1.id,
+        departure_hour: 15,
+        departure_minute: 0,
+        notes: 'Santa Cruz → Isabela',
+      },
+      {
+        route_id: route7.id,
+        ferry_id: ferry1.id,
+        departure_hour: 6,
+        departure_minute: 0,
+        notes: 'Isabela → Santa Cruz',
+      },
+      {
+        route_id: route7.id,
+        ferry_id: ferry1.id,
+        departure_hour: 15,
+        departure_minute: 0,
+        notes: 'Isabela → Santa Cruz',
+      },
+      {
+        route_id: route9.id,
+        ferry_id: ferry1.id,
+        departure_hour: 8,
+        departure_minute: 0,
+        notes: 'Santa Cruz → Floreana',
+      },
+      {
+        route_id: route10.id,
+        ferry_id: ferry1.id,
+        departure_hour: 15,
+        departure_minute: 0,
+        notes: 'Floreana → Santa Cruz',
+      },
+    ],
+  });
+
+  // SCHEDULES
+  // Un solo schedule manual solo para poder crear el ticket/hold/pago de
+  // ejemplo sin depender de que la app ya haya arrancado y generado los
+  // horarios reales. Se liga al template Santa Cruz → San Cristóbal 07:00
+  // para que el generador lo detecte como ya generado en esa fecha y no
+  // cree una fila duplicada para la misma ruta/hora.
+  console.log('📅 Creating schedules...');
+  const route1MorningTemplate =
+    await prisma.schedule_templates.findFirstOrThrow({
+      where: { route_id: route1.id, departure_hour: 7, departure_minute: 0 },
     });
-  };
 
-  // Franja horaria: { route, hour, minute, notes }. Floreana solo tiene 1
-  // horario activo por sentido (no hay ferry en el resto de franjas).
-  const DAILY_TIMETABLE = [
-    { route: route1, hour: 7, minute: 0, notes: 'Santa Cruz → San Cristóbal' },
-    { route: route1, hour: 15, minute: 0, notes: 'Santa Cruz → San Cristóbal' },
-    { route: route5, hour: 7, minute: 0, notes: 'San Cristóbal → Santa Cruz' },
-    { route: route5, hour: 15, minute: 0, notes: 'San Cristóbal → Santa Cruz' },
-    { route: route3, hour: 7, minute: 0, notes: 'Santa Cruz → Isabela' },
-    { route: route3, hour: 15, minute: 0, notes: 'Santa Cruz → Isabela' },
-    { route: route7, hour: 6, minute: 0, notes: 'Isabela → Santa Cruz' },
-    { route: route7, hour: 15, minute: 0, notes: 'Isabela → Santa Cruz' },
-    { route: route9, hour: 8, minute: 0, notes: 'Santa Cruz → Floreana' },
-    { route: route10, hour: 15, minute: 0, notes: 'Floreana → Santa Cruz' },
-  ];
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(7, 0, 0, 0);
+  const arrival = new Date(tomorrow.getTime() + 120 * 60 * 1000);
 
-  let schedule1: Awaited<ReturnType<typeof createSchedule>> | undefined;
-  for (let day = 0; day < DAYS_TO_SEED; day++) {
-    for (let i = 0; i < DAILY_TIMETABLE.length; i++) {
-      const slot = DAILY_TIMETABLE[i];
-      const created = await createSchedule(
-        day,
-        slot.route,
-        slot.hour,
-        slot.minute,
-        10 + i * 5,
-        slot.notes,
-      );
-      if (day === 0 && slot.route === route1 && slot.hour === 7) {
-        schedule1 = created;
-      }
-    }
-  }
-  if (!schedule1)
-    throw new Error('schedule1 not created — check DAILY_TIMETABLE');
+  const schedule1 = await prisma.schedules.create({
+    data: {
+      route_id: route1.id,
+      ferry_id: ferry1.id,
+      schedule_template_id: route1MorningTemplate.id,
+      departure_date: tomorrow,
+      departure_time: tomorrow,
+      arrival_time: arrival,
+      total_capacity: ferry1.capacity,
+      available_seats: ferry1.capacity - 10,
+      status: 'scheduled',
+      notes: 'Schedule de ejemplo para el ticket de prueba del seed',
+    },
+  });
 
   // SEAT HOLDS
   console.log('⏳ Creating seat holds...');

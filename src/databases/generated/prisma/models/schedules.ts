@@ -40,6 +40,7 @@ export type SchedulesMinAggregateOutputType = {
   id: string | null
   route_id: string | null
   ferry_id: string | null
+  schedule_template_id: string | null
   total_capacity: number | null
   available_seats: number | null
   cancellation_reason: string | null
@@ -56,6 +57,7 @@ export type SchedulesMaxAggregateOutputType = {
   id: string | null
   route_id: string | null
   ferry_id: string | null
+  schedule_template_id: string | null
   total_capacity: number | null
   available_seats: number | null
   cancellation_reason: string | null
@@ -72,6 +74,7 @@ export type SchedulesCountAggregateOutputType = {
   id: number
   route_id: number
   ferry_id: number
+  schedule_template_id: number
   total_capacity: number
   available_seats: number
   cancellation_reason: number
@@ -100,6 +103,7 @@ export type SchedulesMinAggregateInputType = {
   id?: true
   route_id?: true
   ferry_id?: true
+  schedule_template_id?: true
   total_capacity?: true
   available_seats?: true
   cancellation_reason?: true
@@ -116,6 +120,7 @@ export type SchedulesMaxAggregateInputType = {
   id?: true
   route_id?: true
   ferry_id?: true
+  schedule_template_id?: true
   total_capacity?: true
   available_seats?: true
   cancellation_reason?: true
@@ -132,6 +137,7 @@ export type SchedulesCountAggregateInputType = {
   id?: true
   route_id?: true
   ferry_id?: true
+  schedule_template_id?: true
   total_capacity?: true
   available_seats?: true
   cancellation_reason?: true
@@ -235,6 +241,7 @@ export type SchedulesGroupByOutputType = {
   id: string
   route_id: string | null
   ferry_id: string | null
+  schedule_template_id: string | null
   total_capacity: number
   available_seats: number
   cancellation_reason: string | null
@@ -274,6 +281,7 @@ export type schedulesWhereInput = {
   id?: Prisma.StringFilter<"schedules"> | string
   route_id?: Prisma.StringNullableFilter<"schedules"> | string | null
   ferry_id?: Prisma.StringNullableFilter<"schedules"> | string | null
+  schedule_template_id?: Prisma.StringNullableFilter<"schedules"> | string | null
   total_capacity?: Prisma.IntFilter<"schedules"> | number
   available_seats?: Prisma.IntFilter<"schedules"> | number
   cancellation_reason?: Prisma.StringNullableFilter<"schedules"> | string | null
@@ -286,6 +294,7 @@ export type schedulesWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"schedules"> | Date | string
   routes?: Prisma.XOR<Prisma.RoutesNullableScalarRelationFilter, Prisma.routesWhereInput> | null
   ferries?: Prisma.XOR<Prisma.FerriesNullableScalarRelationFilter, Prisma.ferriesWhereInput> | null
+  schedule_templates?: Prisma.XOR<Prisma.Schedule_templatesNullableScalarRelationFilter, Prisma.schedule_templatesWhereInput> | null
   seat_holds?: Prisma.Seat_holdsListRelationFilter
   return_tickets?: Prisma.TicketsListRelationFilter
   outbound_tickets?: Prisma.TicketsListRelationFilter
@@ -295,6 +304,7 @@ export type schedulesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   route_id?: Prisma.SortOrderInput | Prisma.SortOrder
   ferry_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  schedule_template_id?: Prisma.SortOrderInput | Prisma.SortOrder
   total_capacity?: Prisma.SortOrder
   available_seats?: Prisma.SortOrder
   cancellation_reason?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -307,6 +317,7 @@ export type schedulesOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrder
   routes?: Prisma.routesOrderByWithRelationInput
   ferries?: Prisma.ferriesOrderByWithRelationInput
+  schedule_templates?: Prisma.schedule_templatesOrderByWithRelationInput
   seat_holds?: Prisma.seat_holdsOrderByRelationAggregateInput
   return_tickets?: Prisma.ticketsOrderByRelationAggregateInput
   outbound_tickets?: Prisma.ticketsOrderByRelationAggregateInput
@@ -319,6 +330,7 @@ export type schedulesWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.schedulesWhereInput | Prisma.schedulesWhereInput[]
   route_id?: Prisma.StringNullableFilter<"schedules"> | string | null
   ferry_id?: Prisma.StringNullableFilter<"schedules"> | string | null
+  schedule_template_id?: Prisma.StringNullableFilter<"schedules"> | string | null
   total_capacity?: Prisma.IntFilter<"schedules"> | number
   available_seats?: Prisma.IntFilter<"schedules"> | number
   cancellation_reason?: Prisma.StringNullableFilter<"schedules"> | string | null
@@ -331,6 +343,7 @@ export type schedulesWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeFilter<"schedules"> | Date | string
   routes?: Prisma.XOR<Prisma.RoutesNullableScalarRelationFilter, Prisma.routesWhereInput> | null
   ferries?: Prisma.XOR<Prisma.FerriesNullableScalarRelationFilter, Prisma.ferriesWhereInput> | null
+  schedule_templates?: Prisma.XOR<Prisma.Schedule_templatesNullableScalarRelationFilter, Prisma.schedule_templatesWhereInput> | null
   seat_holds?: Prisma.Seat_holdsListRelationFilter
   return_tickets?: Prisma.TicketsListRelationFilter
   outbound_tickets?: Prisma.TicketsListRelationFilter
@@ -340,6 +353,7 @@ export type schedulesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   route_id?: Prisma.SortOrderInput | Prisma.SortOrder
   ferry_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  schedule_template_id?: Prisma.SortOrderInput | Prisma.SortOrder
   total_capacity?: Prisma.SortOrder
   available_seats?: Prisma.SortOrder
   cancellation_reason?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -364,6 +378,7 @@ export type schedulesScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"schedules"> | string
   route_id?: Prisma.StringNullableWithAggregatesFilter<"schedules"> | string | null
   ferry_id?: Prisma.StringNullableWithAggregatesFilter<"schedules"> | string | null
+  schedule_template_id?: Prisma.StringNullableWithAggregatesFilter<"schedules"> | string | null
   total_capacity?: Prisma.IntWithAggregatesFilter<"schedules"> | number
   available_seats?: Prisma.IntWithAggregatesFilter<"schedules"> | number
   cancellation_reason?: Prisma.StringNullableWithAggregatesFilter<"schedules"> | string | null
@@ -390,6 +405,7 @@ export type schedulesCreateInput = {
   updated_at?: Date | string
   routes?: Prisma.routesCreateNestedOneWithoutSchedulesInput
   ferries?: Prisma.ferriesCreateNestedOneWithoutSchedulesInput
+  schedule_templates?: Prisma.schedule_templatesCreateNestedOneWithoutSchedulesInput
   seat_holds?: Prisma.seat_holdsCreateNestedManyWithoutSchedulesInput
   return_tickets?: Prisma.ticketsCreateNestedManyWithoutReturn_schedulesInput
   outbound_tickets?: Prisma.ticketsCreateNestedManyWithoutOutbound_schedulesInput
@@ -399,6 +415,7 @@ export type schedulesUncheckedCreateInput = {
   id?: string
   route_id?: string | null
   ferry_id?: string | null
+  schedule_template_id?: string | null
   total_capacity: number
   available_seats: number
   cancellation_reason?: string | null
@@ -428,6 +445,7 @@ export type schedulesUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   routes?: Prisma.routesUpdateOneWithoutSchedulesNestedInput
   ferries?: Prisma.ferriesUpdateOneWithoutSchedulesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUpdateOneWithoutSchedulesNestedInput
   seat_holds?: Prisma.seat_holdsUpdateManyWithoutSchedulesNestedInput
   return_tickets?: Prisma.ticketsUpdateManyWithoutReturn_schedulesNestedInput
   outbound_tickets?: Prisma.ticketsUpdateManyWithoutOutbound_schedulesNestedInput
@@ -437,6 +455,7 @@ export type schedulesUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule_template_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
   available_seats?: Prisma.IntFieldUpdateOperationsInput | number
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -456,6 +475,7 @@ export type schedulesCreateManyInput = {
   id?: string
   route_id?: string | null
   ferry_id?: string | null
+  schedule_template_id?: string | null
   total_capacity: number
   available_seats: number
   cancellation_reason?: string | null
@@ -486,6 +506,7 @@ export type schedulesUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule_template_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
   available_seats?: Prisma.IntFieldUpdateOperationsInput | number
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -512,6 +533,7 @@ export type schedulesCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   route_id?: Prisma.SortOrder
   ferry_id?: Prisma.SortOrder
+  schedule_template_id?: Prisma.SortOrder
   total_capacity?: Prisma.SortOrder
   available_seats?: Prisma.SortOrder
   cancellation_reason?: Prisma.SortOrder
@@ -533,6 +555,7 @@ export type schedulesMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   route_id?: Prisma.SortOrder
   ferry_id?: Prisma.SortOrder
+  schedule_template_id?: Prisma.SortOrder
   total_capacity?: Prisma.SortOrder
   available_seats?: Prisma.SortOrder
   cancellation_reason?: Prisma.SortOrder
@@ -549,6 +572,7 @@ export type schedulesMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   route_id?: Prisma.SortOrder
   ferry_id?: Prisma.SortOrder
+  schedule_template_id?: Prisma.SortOrder
   total_capacity?: Prisma.SortOrder
   available_seats?: Prisma.SortOrder
   cancellation_reason?: Prisma.SortOrder
@@ -655,6 +679,48 @@ export type schedulesUncheckedUpdateManyWithoutFerriesNestedInput = {
   deleteMany?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
 }
 
+export type schedulesCreateNestedManyWithoutSchedule_templatesInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutSchedule_templatesInput, Prisma.schedulesUncheckedCreateWithoutSchedule_templatesInput> | Prisma.schedulesCreateWithoutSchedule_templatesInput[] | Prisma.schedulesUncheckedCreateWithoutSchedule_templatesInput[]
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutSchedule_templatesInput | Prisma.schedulesCreateOrConnectWithoutSchedule_templatesInput[]
+  createMany?: Prisma.schedulesCreateManySchedule_templatesInputEnvelope
+  connect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+}
+
+export type schedulesUncheckedCreateNestedManyWithoutSchedule_templatesInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutSchedule_templatesInput, Prisma.schedulesUncheckedCreateWithoutSchedule_templatesInput> | Prisma.schedulesCreateWithoutSchedule_templatesInput[] | Prisma.schedulesUncheckedCreateWithoutSchedule_templatesInput[]
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutSchedule_templatesInput | Prisma.schedulesCreateOrConnectWithoutSchedule_templatesInput[]
+  createMany?: Prisma.schedulesCreateManySchedule_templatesInputEnvelope
+  connect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+}
+
+export type schedulesUpdateManyWithoutSchedule_templatesNestedInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutSchedule_templatesInput, Prisma.schedulesUncheckedCreateWithoutSchedule_templatesInput> | Prisma.schedulesCreateWithoutSchedule_templatesInput[] | Prisma.schedulesUncheckedCreateWithoutSchedule_templatesInput[]
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutSchedule_templatesInput | Prisma.schedulesCreateOrConnectWithoutSchedule_templatesInput[]
+  upsert?: Prisma.schedulesUpsertWithWhereUniqueWithoutSchedule_templatesInput | Prisma.schedulesUpsertWithWhereUniqueWithoutSchedule_templatesInput[]
+  createMany?: Prisma.schedulesCreateManySchedule_templatesInputEnvelope
+  set?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  disconnect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  delete?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  connect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  update?: Prisma.schedulesUpdateWithWhereUniqueWithoutSchedule_templatesInput | Prisma.schedulesUpdateWithWhereUniqueWithoutSchedule_templatesInput[]
+  updateMany?: Prisma.schedulesUpdateManyWithWhereWithoutSchedule_templatesInput | Prisma.schedulesUpdateManyWithWhereWithoutSchedule_templatesInput[]
+  deleteMany?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
+}
+
+export type schedulesUncheckedUpdateManyWithoutSchedule_templatesNestedInput = {
+  create?: Prisma.XOR<Prisma.schedulesCreateWithoutSchedule_templatesInput, Prisma.schedulesUncheckedCreateWithoutSchedule_templatesInput> | Prisma.schedulesCreateWithoutSchedule_templatesInput[] | Prisma.schedulesUncheckedCreateWithoutSchedule_templatesInput[]
+  connectOrCreate?: Prisma.schedulesCreateOrConnectWithoutSchedule_templatesInput | Prisma.schedulesCreateOrConnectWithoutSchedule_templatesInput[]
+  upsert?: Prisma.schedulesUpsertWithWhereUniqueWithoutSchedule_templatesInput | Prisma.schedulesUpsertWithWhereUniqueWithoutSchedule_templatesInput[]
+  createMany?: Prisma.schedulesCreateManySchedule_templatesInputEnvelope
+  set?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  disconnect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  delete?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  connect?: Prisma.schedulesWhereUniqueInput | Prisma.schedulesWhereUniqueInput[]
+  update?: Prisma.schedulesUpdateWithWhereUniqueWithoutSchedule_templatesInput | Prisma.schedulesUpdateWithWhereUniqueWithoutSchedule_templatesInput[]
+  updateMany?: Prisma.schedulesUpdateManyWithWhereWithoutSchedule_templatesInput | Prisma.schedulesUpdateManyWithWhereWithoutSchedule_templatesInput[]
+  deleteMany?: Prisma.schedulesScalarWhereInput | Prisma.schedulesScalarWhereInput[]
+}
+
 export type EnumScheduleStatusFieldUpdateOperationsInput = {
   set?: $Enums.ScheduleStatus
 }
@@ -720,6 +786,7 @@ export type schedulesCreateWithoutRoutesInput = {
   created_at?: Date | string
   updated_at?: Date | string
   ferries?: Prisma.ferriesCreateNestedOneWithoutSchedulesInput
+  schedule_templates?: Prisma.schedule_templatesCreateNestedOneWithoutSchedulesInput
   seat_holds?: Prisma.seat_holdsCreateNestedManyWithoutSchedulesInput
   return_tickets?: Prisma.ticketsCreateNestedManyWithoutReturn_schedulesInput
   outbound_tickets?: Prisma.ticketsCreateNestedManyWithoutOutbound_schedulesInput
@@ -728,6 +795,7 @@ export type schedulesCreateWithoutRoutesInput = {
 export type schedulesUncheckedCreateWithoutRoutesInput = {
   id?: string
   ferry_id?: string | null
+  schedule_template_id?: string | null
   total_capacity: number
   available_seats: number
   cancellation_reason?: string | null
@@ -776,6 +844,7 @@ export type schedulesScalarWhereInput = {
   id?: Prisma.StringFilter<"schedules"> | string
   route_id?: Prisma.StringNullableFilter<"schedules"> | string | null
   ferry_id?: Prisma.StringNullableFilter<"schedules"> | string | null
+  schedule_template_id?: Prisma.StringNullableFilter<"schedules"> | string | null
   total_capacity?: Prisma.IntFilter<"schedules"> | number
   available_seats?: Prisma.IntFilter<"schedules"> | number
   cancellation_reason?: Prisma.StringNullableFilter<"schedules"> | string | null
@@ -801,6 +870,7 @@ export type schedulesCreateWithoutFerriesInput = {
   created_at?: Date | string
   updated_at?: Date | string
   routes?: Prisma.routesCreateNestedOneWithoutSchedulesInput
+  schedule_templates?: Prisma.schedule_templatesCreateNestedOneWithoutSchedulesInput
   seat_holds?: Prisma.seat_holdsCreateNestedManyWithoutSchedulesInput
   return_tickets?: Prisma.ticketsCreateNestedManyWithoutReturn_schedulesInput
   outbound_tickets?: Prisma.ticketsCreateNestedManyWithoutOutbound_schedulesInput
@@ -809,6 +879,7 @@ export type schedulesCreateWithoutFerriesInput = {
 export type schedulesUncheckedCreateWithoutFerriesInput = {
   id?: string
   route_id?: string | null
+  schedule_template_id?: string | null
   total_capacity: number
   available_seats: number
   cancellation_reason?: string | null
@@ -850,6 +921,70 @@ export type schedulesUpdateManyWithWhereWithoutFerriesInput = {
   data: Prisma.XOR<Prisma.schedulesUpdateManyMutationInput, Prisma.schedulesUncheckedUpdateManyWithoutFerriesInput>
 }
 
+export type schedulesCreateWithoutSchedule_templatesInput = {
+  id?: string
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
+  status?: $Enums.ScheduleStatus
+  departure_date: Date | string
+  departure_time: Date | string
+  arrival_time: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
+  routes?: Prisma.routesCreateNestedOneWithoutSchedulesInput
+  ferries?: Prisma.ferriesCreateNestedOneWithoutSchedulesInput
+  seat_holds?: Prisma.seat_holdsCreateNestedManyWithoutSchedulesInput
+  return_tickets?: Prisma.ticketsCreateNestedManyWithoutReturn_schedulesInput
+  outbound_tickets?: Prisma.ticketsCreateNestedManyWithoutOutbound_schedulesInput
+}
+
+export type schedulesUncheckedCreateWithoutSchedule_templatesInput = {
+  id?: string
+  route_id?: string | null
+  ferry_id?: string | null
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
+  status?: $Enums.ScheduleStatus
+  departure_date: Date | string
+  departure_time: Date | string
+  arrival_time: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
+  seat_holds?: Prisma.seat_holdsUncheckedCreateNestedManyWithoutSchedulesInput
+  return_tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutReturn_schedulesInput
+  outbound_tickets?: Prisma.ticketsUncheckedCreateNestedManyWithoutOutbound_schedulesInput
+}
+
+export type schedulesCreateOrConnectWithoutSchedule_templatesInput = {
+  where: Prisma.schedulesWhereUniqueInput
+  create: Prisma.XOR<Prisma.schedulesCreateWithoutSchedule_templatesInput, Prisma.schedulesUncheckedCreateWithoutSchedule_templatesInput>
+}
+
+export type schedulesCreateManySchedule_templatesInputEnvelope = {
+  data: Prisma.schedulesCreateManySchedule_templatesInput | Prisma.schedulesCreateManySchedule_templatesInput[]
+  skipDuplicates?: boolean
+}
+
+export type schedulesUpsertWithWhereUniqueWithoutSchedule_templatesInput = {
+  where: Prisma.schedulesWhereUniqueInput
+  update: Prisma.XOR<Prisma.schedulesUpdateWithoutSchedule_templatesInput, Prisma.schedulesUncheckedUpdateWithoutSchedule_templatesInput>
+  create: Prisma.XOR<Prisma.schedulesCreateWithoutSchedule_templatesInput, Prisma.schedulesUncheckedCreateWithoutSchedule_templatesInput>
+}
+
+export type schedulesUpdateWithWhereUniqueWithoutSchedule_templatesInput = {
+  where: Prisma.schedulesWhereUniqueInput
+  data: Prisma.XOR<Prisma.schedulesUpdateWithoutSchedule_templatesInput, Prisma.schedulesUncheckedUpdateWithoutSchedule_templatesInput>
+}
+
+export type schedulesUpdateManyWithWhereWithoutSchedule_templatesInput = {
+  where: Prisma.schedulesScalarWhereInput
+  data: Prisma.XOR<Prisma.schedulesUpdateManyMutationInput, Prisma.schedulesUncheckedUpdateManyWithoutSchedule_templatesInput>
+}
+
 export type schedulesCreateWithoutSeat_holdsInput = {
   id?: string
   total_capacity: number
@@ -864,6 +999,7 @@ export type schedulesCreateWithoutSeat_holdsInput = {
   updated_at?: Date | string
   routes?: Prisma.routesCreateNestedOneWithoutSchedulesInput
   ferries?: Prisma.ferriesCreateNestedOneWithoutSchedulesInput
+  schedule_templates?: Prisma.schedule_templatesCreateNestedOneWithoutSchedulesInput
   return_tickets?: Prisma.ticketsCreateNestedManyWithoutReturn_schedulesInput
   outbound_tickets?: Prisma.ticketsCreateNestedManyWithoutOutbound_schedulesInput
 }
@@ -872,6 +1008,7 @@ export type schedulesUncheckedCreateWithoutSeat_holdsInput = {
   id?: string
   route_id?: string | null
   ferry_id?: string | null
+  schedule_template_id?: string | null
   total_capacity: number
   available_seats: number
   cancellation_reason?: string | null
@@ -916,6 +1053,7 @@ export type schedulesUpdateWithoutSeat_holdsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   routes?: Prisma.routesUpdateOneWithoutSchedulesNestedInput
   ferries?: Prisma.ferriesUpdateOneWithoutSchedulesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUpdateOneWithoutSchedulesNestedInput
   return_tickets?: Prisma.ticketsUpdateManyWithoutReturn_schedulesNestedInput
   outbound_tickets?: Prisma.ticketsUpdateManyWithoutOutbound_schedulesNestedInput
 }
@@ -924,6 +1062,7 @@ export type schedulesUncheckedUpdateWithoutSeat_holdsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule_template_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
   available_seats?: Prisma.IntFieldUpdateOperationsInput | number
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -952,6 +1091,7 @@ export type schedulesCreateWithoutReturn_ticketsInput = {
   updated_at?: Date | string
   routes?: Prisma.routesCreateNestedOneWithoutSchedulesInput
   ferries?: Prisma.ferriesCreateNestedOneWithoutSchedulesInput
+  schedule_templates?: Prisma.schedule_templatesCreateNestedOneWithoutSchedulesInput
   seat_holds?: Prisma.seat_holdsCreateNestedManyWithoutSchedulesInput
   outbound_tickets?: Prisma.ticketsCreateNestedManyWithoutOutbound_schedulesInput
 }
@@ -960,6 +1100,7 @@ export type schedulesUncheckedCreateWithoutReturn_ticketsInput = {
   id?: string
   route_id?: string | null
   ferry_id?: string | null
+  schedule_template_id?: string | null
   total_capacity: number
   available_seats: number
   cancellation_reason?: string | null
@@ -993,6 +1134,7 @@ export type schedulesCreateWithoutOutbound_ticketsInput = {
   updated_at?: Date | string
   routes?: Prisma.routesCreateNestedOneWithoutSchedulesInput
   ferries?: Prisma.ferriesCreateNestedOneWithoutSchedulesInput
+  schedule_templates?: Prisma.schedule_templatesCreateNestedOneWithoutSchedulesInput
   seat_holds?: Prisma.seat_holdsCreateNestedManyWithoutSchedulesInput
   return_tickets?: Prisma.ticketsCreateNestedManyWithoutReturn_schedulesInput
 }
@@ -1001,6 +1143,7 @@ export type schedulesUncheckedCreateWithoutOutbound_ticketsInput = {
   id?: string
   route_id?: string | null
   ferry_id?: string | null
+  schedule_template_id?: string | null
   total_capacity: number
   available_seats: number
   cancellation_reason?: string | null
@@ -1045,6 +1188,7 @@ export type schedulesUpdateWithoutReturn_ticketsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   routes?: Prisma.routesUpdateOneWithoutSchedulesNestedInput
   ferries?: Prisma.ferriesUpdateOneWithoutSchedulesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUpdateOneWithoutSchedulesNestedInput
   seat_holds?: Prisma.seat_holdsUpdateManyWithoutSchedulesNestedInput
   outbound_tickets?: Prisma.ticketsUpdateManyWithoutOutbound_schedulesNestedInput
 }
@@ -1053,6 +1197,7 @@ export type schedulesUncheckedUpdateWithoutReturn_ticketsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule_template_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
   available_seats?: Prisma.IntFieldUpdateOperationsInput | number
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1092,6 +1237,7 @@ export type schedulesUpdateWithoutOutbound_ticketsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   routes?: Prisma.routesUpdateOneWithoutSchedulesNestedInput
   ferries?: Prisma.ferriesUpdateOneWithoutSchedulesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUpdateOneWithoutSchedulesNestedInput
   seat_holds?: Prisma.seat_holdsUpdateManyWithoutSchedulesNestedInput
   return_tickets?: Prisma.ticketsUpdateManyWithoutReturn_schedulesNestedInput
 }
@@ -1100,6 +1246,7 @@ export type schedulesUncheckedUpdateWithoutOutbound_ticketsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule_template_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
   available_seats?: Prisma.IntFieldUpdateOperationsInput | number
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1117,6 +1264,7 @@ export type schedulesUncheckedUpdateWithoutOutbound_ticketsInput = {
 export type schedulesCreateManyRoutesInput = {
   id?: string
   ferry_id?: string | null
+  schedule_template_id?: string | null
   total_capacity: number
   available_seats: number
   cancellation_reason?: string | null
@@ -1142,6 +1290,7 @@ export type schedulesUpdateWithoutRoutesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ferries?: Prisma.ferriesUpdateOneWithoutSchedulesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUpdateOneWithoutSchedulesNestedInput
   seat_holds?: Prisma.seat_holdsUpdateManyWithoutSchedulesNestedInput
   return_tickets?: Prisma.ticketsUpdateManyWithoutReturn_schedulesNestedInput
   outbound_tickets?: Prisma.ticketsUpdateManyWithoutOutbound_schedulesNestedInput
@@ -1150,6 +1299,7 @@ export type schedulesUpdateWithoutRoutesInput = {
 export type schedulesUncheckedUpdateWithoutRoutesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule_template_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
   available_seats?: Prisma.IntFieldUpdateOperationsInput | number
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1168,6 +1318,7 @@ export type schedulesUncheckedUpdateWithoutRoutesInput = {
 export type schedulesUncheckedUpdateManyWithoutRoutesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule_template_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
   available_seats?: Prisma.IntFieldUpdateOperationsInput | number
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1183,6 +1334,7 @@ export type schedulesUncheckedUpdateManyWithoutRoutesInput = {
 export type schedulesCreateManyFerriesInput = {
   id?: string
   route_id?: string | null
+  schedule_template_id?: string | null
   total_capacity: number
   available_seats: number
   cancellation_reason?: string | null
@@ -1208,6 +1360,7 @@ export type schedulesUpdateWithoutFerriesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   routes?: Prisma.routesUpdateOneWithoutSchedulesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUpdateOneWithoutSchedulesNestedInput
   seat_holds?: Prisma.seat_holdsUpdateManyWithoutSchedulesNestedInput
   return_tickets?: Prisma.ticketsUpdateManyWithoutReturn_schedulesNestedInput
   outbound_tickets?: Prisma.ticketsUpdateManyWithoutOutbound_schedulesNestedInput
@@ -1216,6 +1369,7 @@ export type schedulesUpdateWithoutFerriesInput = {
 export type schedulesUncheckedUpdateWithoutFerriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule_template_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
   available_seats?: Prisma.IntFieldUpdateOperationsInput | number
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1234,6 +1388,77 @@ export type schedulesUncheckedUpdateWithoutFerriesInput = {
 export type schedulesUncheckedUpdateManyWithoutFerriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schedule_template_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type schedulesCreateManySchedule_templatesInput = {
+  id?: string
+  route_id?: string | null
+  ferry_id?: string | null
+  total_capacity: number
+  available_seats: number
+  cancellation_reason?: string | null
+  notes?: string | null
+  status?: $Enums.ScheduleStatus
+  departure_date: Date | string
+  departure_time: Date | string
+  arrival_time: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type schedulesUpdateWithoutSchedule_templatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  routes?: Prisma.routesUpdateOneWithoutSchedulesNestedInput
+  ferries?: Prisma.ferriesUpdateOneWithoutSchedulesNestedInput
+  seat_holds?: Prisma.seat_holdsUpdateManyWithoutSchedulesNestedInput
+  return_tickets?: Prisma.ticketsUpdateManyWithoutReturn_schedulesNestedInput
+  outbound_tickets?: Prisma.ticketsUpdateManyWithoutOutbound_schedulesNestedInput
+}
+
+export type schedulesUncheckedUpdateWithoutSchedule_templatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_seats?: Prisma.IntFieldUpdateOperationsInput | number
+  cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
+  departure_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  arrival_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  seat_holds?: Prisma.seat_holdsUncheckedUpdateManyWithoutSchedulesNestedInput
+  return_tickets?: Prisma.ticketsUncheckedUpdateManyWithoutReturn_schedulesNestedInput
+  outbound_tickets?: Prisma.ticketsUncheckedUpdateManyWithoutOutbound_schedulesNestedInput
+}
+
+export type schedulesUncheckedUpdateManyWithoutSchedule_templatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  route_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ferry_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_capacity?: Prisma.IntFieldUpdateOperationsInput | number
   available_seats?: Prisma.IntFieldUpdateOperationsInput | number
   cancellation_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1299,6 +1524,7 @@ export type schedulesSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   id?: boolean
   route_id?: boolean
   ferry_id?: boolean
+  schedule_template_id?: boolean
   total_capacity?: boolean
   available_seats?: boolean
   cancellation_reason?: boolean
@@ -1311,6 +1537,7 @@ export type schedulesSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   updated_at?: boolean
   routes?: boolean | Prisma.schedules$routesArgs<ExtArgs>
   ferries?: boolean | Prisma.schedules$ferriesArgs<ExtArgs>
+  schedule_templates?: boolean | Prisma.schedules$schedule_templatesArgs<ExtArgs>
   seat_holds?: boolean | Prisma.schedules$seat_holdsArgs<ExtArgs>
   return_tickets?: boolean | Prisma.schedules$return_ticketsArgs<ExtArgs>
   outbound_tickets?: boolean | Prisma.schedules$outbound_ticketsArgs<ExtArgs>
@@ -1321,6 +1548,7 @@ export type schedulesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   route_id?: boolean
   ferry_id?: boolean
+  schedule_template_id?: boolean
   total_capacity?: boolean
   available_seats?: boolean
   cancellation_reason?: boolean
@@ -1333,12 +1561,14 @@ export type schedulesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   updated_at?: boolean
   routes?: boolean | Prisma.schedules$routesArgs<ExtArgs>
   ferries?: boolean | Prisma.schedules$ferriesArgs<ExtArgs>
+  schedule_templates?: boolean | Prisma.schedules$schedule_templatesArgs<ExtArgs>
 }, ExtArgs["result"]["schedules"]>
 
 export type schedulesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   route_id?: boolean
   ferry_id?: boolean
+  schedule_template_id?: boolean
   total_capacity?: boolean
   available_seats?: boolean
   cancellation_reason?: boolean
@@ -1351,12 +1581,14 @@ export type schedulesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   updated_at?: boolean
   routes?: boolean | Prisma.schedules$routesArgs<ExtArgs>
   ferries?: boolean | Prisma.schedules$ferriesArgs<ExtArgs>
+  schedule_templates?: boolean | Prisma.schedules$schedule_templatesArgs<ExtArgs>
 }, ExtArgs["result"]["schedules"]>
 
 export type schedulesSelectScalar = {
   id?: boolean
   route_id?: boolean
   ferry_id?: boolean
+  schedule_template_id?: boolean
   total_capacity?: boolean
   available_seats?: boolean
   cancellation_reason?: boolean
@@ -1369,10 +1601,11 @@ export type schedulesSelectScalar = {
   updated_at?: boolean
 }
 
-export type schedulesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "route_id" | "ferry_id" | "total_capacity" | "available_seats" | "cancellation_reason" | "notes" | "status" | "departure_date" | "departure_time" | "arrival_time" | "created_at" | "updated_at", ExtArgs["result"]["schedules"]>
+export type schedulesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "route_id" | "ferry_id" | "schedule_template_id" | "total_capacity" | "available_seats" | "cancellation_reason" | "notes" | "status" | "departure_date" | "departure_time" | "arrival_time" | "created_at" | "updated_at", ExtArgs["result"]["schedules"]>
 export type schedulesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   routes?: boolean | Prisma.schedules$routesArgs<ExtArgs>
   ferries?: boolean | Prisma.schedules$ferriesArgs<ExtArgs>
+  schedule_templates?: boolean | Prisma.schedules$schedule_templatesArgs<ExtArgs>
   seat_holds?: boolean | Prisma.schedules$seat_holdsArgs<ExtArgs>
   return_tickets?: boolean | Prisma.schedules$return_ticketsArgs<ExtArgs>
   outbound_tickets?: boolean | Prisma.schedules$outbound_ticketsArgs<ExtArgs>
@@ -1381,10 +1614,12 @@ export type schedulesInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type schedulesIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   routes?: boolean | Prisma.schedules$routesArgs<ExtArgs>
   ferries?: boolean | Prisma.schedules$ferriesArgs<ExtArgs>
+  schedule_templates?: boolean | Prisma.schedules$schedule_templatesArgs<ExtArgs>
 }
 export type schedulesIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   routes?: boolean | Prisma.schedules$routesArgs<ExtArgs>
   ferries?: boolean | Prisma.schedules$ferriesArgs<ExtArgs>
+  schedule_templates?: boolean | Prisma.schedules$schedule_templatesArgs<ExtArgs>
 }
 
 export type $schedulesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1392,6 +1627,7 @@ export type $schedulesPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   objects: {
     routes: Prisma.$routesPayload<ExtArgs> | null
     ferries: Prisma.$ferriesPayload<ExtArgs> | null
+    schedule_templates: Prisma.$schedule_templatesPayload<ExtArgs> | null
     seat_holds: Prisma.$seat_holdsPayload<ExtArgs>[]
     return_tickets: Prisma.$ticketsPayload<ExtArgs>[]
     outbound_tickets: Prisma.$ticketsPayload<ExtArgs>[]
@@ -1400,6 +1636,7 @@ export type $schedulesPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     id: string
     route_id: string | null
     ferry_id: string | null
+    schedule_template_id: string | null
     total_capacity: number
     available_seats: number
     cancellation_reason: string | null
@@ -1806,6 +2043,7 @@ export interface Prisma__schedulesClient<T, Null = never, ExtArgs extends runtim
   readonly [Symbol.toStringTag]: "PrismaPromise"
   routes<T extends Prisma.schedules$routesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.schedules$routesArgs<ExtArgs>>): Prisma.Prisma__routesClient<runtime.Types.Result.GetResult<Prisma.$routesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   ferries<T extends Prisma.schedules$ferriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.schedules$ferriesArgs<ExtArgs>>): Prisma.Prisma__ferriesClient<runtime.Types.Result.GetResult<Prisma.$ferriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  schedule_templates<T extends Prisma.schedules$schedule_templatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.schedules$schedule_templatesArgs<ExtArgs>>): Prisma.Prisma__schedule_templatesClient<runtime.Types.Result.GetResult<Prisma.$schedule_templatesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   seat_holds<T extends Prisma.schedules$seat_holdsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.schedules$seat_holdsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$seat_holdsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   return_tickets<T extends Prisma.schedules$return_ticketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.schedules$return_ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ticketsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   outbound_tickets<T extends Prisma.schedules$outbound_ticketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.schedules$outbound_ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ticketsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1841,6 +2079,7 @@ export interface schedulesFieldRefs {
   readonly id: Prisma.FieldRef<"schedules", 'String'>
   readonly route_id: Prisma.FieldRef<"schedules", 'String'>
   readonly ferry_id: Prisma.FieldRef<"schedules", 'String'>
+  readonly schedule_template_id: Prisma.FieldRef<"schedules", 'String'>
   readonly total_capacity: Prisma.FieldRef<"schedules", 'Int'>
   readonly available_seats: Prisma.FieldRef<"schedules", 'Int'>
   readonly cancellation_reason: Prisma.FieldRef<"schedules", 'String'>
@@ -2282,6 +2521,25 @@ export type schedules$ferriesArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   include?: Prisma.ferriesInclude<ExtArgs> | null
   where?: Prisma.ferriesWhereInput
+}
+
+/**
+ * schedules.schedule_templates
+ */
+export type schedules$schedule_templatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the schedule_templates
+   */
+  select?: Prisma.schedule_templatesSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the schedule_templates
+   */
+  omit?: Prisma.schedule_templatesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.schedule_templatesInclude<ExtArgs> | null
+  where?: Prisma.schedule_templatesWhereInput
 }
 
 /**

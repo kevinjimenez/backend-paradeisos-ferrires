@@ -259,6 +259,7 @@ export type routesWhereInput = {
   origin_islands?: Prisma.XOR<Prisma.IslandsScalarRelationFilter, Prisma.islandsWhereInput>
   destination_islands?: Prisma.XOR<Prisma.IslandsScalarRelationFilter, Prisma.islandsWhereInput>
   schedules?: Prisma.SchedulesListRelationFilter
+  schedule_templates?: Prisma.Schedule_templatesListRelationFilter
 }
 
 export type routesOrderByWithRelationInput = {
@@ -274,6 +275,7 @@ export type routesOrderByWithRelationInput = {
   origin_islands?: Prisma.islandsOrderByWithRelationInput
   destination_islands?: Prisma.islandsOrderByWithRelationInput
   schedules?: Prisma.schedulesOrderByRelationAggregateInput
+  schedule_templates?: Prisma.schedule_templatesOrderByRelationAggregateInput
 }
 
 export type routesWhereUniqueInput = Prisma.AtLeast<{
@@ -292,6 +294,7 @@ export type routesWhereUniqueInput = Prisma.AtLeast<{
   origin_islands?: Prisma.XOR<Prisma.IslandsScalarRelationFilter, Prisma.islandsWhereInput>
   destination_islands?: Prisma.XOR<Prisma.IslandsScalarRelationFilter, Prisma.islandsWhereInput>
   schedules?: Prisma.SchedulesListRelationFilter
+  schedule_templates?: Prisma.Schedule_templatesListRelationFilter
 }, "id">
 
 export type routesOrderByWithAggregationInput = {
@@ -337,6 +340,7 @@ export type routesCreateInput = {
   origin_islands: Prisma.islandsCreateNestedOneWithoutOrigin_routesInput
   destination_islands: Prisma.islandsCreateNestedOneWithoutDestination_routesInput
   schedules?: Prisma.schedulesCreateNestedManyWithoutRoutesInput
+  schedule_templates?: Prisma.schedule_templatesCreateNestedManyWithoutRoutesInput
 }
 
 export type routesUncheckedCreateInput = {
@@ -350,6 +354,7 @@ export type routesUncheckedCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutRoutesInput
+  schedule_templates?: Prisma.schedule_templatesUncheckedCreateNestedManyWithoutRoutesInput
 }
 
 export type routesUpdateInput = {
@@ -363,6 +368,7 @@ export type routesUpdateInput = {
   origin_islands?: Prisma.islandsUpdateOneRequiredWithoutOrigin_routesNestedInput
   destination_islands?: Prisma.islandsUpdateOneRequiredWithoutDestination_routesNestedInput
   schedules?: Prisma.schedulesUpdateManyWithoutRoutesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesUncheckedUpdateInput = {
@@ -376,6 +382,7 @@ export type routesUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schedules?: Prisma.schedulesUncheckedUpdateManyWithoutRoutesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUncheckedUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesCreateManyInput = {
@@ -468,6 +475,11 @@ export type routesSumOrderByAggregateInput = {
   distance_km?: Prisma.SortOrder
   duration_minutes?: Prisma.SortOrder
   base_price?: Prisma.SortOrder
+}
+
+export type RoutesScalarRelationFilter = {
+  is?: Prisma.routesWhereInput
+  isNot?: Prisma.routesWhereInput
 }
 
 export type RoutesNullableScalarRelationFilter = {
@@ -567,6 +579,20 @@ export type NullableDecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type routesCreateNestedOneWithoutSchedule_templatesInput = {
+  create?: Prisma.XOR<Prisma.routesCreateWithoutSchedule_templatesInput, Prisma.routesUncheckedCreateWithoutSchedule_templatesInput>
+  connectOrCreate?: Prisma.routesCreateOrConnectWithoutSchedule_templatesInput
+  connect?: Prisma.routesWhereUniqueInput
+}
+
+export type routesUpdateOneRequiredWithoutSchedule_templatesNestedInput = {
+  create?: Prisma.XOR<Prisma.routesCreateWithoutSchedule_templatesInput, Prisma.routesUncheckedCreateWithoutSchedule_templatesInput>
+  connectOrCreate?: Prisma.routesCreateOrConnectWithoutSchedule_templatesInput
+  upsert?: Prisma.routesUpsertWithoutSchedule_templatesInput
+  connect?: Prisma.routesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.routesUpdateToOneWithWhereWithoutSchedule_templatesInput, Prisma.routesUpdateWithoutSchedule_templatesInput>, Prisma.routesUncheckedUpdateWithoutSchedule_templatesInput>
+}
+
 export type routesCreateNestedOneWithoutSchedulesInput = {
   create?: Prisma.XOR<Prisma.routesCreateWithoutSchedulesInput, Prisma.routesUncheckedCreateWithoutSchedulesInput>
   connectOrCreate?: Prisma.routesCreateOrConnectWithoutSchedulesInput
@@ -593,6 +619,7 @@ export type routesCreateWithoutOrigin_islandsInput = {
   updated_at?: Date | string
   destination_islands: Prisma.islandsCreateNestedOneWithoutDestination_routesInput
   schedules?: Prisma.schedulesCreateNestedManyWithoutRoutesInput
+  schedule_templates?: Prisma.schedule_templatesCreateNestedManyWithoutRoutesInput
 }
 
 export type routesUncheckedCreateWithoutOrigin_islandsInput = {
@@ -605,6 +632,7 @@ export type routesUncheckedCreateWithoutOrigin_islandsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutRoutesInput
+  schedule_templates?: Prisma.schedule_templatesUncheckedCreateNestedManyWithoutRoutesInput
 }
 
 export type routesCreateOrConnectWithoutOrigin_islandsInput = {
@@ -627,6 +655,7 @@ export type routesCreateWithoutDestination_islandsInput = {
   updated_at?: Date | string
   origin_islands: Prisma.islandsCreateNestedOneWithoutOrigin_routesInput
   schedules?: Prisma.schedulesCreateNestedManyWithoutRoutesInput
+  schedule_templates?: Prisma.schedule_templatesCreateNestedManyWithoutRoutesInput
 }
 
 export type routesUncheckedCreateWithoutDestination_islandsInput = {
@@ -639,6 +668,7 @@ export type routesUncheckedCreateWithoutDestination_islandsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutRoutesInput
+  schedule_templates?: Prisma.schedule_templatesUncheckedCreateNestedManyWithoutRoutesInput
 }
 
 export type routesCreateOrConnectWithoutDestination_islandsInput = {
@@ -698,6 +728,74 @@ export type routesUpdateManyWithWhereWithoutDestination_islandsInput = {
   data: Prisma.XOR<Prisma.routesUpdateManyMutationInput, Prisma.routesUncheckedUpdateManyWithoutDestination_islandsInput>
 }
 
+export type routesCreateWithoutSchedule_templatesInput = {
+  id?: string
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  origin_islands: Prisma.islandsCreateNestedOneWithoutOrigin_routesInput
+  destination_islands: Prisma.islandsCreateNestedOneWithoutDestination_routesInput
+  schedules?: Prisma.schedulesCreateNestedManyWithoutRoutesInput
+}
+
+export type routesUncheckedCreateWithoutSchedule_templatesInput = {
+  id?: string
+  origin_island_id: string
+  destination_island_id: string
+  distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes: number
+  base_price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutRoutesInput
+}
+
+export type routesCreateOrConnectWithoutSchedule_templatesInput = {
+  where: Prisma.routesWhereUniqueInput
+  create: Prisma.XOR<Prisma.routesCreateWithoutSchedule_templatesInput, Prisma.routesUncheckedCreateWithoutSchedule_templatesInput>
+}
+
+export type routesUpsertWithoutSchedule_templatesInput = {
+  update: Prisma.XOR<Prisma.routesUpdateWithoutSchedule_templatesInput, Prisma.routesUncheckedUpdateWithoutSchedule_templatesInput>
+  create: Prisma.XOR<Prisma.routesCreateWithoutSchedule_templatesInput, Prisma.routesUncheckedCreateWithoutSchedule_templatesInput>
+  where?: Prisma.routesWhereInput
+}
+
+export type routesUpdateToOneWithWhereWithoutSchedule_templatesInput = {
+  where?: Prisma.routesWhereInput
+  data: Prisma.XOR<Prisma.routesUpdateWithoutSchedule_templatesInput, Prisma.routesUncheckedUpdateWithoutSchedule_templatesInput>
+}
+
+export type routesUpdateWithoutSchedule_templatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin_islands?: Prisma.islandsUpdateOneRequiredWithoutOrigin_routesNestedInput
+  destination_islands?: Prisma.islandsUpdateOneRequiredWithoutDestination_routesNestedInput
+  schedules?: Prisma.schedulesUpdateManyWithoutRoutesNestedInput
+}
+
+export type routesUncheckedUpdateWithoutSchedule_templatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  origin_island_id?: Prisma.StringFieldUpdateOperationsInput | string
+  destination_island_id?: Prisma.StringFieldUpdateOperationsInput | string
+  distance_km?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  duration_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  base_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  schedules?: Prisma.schedulesUncheckedUpdateManyWithoutRoutesNestedInput
+}
+
 export type routesCreateWithoutSchedulesInput = {
   id?: string
   distance_km?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -708,6 +806,7 @@ export type routesCreateWithoutSchedulesInput = {
   updated_at?: Date | string
   origin_islands: Prisma.islandsCreateNestedOneWithoutOrigin_routesInput
   destination_islands: Prisma.islandsCreateNestedOneWithoutDestination_routesInput
+  schedule_templates?: Prisma.schedule_templatesCreateNestedManyWithoutRoutesInput
 }
 
 export type routesUncheckedCreateWithoutSchedulesInput = {
@@ -720,6 +819,7 @@ export type routesUncheckedCreateWithoutSchedulesInput = {
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  schedule_templates?: Prisma.schedule_templatesUncheckedCreateNestedManyWithoutRoutesInput
 }
 
 export type routesCreateOrConnectWithoutSchedulesInput = {
@@ -748,6 +848,7 @@ export type routesUpdateWithoutSchedulesInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   origin_islands?: Prisma.islandsUpdateOneRequiredWithoutOrigin_routesNestedInput
   destination_islands?: Prisma.islandsUpdateOneRequiredWithoutDestination_routesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesUncheckedUpdateWithoutSchedulesInput = {
@@ -760,6 +861,7 @@ export type routesUncheckedUpdateWithoutSchedulesInput = {
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  schedule_templates?: Prisma.schedule_templatesUncheckedUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesCreateManyOrigin_islandsInput = {
@@ -794,6 +896,7 @@ export type routesUpdateWithoutOrigin_islandsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   destination_islands?: Prisma.islandsUpdateOneRequiredWithoutDestination_routesNestedInput
   schedules?: Prisma.schedulesUpdateManyWithoutRoutesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesUncheckedUpdateWithoutOrigin_islandsInput = {
@@ -806,6 +909,7 @@ export type routesUncheckedUpdateWithoutOrigin_islandsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schedules?: Prisma.schedulesUncheckedUpdateManyWithoutRoutesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUncheckedUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesUncheckedUpdateManyWithoutOrigin_islandsInput = {
@@ -829,6 +933,7 @@ export type routesUpdateWithoutDestination_islandsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   origin_islands?: Prisma.islandsUpdateOneRequiredWithoutOrigin_routesNestedInput
   schedules?: Prisma.schedulesUpdateManyWithoutRoutesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesUncheckedUpdateWithoutDestination_islandsInput = {
@@ -841,6 +946,7 @@ export type routesUncheckedUpdateWithoutDestination_islandsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schedules?: Prisma.schedulesUncheckedUpdateManyWithoutRoutesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUncheckedUpdateManyWithoutRoutesNestedInput
 }
 
 export type routesUncheckedUpdateManyWithoutDestination_islandsInput = {
@@ -861,10 +967,12 @@ export type routesUncheckedUpdateManyWithoutDestination_islandsInput = {
 
 export type RoutesCountOutputType = {
   schedules: number
+  schedule_templates: number
 }
 
 export type RoutesCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   schedules?: boolean | RoutesCountOutputTypeCountSchedulesArgs
+  schedule_templates?: boolean | RoutesCountOutputTypeCountSchedule_templatesArgs
 }
 
 /**
@@ -884,6 +992,13 @@ export type RoutesCountOutputTypeCountSchedulesArgs<ExtArgs extends runtime.Type
   where?: Prisma.schedulesWhereInput
 }
 
+/**
+ * RoutesCountOutputType without action
+ */
+export type RoutesCountOutputTypeCountSchedule_templatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.schedule_templatesWhereInput
+}
+
 
 export type routesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -898,6 +1013,7 @@ export type routesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   origin_islands?: boolean | Prisma.islandsDefaultArgs<ExtArgs>
   destination_islands?: boolean | Prisma.islandsDefaultArgs<ExtArgs>
   schedules?: boolean | Prisma.routes$schedulesArgs<ExtArgs>
+  schedule_templates?: boolean | Prisma.routes$schedule_templatesArgs<ExtArgs>
   _count?: boolean | Prisma.RoutesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["routes"]>
 
@@ -946,6 +1062,7 @@ export type routesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   origin_islands?: boolean | Prisma.islandsDefaultArgs<ExtArgs>
   destination_islands?: boolean | Prisma.islandsDefaultArgs<ExtArgs>
   schedules?: boolean | Prisma.routes$schedulesArgs<ExtArgs>
+  schedule_templates?: boolean | Prisma.routes$schedule_templatesArgs<ExtArgs>
   _count?: boolean | Prisma.RoutesCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type routesIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -963,6 +1080,7 @@ export type $routesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     origin_islands: Prisma.$islandsPayload<ExtArgs>
     destination_islands: Prisma.$islandsPayload<ExtArgs>
     schedules: Prisma.$schedulesPayload<ExtArgs>[]
+    schedule_templates: Prisma.$schedule_templatesPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1371,6 +1489,7 @@ export interface Prisma__routesClient<T, Null = never, ExtArgs extends runtime.T
   origin_islands<T extends Prisma.islandsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.islandsDefaultArgs<ExtArgs>>): Prisma.Prisma__islandsClient<runtime.Types.Result.GetResult<Prisma.$islandsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   destination_islands<T extends Prisma.islandsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.islandsDefaultArgs<ExtArgs>>): Prisma.Prisma__islandsClient<runtime.Types.Result.GetResult<Prisma.$islandsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   schedules<T extends Prisma.routes$schedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.routes$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$schedulesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  schedule_templates<T extends Prisma.routes$schedule_templatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.routes$schedule_templatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$schedule_templatesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1826,6 +1945,30 @@ export type routes$schedulesArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.SchedulesScalarFieldEnum | Prisma.SchedulesScalarFieldEnum[]
+}
+
+/**
+ * routes.schedule_templates
+ */
+export type routes$schedule_templatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the schedule_templates
+   */
+  select?: Prisma.schedule_templatesSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the schedule_templates
+   */
+  omit?: Prisma.schedule_templatesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.schedule_templatesInclude<ExtArgs> | null
+  where?: Prisma.schedule_templatesWhereInput
+  orderBy?: Prisma.schedule_templatesOrderByWithRelationInput | Prisma.schedule_templatesOrderByWithRelationInput[]
+  cursor?: Prisma.schedule_templatesWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Schedule_templatesScalarFieldEnum | Prisma.Schedule_templatesScalarFieldEnum[]
 }
 
 /**
