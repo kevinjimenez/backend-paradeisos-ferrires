@@ -18,6 +18,7 @@ export interface TicketPdf {
 
 export interface PassengerPdf {
   name: string;
+  age: number;
   code: string;
   country: string;
 }

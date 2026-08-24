@@ -27,6 +27,8 @@ export class IslandsRepository extends BaseRepository<Prisma.islandsModel> {
         name: true,
         code: true,
         description: true,
+        pier_name: true,
+        port_address: true,
       },
     });
   }

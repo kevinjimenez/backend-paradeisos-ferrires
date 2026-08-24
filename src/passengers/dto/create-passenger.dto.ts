@@ -3,6 +3,7 @@ import { Type } from 'class-transformer';
 import {
   IsArray,
   IsBoolean,
+  IsDateString,
   IsEnum,
   IsNotEmpty,
   IsNumber,
@@ -41,6 +42,10 @@ export class CreatePassengerDto {
   @IsNotEmpty()
   @IsString()
   documentNumber: string;
+
+  @IsNotEmpty()
+  @IsDateString()
+  dateOfBirth: string;
 
   @IsNotEmpty()
   @IsEnum(DocumentType)

@@ -19,6 +19,7 @@ async function main() {
   await prisma.tickets.deleteMany();
   await prisma.seat_holds.deleteMany();
   await prisma.schedules.deleteMany();
+  await prisma.schedule_templates.deleteMany();
   await prisma.routes.deleteMany();
   await prisma.ferries.deleteMany();
   await prisma.islands.deleteMany();
@@ -37,25 +38,53 @@ async function main() {
       variant: 'secondary',
       features: [
         { text: 'Maleta de mano (5kg)', included: true },
-        { text: 'Chaleco salvavidas', included: true },
-        { text: 'Traslado muelle a muelle', included: false },
-        { text: 'Snack a bordo', included: false },
-        { text: 'Seguro de viaje', included: false },
+        { text: 'Maleta de 23kg', included: true },
+        { text: 'Maleta de 10kg', included: false },
+        {
+          text: 'Cambio de fecha o ruta u hora',
+          included: false,
+          description: '48 horas antes de fecha de salida',
+        },
+        {
+          text: 'Equipaje extra',
+          included: false,
+          description:
+            'Tabla de surf, caja de herramientas, equipos de buceo, otros.',
+        },
+        {
+          text: 'Reembolso 0%',
+          included: false,
+          description: 'Solo precio ticket ferry',
+        },
       ],
     },
   });
   const fareBasic = await prisma.fares.create({
     data: {
       name: 'Light',
-      price: 50,
+      price: 40,
       description: 'Tarifa Light - equipaje de mano + 1 maleta',
       variant: 'primary',
       features: [
         { text: 'Maleta de mano (5kg)', included: true },
-        { text: 'Chaleco salvavidas', included: true },
-        { text: 'Traslado muelle a muelle', included: true },
-        { text: 'Snack a bordo', included: true },
-        { text: 'Seguro de viaje', included: false },
+        { text: 'Maleta de 23kg', included: true },
+        { text: 'Maleta de 10kg', included: true },
+        {
+          text: 'Cambio de fecha o ruta u hora',
+          included: true,
+          description: '48 horas antes de fecha de salida',
+        },
+        {
+          text: 'Equipaje extra',
+          included: false,
+          description:
+            'Tabla de surf, caja de herramientas, equipos de buceo, otros.',
+        },
+        {
+          text: 'Reembolso 50%',
+          included: false,
+          description: 'Solo precio ticket ferry',
+        },
       ],
     },
   });
@@ -67,10 +96,24 @@ async function main() {
       variant: 'primary',
       features: [
         { text: 'Maleta de mano (5kg)', included: true },
-        { text: 'Chaleco salvavidas', included: true },
-        { text: 'Traslado muelle a muelle', included: true },
-        { text: 'Snack a bordo', included: true },
-        { text: 'Seguro de viaje', included: true },
+        { text: 'Maleta de 23kg', included: true },
+        { text: 'Maleta de 10kg', included: true },
+        {
+          text: 'Cambio de fecha o ruta u hora',
+          included: true,
+          description: '48 horas antes de fecha de salida',
+        },
+        {
+          text: 'Equipaje extra',
+          included: true,
+          description:
+            'Tabla de surf, caja de herramientas, equipos de buceo, otros.',
+        },
+        {
+          text: 'Reembolso 100%',
+          included: true,
+          description: 'Solo precio ticket ferry',
+        },
       ],
     },
   });
@@ -86,11 +129,11 @@ async function main() {
         description: 'Servicio compartido en el trayecto',
         features: [
           {
-            text: 'Asistencia y transporte desde el hotel al muelle principal.',
+            text: 'Asistencia y transporte desde el Hotel hacia el muelle principal',
             included: true,
           },
           {
-            text: 'O del muelle principal al hotel (zona urbana).',
+            text: 'O asistencia y transporte desde el muelle principal hacia el hotel',
             included: true,
           },
         ],
@@ -274,11 +317,15 @@ async function main() {
 
   // ISLANDS
   console.log('🏝 Creating islands...');
+  // NOTE: pier_name/port_address are placeholders for Santa Cruz, Isabela y Floreana,
+  // pendientes de confirmar con el cliente. San Cristóbal viene confirmado del mockup.
   const santaCruz = await prisma.islands.create({
     data: {
       name: 'Isla Santa Cruz',
       code: 'SCX',
       description: 'Galápagos - Isla Santa Cruz',
+      pier_name: 'Muelle Municipal Puerto Ayora',
+      port_address: 'Puerto Ayora, Galápagos, ECU',
     },
   });
 
@@ -287,6 +334,8 @@ async function main() {
       name: 'Isla San Cristóbal',
       code: 'SCY',
       description: 'Galápagos - Isla San Cristóbal',
+      pier_name: 'Muelle Eco Turístico Tiburón Martillo',
+      port_address: 'Puerto Baquerizo Moreno, Galápagos, ECU',
     },
   });
 
@@ -295,14 +344,8 @@ async function main() {
       name: 'Isla Isabela',
       code: 'ISA',
       description: 'Galápagos - Isla Isabela',
-    },
-  });
-
-  const baltraIsland = await prisma.islands.create({
-    data: {
-      name: 'Isla Baltra',
-      code: 'BLT',
-      description: 'Galápagos - Isla Baltra',
+      pier_name: 'Muelle Puerto Villamil',
+      port_address: 'Puerto Villamil, Galápagos, ECU',
     },
   });
 
@@ -311,74 +354,38 @@ async function main() {
       name: 'Isla Floreana',
       code: 'FLO',
       description: 'Galápagos - Isla Floreana',
+      pier_name: 'Muelle Puerto Velasco Ibarra',
+      port_address: 'Puerto Velasco Ibarra, Galápagos, ECU',
     },
   });
 
   // FERRIES
+  // Solo existe una embarcación: Paradeisos Ferry, opera todas las rutas.
   console.log('⛴ Creating ferries...');
   const ferry1 = await prisma.ferries.create({
     data: {
-      name: 'Mediterráneo Express',
-      register_code: 'MED-001',
-      capacity: 500,
+      name: 'Paradeisos Ferry',
+      register_code: 'PDS-001',
+      capacity: 50,
       operator_name: 'Paradeisos Ferries',
-      operator_phone: '+34 111111111',
+      operator_phone: '+593 999999999',
       operator_email: 'ops@paradeisos.com',
-      year_built: 2015,
-      amenities: ['WiFi', 'Restaurant', 'Bar'],
-      status: 'active',
-    },
-  });
-
-  const ferry2 = await prisma.ferries.create({
-    data: {
-      name: 'Paradeisos Premium',
-      register_code: 'MED-002',
-      capacity: 300,
-      operator_name: 'Paradeisos Ferries',
-      operator_phone: '+34 222222222',
-      operator_email: 'premium@paradeisos.com',
       year_built: 2020,
-      amenities: ['WiFi', 'Restaurant', 'VIP Lounge'],
-      type: 'premium',
-      status: 'active',
-    },
-  });
-
-  const ferry3 = await prisma.ferries.create({
-    data: {
-      name: 'Paradeisos Fast',
-      register_code: 'MED-003',
-      capacity: 200,
-      operator_name: 'Paradeisos Ferries',
-      operator_phone: '+34 333333333',
-      operator_email: 'fast@paradeisos.com',
-      year_built: 2018,
-      amenities: ['WiFi'],
-      type: 'fast',
+      amenities: ['WiFi', 'Restaurant'],
       status: 'active',
     },
   });
 
   // ROUTES
+  // Santa Cruz es el hub: no hay rutas directas entre San Cristóbal, Isabela
+  // y Floreana entre sí. Tarifa plana $65 (nacionales y extranjeros).
   console.log('🗺 Creating routes...');
   const route1 = await prisma.routes.create({
     data: {
       origin_island_id: santaCruz.id,
       destination_island_id: sanCristobal.id,
       distance_km: 95,
-      duration_minutes: 150,
-      base_price: 70,
-      is_active: true,
-    },
-  });
-
-  const route2 = await prisma.routes.create({
-    data: {
-      origin_island_id: baltraIsland.id,
-      destination_island_id: santaCruz.id,
-      distance_km: 30,
-      duration_minutes: 60,
+      duration_minutes: 120,
       base_price: 65,
       is_active: true,
     },
@@ -389,19 +396,8 @@ async function main() {
       origin_island_id: santaCruz.id,
       destination_island_id: isabela.id,
       distance_km: 110,
-      duration_minutes: 180,
-      base_price: 60,
-      is_active: true,
-    },
-  });
-
-  const route4 = await prisma.routes.create({
-    data: {
-      origin_island_id: sanCristobal.id,
-      destination_island_id: baltraIsland.id,
-      distance_km: 60,
       duration_minutes: 120,
-      base_price: 70,
+      base_price: 65,
       is_active: true,
     },
   });
@@ -412,18 +408,7 @@ async function main() {
       origin_island_id: sanCristobal.id,
       destination_island_id: santaCruz.id,
       distance_km: 95,
-      duration_minutes: 150,
-      base_price: 70,
-      is_active: true,
-    },
-  });
-
-  const route6 = await prisma.routes.create({
-    data: {
-      origin_island_id: santaCruz.id,
-      destination_island_id: baltraIsland.id,
-      distance_km: 30,
-      duration_minutes: 60,
+      duration_minutes: 120,
       base_price: 65,
       is_active: true,
     },
@@ -434,353 +419,146 @@ async function main() {
       origin_island_id: isabela.id,
       destination_island_id: santaCruz.id,
       distance_km: 110,
-      duration_minutes: 180,
-      base_price: 60,
+      duration_minutes: 120,
+      base_price: 65,
       is_active: true,
     },
   });
 
-  const route8 = await prisma.routes.create({
+  // Floreana: solo 1 horario activo por sentido (ver SCHEDULES más abajo)
+  const route9 = await prisma.routes.create({
     data: {
-      origin_island_id: baltraIsland.id,
-      destination_island_id: sanCristobal.id,
-      distance_km: 60,
+      origin_island_id: santaCruz.id,
+      destination_island_id: floreanaIsland.id,
+      distance_km: 70,
       duration_minutes: 120,
-      base_price: 70,
+      base_price: 65,
       is_active: true,
     },
+  });
+
+  const route10 = await prisma.routes.create({
+    data: {
+      origin_island_id: floreanaIsland.id,
+      destination_island_id: santaCruz.id,
+      distance_km: 70,
+      duration_minutes: 120,
+      base_price: 65,
+      is_active: true,
+    },
+  });
+
+  // SCHEDULE TEMPLATES
+  // Horario fijo diario por isla, según las rutas asignadas. Los horarios sin
+  // servicio real (Floreana 15:00→17:00 salida y 08:00→10:00 regreso) se dejan
+  // bloqueados: simplemente no se crea el template para esa franja. Las filas
+  // concretas de `schedules` las genera la app al arrancar/cada noche
+  // (ver ScheduleGeneratorService en src/tasks), no el seed.
+  console.log('🗓 Creating schedule templates...');
+  await prisma.schedule_templates.createMany({
+    data: [
+      {
+        route_id: route1.id,
+        ferry_id: ferry1.id,
+        departure_hour: 7,
+        departure_minute: 0,
+        notes: 'Santa Cruz → San Cristóbal',
+      },
+      {
+        route_id: route1.id,
+        ferry_id: ferry1.id,
+        departure_hour: 15,
+        departure_minute: 0,
+        notes: 'Santa Cruz → San Cristóbal',
+      },
+      {
+        route_id: route5.id,
+        ferry_id: ferry1.id,
+        departure_hour: 7,
+        departure_minute: 0,
+        notes: 'San Cristóbal → Santa Cruz',
+      },
+      {
+        route_id: route5.id,
+        ferry_id: ferry1.id,
+        departure_hour: 15,
+        departure_minute: 0,
+        notes: 'San Cristóbal → Santa Cruz',
+      },
+      {
+        route_id: route3.id,
+        ferry_id: ferry1.id,
+        departure_hour: 7,
+        departure_minute: 0,
+        notes: 'Santa Cruz → Isabela',
+      },
+      {
+        route_id: route3.id,
+        ferry_id: ferry1.id,
+        departure_hour: 15,
+        departure_minute: 0,
+        notes: 'Santa Cruz → Isabela',
+      },
+      {
+        route_id: route7.id,
+        ferry_id: ferry1.id,
+        departure_hour: 6,
+        departure_minute: 0,
+        notes: 'Isabela → Santa Cruz',
+      },
+      {
+        route_id: route7.id,
+        ferry_id: ferry1.id,
+        departure_hour: 15,
+        departure_minute: 0,
+        notes: 'Isabela → Santa Cruz',
+      },
+      {
+        route_id: route9.id,
+        ferry_id: ferry1.id,
+        departure_hour: 8,
+        departure_minute: 0,
+        notes: 'Santa Cruz → Floreana',
+      },
+      {
+        route_id: route10.id,
+        ferry_id: ferry1.id,
+        departure_hour: 15,
+        departure_minute: 0,
+        notes: 'Floreana → Santa Cruz',
+      },
+    ],
   });
 
   // SCHEDULES
+  // Un solo schedule manual solo para poder crear el ticket/hold/pago de
+  // ejemplo sin depender de que la app ya haya arrancado y generado los
+  // horarios reales. Se liga al template Santa Cruz → San Cristóbal 07:00
+  // para que el generador lo detecte como ya generado en esa fecha y no
+  // cree una fila duplicada para la misma ruta/hora.
   console.log('📅 Creating schedules...');
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  tomorrow.setHours(8, 0, 0, 0);
+  const route1MorningTemplate =
+    await prisma.schedule_templates.findFirstOrThrow({
+      where: { route_id: route1.id, departure_hour: 7, departure_minute: 0 },
+    });
 
-  const departure = new Date(tomorrow);
-  const arrival = new Date(departure.getTime() + 2.5 * 60 * 60 * 1000);
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(7, 0, 0, 0);
+  const arrival = new Date(tomorrow.getTime() + 120 * 60 * 1000);
 
   const schedule1 = await prisma.schedules.create({
     data: {
       route_id: route1.id,
       ferry_id: ferry1.id,
-      departure_date: departure,
-      departure_time: departure,
+      schedule_template_id: route1MorningTemplate.id,
+      departure_date: tomorrow,
+      departure_time: tomorrow,
       arrival_time: arrival,
       total_capacity: ferry1.capacity,
       available_seats: ferry1.capacity - 10,
       status: 'scheduled',
-      notes: 'Ruta diaria de prueba',
-    },
-  });
-
-  const base = new Date(tomorrow);
-
-  const departure2 = new Date(base);
-  departure2.setDate(base.getDate() + 1);
-  departure2.setHours(14, 0, 0, 0);
-  const arrival2 = new Date(departure2.getTime() + 2.5 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route1.id,
-      ferry_id: ferry2.id,
-      departure_date: departure2,
-      departure_time: departure2,
-      arrival_time: arrival2,
-      total_capacity: ferry2.capacity,
-      available_seats: ferry2.capacity - 50,
-      status: 'scheduled',
-      notes: 'Santa Cruz → San Cristóbal (premium) nocturno',
-    },
-  });
-
-  const departure3 = new Date(base);
-  departure3.setDate(base.getDate() + 2);
-  departure3.setHours(7, 30, 0, 0);
-  const arrival3 = new Date(departure3.getTime() + 1 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route2.id,
-      ferry_id: ferry3.id,
-      departure_date: departure3,
-      departure_time: departure3,
-      arrival_time: arrival3,
-      total_capacity: ferry3.capacity,
-      available_seats: ferry3.capacity - 80,
-      status: 'scheduled',
-      notes: 'Baltra → Santa Cruz (fast) diurno',
-    },
-  });
-
-  const departure4 = new Date(base);
-  departure4.setDate(base.getDate() + 3);
-  departure4.setHours(15, 0, 0, 0);
-  const arrival4 = new Date(departure4.getTime() + 1 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route2.id,
-      ferry_id: ferry1.id,
-      departure_date: departure4,
-      departure_time: departure4,
-      arrival_time: arrival4,
-      total_capacity: ferry1.capacity,
-      available_seats: ferry1.capacity - 120,
-      status: 'scheduled',
-      notes: 'Baltra → Santa Cruz (normal) fin de semana',
-    },
-  });
-
-  const departure5 = new Date(base);
-  departure5.setDate(base.getDate() + 4);
-  departure5.setHours(9, 0, 0, 0);
-  const arrival5 = new Date(departure5.getTime() + 3 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route3.id,
-      ferry_id: ferry2.id,
-      departure_date: departure5,
-      departure_time: departure5,
-      arrival_time: arrival5,
-      total_capacity: ferry2.capacity,
-      available_seats: ferry2.capacity - 150,
-      status: 'scheduled',
-      notes: 'Santa Cruz → Isabela (premium) tarde',
-    },
-  });
-
-  const departure6 = new Date(base);
-  departure6.setDate(base.getDate() + 5);
-  departure6.setHours(13, 30, 0, 0);
-  const arrival6 = new Date(departure6.getTime() + 3 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route3.id,
-      ferry_id: ferry3.id,
-      departure_date: departure6,
-      departure_time: departure6,
-      arrival_time: arrival6,
-      total_capacity: ferry3.capacity,
-      available_seats: ferry3.capacity - 90,
-      status: 'scheduled',
-      notes: 'Santa Cruz → Isabela (fast) mañana',
-    },
-  });
-
-  const departure7 = new Date(base);
-  departure7.setDate(base.getDate() + 6);
-  departure7.setHours(10, 0, 0, 0);
-  const arrival7 = new Date(departure7.getTime() + 2 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route4.id,
-      ferry_id: ferry1.id,
-      departure_date: departure7,
-      departure_time: departure7,
-      arrival_time: arrival7,
-      total_capacity: ferry1.capacity,
-      available_seats: ferry1.capacity - 200,
-      status: 'scheduled',
-      notes: 'San Cristóbal → Baltra (normal) diurno',
-    },
-  });
-
-  const departure8 = new Date(base);
-  departure8.setDate(base.getDate() + 7);
-  departure8.setHours(18, 0, 0, 0);
-  const arrival8 = new Date(departure8.getTime() + 2 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route4.id,
-      ferry_id: ferry2.id,
-      departure_date: departure8,
-      departure_time: departure8,
-      arrival_time: arrival8,
-      total_capacity: ferry2.capacity,
-      available_seats: ferry2.capacity - 80,
-      status: 'scheduled',
-      notes: 'San Cristóbal → Baltra (premium) noche',
-    },
-  });
-
-  const departure9 = new Date(base);
-  departure9.setDate(base.getDate() + 8);
-  departure9.setHours(6, 30, 0, 0);
-  const arrival9 = new Date(departure9.getTime() + 1 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route2.id,
-      ferry_id: ferry3.id,
-      departure_date: departure9,
-      departure_time: departure9,
-      arrival_time: arrival9,
-      total_capacity: ferry3.capacity,
-      available_seats: ferry3.capacity - 50,
-      status: 'scheduled',
-      notes: 'Baltra → Santa Cruz (fast) especial',
-    },
-  });
-
-  const departure10 = new Date(base);
-  departure10.setDate(base.getDate() + 9);
-  departure10.setHours(11, 0, 0, 0);
-  const arrival10 = new Date(departure10.getTime() + 2.5 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route1.id,
-      ferry_id: ferry1.id,
-      departure_date: departure10,
-      departure_time: departure10,
-      arrival_time: arrival10,
-      total_capacity: ferry1.capacity,
-      available_seats: ferry1.capacity - 30,
-      status: 'scheduled',
-      notes: 'Santa Cruz → San Cristóbal (normal) fin de mes',
-    },
-  });
-
-  // Schedules adicionales de vuelta
-  const departure11 = new Date(base);
-  departure11.setDate(base.getDate() + 1);
-  departure11.setHours(16, 30, 0, 0);
-  const arrival11 = new Date(departure11.getTime() + 2.5 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route5.id,
-      ferry_id: ferry2.id,
-      departure_date: departure11,
-      departure_time: departure11,
-      arrival_time: arrival11,
-      total_capacity: ferry2.capacity,
-      available_seats: ferry2.capacity - 40,
-      status: 'scheduled',
-      notes: 'San Cristóbal → Santa Cruz (vuelta tarde)',
-    },
-  });
-
-  const departure12 = new Date(base);
-  departure12.setDate(base.getDate() + 2);
-  departure12.setHours(9, 30, 0, 0);
-  const arrival12 = new Date(departure12.getTime() + 1 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route6.id,
-      ferry_id: ferry3.id,
-      departure_date: departure12,
-      departure_time: departure12,
-      arrival_time: arrival12,
-      total_capacity: ferry3.capacity,
-      available_seats: ferry3.capacity - 60,
-      status: 'scheduled',
-      notes: 'Santa Cruz → Baltra (vuelta mañana)',
-    },
-  });
-
-  const departure13 = new Date(base);
-  departure13.setDate(base.getDate() + 3);
-  departure13.setHours(12, 0, 0, 0);
-  const arrival13 = new Date(departure13.getTime() + 3 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route7.id,
-      ferry_id: ferry1.id,
-      departure_date: departure13,
-      departure_time: departure13,
-      arrival_time: arrival13,
-      total_capacity: ferry1.capacity,
-      available_seats: ferry1.capacity - 100,
-      status: 'scheduled',
-      notes: 'Isabela → Santa Cruz (vuelta mediodía)',
-    },
-  });
-
-  const departure14 = new Date(base);
-  departure14.setDate(base.getDate() + 4);
-  departure14.setHours(14, 30, 0, 0);
-  const arrival14 = new Date(departure14.getTime() + 2 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route8.id,
-      ferry_id: ferry2.id,
-      departure_date: departure14,
-      departure_time: departure14,
-      arrival_time: arrival14,
-      total_capacity: ferry2.capacity,
-      available_seats: ferry2.capacity - 70,
-      status: 'scheduled',
-      notes: 'Baltra → San Cristóbal (vuelta tarde)',
-    },
-  });
-
-  const departure15 = new Date(base);
-  departure15.setDate(base.getDate() + 5);
-  departure15.setHours(7, 0, 0, 0);
-  const arrival15 = new Date(departure15.getTime() + 2.5 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route5.id,
-      ferry_id: ferry1.id,
-      departure_date: departure15,
-      departure_time: departure15,
-      arrival_time: arrival15,
-      total_capacity: ferry1.capacity,
-      available_seats: ferry1.capacity - 55,
-      status: 'scheduled',
-      notes: 'San Cristóbal → Santa Cruz (vuelta temprano)',
-    },
-  });
-
-  const departure16 = new Date(base);
-  departure16.setDate(base.getDate() + 6);
-  departure16.setHours(16, 0, 0, 0);
-  const arrival16 = new Date(departure16.getTime() + 1 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route6.id,
-      ferry_id: ferry3.id,
-      departure_date: departure16,
-      departure_time: departure16,
-      arrival_time: arrival16,
-      total_capacity: ferry3.capacity,
-      available_seats: ferry3.capacity - 45,
-      status: 'scheduled',
-      notes: 'Santa Cruz → Baltra (vuelta tarde)',
-    },
-  });
-
-  const departure17 = new Date(base);
-  departure17.setDate(base.getDate() + 7);
-  departure17.setHours(10, 30, 0, 0);
-  const arrival17 = new Date(departure17.getTime() + 3 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route7.id,
-      ferry_id: ferry2.id,
-      departure_date: departure17,
-      departure_time: departure17,
-      arrival_time: arrival17,
-      total_capacity: ferry2.capacity,
-      available_seats: ferry2.capacity - 85,
-      status: 'scheduled',
-      notes: 'Isabela → Santa Cruz (vuelta mañana)',
-    },
-  });
-
-  const departure18 = new Date(base);
-  departure18.setDate(base.getDate() + 8);
-  departure18.setHours(17, 30, 0, 0);
-  const arrival18 = new Date(departure18.getTime() + 2 * 60 * 60 * 1000);
-  await prisma.schedules.create({
-    data: {
-      route_id: route8.id,
-      ferry_id: ferry1.id,
-      departure_date: departure18,
-      departure_time: departure18,
-      arrival_time: arrival18,
-      total_capacity: ferry1.capacity,
-      available_seats: ferry1.capacity - 110,
-      status: 'scheduled',
-      notes: 'Baltra → San Cristóbal (vuelta noche)',
+      notes: 'Schedule de ejemplo para el ticket de prueba del seed',
     },
   });
 
@@ -812,7 +590,9 @@ async function main() {
       currency: 'USD',
       qr_code: 'QR-AYO-BQM-001',
       status: 'confirmed',
-      booking_expires_at: new Date(departure.getTime() - 2 * 60 * 60 * 1000),
+      booking_expires_at: new Date(
+        schedule1.departure_time.getTime() - 2 * 60 * 60 * 1000,
+      ),
       outbound_hold_id: hold1.id,
     },
   });
@@ -828,6 +608,7 @@ async function main() {
         email: 'juan@example.com',
         phone: '+123456789',
         document_number: '12345678A',
+        date_of_birth: new Date('1990-05-14'),
         unit_price: 85, // base 50 + fare basic 35
         outbound_fare_id: fareBasic.id,
         is_primary: true,
@@ -842,6 +623,7 @@ async function main() {
         email: 'ana@example.com',
         phone: '+123456780',
         document_number: 'X1234567',
+        date_of_birth: new Date('2021-09-02'),
         unit_price: 125, // base 90 + fare basic 35
         outbound_fare_id: fareLight.id,
         is_primary: false,

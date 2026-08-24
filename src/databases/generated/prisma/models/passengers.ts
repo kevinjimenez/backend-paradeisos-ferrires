@@ -46,6 +46,7 @@ export type PassengersMinAggregateOutputType = {
   email: string | null
   phone: string | null
   document_number: string | null
+  date_of_birth: Date | null
   unit_price: runtime.Decimal | null
   is_primary: boolean | null
   checked_in_outbound: boolean | null
@@ -68,6 +69,7 @@ export type PassengersMaxAggregateOutputType = {
   email: string | null
   phone: string | null
   document_number: string | null
+  date_of_birth: Date | null
   unit_price: runtime.Decimal | null
   is_primary: boolean | null
   checked_in_outbound: boolean | null
@@ -90,6 +92,7 @@ export type PassengersCountAggregateOutputType = {
   email: number
   phone: number
   document_number: number
+  date_of_birth: number
   unit_price: number
   is_primary: number
   checked_in_outbound: number
@@ -122,6 +125,7 @@ export type PassengersMinAggregateInputType = {
   email?: true
   phone?: true
   document_number?: true
+  date_of_birth?: true
   unit_price?: true
   is_primary?: true
   checked_in_outbound?: true
@@ -144,6 +148,7 @@ export type PassengersMaxAggregateInputType = {
   email?: true
   phone?: true
   document_number?: true
+  date_of_birth?: true
   unit_price?: true
   is_primary?: true
   checked_in_outbound?: true
@@ -166,6 +171,7 @@ export type PassengersCountAggregateInputType = {
   email?: true
   phone?: true
   document_number?: true
+  date_of_birth?: true
   unit_price?: true
   is_primary?: true
   checked_in_outbound?: true
@@ -275,6 +281,7 @@ export type PassengersGroupByOutputType = {
   email: string | null
   phone: string | null
   document_number: string
+  date_of_birth: Date
   unit_price: runtime.Decimal
   is_primary: boolean
   checked_in_outbound: boolean
@@ -290,7 +297,7 @@ export type PassengersGroupByOutputType = {
   _max: PassengersMaxAggregateOutputType | null
 }
 
-export type GetPassengersGroupByPayload<T extends passengersGroupByArgs> = Prisma.PrismaPromise<
+type GetPassengersGroupByPayload<T extends passengersGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<PassengersGroupByOutputType, T['by']> &
       {
@@ -320,6 +327,7 @@ export type passengersWhereInput = {
   email?: Prisma.StringNullableFilter<"passengers"> | string | null
   phone?: Prisma.StringNullableFilter<"passengers"> | string | null
   document_number?: Prisma.StringFilter<"passengers"> | string
+  date_of_birth?: Prisma.DateTimeFilter<"passengers"> | Date | string
   unit_price?: Prisma.DecimalFilter<"passengers"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFilter<"passengers"> | boolean
   checked_in_outbound?: Prisma.BoolFilter<"passengers"> | boolean
@@ -346,6 +354,7 @@ export type passengersOrderByWithRelationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   document_number?: Prisma.SortOrder
+  date_of_birth?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
   is_primary?: Prisma.SortOrder
   checked_in_outbound?: Prisma.SortOrder
@@ -375,6 +384,7 @@ export type passengersWhereUniqueInput = Prisma.AtLeast<{
   city?: Prisma.StringNullableFilter<"passengers"> | string | null
   email?: Prisma.StringNullableFilter<"passengers"> | string | null
   phone?: Prisma.StringNullableFilter<"passengers"> | string | null
+  date_of_birth?: Prisma.DateTimeFilter<"passengers"> | Date | string
   unit_price?: Prisma.DecimalFilter<"passengers"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFilter<"passengers"> | boolean
   checked_in_outbound?: Prisma.BoolFilter<"passengers"> | boolean
@@ -401,6 +411,7 @@ export type passengersOrderByWithAggregationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   document_number?: Prisma.SortOrder
+  date_of_birth?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
   is_primary?: Prisma.SortOrder
   checked_in_outbound?: Prisma.SortOrder
@@ -431,6 +442,7 @@ export type passengersScalarWhereWithAggregatesInput = {
   email?: Prisma.StringNullableWithAggregatesFilter<"passengers"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"passengers"> | string | null
   document_number?: Prisma.StringWithAggregatesFilter<"passengers"> | string
+  date_of_birth?: Prisma.DateTimeWithAggregatesFilter<"passengers"> | Date | string
   unit_price?: Prisma.DecimalWithAggregatesFilter<"passengers"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolWithAggregatesFilter<"passengers"> | boolean
   checked_in_outbound?: Prisma.BoolWithAggregatesFilter<"passengers"> | boolean
@@ -450,6 +462,7 @@ export type passengersCreateInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -476,6 +489,7 @@ export type passengersUncheckedCreateInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -496,6 +510,7 @@ export type passengersUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -522,6 +537,7 @@ export type passengersUncheckedUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -545,6 +561,7 @@ export type passengersCreateManyInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -564,6 +581,7 @@ export type passengersUpdateManyMutationInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -586,6 +604,7 @@ export type passengersUncheckedUpdateManyInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -623,6 +642,7 @@ export type passengersCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   document_number?: Prisma.SortOrder
+  date_of_birth?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
   is_primary?: Prisma.SortOrder
   checked_in_outbound?: Prisma.SortOrder
@@ -649,6 +669,7 @@ export type passengersMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   document_number?: Prisma.SortOrder
+  date_of_birth?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
   is_primary?: Prisma.SortOrder
   checked_in_outbound?: Prisma.SortOrder
@@ -671,6 +692,7 @@ export type passengersMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   document_number?: Prisma.SortOrder
+  date_of_birth?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
   is_primary?: Prisma.SortOrder
   checked_in_outbound?: Prisma.SortOrder
@@ -838,6 +860,7 @@ export type passengersCreateWithoutOutbound_fareInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -862,6 +885,7 @@ export type passengersUncheckedCreateWithoutOutbound_fareInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -892,6 +916,7 @@ export type passengersCreateWithoutReturn_fareInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -916,6 +941,7 @@ export type passengersUncheckedCreateWithoutReturn_fareInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -968,6 +994,7 @@ export type passengersScalarWhereInput = {
   email?: Prisma.StringNullableFilter<"passengers"> | string | null
   phone?: Prisma.StringNullableFilter<"passengers"> | string | null
   document_number?: Prisma.StringFilter<"passengers"> | string
+  date_of_birth?: Prisma.DateTimeFilter<"passengers"> | Date | string
   unit_price?: Prisma.DecimalFilter<"passengers"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFilter<"passengers"> | boolean
   checked_in_outbound?: Prisma.BoolFilter<"passengers"> | boolean
@@ -1003,6 +1030,7 @@ export type passengersCreateWithoutPassenger_extrasInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -1028,6 +1056,7 @@ export type passengersUncheckedCreateWithoutPassenger_extrasInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -1063,6 +1092,7 @@ export type passengersUpdateWithoutPassenger_extrasInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1088,6 +1118,7 @@ export type passengersUncheckedUpdateWithoutPassenger_extrasInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1107,6 +1138,7 @@ export type passengersCreateWithoutTicketsInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -1131,6 +1163,7 @@ export type passengersUncheckedCreateWithoutTicketsInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -1179,6 +1212,7 @@ export type passengersCreateManyOutbound_fareInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -1200,6 +1234,7 @@ export type passengersCreateManyReturn_fareInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -1219,6 +1254,7 @@ export type passengersUpdateWithoutOutbound_fareInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1243,6 +1279,7 @@ export type passengersUncheckedUpdateWithoutOutbound_fareInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1265,6 +1302,7 @@ export type passengersUncheckedUpdateManyWithoutOutbound_fareInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1284,6 +1322,7 @@ export type passengersUpdateWithoutReturn_fareInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1308,6 +1347,7 @@ export type passengersUncheckedUpdateWithoutReturn_fareInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1330,6 +1370,7 @@ export type passengersUncheckedUpdateManyWithoutReturn_fareInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1351,6 +1392,7 @@ export type passengersCreateManyTicketsInput = {
   email?: string | null
   phone?: string | null
   document_number: string
+  date_of_birth: Date | string
   unit_price: runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -1370,6 +1412,7 @@ export type passengersUpdateWithoutTicketsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1394,6 +1437,7 @@ export type passengersUncheckedUpdateWithoutTicketsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1416,6 +1460,7 @@ export type passengersUncheckedUpdateManyWithoutTicketsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document_number?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   is_primary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checked_in_outbound?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1469,6 +1514,7 @@ export type passengersSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   email?: boolean
   phone?: boolean
   document_number?: boolean
+  date_of_birth?: boolean
   unit_price?: boolean
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -1496,6 +1542,7 @@ export type passengersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   email?: boolean
   phone?: boolean
   document_number?: boolean
+  date_of_birth?: boolean
   unit_price?: boolean
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -1521,6 +1568,7 @@ export type passengersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   email?: boolean
   phone?: boolean
   document_number?: boolean
+  date_of_birth?: boolean
   unit_price?: boolean
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -1546,6 +1594,7 @@ export type passengersSelectScalar = {
   email?: boolean
   phone?: boolean
   document_number?: boolean
+  date_of_birth?: boolean
   unit_price?: boolean
   is_primary?: boolean
   checked_in_outbound?: boolean
@@ -1556,7 +1605,7 @@ export type passengersSelectScalar = {
   created_at?: boolean
 }
 
-export type passengersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ticket_id" | "outbound_fare_id" | "return_fare_id" | "first_name" | "last_name" | "country" | "city" | "email" | "phone" | "document_number" | "unit_price" | "is_primary" | "checked_in_outbound" | "checked_in_return" | "document_type" | "checked_in_outbound_at" | "checked_in_return_at" | "created_at", ExtArgs["result"]["passengers"]>
+export type passengersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ticket_id" | "outbound_fare_id" | "return_fare_id" | "first_name" | "last_name" | "country" | "city" | "email" | "phone" | "document_number" | "date_of_birth" | "unit_price" | "is_primary" | "checked_in_outbound" | "checked_in_return" | "document_type" | "checked_in_outbound_at" | "checked_in_return_at" | "created_at", ExtArgs["result"]["passengers"]>
 export type passengersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tickets?: boolean | Prisma.passengers$ticketsArgs<ExtArgs>
   outbound_fare?: boolean | Prisma.passengers$outbound_fareArgs<ExtArgs>
@@ -1595,6 +1644,7 @@ export type $passengersPayload<ExtArgs extends runtime.Types.Extensions.Internal
     email: string | null
     phone: string | null
     document_number: string
+    date_of_birth: Date
     unit_price: runtime.Decimal
     is_primary: boolean
     checked_in_outbound: boolean
@@ -2041,6 +2091,7 @@ export interface passengersFieldRefs {
   readonly email: Prisma.FieldRef<"passengers", 'String'>
   readonly phone: Prisma.FieldRef<"passengers", 'String'>
   readonly document_number: Prisma.FieldRef<"passengers", 'String'>
+  readonly date_of_birth: Prisma.FieldRef<"passengers", 'DateTime'>
   readonly unit_price: Prisma.FieldRef<"passengers", 'Decimal'>
   readonly is_primary: Prisma.FieldRef<"passengers", 'Boolean'>
   readonly checked_in_outbound: Prisma.FieldRef<"passengers", 'Boolean'>
@@ -2245,11 +2296,6 @@ export type passengersFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Skip the first `n` passengers.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of passengers.
-   */
   distinct?: Prisma.PassengersScalarFieldEnum | Prisma.PassengersScalarFieldEnum[]
 }
 

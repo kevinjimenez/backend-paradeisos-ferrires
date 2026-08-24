@@ -17,4 +17,14 @@ export interface FerriesSchedule {
 
 export interface RoutesSchedule {
   base_price: Prisma.Decimal;
+  origin_islands: RouteIsland;
+  destination_islands: RouteIsland;
+}
+
+export interface RouteIsland {
+  name: string;
+  description: string;
+  code: string;
+  pier_name: string;
+  port_address: string;
 }

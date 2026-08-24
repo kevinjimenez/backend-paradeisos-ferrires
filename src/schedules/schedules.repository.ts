@@ -41,10 +41,22 @@ export class SchedulesRepository extends BaseRepository<Prisma.schedulesModel> {
           select: {
             base_price: true,
             origin_islands: {
-              select: { name: true, description: true, code: true },
+              select: {
+                name: true,
+                description: true,
+                code: true,
+                pier_name: true,
+                port_address: true,
+              },
             },
             destination_islands: {
-              select: { name: true, description: true, code: true },
+              select: {
+                name: true,
+                description: true,
+                code: true,
+                pier_name: true,
+                port_address: true,
+              },
             },
           },
         },

@@ -216,7 +216,7 @@ export type Fare_extrasGroupByOutputType = {
   _max: Fare_extrasMaxAggregateOutputType | null
 }
 
-export type GetFare_extrasGroupByPayload<T extends fare_extrasGroupByArgs> = Prisma.PrismaPromise<
+type GetFare_extrasGroupByPayload<T extends fare_extrasGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<Fare_extrasGroupByOutputType, T['by']> &
       {
@@ -1254,11 +1254,6 @@ export type fare_extrasFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Skip the first `n` fare_extras.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of fare_extras.
-   */
   distinct?: Prisma.Fare_extrasScalarFieldEnum | Prisma.Fare_extrasScalarFieldEnum[]
 }
 

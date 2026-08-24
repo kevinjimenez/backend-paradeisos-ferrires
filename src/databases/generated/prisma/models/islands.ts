@@ -29,6 +29,8 @@ export type IslandsMinAggregateOutputType = {
   name: string | null
   code: string | null
   description: string | null
+  pier_name: string | null
+  port_address: string | null
   is_active: boolean | null
   created_at: Date | null
   updated_at: Date | null
@@ -39,6 +41,8 @@ export type IslandsMaxAggregateOutputType = {
   name: string | null
   code: string | null
   description: string | null
+  pier_name: string | null
+  port_address: string | null
   is_active: boolean | null
   created_at: Date | null
   updated_at: Date | null
@@ -49,6 +53,8 @@ export type IslandsCountAggregateOutputType = {
   name: number
   code: number
   description: number
+  pier_name: number
+  port_address: number
   is_active: number
   created_at: number
   updated_at: number
@@ -61,6 +67,8 @@ export type IslandsMinAggregateInputType = {
   name?: true
   code?: true
   description?: true
+  pier_name?: true
+  port_address?: true
   is_active?: true
   created_at?: true
   updated_at?: true
@@ -71,6 +79,8 @@ export type IslandsMaxAggregateInputType = {
   name?: true
   code?: true
   description?: true
+  pier_name?: true
+  port_address?: true
   is_active?: true
   created_at?: true
   updated_at?: true
@@ -81,6 +91,8 @@ export type IslandsCountAggregateInputType = {
   name?: true
   code?: true
   description?: true
+  pier_name?: true
+  port_address?: true
   is_active?: true
   created_at?: true
   updated_at?: true
@@ -164,6 +176,8 @@ export type IslandsGroupByOutputType = {
   name: string
   code: string
   description: string
+  pier_name: string
+  port_address: string
   is_active: boolean
   created_at: Date
   updated_at: Date
@@ -172,7 +186,7 @@ export type IslandsGroupByOutputType = {
   _max: IslandsMaxAggregateOutputType | null
 }
 
-export type GetIslandsGroupByPayload<T extends islandsGroupByArgs> = Prisma.PrismaPromise<
+type GetIslandsGroupByPayload<T extends islandsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<IslandsGroupByOutputType, T['by']> &
       {
@@ -195,6 +209,8 @@ export type islandsWhereInput = {
   name?: Prisma.StringFilter<"islands"> | string
   code?: Prisma.StringFilter<"islands"> | string
   description?: Prisma.StringFilter<"islands"> | string
+  pier_name?: Prisma.StringFilter<"islands"> | string
+  port_address?: Prisma.StringFilter<"islands"> | string
   is_active?: Prisma.BoolFilter<"islands"> | boolean
   created_at?: Prisma.DateTimeFilter<"islands"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"islands"> | Date | string
@@ -207,6 +223,8 @@ export type islandsOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  pier_name?: Prisma.SortOrder
+  port_address?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -222,6 +240,8 @@ export type islandsWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.islandsWhereInput | Prisma.islandsWhereInput[]
   name?: Prisma.StringFilter<"islands"> | string
   description?: Prisma.StringFilter<"islands"> | string
+  pier_name?: Prisma.StringFilter<"islands"> | string
+  port_address?: Prisma.StringFilter<"islands"> | string
   is_active?: Prisma.BoolFilter<"islands"> | boolean
   created_at?: Prisma.DateTimeFilter<"islands"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"islands"> | Date | string
@@ -234,6 +254,8 @@ export type islandsOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  pier_name?: Prisma.SortOrder
+  port_address?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -250,6 +272,8 @@ export type islandsScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"islands"> | string
   code?: Prisma.StringWithAggregatesFilter<"islands"> | string
   description?: Prisma.StringWithAggregatesFilter<"islands"> | string
+  pier_name?: Prisma.StringWithAggregatesFilter<"islands"> | string
+  port_address?: Prisma.StringWithAggregatesFilter<"islands"> | string
   is_active?: Prisma.BoolWithAggregatesFilter<"islands"> | boolean
   created_at?: Prisma.DateTimeWithAggregatesFilter<"islands"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"islands"> | Date | string
@@ -260,6 +284,8 @@ export type islandsCreateInput = {
   name: string
   code: string
   description: string
+  pier_name: string
+  port_address: string
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
@@ -272,6 +298,8 @@ export type islandsUncheckedCreateInput = {
   name: string
   code: string
   description: string
+  pier_name: string
+  port_address: string
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
@@ -284,6 +312,8 @@ export type islandsUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  pier_name?: Prisma.StringFieldUpdateOperationsInput | string
+  port_address?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -296,6 +326,8 @@ export type islandsUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  pier_name?: Prisma.StringFieldUpdateOperationsInput | string
+  port_address?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -308,6 +340,8 @@ export type islandsCreateManyInput = {
   name: string
   code: string
   description: string
+  pier_name: string
+  port_address: string
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
@@ -318,6 +352,8 @@ export type islandsUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  pier_name?: Prisma.StringFieldUpdateOperationsInput | string
+  port_address?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -328,6 +364,8 @@ export type islandsUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  pier_name?: Prisma.StringFieldUpdateOperationsInput | string
+  port_address?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -338,6 +376,8 @@ export type islandsCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  pier_name?: Prisma.SortOrder
+  port_address?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -348,6 +388,8 @@ export type islandsMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  pier_name?: Prisma.SortOrder
+  port_address?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -358,6 +400,8 @@ export type islandsMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  pier_name?: Prisma.SortOrder
+  port_address?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -401,6 +445,8 @@ export type islandsCreateWithoutOrigin_routesInput = {
   name: string
   code: string
   description: string
+  pier_name: string
+  port_address: string
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
@@ -412,6 +458,8 @@ export type islandsUncheckedCreateWithoutOrigin_routesInput = {
   name: string
   code: string
   description: string
+  pier_name: string
+  port_address: string
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
@@ -428,6 +476,8 @@ export type islandsCreateWithoutDestination_routesInput = {
   name: string
   code: string
   description: string
+  pier_name: string
+  port_address: string
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
@@ -439,6 +489,8 @@ export type islandsUncheckedCreateWithoutDestination_routesInput = {
   name: string
   code: string
   description: string
+  pier_name: string
+  port_address: string
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
@@ -466,6 +518,8 @@ export type islandsUpdateWithoutOrigin_routesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  pier_name?: Prisma.StringFieldUpdateOperationsInput | string
+  port_address?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -477,6 +531,8 @@ export type islandsUncheckedUpdateWithoutOrigin_routesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  pier_name?: Prisma.StringFieldUpdateOperationsInput | string
+  port_address?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -499,6 +555,8 @@ export type islandsUpdateWithoutDestination_routesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  pier_name?: Prisma.StringFieldUpdateOperationsInput | string
+  port_address?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -510,6 +568,8 @@ export type islandsUncheckedUpdateWithoutDestination_routesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  pier_name?: Prisma.StringFieldUpdateOperationsInput | string
+  port_address?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -561,6 +621,8 @@ export type islandsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name?: boolean
   code?: boolean
   description?: boolean
+  pier_name?: boolean
+  port_address?: boolean
   is_active?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -574,6 +636,8 @@ export type islandsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   code?: boolean
   description?: boolean
+  pier_name?: boolean
+  port_address?: boolean
   is_active?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -584,6 +648,8 @@ export type islandsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   code?: boolean
   description?: boolean
+  pier_name?: boolean
+  port_address?: boolean
   is_active?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -594,12 +660,14 @@ export type islandsSelectScalar = {
   name?: boolean
   code?: boolean
   description?: boolean
+  pier_name?: boolean
+  port_address?: boolean
   is_active?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type islandsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "description" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["islands"]>
+export type islandsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "description" | "pier_name" | "port_address" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["islands"]>
 export type islandsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   origin_routes?: boolean | Prisma.islands$origin_routesArgs<ExtArgs>
   destination_routes?: boolean | Prisma.islands$destination_routesArgs<ExtArgs>
@@ -619,6 +687,8 @@ export type $islandsPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     name: string
     code: string
     description: string
+    pier_name: string
+    port_address: string
     is_active: boolean
     created_at: Date
     updated_at: Date
@@ -1051,6 +1121,8 @@ export interface islandsFieldRefs {
   readonly name: Prisma.FieldRef<"islands", 'String'>
   readonly code: Prisma.FieldRef<"islands", 'String'>
   readonly description: Prisma.FieldRef<"islands", 'String'>
+  readonly pier_name: Prisma.FieldRef<"islands", 'String'>
+  readonly port_address: Prisma.FieldRef<"islands", 'String'>
   readonly is_active: Prisma.FieldRef<"islands", 'Boolean'>
   readonly created_at: Prisma.FieldRef<"islands", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"islands", 'DateTime'>
@@ -1250,11 +1322,6 @@ export type islandsFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` islands.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of islands.
-   */
   distinct?: Prisma.IslandsScalarFieldEnum | Prisma.IslandsScalarFieldEnum[]
 }
 

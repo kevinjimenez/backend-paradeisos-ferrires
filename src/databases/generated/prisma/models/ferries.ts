@@ -248,7 +248,7 @@ export type FerriesGroupByOutputType = {
   _max: FerriesMaxAggregateOutputType | null
 }
 
-export type GetFerriesGroupByPayload<T extends ferriesGroupByArgs> = Prisma.PrismaPromise<
+type GetFerriesGroupByPayload<T extends ferriesGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<FerriesGroupByOutputType, T['by']> &
       {
@@ -281,6 +281,7 @@ export type ferriesWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ferries"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ferries"> | Date | string
   schedules?: Prisma.SchedulesListRelationFilter
+  schedule_templates?: Prisma.Schedule_templatesListRelationFilter
 }
 
 export type ferriesOrderByWithRelationInput = {
@@ -298,6 +299,7 @@ export type ferriesOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   schedules?: Prisma.schedulesOrderByRelationAggregateInput
+  schedule_templates?: Prisma.schedule_templatesOrderByRelationAggregateInput
 }
 
 export type ferriesWhereUniqueInput = Prisma.AtLeast<{
@@ -318,6 +320,7 @@ export type ferriesWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"ferries"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ferries"> | Date | string
   schedules?: Prisma.SchedulesListRelationFilter
+  schedule_templates?: Prisma.Schedule_templatesListRelationFilter
 }, "id" | "register_code">
 
 export type ferriesOrderByWithAggregationInput = {
@@ -375,6 +378,7 @@ export type ferriesCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   schedules?: Prisma.schedulesCreateNestedManyWithoutFerriesInput
+  schedule_templates?: Prisma.schedule_templatesCreateNestedManyWithoutFerriesInput
 }
 
 export type ferriesUncheckedCreateInput = {
@@ -392,6 +396,7 @@ export type ferriesUncheckedCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutFerriesInput
+  schedule_templates?: Prisma.schedule_templatesUncheckedCreateNestedManyWithoutFerriesInput
 }
 
 export type ferriesUpdateInput = {
@@ -409,6 +414,7 @@ export type ferriesUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schedules?: Prisma.schedulesUpdateManyWithoutFerriesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUpdateManyWithoutFerriesNestedInput
 }
 
 export type ferriesUncheckedUpdateInput = {
@@ -426,6 +432,7 @@ export type ferriesUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schedules?: Prisma.schedulesUncheckedUpdateManyWithoutFerriesNestedInput
+  schedule_templates?: Prisma.schedule_templatesUncheckedUpdateManyWithoutFerriesNestedInput
 }
 
 export type ferriesCreateManyInput = {
@@ -532,6 +539,11 @@ export type ferriesSumOrderByAggregateInput = {
   year_built?: Prisma.SortOrder
 }
 
+export type FerriesScalarRelationFilter = {
+  is?: Prisma.ferriesWhereInput
+  isNot?: Prisma.ferriesWhereInput
+}
+
 export type FerriesNullableScalarRelationFilter = {
   is?: Prisma.ferriesWhereInput | null
   isNot?: Prisma.ferriesWhereInput | null
@@ -553,6 +565,20 @@ export type EnumFerryStatusFieldUpdateOperationsInput = {
   set?: $Enums.FerryStatus
 }
 
+export type ferriesCreateNestedOneWithoutSchedule_templatesInput = {
+  create?: Prisma.XOR<Prisma.ferriesCreateWithoutSchedule_templatesInput, Prisma.ferriesUncheckedCreateWithoutSchedule_templatesInput>
+  connectOrCreate?: Prisma.ferriesCreateOrConnectWithoutSchedule_templatesInput
+  connect?: Prisma.ferriesWhereUniqueInput
+}
+
+export type ferriesUpdateOneRequiredWithoutSchedule_templatesNestedInput = {
+  create?: Prisma.XOR<Prisma.ferriesCreateWithoutSchedule_templatesInput, Prisma.ferriesUncheckedCreateWithoutSchedule_templatesInput>
+  connectOrCreate?: Prisma.ferriesCreateOrConnectWithoutSchedule_templatesInput
+  upsert?: Prisma.ferriesUpsertWithoutSchedule_templatesInput
+  connect?: Prisma.ferriesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ferriesUpdateToOneWithWhereWithoutSchedule_templatesInput, Prisma.ferriesUpdateWithoutSchedule_templatesInput>, Prisma.ferriesUncheckedUpdateWithoutSchedule_templatesInput>
+}
+
 export type ferriesCreateNestedOneWithoutSchedulesInput = {
   create?: Prisma.XOR<Prisma.ferriesCreateWithoutSchedulesInput, Prisma.ferriesUncheckedCreateWithoutSchedulesInput>
   connectOrCreate?: Prisma.ferriesCreateOrConnectWithoutSchedulesInput
@@ -569,6 +595,90 @@ export type ferriesUpdateOneWithoutSchedulesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ferriesUpdateToOneWithWhereWithoutSchedulesInput, Prisma.ferriesUpdateWithoutSchedulesInput>, Prisma.ferriesUncheckedUpdateWithoutSchedulesInput>
 }
 
+export type ferriesCreateWithoutSchedule_templatesInput = {
+  id?: string
+  name: string
+  register_code: string
+  capacity: number
+  operator_name: string
+  operator_phone?: string | null
+  operator_email?: string | null
+  year_built?: number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: $Enums.FerryType
+  status?: $Enums.FerryStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  schedules?: Prisma.schedulesCreateNestedManyWithoutFerriesInput
+}
+
+export type ferriesUncheckedCreateWithoutSchedule_templatesInput = {
+  id?: string
+  name: string
+  register_code: string
+  capacity: number
+  operator_name: string
+  operator_phone?: string | null
+  operator_email?: string | null
+  year_built?: number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: $Enums.FerryType
+  status?: $Enums.FerryStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  schedules?: Prisma.schedulesUncheckedCreateNestedManyWithoutFerriesInput
+}
+
+export type ferriesCreateOrConnectWithoutSchedule_templatesInput = {
+  where: Prisma.ferriesWhereUniqueInput
+  create: Prisma.XOR<Prisma.ferriesCreateWithoutSchedule_templatesInput, Prisma.ferriesUncheckedCreateWithoutSchedule_templatesInput>
+}
+
+export type ferriesUpsertWithoutSchedule_templatesInput = {
+  update: Prisma.XOR<Prisma.ferriesUpdateWithoutSchedule_templatesInput, Prisma.ferriesUncheckedUpdateWithoutSchedule_templatesInput>
+  create: Prisma.XOR<Prisma.ferriesCreateWithoutSchedule_templatesInput, Prisma.ferriesUncheckedCreateWithoutSchedule_templatesInput>
+  where?: Prisma.ferriesWhereInput
+}
+
+export type ferriesUpdateToOneWithWhereWithoutSchedule_templatesInput = {
+  where?: Prisma.ferriesWhereInput
+  data: Prisma.XOR<Prisma.ferriesUpdateWithoutSchedule_templatesInput, Prisma.ferriesUncheckedUpdateWithoutSchedule_templatesInput>
+}
+
+export type ferriesUpdateWithoutSchedule_templatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  register_code?: Prisma.StringFieldUpdateOperationsInput | string
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  operator_name?: Prisma.StringFieldUpdateOperationsInput | string
+  operator_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
+  status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  schedules?: Prisma.schedulesUpdateManyWithoutFerriesNestedInput
+}
+
+export type ferriesUncheckedUpdateWithoutSchedule_templatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  register_code?: Prisma.StringFieldUpdateOperationsInput | string
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  operator_name?: Prisma.StringFieldUpdateOperationsInput | string
+  operator_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  operator_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year_built?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  type?: Prisma.EnumFerryTypeFieldUpdateOperationsInput | $Enums.FerryType
+  status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  schedules?: Prisma.schedulesUncheckedUpdateManyWithoutFerriesNestedInput
+}
+
 export type ferriesCreateWithoutSchedulesInput = {
   id?: string
   name: string
@@ -583,6 +693,7 @@ export type ferriesCreateWithoutSchedulesInput = {
   status?: $Enums.FerryStatus
   created_at?: Date | string
   updated_at?: Date | string
+  schedule_templates?: Prisma.schedule_templatesCreateNestedManyWithoutFerriesInput
 }
 
 export type ferriesUncheckedCreateWithoutSchedulesInput = {
@@ -599,6 +710,7 @@ export type ferriesUncheckedCreateWithoutSchedulesInput = {
   status?: $Enums.FerryStatus
   created_at?: Date | string
   updated_at?: Date | string
+  schedule_templates?: Prisma.schedule_templatesUncheckedCreateNestedManyWithoutFerriesInput
 }
 
 export type ferriesCreateOrConnectWithoutSchedulesInput = {
@@ -631,6 +743,7 @@ export type ferriesUpdateWithoutSchedulesInput = {
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  schedule_templates?: Prisma.schedule_templatesUpdateManyWithoutFerriesNestedInput
 }
 
 export type ferriesUncheckedUpdateWithoutSchedulesInput = {
@@ -647,6 +760,7 @@ export type ferriesUncheckedUpdateWithoutSchedulesInput = {
   status?: Prisma.EnumFerryStatusFieldUpdateOperationsInput | $Enums.FerryStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  schedule_templates?: Prisma.schedule_templatesUncheckedUpdateManyWithoutFerriesNestedInput
 }
 
 
@@ -656,10 +770,12 @@ export type ferriesUncheckedUpdateWithoutSchedulesInput = {
 
 export type FerriesCountOutputType = {
   schedules: number
+  schedule_templates: number
 }
 
 export type FerriesCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   schedules?: boolean | FerriesCountOutputTypeCountSchedulesArgs
+  schedule_templates?: boolean | FerriesCountOutputTypeCountSchedule_templatesArgs
 }
 
 /**
@@ -679,6 +795,13 @@ export type FerriesCountOutputTypeCountSchedulesArgs<ExtArgs extends runtime.Typ
   where?: Prisma.schedulesWhereInput
 }
 
+/**
+ * FerriesCountOutputType without action
+ */
+export type FerriesCountOutputTypeCountSchedule_templatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.schedule_templatesWhereInput
+}
+
 
 export type ferriesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -695,6 +818,7 @@ export type ferriesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   created_at?: boolean
   updated_at?: boolean
   schedules?: boolean | Prisma.ferries$schedulesArgs<ExtArgs>
+  schedule_templates?: boolean | Prisma.ferries$schedule_templatesArgs<ExtArgs>
   _count?: boolean | Prisma.FerriesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ferries"]>
 
@@ -749,6 +873,7 @@ export type ferriesSelectScalar = {
 export type ferriesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "register_code" | "capacity" | "operator_name" | "operator_phone" | "operator_email" | "year_built" | "amenities" | "type" | "status" | "created_at" | "updated_at", ExtArgs["result"]["ferries"]>
 export type ferriesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   schedules?: boolean | Prisma.ferries$schedulesArgs<ExtArgs>
+  schedule_templates?: boolean | Prisma.ferries$schedule_templatesArgs<ExtArgs>
   _count?: boolean | Prisma.FerriesCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ferriesIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -758,6 +883,7 @@ export type $ferriesPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "ferries"
   objects: {
     schedules: Prisma.$schedulesPayload<ExtArgs>[]
+    schedule_templates: Prisma.$schedule_templatesPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1168,6 +1294,7 @@ readonly fields: ferriesFieldRefs;
 export interface Prisma__ferriesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   schedules<T extends Prisma.ferries$schedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ferries$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$schedulesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  schedule_templates<T extends Prisma.ferries$schedule_templatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ferries$schedule_templatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$schedule_templatesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1406,11 +1533,6 @@ export type ferriesFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` ferries.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of ferries.
-   */
   distinct?: Prisma.FerriesScalarFieldEnum | Prisma.FerriesScalarFieldEnum[]
 }
 
@@ -1624,6 +1746,30 @@ export type ferries$schedulesArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.SchedulesScalarFieldEnum | Prisma.SchedulesScalarFieldEnum[]
+}
+
+/**
+ * ferries.schedule_templates
+ */
+export type ferries$schedule_templatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the schedule_templates
+   */
+  select?: Prisma.schedule_templatesSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the schedule_templates
+   */
+  omit?: Prisma.schedule_templatesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.schedule_templatesInclude<ExtArgs> | null
+  where?: Prisma.schedule_templatesWhereInput
+  orderBy?: Prisma.schedule_templatesOrderByWithRelationInput | Prisma.schedule_templatesOrderByWithRelationInput[]
+  cursor?: Prisma.schedule_templatesWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Schedule_templatesScalarFieldEnum | Prisma.Schedule_templatesScalarFieldEnum[]
 }
 
 /**

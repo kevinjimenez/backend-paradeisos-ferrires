@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.8.0
- * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
+ * Prisma Client JS version: 7.3.0
+ * Query Engine version: 9d6ad21cbbceab97458517b147a6a09ff43aa735
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.8.0",
-  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
+  client: "7.3.0",
+  engine: "9d6ad21cbbceab97458517b147a6a09ff43aa735"
 }
 
 /**
@@ -390,6 +390,7 @@ export const ModelName = {
   islands: 'islands',
   routes: 'routes',
   ferries: 'ferries',
+  schedule_templates: 'schedule_templates',
   schedules: 'schedules',
   contacts: 'contacts',
   passengers: 'passengers',
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "fares" | "fare_extras" | "passenger_extras" | "islands" | "routes" | "ferries" | "schedules" | "contacts" | "passengers" | "payments" | "seat_holds" | "seat_holds_history" | "tickets" | "catalogs"
+    modelProps: "fares" | "fare_extras" | "passenger_extras" | "islands" | "routes" | "ferries" | "schedule_templates" | "schedules" | "contacts" | "passengers" | "payments" | "seat_holds" | "seat_holds_history" | "tickets" | "catalogs"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -858,6 +859,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ferriesCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.FerriesCountAggregateOutputType> | number
+        }
+      }
+    }
+    schedule_templates: {
+      payload: Prisma.$schedule_templatesPayload<ExtArgs>
+      fields: Prisma.schedule_templatesFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.schedule_templatesFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$schedule_templatesPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.schedule_templatesFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$schedule_templatesPayload>
+        }
+        findFirst: {
+          args: Prisma.schedule_templatesFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$schedule_templatesPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.schedule_templatesFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$schedule_templatesPayload>
+        }
+        findMany: {
+          args: Prisma.schedule_templatesFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$schedule_templatesPayload>[]
+        }
+        create: {
+          args: Prisma.schedule_templatesCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$schedule_templatesPayload>
+        }
+        createMany: {
+          args: Prisma.schedule_templatesCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.schedule_templatesCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$schedule_templatesPayload>[]
+        }
+        delete: {
+          args: Prisma.schedule_templatesDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$schedule_templatesPayload>
+        }
+        update: {
+          args: Prisma.schedule_templatesUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$schedule_templatesPayload>
+        }
+        deleteMany: {
+          args: Prisma.schedule_templatesDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.schedule_templatesUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.schedule_templatesUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$schedule_templatesPayload>[]
+        }
+        upsert: {
+          args: Prisma.schedule_templatesUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$schedule_templatesPayload>
+        }
+        aggregate: {
+          args: Prisma.Schedule_templatesAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSchedule_templates>
+        }
+        groupBy: {
+          args: Prisma.schedule_templatesGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Schedule_templatesGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.schedule_templatesCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Schedule_templatesCountAggregateOutputType> | number
         }
       }
     }
@@ -1539,6 +1614,8 @@ export const IslandsScalarFieldEnum = {
   name: 'name',
   code: 'code',
   description: 'description',
+  pier_name: 'pier_name',
+  port_address: 'port_address',
   is_active: 'is_active',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -1581,10 +1658,26 @@ export const FerriesScalarFieldEnum = {
 export type FerriesScalarFieldEnum = (typeof FerriesScalarFieldEnum)[keyof typeof FerriesScalarFieldEnum]
 
 
+export const Schedule_templatesScalarFieldEnum = {
+  id: 'id',
+  route_id: 'route_id',
+  ferry_id: 'ferry_id',
+  departure_hour: 'departure_hour',
+  departure_minute: 'departure_minute',
+  is_active: 'is_active',
+  notes: 'notes',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Schedule_templatesScalarFieldEnum = (typeof Schedule_templatesScalarFieldEnum)[keyof typeof Schedule_templatesScalarFieldEnum]
+
+
 export const SchedulesScalarFieldEnum = {
   id: 'id',
   route_id: 'route_id',
   ferry_id: 'ferry_id',
+  schedule_template_id: 'schedule_template_id',
   total_capacity: 'total_capacity',
   available_seats: 'available_seats',
   cancellation_reason: 'cancellation_reason',
@@ -1631,6 +1724,7 @@ export const PassengersScalarFieldEnum = {
   email: 'email',
   phone: 'phone',
   document_number: 'document_number',
+  date_of_birth: 'date_of_birth',
   unit_price: 'unit_price',
   is_primary: 'is_primary',
   checked_in_outbound: 'checked_in_outbound',
@@ -2117,21 +2211,6 @@ export type PrismaClientOptions = ({
    * ```
    */
   comments?: runtime.SqlCommenterPlugin[]
-  /**
-   * Optional maximum size for the query plan cache. If not provided, a default size will be used.
-   * A value of `0` can be used to disable the cache entirely. A higher cache size can improve
-   * performance for applications that execute a large number of unique queries, while a smaller
-   * cache size can reduce memory usage.
-   * 
-   * @example
-   * ```
-   * const prisma = new PrismaClient({
-   *   adapter,
-   *   queryPlanCacheMaxSize: 100,
-   * })
-   * ```
-   */
-  queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
   fares?: Prisma.faresOmit
@@ -2140,6 +2219,7 @@ export type GlobalOmitConfig = {
   islands?: Prisma.islandsOmit
   routes?: Prisma.routesOmit
   ferries?: Prisma.ferriesOmit
+  schedule_templates?: Prisma.schedule_templatesOmit
   schedules?: Prisma.schedulesOmit
   contacts?: Prisma.contactsOmit
   passengers?: Prisma.passengersOmit
