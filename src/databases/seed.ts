@@ -317,14 +317,12 @@ async function main() {
 
   // ISLANDS
   console.log('🏝 Creating islands...');
-  // NOTE: pier_name/port_address are placeholders for Santa Cruz, Isabela y Floreana,
-  // pendientes de confirmar con el cliente. San Cristóbal viene confirmado del mockup.
   const santaCruz = await prisma.islands.create({
     data: {
       name: 'Isla Santa Cruz',
       code: 'SCX',
       description: 'Galápagos - Isla Santa Cruz',
-      pier_name: 'Muelle Municipal Puerto Ayora',
+      pier_name: 'Muelle Turístico Gus Angermeyer',
       port_address: 'Puerto Ayora, Galápagos, ECU',
     },
   });
@@ -344,7 +342,7 @@ async function main() {
       name: 'Isla Isabela',
       code: 'ISA',
       description: 'Galápagos - Isla Isabela',
-      pier_name: 'Muelle Puerto Villamil',
+      pier_name: 'Muelle de Puerto Villamil',
       port_address: 'Puerto Villamil, Galápagos, ECU',
     },
   });
@@ -354,7 +352,7 @@ async function main() {
       name: 'Isla Floreana',
       code: 'FLO',
       description: 'Galápagos - Isla Floreana',
-      pier_name: 'Muelle Puerto Velasco Ibarra',
+      pier_name: 'Muelle Rolf Wittmer',
       port_address: 'Puerto Velasco Ibarra, Galápagos, ECU',
     },
   });
