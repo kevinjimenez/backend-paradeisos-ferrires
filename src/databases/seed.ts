@@ -7,6 +7,25 @@ const adapter = new PrismaPg({
 });
 const prisma = new PrismaClient({ adapter });
 
+// Pacific/Galapagos no observa horario de verano, el offset es fijo todo el año.
+const GALAPAGOS_UTC_OFFSET_HOURS = 6;
+
+// Construye el instante UTC para una hora/minuto en horario local de Galápagos,
+// sin depender del timezone del proceso donde corre el seed.
+function toGalapagosInstant(localDate: Date, hour: number, minute: number): Date {
+  return new Date(
+    Date.UTC(
+      localDate.getFullYear(),
+      localDate.getMonth(),
+      localDate.getDate(),
+      hour + GALAPAGOS_UTC_OFFSET_HOURS,
+      minute,
+      0,
+      0,
+    ),
+  );
+}
+
 async function main() {
   console.log('🌱 Starting seed...');
 
@@ -540,9 +559,9 @@ async function main() {
       where: { route_id: route1.id, departure_hour: 7, departure_minute: 0 },
     });
 
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  tomorrow.setHours(7, 0, 0, 0);
+  const tomorrowDate = new Date();
+  tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+  const tomorrow = toGalapagosInstant(tomorrowDate, 7, 0);
   const arrival = new Date(tomorrow.getTime() + 120 * 60 * 1000);
 
   const schedule1 = await prisma.schedules.create({
