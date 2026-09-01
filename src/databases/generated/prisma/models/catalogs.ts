@@ -172,7 +172,7 @@ export type CatalogsGroupByOutputType = {
   _max: CatalogsMaxAggregateOutputType | null
 }
 
-type GetCatalogsGroupByPayload<T extends catalogsGroupByArgs> = Prisma.PrismaPromise<
+export type GetCatalogsGroupByPayload<T extends catalogsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<CatalogsGroupByOutputType, T['by']> &
       {
@@ -1010,6 +1010,11 @@ export type catalogsFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Skip the first `n` catalogs.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of catalogs.
+   */
   distinct?: Prisma.CatalogsScalarFieldEnum | Prisma.CatalogsScalarFieldEnum[]
 }
 

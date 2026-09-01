@@ -248,7 +248,7 @@ export type FerriesGroupByOutputType = {
   _max: FerriesMaxAggregateOutputType | null
 }
 
-type GetFerriesGroupByPayload<T extends ferriesGroupByArgs> = Prisma.PrismaPromise<
+export type GetFerriesGroupByPayload<T extends ferriesGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<FerriesGroupByOutputType, T['by']> &
       {
@@ -1533,6 +1533,11 @@ export type ferriesFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` ferries.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of ferries.
+   */
   distinct?: Prisma.FerriesScalarFieldEnum | Prisma.FerriesScalarFieldEnum[]
 }
 
