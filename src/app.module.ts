@@ -23,6 +23,7 @@ import { FaresModule } from './fares/fares.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { IslandsModule } from './islands/islands.module';
 import { ScheduleTemplatesModule } from './schedule-templates/schedule-templates.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { ScheduleTemplatesModule } from './schedule-templates/schedule-templates
     FaresModule,
     IslandsModule,
     ScheduleTemplatesModule,
+    ReportsModule,
   ],
   controllers: [AppController],
 })

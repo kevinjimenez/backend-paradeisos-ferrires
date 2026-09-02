@@ -1,12 +1,11 @@
 import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { DateUtil } from './../common/utils/date.util';
 import { SchedulesRepository } from './../schedules/schedules.repository';
 import { ScheduleTemplatesRepository } from './../schedule-templates/schedule-templates.repository';
 import { ActiveScheduleTemplate } from './../schedule-templates/interfaces/schedule-template-response.interface';
 
 const GENERATION_WINDOW_DAYS = 120;
-// Pacific/Galapagos no observa horario de verano, el offset es fijo todo el año.
-const GALAPAGOS_UTC_OFFSET_HOURS = 6;
 
 @Injectable()
 export class ScheduleGeneratorService implements OnApplicationBootstrap {
@@ -66,8 +65,10 @@ export class ScheduleGeneratorService implements OnApplicationBootstrap {
 
     let created = 0;
     while (cursor <= horizon) {
-      const departureAt = this.toGalapagosInstant(
-        cursor,
+      const departureAt = DateUtil.toGalapagosInstant(
+        cursor.getFullYear(),
+        cursor.getMonth(),
+        cursor.getDate(),
         template.departure_hour,
         template.departure_minute,
       );
@@ -93,25 +94,5 @@ export class ScheduleGeneratorService implements OnApplicationBootstrap {
     }
 
     return created;
-  }
-
-  // Construye el instante UTC para una hora/minuto en horario local de Galápagos,
-  // sin depender del timezone del proceso donde corre el servidor.
-  private toGalapagosInstant(
-    localDate: Date,
-    hour: number,
-    minute: number,
-  ): Date {
-    return new Date(
-      Date.UTC(
-        localDate.getFullYear(),
-        localDate.getMonth(),
-        localDate.getDate(),
-        hour + GALAPAGOS_UTC_OFFSET_HOURS,
-        minute,
-        0,
-        0,
-      ),
-    );
   }
 }

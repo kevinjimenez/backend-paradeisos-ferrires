@@ -1,4 +1,31 @@
 export class DateUtil {
+  // Pacific/Galapagos no observa horario de verano, el offset es fijo todo el año.
+  static readonly GALAPAGOS_UTC_OFFSET_HOURS = 6;
+
+  // Construye el instante UTC para una fecha/hora en horario local de Galápagos,
+  // sin depender del timezone del proceso donde corre el servidor.
+  static toGalapagosInstant(
+    year: number,
+    month: number,
+    day: number,
+    hour = 0,
+    minute = 0,
+    second = 0,
+    ms = 0,
+  ): Date {
+    return new Date(
+      Date.UTC(
+        year,
+        month,
+        day,
+        hour + DateUtil.GALAPAGOS_UTC_OFFSET_HOURS,
+        minute,
+        second,
+        ms,
+      ),
+    );
+  }
+
   static formatTime(date: Date): string {
     return new Date(date).toLocaleTimeString('en-GB', {
       hour: '2-digit',
