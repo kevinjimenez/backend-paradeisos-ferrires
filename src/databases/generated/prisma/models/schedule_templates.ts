@@ -224,7 +224,7 @@ export type Schedule_templatesGroupByOutputType = {
   _max: Schedule_templatesMaxAggregateOutputType | null
 }
 
-type GetSchedule_templatesGroupByPayload<T extends schedule_templatesGroupByArgs> = Prisma.PrismaPromise<
+export type GetSchedule_templatesGroupByPayload<T extends schedule_templatesGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<Schedule_templatesGroupByOutputType, T['by']> &
       {
@@ -1591,6 +1591,11 @@ export type schedule_templatesFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` schedule_templates.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of schedule_templates.
+   */
   distinct?: Prisma.Schedule_templatesScalarFieldEnum | Prisma.Schedule_templatesScalarFieldEnum[]
 }
 

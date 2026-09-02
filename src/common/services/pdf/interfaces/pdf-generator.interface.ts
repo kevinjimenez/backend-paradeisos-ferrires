@@ -6,6 +6,7 @@ export interface PdfGenerator<T> {
 
 export interface PdfGeneratorOptions {
   format?: 'A4' | 'A5' | 'Letter';
+  landscape?: boolean;
   printBackground?: boolean;
   preferCSSPageSize?: boolean;
   margin?: {
