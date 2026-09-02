@@ -1,5 +1,8 @@
 import { IsDateString, IsEnum, IsOptional } from 'class-validator';
-import { TicketsStatus } from './../../databases/generated/prisma/enums';
+import {
+  PaymentStatus,
+  TicketsStatus,
+} from './../../databases/generated/prisma/enums';
 
 export enum ReportFormat {
   PDF = 'pdf',
@@ -19,4 +22,8 @@ export class ReportFilterDto {
   @IsOptional()
   @IsEnum(TicketsStatus)
   status?: TicketsStatus;
+
+  @IsOptional()
+  @IsEnum(PaymentStatus)
+  paymentStatus?: PaymentStatus;
 }

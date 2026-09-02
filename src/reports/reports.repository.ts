@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { BaseRepository } from 'src/common/base/base.repository';
 import { PrismaTransaction } from 'src/common/types/prisma-transaction.type';
 import { DatabasesService } from './../databases/databases.service';
-import { Prisma, TicketsStatus } from './../databases/generated/prisma/client';
+import {
+  PaymentStatus,
+  Prisma,
+  TicketsStatus,
+} from './../databases/generated/prisma/client';
 
 @Injectable()
 export class ReportsRepository extends BaseRepository<Prisma.ticketsModel> {
@@ -23,6 +27,7 @@ export class ReportsRepository extends BaseRepository<Prisma.ticketsModel> {
     endDate: Date,
     selectConfig: Prisma.ticketsSelect,
     status?: TicketsStatus,
+    paymentStatus?: PaymentStatus,
     tx?: PrismaTransaction,
   ) {
     const database = tx ?? this.db;
@@ -30,6 +35,7 @@ export class ReportsRepository extends BaseRepository<Prisma.ticketsModel> {
     return database.tickets.findMany({
       where: {
         ...(status && { status }),
+        ...(paymentStatus && { payments: { some: { status: paymentStatus } } }),
         OR: [
           {
             outbound_schedules: {

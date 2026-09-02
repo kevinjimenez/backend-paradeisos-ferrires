@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ValidateException } from './../common/exceptions/validation.exception';
 import { PdfService } from './../common/services/pdf/pdf.service';
 import { DateUtil } from './../common/utils/date.util';
@@ -35,13 +35,21 @@ export class ReportsService {
       endDate,
       selectConfig,
       filter.status,
+      filter.paymentStatus,
     );
 
     const rows = ReportMapper.toReportRows(
       tickets as unknown as ReportTicket[],
       startDate,
       endDate,
+      filter.paymentStatus,
     );
+
+    if (rows.length === 0) {
+      throw new NotFoundException(
+        'No se encontraron tickets para las fechas y filtros seleccionados',
+      );
+    }
 
     if (filter.format === ReportFormat.EXCEL) {
       return this.reportExcelGenerator.generate(rows);

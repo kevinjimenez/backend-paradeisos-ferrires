@@ -19,11 +19,16 @@ export class ReportMapper {
     tickets: ReportTicket[],
     startDate: Date,
     endDate: Date,
+    paymentStatus?: string,
   ): ReportRow[] {
     const rows: ReportRow[] = [];
 
     for (const ticket of tickets) {
-      const payment = ticket.payments[0];
+      // Si se filtró por estado de pago, se muestra ese pago en la fila (puede
+      // haber varios intentos por ticket); si no, el más reciente.
+      const payment = paymentStatus
+        ? ticket.payments.find((p) => p.status === paymentStatus)
+        : ticket.payments[0];
       const buyerName = `${ticket.contacts?.first_name ?? ''} ${
         ticket.contacts?.last_name ?? ''
       }`.trim();
