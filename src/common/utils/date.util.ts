@@ -1,4 +1,31 @@
 export class DateUtil {
+  // Pacific/Galapagos no observa horario de verano, el offset es fijo todo el año.
+  static readonly GALAPAGOS_UTC_OFFSET_HOURS = 6;
+
+  // Construye el instante UTC para una fecha/hora en horario local de Galápagos,
+  // sin depender del timezone del proceso donde corre el servidor.
+  static toGalapagosInstant(
+    year: number,
+    month: number,
+    day: number,
+    hour = 0,
+    minute = 0,
+    second = 0,
+    ms = 0,
+  ): Date {
+    return new Date(
+      Date.UTC(
+        year,
+        month,
+        day,
+        hour + DateUtil.GALAPAGOS_UTC_OFFSET_HOURS,
+        minute,
+        second,
+        ms,
+      ),
+    );
+  }
+
   static formatTime(date: Date): string {
     return new Date(date).toLocaleTimeString('en-GB', {
       hour: '2-digit',
@@ -12,11 +39,42 @@ export class DateUtil {
   }
 
   static formatDate(date: Date): string {
-    return new Date(date).toLocaleDateString('en-US', {
+    const parts = new Intl.DateTimeFormat('es-ES', {
       weekday: 'short',
-      month: 'short',
       day: '2-digit',
-      year: 'numeric',
-    });
+      month: 'short',
+    }).formatToParts(new Date(date));
+
+    const weekday = parts.find((p) => p.type === 'weekday')?.value ?? '';
+    const day = parts.find((p) => p.type === 'day')?.value ?? '';
+    const month = parts.find((p) => p.type === 'month')?.value ?? '';
+    const year = new Date(date).getFullYear();
+    const capitalizedWeekday =
+      weekday.charAt(0).toUpperCase() + weekday.slice(1);
+
+    return `${capitalizedWeekday}, ${day}.${month}.${year}`;
+  }
+
+  static getAge(
+    dateOfBirth: Date | string,
+    referenceDate: Date = new Date(),
+  ): number {
+    const birthDate = new Date(dateOfBirth);
+    let age = referenceDate.getFullYear() - birthDate.getFullYear();
+    const hasHadBirthdayThisYear =
+      referenceDate.getMonth() > birthDate.getMonth() ||
+      (referenceDate.getMonth() === birthDate.getMonth() &&
+        referenceDate.getDate() >= birthDate.getDate());
+
+    if (!hasHadBirthdayThisYear) age -= 1;
+
+    return age;
+  }
+
+  static isEligibleForChildDiscount(
+    dateOfBirth: Date | string,
+    referenceDate: Date = new Date(),
+  ): boolean {
+    return DateUtil.getAge(dateOfBirth, referenceDate) <= 5;
   }
 }

@@ -13,7 +13,6 @@ import { DatabasesModule } from './databases/databases.module';
 import { HealthModule } from './health/health.module';
 import { PassengersModule } from './passengers/passengers.module';
 import { PaymentsModule } from './payments/payments.module';
-import { PortsModule } from './ports/ports.module';
 import { SchedulesModule } from './schedules/schedules.module';
 import { SeatHoldsHistoryModule } from './seat-holds-history/seat-holds-history.module';
 import { TasksModule } from './tasks/tasks.module';
@@ -22,6 +21,9 @@ import { CatalogsModule } from './catalogs/catalogs.module';
 import { FareExtrasModule } from './fare-extras/fare-extras.module';
 import { FaresModule } from './fares/fares.module';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { IslandsModule } from './islands/islands.module';
+import { ScheduleTemplatesModule } from './schedule-templates/schedule-templates.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -33,7 +35,6 @@ import { ThrottlerModule } from '@nestjs/throttler';
     CommonModule,
     HealthModule,
     DatabasesModule,
-    PortsModule,
     SchedulesModule,
     TicketsModule,
     PassengersModule,
@@ -45,6 +46,9 @@ import { ThrottlerModule } from '@nestjs/throttler';
     CatalogsModule,
     FareExtrasModule,
     FaresModule,
+    IslandsModule,
+    ScheduleTemplatesModule,
+    ReportsModule,
   ],
   controllers: [AppController],
 })

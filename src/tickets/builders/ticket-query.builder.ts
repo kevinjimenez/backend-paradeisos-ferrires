@@ -19,7 +19,9 @@ export class TicketQueryBuilder {
       select: {
         first_name: true,
         last_name: true,
+        country: true,
         document_number: true,
+        date_of_birth: true,
         unit_price: true,
         outbound_fare: {
           select: { name: true, price: true },
@@ -49,27 +51,11 @@ export class TicketQueryBuilder {
         arrival_time: true,
         routes: {
           select: {
-            origin_ports: {
-              select: {
-                name: true,
-                code: true,
-                islands: {
-                  select: {
-                    name: true,
-                  },
-                },
-              },
+            origin_islands: {
+              select: { name: true, description: true, code: true },
             },
-            destination_ports: {
-              select: {
-                name: true,
-                code: true,
-                islands: {
-                  select: {
-                    name: true,
-                  },
-                },
-              },
+            destination_islands: {
+              select: { name: true, description: true, code: true },
             },
           },
         },
@@ -91,27 +77,11 @@ export class TicketQueryBuilder {
         arrival_time: true,
         routes: {
           select: {
-            origin_ports: {
-              select: {
-                name: true,
-                code: true,
-                islands: {
-                  select: {
-                    name: true,
-                  },
-                },
-              },
+            origin_islands: {
+              select: { name: true, description: true, code: true },
             },
-            destination_ports: {
-              select: {
-                name: true,
-                code: true,
-                islands: {
-                  select: {
-                    name: true,
-                  },
-                },
-              },
+            destination_islands: {
+              select: { name: true, description: true, code: true },
             },
           },
         },

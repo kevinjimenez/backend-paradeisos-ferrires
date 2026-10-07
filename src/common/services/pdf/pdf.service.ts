@@ -49,7 +49,7 @@ export class PdfService implements OnModuleInit, OnModuleDestroy {
     this.logger.debug('Generating PDF...');
 
     try {
-      const templateData = generator.prepareData(data);
+      const templateData = await generator.prepareData(data);
       const html = await ejs.renderFile(
         generator.getTemplatePath(),
         templateData,

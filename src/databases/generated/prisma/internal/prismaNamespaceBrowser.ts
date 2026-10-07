@@ -55,9 +55,9 @@ export const ModelName = {
   fare_extras: 'fare_extras',
   passenger_extras: 'passenger_extras',
   islands: 'islands',
-  ports: 'ports',
   routes: 'routes',
   ferries: 'ferries',
+  schedule_templates: 'schedule_templates',
   schedules: 'schedules',
   contacts: 'contacts',
   passengers: 'passengers',
@@ -131,6 +131,8 @@ export const IslandsScalarFieldEnum = {
   name: 'name',
   code: 'code',
   description: 'description',
+  pier_name: 'pier_name',
+  port_address: 'port_address',
   is_active: 'is_active',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -139,34 +141,13 @@ export const IslandsScalarFieldEnum = {
 export type IslandsScalarFieldEnum = (typeof IslandsScalarFieldEnum)[keyof typeof IslandsScalarFieldEnum]
 
 
-export const PortsScalarFieldEnum = {
-  id: 'id',
-  island_id: 'island_id',
-  name: 'name',
-  code: 'code',
-  address: 'address',
-  contact_phone: 'contact_phone',
-  latitude: 'latitude',
-  longitude: 'longitude',
-  is_active: 'is_active',
-  opening_time: 'opening_time',
-  closing_time: 'closing_time',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type PortsScalarFieldEnum = (typeof PortsScalarFieldEnum)[keyof typeof PortsScalarFieldEnum]
-
-
 export const RoutesScalarFieldEnum = {
   id: 'id',
-  origin_port_id: 'origin_port_id',
-  destination_port_id: 'destination_port_id',
+  origin_island_id: 'origin_island_id',
+  destination_island_id: 'destination_island_id',
   distance_km: 'distance_km',
   duration_minutes: 'duration_minutes',
-  base_price_resident: 'base_price_resident',
-  base_price_national: 'base_price_national',
-  base_price_foreign: 'base_price_foreign',
+  base_price: 'base_price',
   is_active: 'is_active',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -194,10 +175,26 @@ export const FerriesScalarFieldEnum = {
 export type FerriesScalarFieldEnum = (typeof FerriesScalarFieldEnum)[keyof typeof FerriesScalarFieldEnum]
 
 
+export const Schedule_templatesScalarFieldEnum = {
+  id: 'id',
+  route_id: 'route_id',
+  ferry_id: 'ferry_id',
+  departure_hour: 'departure_hour',
+  departure_minute: 'departure_minute',
+  is_active: 'is_active',
+  notes: 'notes',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Schedule_templatesScalarFieldEnum = (typeof Schedule_templatesScalarFieldEnum)[keyof typeof Schedule_templatesScalarFieldEnum]
+
+
 export const SchedulesScalarFieldEnum = {
   id: 'id',
   route_id: 'route_id',
   ferry_id: 'ferry_id',
+  schedule_template_id: 'schedule_template_id',
   total_capacity: 'total_capacity',
   available_seats: 'available_seats',
   cancellation_reason: 'cancellation_reason',
@@ -217,10 +214,14 @@ export const ContactsScalarFieldEnum = {
   id: 'id',
   first_name: 'first_name',
   last_name: 'last_name',
+  legal_name: 'legal_name',
+  country: 'country',
+  city: 'city',
   email: 'email',
   phone: 'phone',
   document_number: 'document_number',
   document_type: 'document_type',
+  contact_type: 'contact_type',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -235,9 +236,12 @@ export const PassengersScalarFieldEnum = {
   return_fare_id: 'return_fare_id',
   first_name: 'first_name',
   last_name: 'last_name',
+  country: 'country',
+  city: 'city',
   email: 'email',
   phone: 'phone',
   document_number: 'document_number',
+  date_of_birth: 'date_of_birth',
   unit_price: 'unit_price',
   is_primary: 'is_primary',
   checked_in_outbound: 'checked_in_outbound',

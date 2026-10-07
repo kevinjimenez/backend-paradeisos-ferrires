@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reporte de tickets</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        color: #0b132b;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 8px;
+      }
+
+      .header h1 {
+        font-size: 16px;
+        margin: 0;
+      }
+
+      .header .meta {
+        font-size: 9px;
+        color: #555;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8px;
+      }
+
+      thead th {
+        background: #0b132b;
+        color: #fff;
+        text-align: left;
+        padding: 4px 6px;
+      }
+
+      tbody td {
+        padding: 3px 6px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      tbody tr {
+        page-break-inside: avoid;
+      }
+
+      tbody tr:nth-child(even) {
+        background: #f7f7f9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Reporte de tickets</h1>
+      <div class="meta">
+        Generado: <%= generatedAt %> &middot; Total de filas: <%= total %>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Ticket</th>
+          <th>Estado</th>
+          <th>Comprador</th>
+          <th>Doc. comprador</th>
+          <th>Pasajero</th>
+          <th>Doc. pasajero</th>
+          <th>Trayecto</th>
+          <th>Origen</th>
+          <th>Destino</th>
+          <th>Fecha salida</th>
+          <th>Hora</th>
+          <th>Ferry</th>
+          <th>Check-in</th>
+          <th>Pago</th>
+          <th>Monto</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% rows.forEach((row) => { %>
+          <tr>
+            <td><%= row.ticketCode %></td>
+            <td><%= row.ticketStatus %></td>
+            <td><%= row.buyerName %></td>
+            <td><%= row.buyerDocumentNumber %></td>
+            <td><%= row.passengerName %></td>
+            <td><%= row.passengerDocumentNumber %></td>
+            <td><%= row.directionLabel %></td>
+            <td><%= row.originIsland %></td>
+            <td><%= row.destinationIsland %></td>
+            <td><%= row.departureDateLabel %></td>
+            <td><%= row.departureTimeLabel %></td>
+            <td><%= row.ferryName %></td>
+            <td><%= row.checkedInLabel %></td>
+            <td><%= row.paymentStatus ?? '-' %></td>
+            <td><%= row.amountPaid !== null ? row.amountPaid.toFixed(2) : '-' %></td>
+            <td><%= row.total.toFixed(2) %> <%= row.currency %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>

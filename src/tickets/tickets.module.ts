@@ -13,7 +13,13 @@ import { TicketsService } from './tickets.service';
 import { GenerateTicketPdfListener } from './listeners/generate-ticket-pdf.listener';
 
 @Module({
-  imports: [ContactsModule, FareExtrasModule, FaresModule, PassengersModule, PaymentsModule],
+  imports: [
+    ContactsModule,
+    FareExtrasModule,
+    FaresModule,
+    PassengersModule,
+    PaymentsModule,
+  ],
   controllers: [TicketsController],
   providers: [
     TicketsService,

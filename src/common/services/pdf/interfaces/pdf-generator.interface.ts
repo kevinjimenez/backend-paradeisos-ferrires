@@ -1,11 +1,12 @@
 export interface PdfGenerator<T> {
   getTemplatePath(): string;
-  prepareData(data: T): Record<string, any>;
+  prepareData(data: T): Record<string, any> | Promise<Record<string, any>>;
   getPdfOptions(): PdfGeneratorOptions;
 }
 
 export interface PdfGeneratorOptions {
   format?: 'A4' | 'A5' | 'Letter';
+  landscape?: boolean;
   printBackground?: boolean;
   preferCSSPageSize?: boolean;
   margin?: {

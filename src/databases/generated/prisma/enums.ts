@@ -11,10 +11,19 @@
 
 export const DocumentType = {
   dni: 'dni',
+  ruc: 'ruc',
   passport: 'passport'
 } as const
 
 export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType]
+
+
+export const ContactType = {
+  natural_person: 'natural_person',
+  juridical_person: 'juridical_person'
+} as const
+
+export type ContactType = (typeof ContactType)[keyof typeof ContactType]
 
 
 export const FerryType = {

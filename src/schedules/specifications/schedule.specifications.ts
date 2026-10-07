@@ -15,18 +15,18 @@ export class ScheduleSpecifications {
     };
   }
 
-  static byOriginPort(portId: string): Prisma.schedulesWhereInput {
+  static byOriginIsland(islandId: string): Prisma.schedulesWhereInput {
     return {
       routes: {
-        origin_port_id: portId,
+        origin_island_id: islandId,
       },
     };
   }
 
-  static byDestinationPort(portId: string): Prisma.schedulesWhereInput {
+  static byDestinationIsland(islandId: string): Prisma.schedulesWhereInput {
     return {
       routes: {
-        destination_port_id: portId,
+        destination_island_id: islandId,
       },
     };
   }
@@ -34,7 +34,6 @@ export class ScheduleSpecifications {
   static combine(
     ...specs: Prisma.schedulesWhereInput[]
   ): Prisma.schedulesWhereInput {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return Object.assign({}, ...specs);
+    return { AND: specs };
   }
 }

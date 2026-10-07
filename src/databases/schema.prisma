@@ -16,20 +16,26 @@ datasource db {
 
 enum DocumentType {
   dni // cedula
+  ruc
   passport
+}
+
+enum ContactType {
+  natural_person
+  juridical_person
 }
 
 // TABLE fares
 model fares {
-  id          String       @id @default(uuid())
-  name        String       @unique @db.VarChar(50)
-  price       Decimal      @db.Decimal(10, 2)
-  description String?      @db.VarChar(255)
-  features    Json         @default("[]") @db.JsonB
-  variant     String       @default("primary")
-  is_active   Boolean      @default(true)
-  created_at  DateTime     @default(now())
-  updated_at  DateTime     @updatedAt
+  id                  String       @id @default(uuid())
+  name                String       @unique @db.VarChar(50)
+  price               Decimal      @db.Decimal(10, 2)
+  description         String?      @db.VarChar(255)
+  features            Json         @default("[]") @db.JsonB
+  variant             String       @default("primary")
+  is_active           Boolean      @default(true)
+  created_at          DateTime     @default(now())
+  updated_at          DateTime     @updatedAt
   outbound_passengers passengers[] @relation("outbound_fare")
   return_passengers   passengers[] @relation("return_fare")
 }
@@ -66,36 +72,14 @@ model passenger_extras {
 
 // TABLE islands
 model islands {
-  id          String  @id @default(uuid())
-  name        String  @db.VarChar(100)
-  code        String  @unique @db.VarChar(10)
-  description String  @db.Text
-  is_active   Boolean @default(true)
+  id           String  @id @default(uuid())
+  name         String  @db.VarChar(100)
+  code         String  @unique @db.VarChar(10)
+  description  String  @db.Text
+  pier_name    String  @db.VarChar(150)
+  port_address String  @db.VarChar(200)
+  is_active    Boolean @default(true)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  // Relations one-to-many
-  ports      ports[]
-}
-
-// TABLE ports
-model ports {
-  id      String   @id @default(uuid())
-  // Relations many-to-one
-  islands islands? @relation(fields: [island_id], references: [id])
-
-  island_id     String?
-  //
-  name          String   @db.VarChar(100)
-  code          String   @unique @db.VarChar(10)
-  address       String?  @db.VarChar(255)
-  contact_phone String?  @db.VarChar(20)
-  latitude      Decimal? @db.Decimal(10, 8)
-  longitude     Decimal? @db.Decimal(11, 8)
-  is_active     Boolean  @default(true)
-
-  opening_time       DateTime @default(now())
-  closing_time       DateTime @default(now())
   created_at         DateTime @default(now())
   updated_at         DateTime @updatedAt
   // Relations one-to-many
@@ -105,25 +89,24 @@ model ports {
 
 // TABLE routes
 model routes {
-  id                String @id @default(uuid())
+  id                  String  @id @default(uuid())
   // Relations many-to-one
-  origin_ports      ports  @relation("origin_routes", fields: [origin_port_id], references: [id])
-  destination_ports ports  @relation("destination_routes", fields: [destination_port_id], references: [id])
+  origin_islands      islands @relation("origin_routes", fields: [origin_island_id], references: [id])
+  destination_islands islands @relation("destination_routes", fields: [destination_island_id], references: [id])
 
-  origin_port_id      String
-  destination_port_id String
+  origin_island_id      String
+  destination_island_id String
   //
-  distance_km         Decimal? @db.Decimal(6, 2)
-  duration_minutes    Int
-  base_price_resident Decimal  @db.Decimal(10, 2)
-  base_price_national Decimal  @db.Decimal(10, 2)
-  base_price_foreign  Decimal  @db.Decimal(10, 2)
-  is_active           Boolean  @default(true)
+  distance_km           Decimal? @db.Decimal(6, 2)
+  duration_minutes      Int
+  base_price            Decimal  @db.Decimal(10, 2)
+  is_active             Boolean  @default(true)
 
-  created_at DateTime    @default(now())
-  updated_at DateTime    @updatedAt
+  created_at         DateTime             @default(now())
+  updated_at         DateTime             @updatedAt
   // Relations one-to-many
-  schedules  schedules[]
+  schedules          schedules[]
+  schedule_templates schedule_templates[]
 }
 
 // TABLE ferries
@@ -153,6 +136,30 @@ model ferries {
   type   FerryType   @default(normal)
   status FerryStatus @default(active)
 
+  created_at         DateTime             @default(now())
+  updated_at         DateTime             @updatedAt
+  // Relations one-to-many
+  schedules          schedules[]
+  schedule_templates schedule_templates[]
+}
+
+// TABLE schedule_templates
+// Patrón recurrente (ruta + hora) del que el generador crea filas concretas
+// en `schedules` por adelantado. Desactivar un template "bloquea" ese
+// horario sin borrar el histórico ya generado.
+model schedule_templates {
+  id      String  @id @default(uuid())
+  routes  routes  @relation(fields: [route_id], references: [id])
+  ferries ferries @relation(fields: [ferry_id], references: [id])
+
+  route_id String
+  ferry_id String
+
+  departure_hour   Int
+  departure_minute Int
+  is_active        Boolean @default(true)
+  notes            String? @db.Text
+
   created_at DateTime    @default(now())
   updated_at DateTime    @updatedAt
   // Relations one-to-many
@@ -169,18 +176,20 @@ enum ScheduleStatus {
 }
 
 model schedules {
-  id      String   @id @default(uuid())
+  id                 String              @id @default(uuid())
   // Relations many-to-one
-  routes  routes?  @relation(fields: [route_id], references: [id])
-  ferries ferries? @relation(fields: [ferry_id], references: [id])
+  routes             routes?             @relation(fields: [route_id], references: [id])
+  ferries            ferries?            @relation(fields: [ferry_id], references: [id])
+  schedule_templates schedule_templates? @relation(fields: [schedule_template_id], references: [id])
 
-  route_id            String?
-  ferry_id            String?
+  route_id             String?
+  ferry_id             String?
+  schedule_template_id String?
   //
-  total_capacity      Int
-  available_seats     Int
-  cancellation_reason String? @db.Text
-  notes               String? @db.Text
+  total_capacity       Int
+  available_seats      Int
+  cancellation_reason  String? @db.Text
+  notes                String? @db.Text
 
   status ScheduleStatus @default(scheduled)
 
@@ -198,13 +207,17 @@ model schedules {
 // TABLE contacts
 model contacts {
   id              String  @id @default(uuid())
-  first_name      String  @db.VarChar(100)
-  last_name       String  @db.VarChar(100)
+  first_name      String? @db.VarChar(100)
+  last_name       String? @db.VarChar(100)
+  legal_name      String? @db.VarChar(100)
+  country         String  @default("EC") @db.VarChar(100)
+  city            String? @db.VarChar(100)
   email           String  @unique @db.VarChar(255)
   phone           String? @db.VarChar(20)
   document_number String  @unique @db.VarChar(50)
 
   document_type DocumentType
+  contact_type  ContactType  @default(natural_person)
 
   created_at DateTime     @default(now())
   updated_at DateTime     @updatedAt
@@ -219,21 +232,24 @@ model passengers {
   // Relations many-to-one
   tickets tickets? @relation(fields: [ticket_id], references: [id])
 
-  ticket_id            String?
-  outbound_fare_id     String?
-  return_fare_id       String?
-  outbound_fare        fares?  @relation("outbound_fare", fields: [outbound_fare_id], references: [id])
-  return_fare          fares?  @relation("return_fare", fields: [return_fare_id], references: [id])
+  ticket_id           String?
+  outbound_fare_id    String?
+  return_fare_id      String?
+  outbound_fare       fares?   @relation("outbound_fare", fields: [outbound_fare_id], references: [id])
+  return_fare         fares?   @relation("return_fare", fields: [return_fare_id], references: [id])
   //
-  first_name          String  @db.VarChar(100)
-  last_name           String  @db.VarChar(100)
-  email               String? @db.VarChar(255)
-  phone               String? @db.VarChar(20)
-  document_number     String  @unique @db.VarChar(50)
-  unit_price          Decimal @db.Decimal(10, 2)
-  is_primary          Boolean @default(false)
-  checked_in_outbound Boolean @default(false)
-  checked_in_return   Boolean @default(false)
+  first_name          String   @db.VarChar(100)
+  last_name           String   @db.VarChar(100)
+  country             String?  @db.VarChar(100)
+  city                String?  @db.VarChar(100)
+  email               String?  @db.VarChar(255)
+  phone               String?  @db.VarChar(20)
+  document_number     String   @unique @db.VarChar(50)
+  date_of_birth       DateTime @db.Date
+  unit_price          Decimal  @db.Decimal(10, 2)
+  is_primary          Boolean  @default(false)
+  checked_in_outbound Boolean  @default(false)
+  checked_in_return   Boolean  @default(false)
 
   document_type DocumentType
 

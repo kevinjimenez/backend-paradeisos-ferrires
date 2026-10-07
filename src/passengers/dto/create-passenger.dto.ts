@@ -3,6 +3,7 @@ import { Type } from 'class-transformer';
 import {
   IsArray,
   IsBoolean,
+  IsDateString,
   IsEnum,
   IsNotEmpty,
   IsNumber,
@@ -22,6 +23,14 @@ export class CreatePassengerDto {
   @IsString()
   lastName: string;
 
+  @IsOptional()
+  @IsString()
+  country?: string;
+
+  @IsOptional()
+  @IsString()
+  city?: string;
+
   @IsNotEmpty()
   @IsString()
   email: string;
@@ -33,6 +42,10 @@ export class CreatePassengerDto {
   @IsNotEmpty()
   @IsString()
   documentNumber: string;
+
+  @IsNotEmpty()
+  @IsDateString()
+  dateOfBirth: string;
 
   @IsNotEmpty()
   @IsEnum(DocumentType)
@@ -71,6 +84,10 @@ export class CreatePassengerDto {
 
 export type PassengerInputDto = CreatePassengerDto & {
   unitPrice: number;
-  resolvedExtras: Array<{ extraId: string; quantity: number; unitPrice: number }>;
+  resolvedExtras: Array<{
+    extraId: string;
+    quantity: number;
+    unitPrice: number;
+  }>;
   ticket?: string;
 };

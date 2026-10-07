@@ -227,7 +227,7 @@ export type Seat_holdsGroupByOutputType = {
   _max: Seat_holdsMaxAggregateOutputType | null
 }
 
-type GetSeat_holdsGroupByPayload<T extends seat_holdsGroupByArgs> = Prisma.PrismaPromise<
+export type GetSeat_holdsGroupByPayload<T extends seat_holdsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<Seat_holdsGroupByOutputType, T['by']> &
       {
@@ -2000,6 +2000,11 @@ export type seat_holdsFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Skip the first `n` seat_holds.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of seat_holds.
+   */
   distinct?: Prisma.Seat_holdsScalarFieldEnum | Prisma.Seat_holdsScalarFieldEnum[]
 }
 

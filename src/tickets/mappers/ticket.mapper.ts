@@ -17,10 +17,12 @@ export class TicketMapper {
   static toTicketOutboundResponse(ticket: TicketResponse): TicketPdf {
     return {
       ticketCode: ticket.ticket_code,
+      qrCode: ticket.qr_code ?? ticket.ticket_code,
       passengers: ticket.passengers.map((p) => ({
-        name: `${p.first_name} ${p.last_name}`,
+        name: `${p.last_name} ${p.first_name}`.toUpperCase(),
+        age: DateUtil.getAge(p.date_of_birth),
         code: p.document_number,
-        // country: 'USA',
+        country: p.country ?? '',
       })),
       checkInTime: DateUtil.formatTime(
         DateUtil.subtractMinutes(
@@ -34,10 +36,10 @@ export class TicketMapper {
       ),
       arriveTime: DateUtil.formatTime(ticket.outbound_schedules.arrival_time),
       ferry: ticket.outbound_schedules.ferries.name,
-      from: ticket.outbound_schedules.routes.origin_ports.code,
-      origin: ticket.outbound_schedules.routes.origin_ports.name,
-      to: ticket.outbound_schedules.routes.destination_ports.code,
-      destination: ticket.outbound_schedules.routes.destination_ports.name,
+      from: ticket.outbound_schedules.routes.origin_islands.code,
+      origin: ticket.outbound_schedules.routes.origin_islands.name,
+      to: ticket.outbound_schedules.routes.destination_islands.code,
+      destination: ticket.outbound_schedules.routes.destination_islands.name,
       status: ticket.status,
       generatedAt: new Date().toISOString(),
     };
@@ -46,10 +48,12 @@ export class TicketMapper {
   static toTicketInboundResponse(ticket: TicketResponse): TicketPdf {
     return {
       ticketCode: ticket.ticket_code,
+      qrCode: ticket.qr_code ?? ticket.ticket_code,
       passengers: ticket.passengers.map((p) => ({
-        name: `${p.first_name} ${p.last_name}`,
+        name: `${p.last_name} ${p.first_name}`.toUpperCase(),
+        age: DateUtil.getAge(p.date_of_birth),
         code: p.document_number,
-        // country: 'USA',
+        country: p.country ?? '',
       })),
       checkInTime: DateUtil.formatTime(
         DateUtil.subtractMinutes(
@@ -63,10 +67,10 @@ export class TicketMapper {
       ),
       arriveTime: DateUtil.formatTime(ticket.return_schedules!.arrival_time),
       ferry: ticket.return_schedules!.ferries.name,
-      from: ticket.return_schedules!.routes.origin_ports.code,
-      origin: ticket.return_schedules!.routes.origin_ports.name,
-      to: ticket.return_schedules!.routes.destination_ports.code,
-      destination: ticket.return_schedules!.routes.destination_ports.name,
+      from: ticket.return_schedules!.routes.origin_islands.code,
+      origin: ticket.return_schedules!.routes.origin_islands.name,
+      to: ticket.return_schedules!.routes.destination_islands.code,
+      destination: ticket.return_schedules!.routes.destination_islands.name,
       status: ticket.status,
       generatedAt: new Date().toISOString(),
     };

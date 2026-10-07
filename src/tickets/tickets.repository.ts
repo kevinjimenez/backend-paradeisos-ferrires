@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { BaseRepository } from 'src/common/base/base.repository';
 import { PrismaTransaction } from 'src/common/types/prisma-transaction.type';
+import { handlePrismaError } from 'src/common/utils/prisma-error.handler';
 import { DatabasesService } from './../databases/databases.service';
 import { Prisma, TicketsStatus } from './../databases/generated/prisma/client';
 
@@ -36,9 +37,13 @@ export class TicketsRepository extends BaseRepository<Prisma.ticketsModel> {
   ): Promise<Prisma.ticketsModel> {
     const database = tx ?? this.db;
 
-    return database.tickets.create({
-      data,
-    });
+    try {
+      return await database.tickets.create({
+        data,
+      });
+    } catch (error) {
+      return handlePrismaError(error);
+    }
   }
 
   async findOneWithRelations(

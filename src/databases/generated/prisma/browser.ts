@@ -38,11 +38,6 @@ export type passenger_extras = Prisma.passenger_extrasModel
  */
 export type islands = Prisma.islandsModel
 /**
- * Model ports
- * 
- */
-export type ports = Prisma.portsModel
-/**
  * Model routes
  * 
  */
@@ -52,6 +47,11 @@ export type routes = Prisma.routesModel
  * 
  */
 export type ferries = Prisma.ferriesModel
+/**
+ * Model schedule_templates
+ * 
+ */
+export type schedule_templates = Prisma.schedule_templatesModel
 /**
  * Model schedules
  * 
