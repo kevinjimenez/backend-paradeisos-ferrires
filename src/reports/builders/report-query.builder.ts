@@ -15,6 +15,7 @@ export class ReportQueryBuilder {
       select: {
         first_name: true,
         last_name: true,
+        legal_name: true,
         email: true,
         phone: true,
         document_type: true,
