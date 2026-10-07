@@ -29,9 +29,11 @@ export class ReportMapper {
       const payment = paymentStatus
         ? ticket.payments.find((p) => p.status === paymentStatus)
         : ticket.payments[0];
-      const buyerName = `${ticket.contacts?.first_name ?? ''} ${
-        ticket.contacts?.last_name ?? ''
-      }`.trim();
+      // Persona jurídica no tiene first/last name: se usa la razón social.
+      const buyerName =
+        `${ticket.contacts?.first_name ?? ''} ${ticket.contacts?.last_name ?? ''}`.trim() ||
+        ticket.contacts?.legal_name ||
+        '';
 
       const legs: Leg[] = [
         {
