@@ -11,6 +11,7 @@ export interface ReportSchedule {
 export interface ReportContact {
   first_name: string | null;
   last_name: string | null;
+  legal_name: string | null;
   email: string;
   phone: string | null;
   document_type: string;
